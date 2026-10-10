@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Book Club Picker Wheel – Choose Your Next Read or Host</title>
-<meta name="description" content="Spin the wheel to pick your book club's next book: your club's own list, or suggested picks by genre including this week's bestsellers. Can also pick who hosts. Free, works on any phone.">
+<title>Book Club Picker Wheel – Bestsellers &amp; Club Favorites</title>
+<meta name="description" content="This week's bestsellers and book club favorites in one wheel. Spin, then read reviews, buy, borrow, or listen. Use your club's list or pick who hosts.">
 <link rel="canonical" href="https://thepartywheel.com/book-club-picker/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="The Party Wheel">
-<meta property="og:title" content="Book Club Picker Wheel – Choose Your Next Read or Host">
-<meta property="og:description" content="Spin the wheel to pick your book club's next book: your club's own list, or suggested picks by genre including this week's bestsellers. Can also pick who hosts. Free, works on any phone.">
+<meta property="og:title" content="Book Club Picker Wheel – Bestsellers &amp; Club Favorites">
+<meta property="og:description" content="This week's bestsellers and book club favorites in one wheel. Spin, then read reviews, buy, borrow, or listen. Use your club's list or pick who hosts.">
 <meta property="og:url" content="https://thepartywheel.com/book-club-picker/">
 <meta property="og:image" content="https://thepartywheel.com/assets/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -26,7 +26,7 @@
 
 <main class="wrap">
   <h1>Book club picker</h1>
-  <p class="lede">Let the wheel choose your next read from your club’s suggestions or ours. No more debating, no hurt feelings.</p>
+  <p class="lede">This week’s bestsellers and book club favorites in one wheel. Spin, then read reviews, buy, borrow, or listen.</p>
 
   <fieldset class="segmented">
     <legend class="sr-only">What are you picking?</legend>
@@ -252,6 +252,10 @@
     else if (pool.length < 2) status.textContent = 'Not enough books in those genres. Add another.';
     else if (pool.length <= WHEEL_SIZE) status.textContent = `All ${pool.length} books from your genres are on the wheel.`;
     else status.textContent = `12 random books from ${pool.length} in ${on.size} genre${on.size > 1 ? 's' : ''}.`;
+    if (on.has('current') && CURRENT.updated) {
+      const when = new Date(CURRENT.updated + 'T12:00:00').toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+      status.textContent += ` Bestsellers updated ${when}.`;
+    }
     $('deal').hidden = pool.length <= WHEEL_SIZE;
     refresh(); save();
   }
