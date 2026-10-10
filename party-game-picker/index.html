@@ -253,6 +253,22 @@
   if (saved.occasion) state.occasion = saved.occasion;
   if (Array.isArray(saved.types)) state.types = saved.types.filter((t) => typeLabel[t]);
   state.own = saved.own || '';
+  // Preset links: ?occasion=holiday&players=8-12&types=free,paper. Only known values are accepted.
+  const qp = new URLSearchParams(location.search);
+  const okVal = (sel, v) => v && [...sel.options].some((o) => o.value === v);
+  let preset = false;
+  if (okVal($('occasion'), qp.get('occasion'))) { state.occasion = qp.get('occasion'); preset = true; }
+  if (okVal(playersSel, qp.get('players'))) { state.players = qp.get('players'); preset = true; }
+  if (qp.get('types')) {
+    const t = qp.get('types').split(',').filter((x) => typeLabel[x]);
+    if (t.length) { state.types = t; preset = true; }
+  }
+  if (preset) {
+    state.source = 'suggested';
+    if (!qp.get('types')) state.types = TYPES.map(([id]) => id);
+    if (!qp.get('players')) state.players = 'any';
+    if (!qp.get('occasion')) state.occasion = 'any';
+  }
   ownTA.value = state.own; playersSel.value = state.players; $('occasion').value = state.occasion;
   const shared = window.PartyShare.read();
   if (shared) {

@@ -319,6 +319,15 @@
   }
   state.club = saved.club || '';
   state.hosts = saved.hosts || '';
+  // Preset links: ?genres=challenged,classics or ?mode=host. Only known values are accepted.
+  const qp = new URLSearchParams(location.search);
+  if (qp.get('genres')) {
+    const valid = new Set(GENRES.map(([id]) => id));
+    const g = qp.get('genres').split(',').filter((x) => valid.has(x));
+    if (g.length) { state.genres = g; state.mode = 'book'; state.source = 'suggested'; }
+  }
+  if (qp.get('mode') === 'host') state.mode = 'host';
+  if (qp.get('mode') === 'book') state.mode = 'book';
   clubTA.value = state.club; hostTA.value = state.hosts;
   $('mode-' + state.mode).checked = true;
   $('src-' + state.source).checked = true;

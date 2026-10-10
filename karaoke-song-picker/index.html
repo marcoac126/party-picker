@@ -250,13 +250,21 @@
   const saved = store.get();
   if (saved.decade) decadeSel.value = saved.decade;
   if (saved.style) styleSel.value = saved.style;
+  // Preset links (e.g. from Pinterest): ?style=holiday&decade=1990. Only known values are accepted.
+  const qp = new URLSearchParams(location.search);
+  const okVal = (sel, v) => v && [...sel.options].some((o) => o.value === v);
+  let preset = false;
+  if (okVal(styleSel, qp.get('style'))) { styleSel.value = qp.get('style'); preset = true; }
+  if (okVal(decadeSel, qp.get('decade'))) { decadeSel.value = qp.get('decade'); preset = true; }
+  if (preset && !qp.get('decade') && styleSel.value !== 'hits' && styleSel.value !== 'holiday') decadeSel.value = 'any';
+  if (preset && !qp.get('style')) styleSel.value = 'any';
   const shared = window.PartyShare.read();
   if (shared) {
     mode = 'own'; textarea.value = shared.items.join('\n'); own.open = true;
     status.textContent = 'Using a shared list.';
     $('deal').hidden = false; refreshWheel(); save();
     document.querySelector('.stage').insertAdjacentHTML('beforebegin', '<p class="shared-note">Someone shared this wheel with you. The list was made by whoever sent the link, not The Party Wheel. Spin away, or change it below.</p>');
-  } else if (saved.mode === 'own' && saved.own && saved.own.trim()) {
+  } else if (!preset && saved.mode === 'own' && saved.own && saved.own.trim()) {
     mode = 'own';
     textarea.value = saved.own;
     own.open = true;
