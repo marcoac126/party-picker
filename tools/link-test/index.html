@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Link test – The Party Wheel</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#2B1342">
+<link rel="stylesheet" href="../../assets/style.css?v=20261010a">
+<style>
+  .t { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+  .t th, .t td { text-align: left; padding: 0.5rem 0.35rem; border-bottom: 1px solid var(--plum-2); vertical-align: top; }
+  .t td a { display: inline-block; padding: 0.35rem 0; }
+  .terms { color: var(--cream-dim); font-size: 0.85rem; display: block; }
+</style>
+</head>
+<body>
+<header class="site-header"><div class="wrap"><a href="../../">The Party Wheel</a></div></header>
+<main class="wrap prose">
+  <h1>Store link test</h1>
+  <p>Internal page (hidden from search). Tap each store for each book. Note any that show “no results” or the wrong book, and tell the team which store and which book.</p>
+  <div id="out"></div>
+</main>
+<script src="../../assets/links.js?v=20261010a"></script>
+<script>
+(function () {
+  const L = window.PartyLinks;
+  const BOOKS = [
+    ['The Handmaid’s Tale', 'Margaret Atwood'],      // curly apostrophe
+    ['James', 'Percival Everett'],                    // one-word title
+    ['1984', 'George Orwell'],                        // number title
+    ['Double Tap', 'Vince Flynn & Don Bentley'],      // co-authors
+    ['The Invisible Life of Addie LaRue', 'V.E. Schwab'], // initials
+    ['Red, White & Royal Blue', 'Casey McQuiston'],   // punctuation
+    ['Educated', 'Tara Westover'],                    // common word
+    ['Fourth Wing', 'Rebecca Yarros']                 // popular series
+  ];
+  const NAMES = { goodreads: 'Goodreads', bookshop: 'Bookshop', librofm: 'Libro.fm', amazon: 'Amazon', audible: 'Audible', library: 'OverDrive' };
+  const out = document.getElementById('out');
+  BOOKS.forEach(([t, a]) => {
+    const h = document.createElement('h2'); h.textContent = `${t} – ${a}`; out.append(h);
+    const table = document.createElement('table'); table.className = 't';
+    L.STORE_IDS.forEach((id) => {
+      const tr = document.createElement('tr');
+      const td1 = document.createElement('td'); td1.append(L.link(id, t, a, NAMES[id]));
+      const td2 = document.createElement('td'); const sp = document.createElement('span'); sp.className = 'terms';
+      sp.textContent = `searches: “${L.searchTerms(id, t, a)}”`; td2.append(sp);
+      tr.append(td1, td2); table.append(tr);
+    });
+    out.append(table);
+  });
+})();
+</script>
+</body>
+</html>

@@ -16,6 +16,45 @@
 
   const q = (s) => encodeURIComponent(s.trim());
 
+  // ---- Search wording per store ----
+  // Store searches are picky in different ways (curly apostrophes, subtitles,
+  // co-authors, initials). Each store gets the wording that works best for it.
+  // Tune SEARCH_STYLE after tap-testing on /tools/link-test/.
+  const SEARCH_STYLE = {
+    goodreads: 'title+last',   // title + first author's last name
+    bookshop:  'title+last',
+    librofm:   'title',        // audiobook titles match on their own; author wording varies by narrator listing
+    amazon:    'title+author', // Amazon's search is forgiving
+    audible:   'title+last',
+    library:   'title+last'
+  };
+
+  function cleanText(s) {
+    return String(s || '')
+      .replace(/[\u2018\u2019\u02BC]/g, "'").replace(/[\u201C\u201D]/g, '"')
+      .replace(/[\u2013\u2014]/g, ' ').replace(/[&,;!?…]/g, ' ')
+      .replace(/\s+/g, ' ').trim();
+  }
+  function cleanTitle(t) {
+    // Drop subtitles and bracketed extras: "Fourth Wing (Empyrean 1)" -> "Fourth Wing"
+    return cleanText(String(t || '').replace(/\s*[(\[].*?[)\]]\s*/g, ' ').split(/:\s/)[0]);
+  }
+  function firstAuthor(a) {
+    return cleanText(String(a || '').split(/\s+(?:&|and|ft\.?|feat\.?|featuring|with)\s+|,\s*/i)[0]);
+  }
+  function lastName(a) {
+    const words = firstAuthor(a).split(' ').filter((w) => !/^(jr\.?|sr\.?|ii|iii|iv)$/i.test(w));
+    return words.length ? words[words.length - 1] : '';
+  }
+  function searchTerms(storeId, title, author) {
+    const t = cleanTitle(title);
+    switch (SEARCH_STYLE[storeId]) {
+      case 'title': return t;
+      case 'title+author': return author ? `${t} ${firstAuthor(author)}` : t;
+      default: return author ? `${t} ${lastName(author)}` : t;
+    }
+  }
+
   // Each store: what the link does, store name, URL builder, affiliate check.
   const STORES = {
     goodreads: { action: 'Read reviews', name: 'Goodreads',
@@ -43,7 +82,7 @@
   function link(storeId, title, author, text) {
     const s = STORES[storeId];
     const a = document.createElement('a');
-    a.href = s.url(author ? `${title} ${author}` : title);
+    a.href = s.url(searchTerms(storeId, title, author));
     a.textContent = text || `${s.action} on ${s.name}`;
     a.target = '_blank';
     a.rel = s.aff() ? 'sponsored noopener' : 'noopener';
@@ -103,5 +142,5 @@
     return parts.join(' ');
   }
 
-  window.PartyLinks = { bookLinks, gameLinks, link, isAffiliate, disclosure };
+  window.PartyLinks = { bookLinks, gameLinks, link, isAffiliate, disclosure, searchTerms, STORE_IDS: Object.keys(STORES) };
 })();
