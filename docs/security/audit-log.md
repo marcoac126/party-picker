@@ -38,3 +38,10 @@
 **Open (Mark to confirm)**
 - Two-factor login on the Cloudflare account. **High** until confirmed: whoever controls the domain controls the site.
 - Tick "Enforce HTTPS" in GitHub Pages settings once it's available.
+
+## 2026-10-09 — Review: Apple Books bestseller feed + outbound book links
+
+**Verdict: approved, low risk.**
+- Apple Books US top-paid feed: same source, pattern, and safeguards as the Current hits feed (read-only, no keys, plain text, keep-old-list on failure). Filters out kids/YA, comics & manga, erotica, and box sets. Tested against a sample feed.
+- Outbound links (`assets/links.js`): store search links only, built from text with URL encoding, opened in a new tab with `rel="noopener"`. No tracking scripts.
+- **Affiliate switch-on checklist** (for later): Mark approves → program added to third-parties list → ID set in `assets/links.js` → links automatically get `rel="sponsored"` and the disclosure line appears. Security re-reviews before the change goes live.

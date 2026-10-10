@@ -240,3 +240,22 @@ select:disabled { opacity: 0.5; }
 .segmented input:checked + label { background: var(--yellow); color: var(--plum); }
 .segmented input:focus-visible + label { outline: 3px solid var(--yellow); outline-offset: 2px; }
 .filters.single { grid-template-columns: 1fr; }
+
+/* ---------- Book club: source switch, genre chips, book list ---------- */
+.segmented.small { width: 100%; margin: 0 0 1.25rem; }
+p.field-legend { margin: 0.5rem 0 0.5rem; }
+.segmented.small label { padding: 0.6rem 0.4rem; font-size: 0.98rem; }
+.field-legend { font-weight: 700; padding: 0; margin-bottom: 0.5rem; grid-column: 1 / -1; }
+.legend-note { display: block; font-weight: 400; color: var(--cream-dim); font-size: 0.95rem; }
+.chip-group { border: 0; padding: 0; margin: 0; }
+.chip-group .chips { margin-top: 0; }
+.chip[aria-pressed="false"] { color: var(--cream-dim); text-decoration: line-through; text-decoration-color: rgba(255,244,226,0.4); }
+.book-list { list-style: none; padding: 0; margin: 0; }
+.book-list li {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+  padding: 0.6rem 0; border-bottom: 1px solid var(--plum-2);
+}
+.book-list a { flex: none; font-weight: 700; padding: 0.25rem 0; }
+.result-link { margin: 0.6rem 0 0; }
+.result-link a { font-weight: 750; }
+.disclosure { color: var(--cream-dim); font-size: 0.9rem; margin-top: 1rem; }

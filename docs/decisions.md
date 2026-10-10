@@ -15,3 +15,5 @@
 | 2026-10-09 | Added weekly "Current hits" from Apple Music's free top-songs feed (explicit songs excluded) | Keeps the picker current at $0; Billboard has no free feed and scraping it isn't allowed |
 | 2026-10-09 | Built book club picker: next book (club list or ~90 popular picks by genre) + who-hosts mode | Second "build now" page; host rotation adds a reason to return monthly |
 | 2026-10-09 | Bought thepartywheel.com ($10.46/yr, Cloudflare); site renamed "The Party Wheel" | partypicker.com taken; broad name fits every picker; finance-approved registrar with flat renewal |
+| 2026-10-09 | Book club redesign: Suggested vs club-list switch, multi-genre chips, weekly "New & popular" (Apple Books), book links ready for affiliates | Mark's request; clearer choices and groundwork for revenue |
+| 2026-10-09 | Default book store for links: Bookshop.org (search links, no affiliate yet) | Pays 10% vs Amazon's 4.5% on books and has no 3-sales-in-180-days rule; Amazon stays a one-line switch |
