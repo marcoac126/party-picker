@@ -59,5 +59,5 @@
 - Game picker: plain YouTube and Amazon search links, no embeds or scripts.
 
 **Open**
-- **Medium:** `hello@thepartywheel.com` is listed as the contact address. Set up free Cloudflare Email Routing to forward it to Mark's personal email, or mail will bounce.
+- ~~**Medium:** `hello@thepartywheel.com` contact address not set up.~~ **Fixed 2026-10-09:** Cloudflare Email Routing forwards hello@ to Mark's personal inbox; tested from an outside account.
 - Not legal advice. If revenue grows or ads/analytics are added, have the policy reviewed.
