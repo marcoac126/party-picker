@@ -33,7 +33,7 @@
       url: (t) => `https://www.audible.com/search?keywords=${q(t)}` + (IDS.amazon ? `&tag=${q(IDS.amazon)}` : ''),
       aff: () => !!IDS.amazon },
     library: { action: 'Borrow', name: 'your library',
-      url: (t) => `https://search.worldcat.org/search?q=${q(t)}`, aff: () => false }
+      url: (t) => `https://www.overdrive.com/search?q=${q(t)}`, aff: () => false } // OverDrive (Libby). WorldCat rate-limited visitors (2026-10-09)
   };
 
   // UX rule: three visible choices labelled by task, the rest under "More".
