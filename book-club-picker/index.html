@@ -6,6 +6,16 @@
 <title>Book Club Picker Wheel – Choose Your Next Read or Host</title>
 <meta name="description" content="Spin the wheel to pick your book club's next book: your club's own list, or suggested picks by genre including this week's bestsellers. Can also pick who hosts. Free, works on any phone.">
 <link rel="canonical" href="https://thepartywheel.com/book-club-picker/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Party Wheel">
+<meta property="og:title" content="Book Club Picker Wheel – Choose Your Next Read or Host">
+<meta property="og:description" content="Spin the wheel to pick your book club's next book: your club's own list, or suggested picks by genre including this week's bestsellers. Can also pick who hosts. Free, works on any phone.">
+<meta property="og:url" content="https://thepartywheel.com/book-club-picker/">
+<meta property="og:image" content="https://thepartywheel.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A colorful spinning wheel next to the words The Party Wheel: karaoke songs, book club picks, party games">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#2B1342">
 <link rel="stylesheet" href="../assets/style.css?v=20261009e">
 </head>
@@ -314,7 +324,7 @@
     if (shared.kind === 'hosts') { state.mode = 'host'; state.hosts = text; hostTA.value = text; }
     else { state.mode = 'book'; state.source = 'club'; state.club = text; clubTA.value = text; }
     $('mode-' + state.mode).checked = true; $('src-' + state.source).checked = true;
-    document.querySelector('.segmented').insertAdjacentHTML('afterend', '<p class="shared-note">Someone shared this wheel with you. Spin away, or change the list below.</p>');
+    document.querySelector('.segmented').insertAdjacentHTML('afterend', '<p class="shared-note">Someone shared this wheel with you. The list was made by whoever sent the link, not The Party Wheel. Spin away, or change it below.</p>');
   }
   syncChips();
   deal();
