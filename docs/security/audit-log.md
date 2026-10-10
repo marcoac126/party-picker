@@ -26,3 +26,15 @@
 - If the feed fails or returns fewer than 5 clean songs, the old list stays live.
 - Workflow has write access to this repo's contents only and a 5-minute timeout.
 - **Watch:** if Apple changes or retires the feed, the list goes stale but nothing breaks. The monthly audit should check the last update date in `karaoke-song-picker/hits.js`.
+
+## 2026-10-09 — Domain setup: thepartywheel.com
+
+**Passed**
+- Domain verified on Mark's GitHub account (TXT record). Blocks anyone else from using it for a GitHub Pages site.
+- DNS: 4 GitHub A records + www CNAME, all "DNS only". No wildcard records.
+- Site loads over HTTPS at https://thepartywheel.com.
+- Registrar: Cloudflare, personal account, WHOIS details redacted, auto-renew on.
+
+**Open (Mark to confirm)**
+- Two-factor login on the Cloudflare account. **High** until confirmed: whoever controls the domain controls the site.
+- Tick "Enforce HTTPS" in GitHub Pages settings once it's available.
