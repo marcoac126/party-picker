@@ -26,3 +26,4 @@
 | 2026-10-09 | Added "Frequently challenged" book genre (ALA most-challenged titles, neutral framing) | Popular book club theme; strong discussion value; good Bookshop.org fit |
 | 2026-10-09 | Added Holiday karaoke style (25 classics) and Holiday party occasion for games (7 holiday games + 12 crowd-pleasers) | Nov–Dec is peak party and gift season; pages need to be indexed by mid-November |
 | 2026-10-09 | Added "Share this wheel" to all pickers (list packed into the link, no server storage) | Word-of-mouth growth: every shared wheel brings a new visitor; keeps the no-data privacy promise |
+| 2026-10-09 | Karaoke library expanded from ~180 to 346 regular songs (+25 holiday); every decade + style has 12+ | Mark noticed thin categories (e.g. 2010s R&B had 3); a full wheel needs 12 |
