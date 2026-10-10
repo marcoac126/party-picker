@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Book Club Picker Wheel – Choose Your Next Read or Host</title>
+<meta name="description" content="Spin the wheel to pick your book club's next book from your own list or popular picks by genre. Can also pick who hosts next. Free, works on any phone.">
+<meta name="theme-color" content="#2B1342">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap"><a href="../">Party Picker</a></div>
+</header>
+
+<main class="wrap">
+  <h1>Book club picker</h1>
+  <p class="lede">Add everyone’s suggestions and let the wheel choose your next read. No more debating, no hurt feelings.</p>
+
+  <fieldset class="segmented">
+    <legend class="sr-only">What are you picking?</legend>
+    <input type="radio" name="mode" id="mode-book" value="book" checked>
+    <label for="mode-book">Next book</label>
+    <input type="radio" name="mode" id="mode-host" value="host">
+    <label for="mode-host">Who hosts</label>
+  </fieldset>
+
+  <div class="stage">
+    <div class="pointer" aria-hidden="true"></div>
+    <canvas id="wheel" role="img" aria-label="Spinning wheel of book club choices"></canvas>
+  </div>
+  <button class="spin-btn" id="spin" type="button">Spin</button>
+
+  <div class="result" id="result" aria-live="polite">
+    <p class="result-hint">Your pick shows up here.</p>
+  </div>
+
+  <section class="controls" aria-labelledby="list-heading">
+    <h2 id="list-heading">On the wheel</h2>
+
+    <div id="book-controls">
+      <div class="filters single">
+        <div class="field">
+          <label for="genre">Need ideas? Deal popular picks by genre</label>
+          <select id="genre">
+            <option value="any">Any genre</option>
+            <option value="fiction">Contemporary fiction</option>
+            <option value="mystery">Mystery &amp; thriller</option>
+            <option value="romance">Romance</option>
+            <option value="scifi">Sci-fi &amp; fantasy</option>
+            <option value="nonfiction">Nonfiction</option>
+            <option value="classics">Classics</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <p class="status" id="status" aria-live="polite"></p>
+        <button class="text-btn" id="deal" type="button">Deal new books</button>
+      </div>
+    </div>
+
+    <p class="check"><input type="checkbox" id="remove"><label for="remove" id="remove-label">Remove each pick after it’s chosen</label></p>
+
+    <details class="own-list" id="own">
+      <summary id="own-summary">Use your club’s list</summary>
+      <label for="entries" id="entries-label">Your club’s suggestions</label>
+      <p class="help" id="entries-help">One book per line. Add the author after a dash, like “Educated – Tara Westover”.</p>
+      <textarea id="entries" aria-describedby="entries-help" spellcheck="false"></textarea>
+      <div class="row">
+        <button class="text-btn" id="shuffle" type="button">Shuffle list</button>
+      </div>
+    </details>
+  </section>
+
+  <article class="guide">
+    <h2>How to pick a book club book with the wheel</h2>
+    <p>Before the meeting ends, ask each member to suggest one or two books. Type them into “Use your club’s list”, spin, and that’s next month’s read. Everyone had a say, and nobody has to argue for their pick.</p>
+
+    <h3>Ways to use it</h3>
+    <ul>
+      <li><strong>One suggestion each:</strong> keeps the wheel fair and the list short enough to read every title.</li>
+      <li><strong>Theme months:</strong> deal popular picks from one genre when the club wants a change of pace.</li>
+      <li><strong>Pick the host too:</strong> switch to “Who hosts”, add members’ names, and turn on “Remove each pick” so everyone takes a turn before anyone repeats.</li>
+      <li><strong>Veto rule:</strong> let each member veto one spin per year. Use it wisely.</li>
+    </ul>
+
+    <h3>What makes a good book club book?</h3>
+    <p>The best picks give people something to disagree about: a character who makes a hard choice, an ending that splits the room, or a true story that raises questions. Keep length in mind, since a 300-page novel is finished by more members than a 700-page epic. Check that it’s easy to get at the library or as an ebook, too.</p>
+
+    <h3>Is the wheel random?</h3>
+    <p>Yes. Each spin uses your browser’s built-in random number generator, so every book on the wheel has the same chance. Your list stays on your device and isn’t sent anywhere.</p>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">Party Picker · Free spinning wheels for game nights, karaoke, and book clubs.</div>
+</footer>
+
+<script src="../assets/wheel.js"></script>
+<script src="books.js"></script>
+<script>
+(function () {
+  const WHEEL_SIZE = 12;
+  const STORE_KEY = 'pp-bookclub-v1';
+  const $ = (id) => document.getElementById(id);
+  const textarea = $('entries'), spinBtn = $('spin'), result = $('result'), status = $('status');
+  const genreSel = $('genre'), own = $('own');
+  const BOOKS = window.BOOK_CLUB_BOOKS || [];
+
+  // Two independent lists: books (dealt or the club's own) and host names.
+  const state = { mode: 'book', bookSource: 'dealt', books: '', hosts: '', genre: 'any' };
+
+  const store = {
+    get() { try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; } catch (e) { return {}; } },
+    set(v) { try { localStorage.setItem(STORE_KEY, JSON.stringify(v)); } catch (e) {} }
+  };
+  function save() {
+    const out = { ...state };
+    if (state.bookSource === 'dealt') out.books = ''; // re-deal fresh next visit
+    store.set(out);
+  }
+
+  const wheel = new Wheel($('wheel'), {
+    colors: ['#FF4F86', '#FFC93C', '#22B8A7', '#FFF4E2'],
+    labelFn: (item) => item.split(/\s+[–-]\s+/)[0],
+    onResult(item, index) {
+      const [title, ...rest] = item.split(/\s+[–-]\s+/);
+      const author = rest.join(' – ');
+      result.innerHTML = '';
+      const label = document.createElement('p'); label.className = 'result-label';
+      label.textContent = state.mode === 'host' ? 'Hosting next' : 'Next read';
+      const main = document.createElement('p'); main.className = 'lyric'; main.textContent = title;
+      result.append(label, main);
+      if (author) { const a = document.createElement('p'); a.className = 'artist'; a.textContent = 'by ' + author; result.append(a); }
+      requestAnimationFrame(() => main.classList.add('sing'));
+      const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      result.scrollIntoView({ behavior: still ? 'auto' : 'smooth', block: 'nearest' });
+
+      if ($('remove').checked) {
+        const items = readList(); items.splice(index, 1);
+        textarea.value = items.join('\n');
+        storeText();
+        refreshWheel();
+        if (state.mode === 'book' && state.bookSource === 'dealt') status.textContent = `${items.length} books left on the wheel.`;
+      }
+      spinBtn.disabled = readList().length < 2;
+      spinBtn.textContent = 'Spin again';
+    }
+  });
+
+  function readList() { return textarea.value.split('\n').map((s) => s.trim()).filter(Boolean); }
+  function refreshWheel() {
+    const items = readList();
+    wheel.setItems(items);
+    spinBtn.disabled = items.length < 2;
+  }
+  function storeText() {
+    if (state.mode === 'host') state.hosts = textarea.value; else state.books = textarea.value;
+    save();
+  }
+  function randomInt(n) { const r = new Uint32Array(1); crypto.getRandomValues(r); return r[0] % n; }
+  function sample(arr, n) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) { const j = randomInt(i + 1); [a[i], a[j]] = [a[j], a[i]]; }
+    return a.slice(0, n);
+  }
+
+  function deal() {
+    state.bookSource = 'dealt';
+    state.genre = genreSel.value;
+    const pool = BOOKS.filter(([, , g]) => state.genre === 'any' || g === state.genre);
+    textarea.value = sample(pool, WHEEL_SIZE).map(([t, a]) => `${t} – ${a}`).join('\n');
+    state.books = textarea.value;
+    refreshWheel();
+    status.textContent = pool.length > WHEEL_SIZE
+      ? `12 popular picks from ${pool.length}. Swap in your club’s list anytime.`
+      : `All ${pool.length} picks in this genre are on the wheel.`;
+    $('deal').hidden = pool.length <= WHEEL_SIZE;
+    own.open = false;
+    save();
+  }
+
+  function setMode(mode) {
+    state.mode = mode;
+    const host = mode === 'host';
+    $('book-controls').hidden = host;
+    $('own-summary').textContent = host ? 'Members’ names' : 'Use your club’s list';
+    $('entries-label').textContent = host ? 'Members' : 'Your club’s suggestions';
+    $('entries-help').textContent = host
+      ? 'One name per line. Turn on “Remove each pick” so everyone hosts once before anyone repeats.'
+      : 'One book per line. Add the author after a dash, like “Educated – Tara Westover”.';
+    $('wheel').setAttribute('aria-label', host ? 'Spinning wheel of club members' : 'Spinning wheel of book club choices');
+    result.innerHTML = `<p class="result-hint">${host ? 'The next host shows up here.' : 'Your pick shows up here.'}</p>`;
+    spinBtn.textContent = 'Spin';
+
+    if (host) {
+      textarea.value = state.hosts;
+      own.open = true;
+      if (!readList().length) textarea.placeholder = 'Alex\nJordan\nSam';
+    } else {
+      textarea.placeholder = '';
+      if (state.bookSource === 'own' && state.books.trim()) {
+        textarea.value = state.books;
+        own.open = true;
+        status.textContent = 'Using your club’s list.';
+        $('deal').hidden = false;
+      } else {
+        textarea.value = state.books;
+        if (!readList().length) { deal(); return; }
+        own.open = false;
+      }
+    }
+    refreshWheel();
+    save();
+  }
+
+  document.querySelectorAll('input[name="mode"]').forEach((r) =>
+    r.addEventListener('change', () => setMode(r.value)));
+  genreSel.addEventListener('change', deal);
+  $('deal').addEventListener('click', deal);
+
+  textarea.addEventListener('input', () => {
+    if (state.mode === 'book') {
+      state.bookSource = 'own';
+      status.textContent = 'Using your club’s list.';
+      $('deal').hidden = false;
+    }
+    storeText();
+    refreshWheel();
+  });
+
+  $('shuffle').addEventListener('click', () => {
+    textarea.value = sample(readList(), Infinity).join('\n');
+    if (state.mode === 'host' || state.bookSource === 'own') storeText();
+    refreshWheel();
+  });
+
+  spinBtn.addEventListener('click', () => {
+    if (wheel.spin()) {
+      spinBtn.disabled = true;
+      spinBtn.textContent = 'Spinning…';
+      result.innerHTML = '<p class="result-hint">Spinning…</p>';
+    }
+  });
+
+  // Restore
+  const saved = store.get();
+  Object.assign(state, saved);
+  if (state.genre) genreSel.value = state.genre;
+  if (state.bookSource !== 'own') state.books = '';
+  $('mode-' + (state.mode === 'host' ? 'host' : 'book')).checked = true;
+  setMode(state.mode === 'host' ? 'host' : 'book');
+})();
+</script>
+</body>
+</html>

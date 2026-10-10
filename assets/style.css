@@ -224,3 +224,19 @@ select {
 }
 .own-list[open] summary { margin-bottom: 0.5rem; }
 select:disabled { opacity: 0.5; }
+
+/* ---------- Segmented mode switch ---------- */
+.segmented {
+  display: grid; grid-template-columns: 1fr 1fr;
+  width: min(100%, 26rem); margin: 0 auto 1.25rem; padding: 4px;
+  border: 0; border-radius: 999px; background: #12081D;
+}
+.segmented input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.segmented label {
+  margin: 0; padding: 0.7rem 0.5rem; min-height: 2.75rem;
+  border-radius: 999px; text-align: center; cursor: pointer;
+  font-weight: 750; color: var(--cream-dim);
+}
+.segmented input:checked + label { background: var(--yellow); color: var(--plum); }
+.segmented input:focus-visible + label { outline: 3px solid var(--yellow); outline-offset: 2px; }
+.filters.single { grid-template-columns: 1fr; }
