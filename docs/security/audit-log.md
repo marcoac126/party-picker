@@ -61,3 +61,10 @@
 **Open**
 - ~~**Medium:** `hello@thepartywheel.com` contact address not set up.~~ **Fixed 2026-10-09:** Cloudflare Email Routing forwards hello@ to Mark's personal inbox; tested from an outside account.
 - Not legal advice. If revenue grows or ads/analytics are added, have the policy reviewed.
+
+## 2026-10-09 — Open items closed (confirmed by Mark)
+- Two-factor login on Cloudflare: **done**.
+- Two-factor login on GitHub: **done**.
+- "Enforce HTTPS" on GitHub Pages: **done**.
+
+**Status:** no open High or Medium findings. Site is ready for affiliate applications (privacy policy, disclosure, working contact email in place). Next full audit: ~2026-11-09.
