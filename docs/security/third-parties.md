@@ -9,3 +9,4 @@
 | Cloudflare | Domain registrar, DNS, and email forwarding (hello@) for thepartywheel.com | Mark (personal) | ✅ | 2026-10-09 |
 | Google Search Console | Search visibility + demand data for thepartywheel.com (Domain property, DNS-verified) | Mark (personal Google) | Google account | 2026-10-09 |
 | Bookshop.org Affiliates | Book links (10% commission) | Mark (hello@thepartywheel.com) | — | Applied 2026-10-09, affiliate ID 129730, verification pending; links NOT yet switched on |
+| Pinterest Business (free) | Hand-posted pins linking to thepartywheel.com; website claim via DNS TXT. No Pinterest tag, no connected apps, no paid promotion | Mark (hello@thepartywheel.com) | Required (authenticator app) | Approved 2026-10-10, account not yet created |

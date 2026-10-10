@@ -78,3 +78,14 @@
 - **Medium:** disclose ownership in every post; once affiliate links are live, say so in the post itself ("I earn a commission from book links"). Check personal accounts for employer details before posting. 2FA on every account; sign up with hello@ or personal email, never work email. Read each community's rules; space posts out; write each fresh; no automation.
 - **Process:** any new account (e.g., Pinterest business) gets a security review and entries in third-parties + decisions before creation.
 - **Low (done):** shared wheels now state the list came from the sender; link previews use the site image, not the shared list.
+
+## 2026-10-10 — Review: Pinterest business account
+**OK with conditions.** Free account, created by Mark on his phone with hello@thepartywheel.com, 8 pins posted by hand, no scheduling tools, no third-party apps, no Pinterest tag (tracking pixel) on the site, no paid promotion. Low risk: nothing new runs on the site or touches visitors.
+- **High:** turn on 2FA (authenticator app, not text message) when the account is created; save the backup codes outside the phone. Whoever controls this account can post under the site's name.
+- **Medium:** Mark creates the account himself; agents never sign up, log in, or hold the password. Personal phone and personal Pinterest app only; no work device, no work email, no link to a work-connected personal profile.
+- **Medium:** before creating it, log the decision in `docs/decisions.md` (process rule from the outreach review). Third-parties row added today, marked not yet created.
+- **Medium:** decline any prompt to connect other apps, ad accounts, or a Pinterest tag. Adding any of these later needs a new security review and a privacy policy update.
+- **Medium:** pin text stays honest. "Free · No sign-up" is true today; if ads or affiliate links go live, re-check the wording, and say so on pins linking to pages with affiliate links.
+- **Low:** pin links use only the site's own preset parameters (e.g., `?style=holiday`). No shared-wheel `#` links in pins, no URL shorteners.
+- **Website claim: OK, use the DNS TXT record.** Pinterest offers an HTML meta tag, an uploaded file, or a DNS TXT record. TXT matches how GitHub and Search Console were verified, needs no code change, and keeps it in Cloudflare where 2FA is on. Mark adds it himself in Cloudflare DNS and leaves it in place (removing it can unclaim the site). The value is not a secret. Claiming adds no scripts and collects no visitor data.
+- **Monthly audit:** check 2FA still on, no connected apps, pin count and wording.
