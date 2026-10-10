@@ -265,3 +265,12 @@ p.field-legend { margin: 0.5rem 0 0.5rem; }
 .store-more a { display: inline-block; padding: 0.55rem 0; }
 .book-list .store-main li { border: 0; padding: 0; }
 .disclosure { color: var(--cream-dim); font-size: 0.9rem; margin-top: 1rem; }
+
+/* ---------- Text pages (privacy, disclosure) ---------- */
+.prose { padding-bottom: 3rem; }
+.prose p, .prose li { max-width: 38rem; }
+.prose .updated { color: var(--cream-dim); font-size: 0.95rem; }
+.footer-links { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; margin-top: 0.5rem; }
+.footer-links a { display: inline-block; padding: 0.4rem 0; color: var(--cream-dim); }
+.footer-links a:hover { color: var(--yellow); }
+.how-to { margin: 0.6rem auto 0; max-width: 30rem; color: var(--cream); font-size: 1rem; }

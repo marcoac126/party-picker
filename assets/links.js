@@ -70,6 +70,29 @@
     return wrap;
   }
 
+  // Games: "how to play" video + store link for card and board games.
+  function gameLinks(name, buyable) {
+    const wrap = document.createElement('div');
+    wrap.className = 'store-links';
+    const ul = document.createElement('ul');
+    ul.className = 'store-main';
+    const add = (a) => { const li = document.createElement('li'); li.append(a); ul.append(li); };
+    const yt = document.createElement('a');
+    yt.href = `https://www.youtube.com/results?search_query=${q('how to play ' + name)}`;
+    yt.textContent = 'Watch how to play';
+    yt.target = '_blank'; yt.rel = 'noopener';
+    add(yt);
+    if (buyable) {
+      const a = document.createElement('a');
+      a.href = `https://www.amazon.com/s?k=${q(name + ' game')}&i=toys-and-games` + (IDS.amazon ? `&tag=${q(IDS.amazon)}` : '');
+      a.textContent = 'Buy on Amazon';
+      a.target = '_blank'; a.rel = IDS.amazon ? 'sponsored noopener' : 'noopener';
+      add(a);
+    }
+    wrap.append(ul);
+    return wrap;
+  }
+
   function isAffiliate() { return Object.values(STORES).some((s) => s.aff()); }
 
   function disclosure() {
@@ -80,5 +103,5 @@
     return parts.join(' ');
   }
 
-  window.PartyLinks = { bookLinks, link, isAffiliate, disclosure };
+  window.PartyLinks = { bookLinks, gameLinks, link, isAffiliate, disclosure };
 })();

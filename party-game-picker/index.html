@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Party Game Picker Wheel – What Should We Play?</title>
+<meta name="description" content="Can't decide what to play? Spin for a party game that fits your group size: no-supply games, pen and paper, card games, or board games. Includes quick rules. Free on any phone.">
+<link rel="canonical" href="https://thepartywheel.com/party-game-picker/">
+<meta name="theme-color" content="#2B1342">
+<link rel="stylesheet" href="../assets/style.css?v=20261009d">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap"><a href="../">The Party Wheel</a></div>
+</header>
+
+<main class="wrap">
+  <h1>Party game picker</h1>
+  <p class="lede">Can’t decide what to play? Tell the wheel how many people you have, then spin.</p>
+
+  <div class="stage">
+    <div class="pointer" aria-hidden="true"></div>
+    <canvas id="wheel" role="img" aria-label="Spinning wheel of party games"></canvas>
+  </div>
+  <button class="spin-btn" id="spin" type="button">Spin</button>
+
+  <div class="result" id="result" aria-live="polite">
+    <p class="result-hint">Your game shows up here.</p>
+  </div>
+
+  <section class="controls" aria-labelledby="list-heading">
+    <h2 id="list-heading">Games on the wheel</h2>
+
+    <p class="field-legend" aria-hidden="true">Where should the games come from?</p>
+    <fieldset class="segmented small">
+      <legend class="sr-only">Where should the games come from?</legend>
+      <input type="radio" name="source" id="src-suggested" value="suggested" checked>
+      <label for="src-suggested">Suggested games</label>
+      <input type="radio" name="source" id="src-own" value="own">
+      <label for="src-own">Games we own</label>
+    </fieldset>
+
+    <div id="suggested-panel">
+      <div class="filters single">
+        <div class="field">
+          <label for="players">How many players?</label>
+          <select id="players">
+            <option value="any">Any number</option>
+            <option value="2">2 players</option>
+            <option value="3-4">3–4 players</option>
+            <option value="5-7">5–7 players</option>
+            <option value="8-12">8–12 players</option>
+            <option value="13-99">13 or more</option>
+          </select>
+        </div>
+      </div>
+      <fieldset class="chip-group" style="margin-top:1rem">
+        <legend class="field-legend">What do you have? <span class="legend-note">Tap to include or leave out</span></legend>
+        <ul class="chips" id="types"></ul>
+      </fieldset>
+      <div class="row">
+        <p class="status" id="status" aria-live="polite"></p>
+        <button class="text-btn" id="deal" type="button">Deal new games</button>
+      </div>
+      <details class="own-list">
+        <summary>See the games on the wheel</summary>
+        <ul class="book-list" id="game-list"></ul>
+      </details>
+    </div>
+
+    <div id="own-panel" hidden>
+      <label for="own-entries">Your games</label>
+      <p class="help" id="own-help">One game per line. Great for spinning through the shelf of games you already have.</p>
+      <textarea id="own-entries" aria-describedby="own-help" spellcheck="false" placeholder="Codenames&#10;Uno&#10;Ticket to Ride"></textarea>
+    </div>
+
+    <p class="check"><input type="checkbox" id="remove"><label for="remove">Remove each game after it’s picked</label></p>
+    <p class="disclosure" id="disclosure" hidden></p>
+  </section>
+
+  <article class="guide">
+    <h2>How to pick a party game</h2>
+    <p>Start with your group size, since it rules out the most games. Then think about what’s on hand: if nobody brought anything, stick with no-supply games like Charades or Two Truths and a Lie. Spin, and the wheel shows quick rules for free games or a how-to-play video for card and board games.</p>
+
+    <h3>Ways to use it</h3>
+    <ul>
+      <li><strong>Game night rotation:</strong> switch to “Games we own”, list your shelf, and turn on “Remove each game” so you play something different each round.</li>
+      <li><strong>Icebreakers:</strong> at a party where people don’t know each other, include only “No supplies” and spin for the first game.</li>
+      <li><strong>Big groups:</strong> pick “13 or more”. Games like Mafia, Fishbowl, and Herd Mentality work for a crowd.</li>
+    </ul>
+
+    <h3>What makes a good party game?</h3>
+    <p>Rules you can explain in under a minute, turns that keep everyone involved, and something that gets people laughing or talking. Team games help shy guests join in, and short rounds make it easy for latecomers to jump in.</p>
+
+    <h3>Is the wheel random?</h3>
+    <p>Yes. Each spin uses your browser’s built-in random number generator, so every game on the wheel has the same chance. Your lists stay on your device and aren’t sent anywhere.</p>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">The Party Wheel · Free spinning wheels for game nights, karaoke, and book clubs.
+    <nav class="footer-links" aria-label="Site information"><a href="../privacy/">Privacy policy</a><a href="../affiliate-disclosure/">Affiliate disclosure</a></nav>
+  </div>
+</footer>
+
+<script src="../assets/wheel.js?v=20261009d"></script>
+<script src="../assets/links.js?v=20261009d"></script>
+<script src="games.js?v=20261009d"></script>
+<script>
+(function () {
+  const WHEEL_SIZE = 12;
+  const STORE_KEY = 'pp-games-v1';
+  const $ = (id) => document.getElementById(id);
+  const spinBtn = $('spin'), result = $('result'), status = $('status'), ownTA = $('own-entries'), playersSel = $('players');
+  const GAMES = window.PARTY_GAMES || [];
+  const L = window.PartyLinks;
+  const TYPES = [['free', 'No supplies', 'No supplies needed'], ['paper', 'Pen & paper', 'Pen & paper'], ['card', 'Card games', 'Card game'], ['board', 'Board games', 'Board game']];
+  const typeLabel = Object.fromEntries(TYPES.map(([id, , single]) => [id, single]));
+  const byName = Object.fromEntries(GAMES.map((g) => [g[0].toLowerCase(), g]));
+
+  const state = { source: 'suggested', players: 'any', types: TYPES.map(([id]) => id), dealt: [], own: '' };
+  const store = {
+    get() { try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; } catch (e) { return {}; } },
+    set(v) { try { localStorage.setItem(STORE_KEY, JSON.stringify(v)); } catch (e) {} }
+  };
+  const save = () => store.set({ source: state.source, players: state.players, types: state.types, own: state.own });
+  const lines = (t) => t.split('\n').map((s) => s.trim()).filter(Boolean);
+  const playersText = (g) => (g[2] === g[3] ? `${g[2]} players` : `${g[2]}–${g[3]} players`);
+
+  function currentNames() { return state.source === 'own' ? lines(ownTA.value) : state.dealt.map((g) => g[0]); }
+
+  const wheel = new Wheel($('wheel'), {
+    colors: ['#FF4F86', '#FFC93C', '#22B8A7', '#FFF4E2'],
+    onResult(name, index) {
+      const g = byName[name.toLowerCase()];
+      result.innerHTML = '';
+      const label = document.createElement('p'); label.className = 'result-label'; label.textContent = 'Let’s play';
+      const main = document.createElement('p'); main.className = 'lyric'; main.textContent = name;
+      result.append(label, main);
+      if (g) {
+        const meta = document.createElement('p'); meta.className = 'artist';
+        meta.textContent = `${playersText(g)} · ${typeLabel[g[1]]}`;
+        const how = document.createElement('p'); how.className = 'how-to'; how.textContent = g[4];
+        result.append(meta, how);
+      }
+      const buyable = state.source === 'suggested' && g && (g[1] === 'card' || g[1] === 'board');
+      if (g) result.append(L.gameLinks(name, buyable)); // unknown homemade games get no links
+      requestAnimationFrame(() => main.classList.add('sing'));
+      const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      result.scrollIntoView({ behavior: still ? 'auto' : 'smooth', block: 'nearest' });
+
+      if ($('remove').checked) {
+        if (state.source === 'own') { const l = lines(ownTA.value); l.splice(index, 1); ownTA.value = l.join('\n'); state.own = ownTA.value; save(); }
+        else { state.dealt.splice(index, 1); renderList(); status.textContent = `${state.dealt.length} games left on the wheel.`; }
+        refresh();
+      }
+      spinBtn.disabled = currentNames().length < 2;
+      spinBtn.textContent = 'Spin again';
+    }
+  });
+
+  function refresh() { const n = currentNames(); wheel.setItems(n); spinBtn.disabled = n.length < 2; }
+
+  function renderList() {
+    const ul = $('game-list'); ul.innerHTML = '';
+    state.dealt.forEach((g, i) => {
+      const li = document.createElement('li');
+      const row = document.createElement('div'); row.className = 'book-row';
+      const name = document.createElement('span'); name.textContent = `${g[0]} (${playersText(g)})`;
+      const btn = document.createElement('button');
+      btn.type = 'button'; btn.className = 'text-btn options-btn'; btn.textContent = 'Options';
+      btn.setAttribute('aria-expanded', 'false'); btn.setAttribute('aria-label', `Options for ${g[0]}`);
+      const panel = L.gameLinks(g[0], g[1] === 'card' || g[1] === 'board');
+      panel.id = `game-opts-${i}`; panel.hidden = true; btn.setAttribute('aria-controls', panel.id);
+      btn.addEventListener('click', () => { const open = btn.getAttribute('aria-expanded') === 'true'; btn.setAttribute('aria-expanded', String(!open)); panel.hidden = open; });
+      row.append(name, btn); li.append(row, panel); ul.append(li);
+    });
+  }
+
+  function randomInt(n) { const r = new Uint32Array(1); crypto.getRandomValues(r); return r[0] % n; }
+  function sample(arr, n) { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = randomInt(i + 1); [a[i], a[j]] = [a[j], a[i]]; } return a.slice(0, n); }
+
+  function deal() {
+    const on = new Set(state.types);
+    let lo = 0, hi = 999;
+    if (state.players !== 'any') { [lo, hi] = state.players.split('-').map(Number); if (!hi) hi = lo; }
+    const pool = GAMES.filter((g) => on.has(g[1]) && g[2] <= hi && g[3] >= lo);
+    state.dealt = sample(pool, WHEEL_SIZE);
+    renderList();
+    if (!on.size) status.textContent = 'Turn on at least one kind of game.';
+    else if (pool.length < 2) status.textContent = 'Not enough games match. Try another group size or kind of game.';
+    else if (pool.length <= WHEEL_SIZE) status.textContent = `All ${pool.length} matching games are on the wheel.`;
+    else status.textContent = `12 random games from ${pool.length} that fit your group.`;
+    $('deal').hidden = pool.length <= WHEEL_SIZE;
+    refresh(); save();
+  }
+
+  TYPES.forEach(([id, name]) => {
+    const li = document.createElement('li'); const b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip'; b.dataset.type = id; b.textContent = name;
+    b.addEventListener('click', () => {
+      const i = state.types.indexOf(id); if (i >= 0) state.types.splice(i, 1); else state.types.push(id);
+      syncChips(); deal();
+    });
+    li.append(b); $('types').append(li);
+  });
+  function syncChips() { $('types').querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(state.types.includes(b.dataset.type)))); }
+
+  function render() {
+    $('suggested-panel').hidden = state.source !== 'suggested';
+    $('own-panel').hidden = state.source !== 'own';
+    result.innerHTML = '<p class="result-hint">Your game shows up here.</p>';
+    spinBtn.textContent = 'Spin';
+    const showDisc = L.isAffiliate();
+    $('disclosure').hidden = !showDisc; $('disclosure').textContent = showDisc ? L.disclosure() : '';
+    refresh();
+  }
+
+  document.querySelectorAll('input[name="source"]').forEach((r) => r.addEventListener('change', () => { state.source = r.value; save(); render(); }));
+  playersSel.addEventListener('change', () => { state.players = playersSel.value; deal(); });
+  $('deal').addEventListener('click', deal);
+  ownTA.addEventListener('input', () => { state.own = ownTA.value; save(); refresh(); });
+  spinBtn.addEventListener('click', () => {
+    if (wheel.spin()) { spinBtn.disabled = true; spinBtn.textContent = 'Spinning…'; result.innerHTML = '<p class="result-hint">Spinning…</p>'; }
+  });
+
+  const saved = store.get();
+  if (saved.source === 'own') state.source = 'own';
+  if (saved.players) state.players = saved.players;
+  if (Array.isArray(saved.types)) state.types = saved.types.filter((t) => typeLabel[t]);
+  state.own = saved.own || '';
+  ownTA.value = state.own; playersSel.value = state.players;
+  $('src-' + state.source).checked = true;
+  syncChips(); deal(); render();
+})();
+</script>
+</body>
+</html>

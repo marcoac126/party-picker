@@ -50,3 +50,14 @@
 
 **Passed.** Six plain search links (Goodreads, Bookshop.org, Libro.fm, Amazon, Audible, OverDrive library search — replaced WorldCat, which showed visitors a rate-limit error). No widgets or third-party scripts; text is URL-encoded; new tab with `rel="noopener"`. No affiliate IDs active, so no disclosure required yet.
 **Note:** affiliate parameter names for Bookshop.org and Libro.fm in `assets/links.js` are placeholders. Confirm exact formats from each program's dashboard at approval, and re-review before the change goes live.
+
+## 2026-10-09 — Review: privacy policy, affiliate disclosure, party game picker
+
+**Passed**
+- Privacy policy matches what the site actually does: no cookies, no analytics, lists in local storage only, GitHub Pages hosting, Cloudflare DNS, Search Console, Apple feeds fetched server-side.
+- Disclosure states no affiliate links today; FTC-style plain-language commitments (random wheel, no paid placement). Footer links on every page.
+- Game picker: plain YouTube and Amazon search links, no embeds or scripts.
+
+**Open**
+- **Medium:** `hello@thepartywheel.com` is listed as the contact address. Set up free Cloudflare Email Routing to forward it to Mark's personal email, or mail will bounce.
+- Not legal advice. If revenue grows or ads/analytics are added, have the policy reviewed.
