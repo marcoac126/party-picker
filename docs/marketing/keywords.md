@@ -16,3 +16,6 @@ Demand figures are not verified yet. Free volume tools need a Google Ads account
 - **Wheel of Names:** polished and feature-rich, with 65 languages, cloud saves, sharing, and streaming support. It reports about 462M spins in 2026 and is funded by display ads. Not low quality.
 - **Picker Wheel:** also polished. Free with ads, plus a paid Premium plan. Its themed wheels are generic (teams, yes/no, numbers, NBA). It has no party themes.
 - **Gap:** neither site has pre-filled party wheels such as song lists, book club, or game night. Compete on themes, not on general wheel features.
+
+## Measurement
+- 2026-10-09: Google Search Console live for thepartywheel.com, sitemap submitted (home, karaoke, book club). First review target: ~2026-10-23 (queries, impressions, clicks per page). Replace guessed demand above with real numbers.
