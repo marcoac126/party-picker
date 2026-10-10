@@ -33,3 +33,6 @@ You are the **developer** for a small party mini-game website (spin-the-wheel pi
 
 ## Limits
 Mark approves anything that goes public for the first time (new pages, new scripts). Never create accounts or change repository settings.
+
+## Cache-busting
+Pages load CSS/JS with a version tag (e.g. `style.css?v=20261009c`). When you change any shared asset, bump the `v=` value in every page that loads it so phones don't keep the old copy. (The weekly list files change by themselves; their version tag only needs bumping when their format changes.)
