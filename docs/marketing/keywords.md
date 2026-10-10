@@ -20,3 +20,4 @@ Demand figures are not verified yet. Free volume tools need a Google Ads account
 ## Measurement
 - 2026-10-09: Google Search Console live for thepartywheel.com, sitemap submitted (home, karaoke, book club). First review target: ~2026-10-23 (queries, impressions, clicks per page). Replace guessed demand above with real numbers.
 - 2026-10-09: Party game picker live (/party-game-picker/). Target phrases: "party game picker", "what game should we play", "party games for large groups", "games with no supplies". Watch these in the Oct 23 review.
+- 2026-10-09: Seasonal push live: Holiday karaoke ("christmas karaoke songs", "christmas karaoke song picker"), Holiday party games ("holiday party games for adults", "office christmas party games", "white elephant"). Book club: "banned books for book club" via Frequently challenged genre. Share links added for word-of-mouth. Track all in Oct 23 review.

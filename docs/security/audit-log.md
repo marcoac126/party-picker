@@ -68,3 +68,6 @@
 - "Enforce HTTPS" on GitHub Pages: **done**.
 
 **Status:** no open High or Medium findings. Site is ready for affiliate applications (privacy policy, disclosure, working contact email in place). Next full audit: ~2026-11-09.
+
+## 2026-10-09 — Review: "Share this wheel"
+**Passed.** The list travels in the link after `#`, which browsers never send to the server, so nothing is stored or logged by us. Incoming shared lists are capped (60 items, 120 characters each), control characters stripped, rendered as plain text only, and the `#` data is cleared from the address bar after loading. Tested with a malicious link containing HTML/script on all three pickers: shown as text, nothing executed. Native share sheet or clipboard only; no third-party share widgets.

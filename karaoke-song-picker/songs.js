@@ -197,5 +197,32 @@ window.KARAOKE_SONGS = [
   ['Tennessee Orange', 'Megan Moroney', 2020, 'country'],
   ['Texas Hold ’Em', 'Beyoncé', 2020, 'country'],
   ['A Bar Song (Tipsy)', 'Shaboozey', 2020, 'country'],
-  ['I Had Some Help', 'Post Malone ft. Morgan Wallen', 2020, 'country', 1]
+  ['I Had Some Help', 'Post Malone ft. Morgan Wallen', 2020, 'country', 1],
+
+  // Holiday (shown only when Style is "Holiday"; decade filter is ignored)
+  ['All I Want for Christmas Is You', 'Mariah Carey', 1990, 'holiday'],
+  ['Last Christmas', 'Wham!', 1980, 'holiday'],
+  ['Jingle Bell Rock', 'Bobby Helms', 1950, 'holiday'],
+  ['Rockin’ Around the Christmas Tree', 'Brenda Lee', 1950, 'holiday'],
+  ['Feliz Navidad', 'José Feliciano', 1970, 'holiday'],
+  ['Happy Xmas (War Is Over)', 'John Lennon & Yoko Ono', 1970, 'holiday'],
+  ['Run Rudolph Run', 'Chuck Berry', 1950, 'holiday'],
+  ['White Christmas', 'Bing Crosby', 1940, 'holiday'],
+  ['A Holly Jolly Christmas', 'Burl Ives', 1960, 'holiday'],
+  ['Let It Snow! Let It Snow! Let It Snow!', 'Dean Martin', 1950, 'holiday'],
+  ['Santa Baby', 'Eartha Kitt', 1950, 'holiday'],
+  ['Wonderful Christmastime', 'Paul McCartney', 1970, 'holiday'],
+  ['Christmas (Baby Please Come Home)', 'Darlene Love', 1960, 'holiday'],
+  ['Blue Christmas', 'Elvis Presley', 1950, 'holiday'],
+  ['Sleigh Ride', 'The Ronettes', 1960, 'holiday'],
+  ['Step Into Christmas', 'Elton John', 1970, 'holiday'],
+  ['Little Saint Nick', 'The Beach Boys', 1960, 'holiday'],
+  ['You’re a Mean One, Mr. Grinch', 'Thurl Ravenscroft', 1960, 'holiday'],
+  ['Mistletoe', 'Justin Bieber', 2010, 'holiday'],
+  ['Santa Tell Me', 'Ariana Grande', 2010, 'holiday'],
+  ['Underneath the Tree', 'Kelly Clarkson', 2010, 'holiday'],
+  ['It’s Beginning to Look a Lot Like Christmas', 'Michael Bublé', 2010, 'holiday'],
+  ['Christmas Tree Farm', 'Taylor Swift', 2010, 'holiday'],
+  ['Have Yourself a Merry Little Christmas', 'Judy Garland', 1940, 'holiday'],
+  ['Jingle Bells', 'Frank Sinatra', 1950, 'holiday']
 ];

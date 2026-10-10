@@ -7,7 +7,7 @@
 <meta name="description" content="Can't decide what to play? Spin for a party game that fits your group size: no-supply games, pen and paper, card games, or board games. Includes quick rules. Free on any phone.">
 <link rel="canonical" href="https://thepartywheel.com/party-game-picker/">
 <meta name="theme-color" content="#2B1342">
-<link rel="stylesheet" href="../assets/style.css?v=20261009d">
+<link rel="stylesheet" href="../assets/style.css?v=20261009e">
 </head>
 <body>
 <header class="site-header">
@@ -23,6 +23,7 @@
     <canvas id="wheel" role="img" aria-label="Spinning wheel of party games"></canvas>
   </div>
   <button class="spin-btn" id="spin" type="button">Spin</button>
+  <p class="share-row"><button class="text-btn" id="share" type="button">Share this wheel</button><span class="share-status" id="share-status" aria-live="polite"></span></p>
 
   <div class="result" id="result" aria-live="polite">
     <p class="result-hint">Your game shows up here.</p>
@@ -41,7 +42,7 @@
     </fieldset>
 
     <div id="suggested-panel">
-      <div class="filters single">
+      <div class="filters">
         <div class="field">
           <label for="players">How many players?</label>
           <select id="players">
@@ -51,6 +52,13 @@
             <option value="5-7">5–7 players</option>
             <option value="8-12">8–12 players</option>
             <option value="13-99">13 or more</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="occasion">Occasion</label>
+          <select id="occasion">
+            <option value="any">Any occasion</option>
+            <option value="holiday">Holiday party</option>
           </select>
         </div>
       </div>
@@ -86,6 +94,7 @@
     <ul>
       <li><strong>Game night rotation:</strong> switch to “Games we own”, list your shelf, and turn on “Remove each game” so you play something different each round.</li>
       <li><strong>Icebreakers:</strong> at a party where people don’t know each other, include only “No supplies” and spin for the first game.</li>
+      <li><strong>Holiday parties:</strong> set the occasion to “Holiday party” for White Elephant, holiday charades, and crowd-pleasers that work for office parties and family gatherings. Card and board games on the wheel also make easy gifts.</li>
       <li><strong>Big groups:</strong> pick “13 or more”. Games like Mafia, Fishbowl, and Herd Mentality work for a crowd.</li>
     </ul>
 
@@ -103,9 +112,10 @@
   </div>
 </footer>
 
-<script src="../assets/wheel.js?v=20261009d"></script>
-<script src="../assets/links.js?v=20261009d"></script>
-<script src="games.js?v=20261009d"></script>
+<script src="../assets/wheel.js?v=20261009e"></script>
+<script src="../assets/share.js?v=20261009e"></script>
+<script src="../assets/links.js?v=20261009e"></script>
+<script src="games.js?v=20261009e"></script>
 <script>
 (function () {
   const WHEEL_SIZE = 12;
@@ -118,12 +128,12 @@
   const typeLabel = Object.fromEntries(TYPES.map(([id, , single]) => [id, single]));
   const byName = Object.fromEntries(GAMES.map((g) => [g[0].toLowerCase(), g]));
 
-  const state = { source: 'suggested', players: 'any', types: TYPES.map(([id]) => id), dealt: [], own: '' };
+  const state = { source: 'suggested', players: 'any', occasion: 'any', types: TYPES.map(([id]) => id), dealt: [], own: '' };
   const store = {
     get() { try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; } catch (e) { return {}; } },
     set(v) { try { localStorage.setItem(STORE_KEY, JSON.stringify(v)); } catch (e) {} }
   };
-  const save = () => store.set({ source: state.source, players: state.players, types: state.types, own: state.own });
+  const save = () => store.set({ source: state.source, players: state.players, occasion: state.occasion, types: state.types, own: state.own });
   const lines = (t) => t.split('\n').map((s) => s.trim()).filter(Boolean);
   const playersText = (g) => (g[2] === g[3] ? `${g[2]} players` : `${g[2]}–${g[3]} players`);
 
@@ -184,7 +194,7 @@
     const on = new Set(state.types);
     let lo = 0, hi = 999;
     if (state.players !== 'any') { [lo, hi] = state.players.split('-').map(Number); if (!hi) hi = lo; }
-    const pool = GAMES.filter((g) => on.has(g[1]) && g[2] <= hi && g[3] >= lo);
+    const pool = GAMES.filter((g) => on.has(g[1]) && g[2] <= hi && g[3] >= lo && (state.occasion === 'any' || g[5] === state.occasion));
     state.dealt = sample(pool, WHEEL_SIZE);
     renderList();
     if (!on.size) status.textContent = 'Turn on at least one kind of game.';
@@ -218,8 +228,11 @@
 
   document.querySelectorAll('input[name="source"]').forEach((r) => r.addEventListener('change', () => { state.source = r.value; save(); render(); }));
   playersSel.addEventListener('change', () => { state.players = playersSel.value; deal(); });
+  $('occasion').addEventListener('change', () => { state.occasion = $('occasion').value; deal(); });
   $('deal').addEventListener('click', deal);
   ownTA.addEventListener('input', () => { state.own = ownTA.value; save(); refresh(); });
+
+  $('share').addEventListener('click', () => window.PartyShare.share(currentNames(), 'games', 'Party games', $('share-status')));
   spinBtn.addEventListener('click', () => {
     if (wheel.spin()) { spinBtn.disabled = true; spinBtn.textContent = 'Spinning…'; result.innerHTML = '<p class="result-hint">Spinning…</p>'; }
   });
@@ -227,9 +240,15 @@
   const saved = store.get();
   if (saved.source === 'own') state.source = 'own';
   if (saved.players) state.players = saved.players;
+  if (saved.occasion) state.occasion = saved.occasion;
   if (Array.isArray(saved.types)) state.types = saved.types.filter((t) => typeLabel[t]);
   state.own = saved.own || '';
-  ownTA.value = state.own; playersSel.value = state.players;
+  ownTA.value = state.own; playersSel.value = state.players; $('occasion').value = state.occasion;
+  const shared = window.PartyShare.read();
+  if (shared) {
+    state.source = 'own'; state.own = shared.items.join('\n'); ownTA.value = state.own;
+    document.querySelector('.stage').insertAdjacentHTML('beforebegin', '<p class="shared-note">Someone shared this wheel with you. Spin away, or change the list below.</p>');
+  }
   $('src-' + state.source).checked = true;
   syncChips(); deal(); render();
 })();

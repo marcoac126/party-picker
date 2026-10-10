@@ -7,7 +7,7 @@
 <meta name="description" content="Spin the wheel to pick your book club's next book: your club's own list, or suggested picks by genre including this week's bestsellers. Can also pick who hosts. Free, works on any phone.">
 <link rel="canonical" href="https://thepartywheel.com/book-club-picker/">
 <meta name="theme-color" content="#2B1342">
-<link rel="stylesheet" href="../assets/style.css?v=20261009d">
+<link rel="stylesheet" href="../assets/style.css?v=20261009e">
 </head>
 <body>
 <header class="site-header">
@@ -31,6 +31,7 @@
     <canvas id="wheel" role="img" aria-label="Spinning wheel of book club choices"></canvas>
   </div>
   <button class="spin-btn" id="spin" type="button">Spin</button>
+  <p class="share-row"><button class="text-btn" id="share" type="button">Share this wheel</button><span class="share-status" id="share-status" aria-live="polite"></span></p>
 
   <div class="result" id="result" aria-live="polite">
     <p class="result-hint">Your pick shows up here.</p>
@@ -93,6 +94,7 @@
       <li><strong>One suggestion each:</strong> keeps the wheel fair and short enough to read every title.</li>
       <li><strong>Theme months:</strong> switch to “Suggested picks” and turn on just one or two genres.</li>
       <li><strong>Stay current:</strong> “New &amp; popular” is this week’s bestseller chart, refreshed every Monday.</li>
+      <li><strong>Banned books month:</strong> turn on only “Frequently challenged” for titles from the American Library Association’s most-challenged lists. These spark big discussions; some include mature themes.</li>
       <li><strong>Pick the host too:</strong> switch to “Who hosts”, add members’ names, and turn on “Remove each pick” so everyone takes a turn.</li>
     </ul>
 
@@ -113,10 +115,11 @@
   </div>
 </footer>
 
-<script src="../assets/wheel.js?v=20261009d"></script>
-<script src="../assets/links.js?v=20261009d"></script>
-<script src="books.js?v=20261009d"></script>
-<script src="current-books.js?v=20261009d"></script>
+<script src="../assets/wheel.js?v=20261009e"></script>
+<script src="../assets/share.js?v=20261009e"></script>
+<script src="../assets/links.js?v=20261009e"></script>
+<script src="books.js?v=20261009e"></script>
+<script src="current-books.js?v=20261009e"></script>
 <script>
 (function () {
   const WHEEL_SIZE = 12;
@@ -135,7 +138,8 @@
     ['romance', 'Romance'],
     ['scifi', 'Sci-fi & fantasy'],
     ['nonfiction', 'Nonfiction'],
-    ['classics', 'Classics']
+    ['classics', 'Classics'],
+    ['challenged', 'Frequently challenged']
   ].filter(([id]) => id !== 'current' || (CURRENT.books || []).length >= 2);
 
   const state = {
@@ -225,7 +229,13 @@
 
   function deal() {
     const on = new Set(state.genres);
-    const pool = LIBRARY.filter(([, , g]) => on.has(g));
+    const seen = new Set();
+    const pool = LIBRARY.filter(([t, a, g]) => {
+      if (!on.has(g)) return false;
+      const k = `${t}|${a}`.toLowerCase();
+      if (seen.has(k)) return false;
+      seen.add(k); return true;
+    });
     state.dealt = sample(pool, WHEEL_SIZE).map(([t, a]) => [t, a]);
     renderBookList();
     if (!on.size) status.textContent = 'Turn on at least one genre.';
@@ -275,6 +285,8 @@
   hostTA.addEventListener('input', () => { state.hosts = hostTA.value; save(); refresh(); });
   $('club-shuffle').addEventListener('click', () => { clubTA.value = sample(lines(clubTA.value), Infinity).join('\n'); state.club = clubTA.value; save(); refresh(); });
 
+
+  $('share').addEventListener('click', () => window.PartyShare.share(currentItems().map(([t, a]) => (a ? `${t} – ${a}` : t)), state.mode === 'host' ? 'hosts' : 'books', 'Book club picks', $('share-status')));
   spinBtn.addEventListener('click', () => {
     if (wheel.spin()) {
       spinBtn.disabled = true;
@@ -296,6 +308,14 @@
   clubTA.value = state.club; hostTA.value = state.hosts;
   $('mode-' + state.mode).checked = true;
   $('src-' + state.source).checked = true;
+  const shared = window.PartyShare.read();
+  if (shared) {
+    const text = shared.items.join('\n');
+    if (shared.kind === 'hosts') { state.mode = 'host'; state.hosts = text; hostTA.value = text; }
+    else { state.mode = 'book'; state.source = 'club'; state.club = text; clubTA.value = text; }
+    $('mode-' + state.mode).checked = true; $('src-' + state.source).checked = true;
+    document.querySelector('.segmented').insertAdjacentHTML('afterend', '<p class="shared-note">Someone shared this wheel with you. Spin away, or change the list below.</p>');
+  }
   syncChips();
   deal();
   render();

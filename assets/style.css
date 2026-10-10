@@ -274,3 +274,8 @@ p.field-legend { margin: 0.5rem 0 0.5rem; }
 .footer-links a { display: inline-block; padding: 0.4rem 0; color: var(--cream-dim); }
 .footer-links a:hover { color: var(--yellow); }
 .how-to { margin: 0.6rem auto 0; max-width: 30rem; color: var(--cream); font-size: 1rem; }
+
+/* ---------- Share ---------- */
+.share-row { text-align: center; margin: 0.5rem 0 0; }
+.share-status { display: block; color: var(--cream-dim); font-size: 0.95rem; min-height: 1.2em; }
+.shared-note { margin: 0.75rem 0 0; padding: 0.6rem 0.9rem; border-radius: 0.5rem; background: #12081D; border: 2px solid var(--teal); color: var(--cream); font-size: 0.95rem; }

@@ -7,7 +7,7 @@
 <meta name="description" content="Can't decide what to sing? Spin the karaoke wheel for a random song by decade (60s to today) or style: pop, rock, country, R&B, hip-hop, or duets. Free, works on any phone.">
 <link rel="canonical" href="https://thepartywheel.com/karaoke-song-picker/">
 <meta name="theme-color" content="#2B1342">
-<link rel="stylesheet" href="../assets/style.css?v=20261009d">
+<link rel="stylesheet" href="../assets/style.css?v=20261009e">
 </head>
 <body>
 <header class="site-header">
@@ -23,6 +23,7 @@
     <canvas id="wheel" role="img" aria-label="Spinning wheel of karaoke songs"></canvas>
   </div>
   <button class="spin-btn" id="spin" type="button">Spin</button>
+  <p class="share-row"><button class="text-btn" id="share" type="button">Share this wheel</button><span class="share-status" id="share-status" aria-live="polite"></span></p>
 
   <div class="result" id="result" aria-live="polite">
     <p class="result-hint">Your song shows up here.</p>
@@ -50,6 +51,7 @@
         <select id="style">
           <option value="any">Any style</option>
           <option value="hits">Current hits</option>
+          <option value="holiday">Holiday</option>
           <option value="pop">Pop</option>
           <option value="rock">Rock</option>
           <option value="country">Country</option>
@@ -85,6 +87,7 @@
     <ul>
       <li><strong>Decade night:</strong> set the decade and stick with it all evening. Tap “Deal new songs” whenever the wheel gets stale.</li>
       <li><strong>No repeats:</strong> turn on “Remove each song after it’s picked” so every spin is new.</li>
+      <li><strong>Holiday party:</strong> set the style to Holiday for Christmas classics from Bing Crosby to Mariah Carey.</li>
       <li><strong>Duet roulette:</strong> set the style to Duets, then spin a second wheel of names to pick partners.</li>
       <li><strong>Crowd’s choice:</strong> open “Use your own list” and have everyone add one song before the first spin.</li>
     </ul>
@@ -106,9 +109,10 @@
   </div>
 </footer>
 
-<script src="../assets/wheel.js?v=20261009d"></script>
-<script src="songs.js?v=20261009d"></script>
-<script src="hits.js?v=20261009d"></script>
+<script src="../assets/share.js?v=20261009e"></script>
+<script src="../assets/wheel.js?v=20261009e"></script>
+<script src="songs.js?v=20261009e"></script>
+<script src="hits.js?v=20261009e"></script>
 <script>
 (function () {
   const WHEEL_SIZE = 12;
@@ -175,7 +179,9 @@
     const d = decadeSel.value, s = styleSel.value;
     // Current hits ignore the decade filter; they're this week's chart.
     if (s === 'hits') return HITS.songs.map(([t, a]) => [t, a, 2020, 'hits']);
-    return SONGS.filter(([, , decade, style, duet]) =>
+    // Holiday songs ignore decade and stay out of the regular lists.
+    if (s === 'holiday') return SONGS.filter(([, , , style]) => style === 'holiday');
+    return SONGS.filter(([, , decade, style, duet]) => style !== 'holiday' &&
       (d === 'any' || String(decade) === d) &&
       (s === 'any' || (s === 'duet' ? duet : style === s)));
   }
@@ -185,7 +191,7 @@
     const picked = sample(pool, WHEEL_SIZE);
     textarea.value = picked.map(([t, a]) => `${t} – ${a}`).join('\n');
     refreshWheel();
-    decadeSel.disabled = styleSel.value === 'hits';
+    decadeSel.disabled = styleSel.value === 'hits' || styleSel.value === 'holiday';
     if (styleSel.value === 'hits' && pool.length < 2) {
       status.textContent = 'This week’s hits list isn’t ready yet. Try another style.';
     } else if (styleSel.value === 'hits') {
@@ -220,6 +226,8 @@
     if (mode === 'own') save();
   });
 
+
+  $('share').addEventListener('click', () => window.PartyShare.share(readList(), 'songs', 'Karaoke songs', $('share-status')));
   spinBtn.addEventListener('click', () => {
     if (wheel.spin()) {
       spinBtn.disabled = true;
@@ -232,7 +240,13 @@
   const saved = store.get();
   if (saved.decade) decadeSel.value = saved.decade;
   if (saved.style) styleSel.value = saved.style;
-  if (saved.mode === 'own' && saved.own && saved.own.trim()) {
+  const shared = window.PartyShare.read();
+  if (shared) {
+    mode = 'own'; textarea.value = shared.items.join('\n'); own.open = true;
+    status.textContent = 'Using a shared list.';
+    $('deal').hidden = false; refreshWheel(); save();
+    document.querySelector('.stage').insertAdjacentHTML('beforebegin', '<p class="shared-note">Someone shared this wheel with you. Spin away, or change the list below.</p>');
+  } else if (saved.mode === 'own' && saved.own && saved.own.trim()) {
     mode = 'own';
     textarea.value = saved.own;
     own.open = true;

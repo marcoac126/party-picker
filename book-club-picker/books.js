@@ -103,5 +103,29 @@ window.BOOK_CLUB_BOOKS = [
   ['Their Eyes Were Watching God', 'Zora Neale Hurston', 'classics'],
   ['East of Eden', 'John Steinbeck', 'classics'],
   ['Of Mice and Men', 'John Steinbeck', 'classics'],
-  ['Fahrenheit 451', 'Ray Bradbury', 'classics']
+  ['Fahrenheit 451', 'Ray Bradbury', 'classics'],
+
+  // Frequently challenged: titles from the American Library Association's annual
+  // "most challenged books" lists. Some include mature themes. Books can also appear
+  // in another genre; the page removes duplicates.
+  ['The Bluest Eye', 'Toni Morrison', 'challenged'],
+  ['Beloved', 'Toni Morrison', 'challenged'],
+  ['The Handmaid’s Tale', 'Margaret Atwood', 'challenged'],
+  ['The Hate U Give', 'Angie Thomas', 'challenged'],
+  ['The Perks of Being a Wallflower', 'Stephen Chbosky', 'challenged'],
+  ['The Color Purple', 'Alice Walker', 'challenged'],
+  ['Brave New World', 'Aldous Huxley', 'challenged'],
+  ['The Absolutely True Diary of a Part-Time Indian', 'Sherman Alexie', 'challenged'],
+  ['Looking for Alaska', 'John Green', 'challenged'],
+  ['The Catcher in the Rye', 'J.D. Salinger', 'challenged'],
+  ['Gender Queer', 'Maia Kobabe', 'challenged'],
+  ['All Boys Aren’t Blue', 'George M. Johnson', 'challenged'],
+  ['Lawn Boy', 'Jonathan Evison', 'challenged'],
+  ['Slaughterhouse-Five', 'Kurt Vonnegut', 'challenged'],
+  ['Maus', 'Art Spiegelman', 'challenged'],
+  ['Speak', 'Laurie Halse Anderson', 'challenged'],
+  ['The Kite Runner', 'Khaled Hosseini', 'challenged'],
+  ['To Kill a Mockingbird', 'Harper Lee', 'challenged'],
+  ['Of Mice and Men', 'John Steinbeck', 'challenged'],
+  ['1984', 'George Orwell', 'challenged']
 ];
