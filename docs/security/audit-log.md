@@ -1,0 +1,18 @@
+# Security & Process Audit Log
+
+## 2026-10-09 — Baseline audit (pre-build)
+
+**High**
+- **Confirm two-factor authentication on GitHub.** The GitHub account will hold the site's code and control what's published. Fix: turn on 2FA with an authenticator app, and save the recovery codes somewhere safe outside GitHub.
+
+**Medium**
+- **Keep work and business separate.** Building on a personal phone and personal accounts is correct. Fix: keep it that way for every new account (Google, Amazon, domain), and check whether your employer's outside-employment policy asks you to disclose side businesses.
+- **The repo will be public.** Free GitHub Pages hosting needs a public repo, so anyone can see the code. Fix: never put passwords or keys in it. The developer agent will follow this rule.
+
+**Low**
+- **Legal pages aren't needed yet.** A privacy policy and affiliate disclosure are required before analytics, ads, or affiliate links go live. Tracked for the pre-launch review.
+
+**Passed**
+- No money spent. Budget and decision log match reality.
+- Paid ads were reviewed by finance before reaching Mark, and rejected (money gate followed).
+- No accounts were created by agents.
