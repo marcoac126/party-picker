@@ -16,3 +16,13 @@
 - No money spent. Budget and decision log match reality.
 - Paid ads were reviewed by finance before reaching Mark, and rejected (money gate followed).
 - No accounts were created by agents.
+
+## 2026-10-09 — Review: Apple Music top-songs feed (Current hits)
+
+**Verdict: approved, low risk.**
+- Read-only public feed, no account or keys. Fetched by GitHub Actions weekly; visitors' browsers never contact Apple.
+- **Explicit filter uses an allow-list.** The feed misspells its explicit flag ("Explict"), so a block-list on "Explicit" would have leaked explicit songs. Only songs with no flag or "Clean" are kept. Tested against a sample feed with all spellings.
+- Song text is stripped of `<`, `>`, and control characters, length-capped, and rendered as plain text.
+- If the feed fails or returns fewer than 5 clean songs, the old list stays live.
+- Workflow has write access to this repo's contents only and a 5-minute timeout.
+- **Watch:** if Apple changes or retires the feed, the list goes stale but nothing breaks. The monthly audit should check the last update date in `karaoke-song-picker/hits.js`.

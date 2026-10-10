@@ -48,6 +48,7 @@
         <label for="style">Style</label>
         <select id="style">
           <option value="any">Any style</option>
+          <option value="hits">Current hits</option>
           <option value="pop">Pop</option>
           <option value="rock">Rock</option>
           <option value="country">Country</option>
@@ -90,6 +91,9 @@
     <h3>Picking a good karaoke song</h3>
     <p>Songs with a big, well-known chorus get the room singing along, which takes pressure off the singer. Mid-tempo songs are easier than fast ones, and a song in a comfortable range beats a show-off song every time.</p>
 
+    <h3>Where do “Current hits” come from?</h3>
+    <p>Once a week the site refreshes the list from Apple Music’s top songs chart in the US. Songs marked explicit are left out. Brand-new hits don’t always have karaoke versions yet, so check your karaoke app before you commit.</p>
+
     <h3>Is the wheel random?</h3>
     <p>Yes, twice over. Each visit deals a random set of 12 songs from the ones that match your decade and style, and each spin uses your browser’s built-in random number generator, so every song on the wheel has the same chance. Your list stays on your device and isn’t sent anywhere.</p>
   </article>
@@ -101,6 +105,7 @@
 
 <script src="../assets/wheel.js"></script>
 <script src="songs.js"></script>
+<script src="hits.js"></script>
 <script>
 (function () {
   const WHEEL_SIZE = 12;
@@ -109,6 +114,7 @@
   const textarea = $('entries'), spinBtn = $('spin'), result = $('result'), status = $('status');
   const decadeSel = $('decade'), styleSel = $('style'), own = $('own');
   const SONGS = window.KARAOKE_SONGS || [];
+  const HITS = window.KARAOKE_HITS || { updated: null, songs: [] };
   let mode = 'dealt'; // 'dealt' or 'own'
 
   const store = {
@@ -164,6 +170,8 @@
   }
   function matches() {
     const d = decadeSel.value, s = styleSel.value;
+    // Current hits ignore the decade filter; they're this week's chart.
+    if (s === 'hits') return HITS.songs.map(([t, a]) => [t, a, 2020, 'hits']);
     return SONGS.filter(([, , decade, style, duet]) =>
       (d === 'any' || String(decade) === d) &&
       (s === 'any' || (s === 'duet' ? duet : style === s)));
@@ -174,7 +182,13 @@
     const picked = sample(pool, WHEEL_SIZE);
     textarea.value = picked.map(([t, a]) => `${t} – ${a}`).join('\n');
     refreshWheel();
-    if (pool.length < 2) {
+    decadeSel.disabled = styleSel.value === 'hits';
+    if (styleSel.value === 'hits' && pool.length < 2) {
+      status.textContent = 'This week’s hits list isn’t ready yet. Try another style.';
+    } else if (styleSel.value === 'hits') {
+      const when = HITS.updated ? new Date(HITS.updated + 'T12:00:00').toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) : '';
+      status.textContent = `${Math.min(pool.length, WHEEL_SIZE)} of this week’s top songs${when ? ' (updated ' + when + ')' : ''}.`;
+    } else if (pool.length < 2) {
       status.textContent = 'Not enough songs match. Try a different decade or style.';
     } else if (pool.length <= WHEEL_SIZE) {
       status.textContent = `All ${pool.length} matching songs are on the wheel.`;

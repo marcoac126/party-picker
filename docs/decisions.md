@@ -12,3 +12,4 @@
 | 2026-10-09 | Added developer agent; first page is the karaoke song picker | Highest-ranked "build now" page with no dedicated competitor |
 | 2026-10-09 | Use built-in phone fonts, no web font downloads | Faster pages, no third-party font requests; Mark declined the font download |
 | 2026-10-09 | Karaoke picker: decade + style dropdowns, random 12 dealt from a ~180-song library, own list collapsed | Fresh wheel every visit and more options without a busy page (Mark's request) |
+| 2026-10-09 | Added weekly "Current hits" from Apple Music's free top-songs feed (explicit songs excluded) | Keeps the picker current at $0; Billboard has no free feed and scraping it isn't allowed |

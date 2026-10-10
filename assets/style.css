@@ -223,3 +223,4 @@ select {
   color: var(--yellow);
 }
 .own-list[open] summary { margin-bottom: 0.5rem; }
+select:disabled { opacity: 0.5; }
