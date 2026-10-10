@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Karaoke Song Picker Wheel – Spin for Your Next Song</title>
+<meta name="description" content="Can't decide what to sing? Spin the karaoke wheel for a random song from the 80s, 90s, 2000s, duets, or your own list. Free, works on any phone.">
+<meta name="theme-color" content="#2B1342">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap"><a href="../">Party Picker</a></div>
+</header>
+
+<main class="wrap">
+  <h1>Karaoke song picker</h1>
+  <p class="lede">Spin the wheel and sing whatever it lands on. Pick a song list below or type your own.</p>
+
+  <div class="stage">
+    <div class="pointer" aria-hidden="true"></div>
+    <canvas id="wheel" role="img" aria-label="Spinning wheel of karaoke songs"></canvas>
+  </div>
+  <button class="spin-btn" id="spin" type="button">Spin</button>
+
+  <div class="result" id="result" aria-live="polite">
+    <p class="result-hint">Your song shows up here.</p>
+  </div>
+
+  <section class="controls" aria-labelledby="songs-heading">
+    <h2 id="songs-heading">Songs on the wheel</h2>
+    <ul class="chips" id="presets"></ul>
+
+    <label for="entries">Your list</label>
+    <p class="help" id="entries-help">One song per line. Add the artist after a dash, like “Dancing Queen – ABBA”.</p>
+    <textarea id="entries" aria-describedby="entries-help" spellcheck="false"></textarea>
+
+    <div class="row">
+      <p class="check"><input type="checkbox" id="remove"><label for="remove" style="margin:0">Remove each song after it’s picked</label></p>
+      <button class="text-btn" id="shuffle" type="button">Shuffle list</button>
+    </div>
+  </section>
+
+  <article class="guide">
+    <h2>How to run a karaoke night with the wheel</h2>
+    <p>Pass the phone around. Whoever holds it spins, and they sing what it lands on. No skipping, unless the group votes to let them off.</p>
+
+    <h3>Ways to play</h3>
+    <ul>
+      <li><strong>Decade night:</strong> pick one decade list and stick with it all evening.</li>
+      <li><strong>No repeats:</strong> turn on “Remove each song after it’s picked” so every spin is new.</li>
+      <li><strong>Duet roulette:</strong> spin the duets list, then spin a second wheel of names to pick partners.</li>
+      <li><strong>Crowd’s choice:</strong> have everyone add one song to the list before the first spin.</li>
+    </ul>
+
+    <h3>Picking a good karaoke song</h3>
+    <p>Songs with a big, well-known chorus get the room singing along, which takes pressure off the singer. Mid-tempo songs are easier than fast ones, and a song in a comfortable range beats a show-off song every time.</p>
+
+    <h3>Is the wheel random?</h3>
+    <p>Yes. Each spin uses your browser’s built-in random number generator, so every song has the same chance. Your list stays on your device and isn’t sent anywhere.</p>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">Party Picker · Free spinning wheels for game nights, karaoke, and book clubs.</div>
+</footer>
+
+<script src="../assets/wheel.js"></script>
+<script>
+(function () {
+  const LISTS = {
+    'Crowd-pleasers': [
+      "Don't Stop Believin' – Journey", 'Sweet Caroline – Neil Diamond', 'Bohemian Rhapsody – Queen',
+      'Livin’ on a Prayer – Bon Jovi', 'I Wanna Dance with Somebody – Whitney Houston', 'Mr. Brightside – The Killers',
+      'Dancing Queen – ABBA', 'Shut Up and Dance – Walk the Moon', 'Wannabe – Spice Girls',
+      'Friends in Low Places – Garth Brooks', 'September – Earth, Wind & Fire', 'Africa – Toto'
+    ],
+    '80s': [
+      'Girls Just Want to Have Fun – Cyndi Lauper', 'Take On Me – a-ha', 'Total Eclipse of the Heart – Bonnie Tyler',
+      'Jessie’s Girl – Rick Springfield', 'Like a Prayer – Madonna', 'Footloose – Kenny Loggins',
+      'Here I Go Again – Whitesnake', 'Billie Jean – Michael Jackson', 'Eye of the Tiger – Survivor',
+      'Come On Eileen – Dexys Midnight Runners', 'Material Girl – Madonna', 'Don’t You (Forget About Me) – Simple Minds'
+    ],
+    '90s': [
+      'Wonderwall – Oasis', 'I Want It That Way – Backstreet Boys', 'Torn – Natalie Imbruglia',
+      'No Scrubs – TLC', 'Semi-Charmed Life – Third Eye Blind', 'Man! I Feel Like a Woman! – Shania Twain',
+      'Baby One More Time – Britney Spears', 'Gangsta’s Paradise – Coolio', 'Losing My Religion – R.E.M.',
+      'Waterfalls – TLC', 'Mambo No. 5 – Lou Bega', 'You Oughta Know – Alanis Morissette'
+    ],
+    '2000s': [
+      'Since U Been Gone – Kelly Clarkson', 'Hey Ya! – OutKast', 'Crazy in Love – Beyoncé',
+      'Toxic – Britney Spears', 'Bye Bye Bye – *NSYNC', 'Complicated – Avril Lavigne',
+      'Sk8er Boi – Avril Lavigne', 'Umbrella – Rihanna', 'Hips Don’t Lie – Shakira',
+      'Before He Cheats – Carrie Underwood', 'Seven Nation Army – The White Stripes', 'I Gotta Feeling – The Black Eyed Peas'
+    ],
+    'Duets': [
+      'Islands in the Stream – Kenny Rogers & Dolly Parton', 'Don’t Go Breaking My Heart – Elton John & Kiki Dee',
+      'Shallow – Lady Gaga & Bradley Cooper', 'I Got You Babe – Sonny & Cher', 'Endless Love – Diana Ross & Lionel Richie',
+      'Summer Nights – Grease', 'Picture – Kid Rock & Sheryl Crow', 'Up Where We Belong – Joe Cocker & Jennifer Warnes',
+      'Ain’t No Mountain High Enough – Marvin Gaye & Tammi Terrell', 'Time of My Life – Bill Medley & Jennifer Warnes'
+    ]
+  };
+
+  const STORE_KEY = 'pp-karaoke-list';
+  const $ = (id) => document.getElementById(id);
+  const textarea = $('entries'), spinBtn = $('spin'), result = $('result'), presets = $('presets');
+
+  const store = {
+    get() { try { return localStorage.getItem(STORE_KEY); } catch (e) { return null; } },
+    set(v) { try { localStorage.setItem(STORE_KEY, v); } catch (e) {} }
+  };
+
+  const wheel = new Wheel($('wheel'), {
+    colors: ['#FF4F86', '#FFC93C', '#22B8A7', '#FFF4E2'],
+    labelFn: (item) => item.split(/\s+[–-]\s+/)[0],
+    onResult(item, index) {
+      const [title, ...rest] = item.split(/\s+[–-]\s+/);
+      const artist = rest.join(' – ');
+      result.innerHTML = '';
+      const label = document.createElement('p'); label.className = 'result-label'; label.textContent = 'Up next';
+      const lyric = document.createElement('p'); lyric.className = 'lyric'; lyric.textContent = title;
+      result.append(label, lyric);
+      if (artist) { const a = document.createElement('p'); a.className = 'artist'; a.textContent = artist; result.append(a); }
+      requestAnimationFrame(() => lyric.classList.add('sing'));
+      const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      result.scrollIntoView({ behavior: still ? 'auto' : 'smooth', block: 'nearest' });
+
+      if ($('remove').checked) {
+        const items = readList(); items.splice(index, 1);
+        textarea.value = items.join('\n'); sync();
+      }
+      spinBtn.disabled = false;
+      spinBtn.textContent = 'Spin again';
+    }
+  });
+
+  function readList() {
+    return textarea.value.split('\n').map((s) => s.trim()).filter(Boolean);
+  }
+  function sync() {
+    const items = readList();
+    wheel.setItems(items);
+    store.set(textarea.value);
+    spinBtn.disabled = items.length < 2;
+  }
+  function choosePreset(name) {
+    textarea.value = LISTS[name].join('\n');
+    presets.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.list === name)));
+    sync();
+  }
+
+  Object.keys(LISTS).forEach((name) => {
+    const li = document.createElement('li');
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip'; b.textContent = name; b.dataset.list = name;
+    b.setAttribute('aria-pressed', 'false');
+    b.addEventListener('click', () => choosePreset(name));
+    li.append(b); presets.append(li);
+  });
+
+  textarea.addEventListener('input', () => {
+    presets.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', 'false'));
+    sync();
+  });
+
+  $('shuffle').addEventListener('click', () => {
+    const items = readList();
+    for (let i = items.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [items[i], items[j]] = [items[j], items[i]]; }
+    textarea.value = items.join('\n'); sync();
+  });
+
+  spinBtn.addEventListener('click', () => {
+    if (wheel.spin()) {
+      spinBtn.disabled = true;
+      spinBtn.textContent = 'Spinning…';
+      result.innerHTML = '<p class="result-hint">Spinning…</p>';
+    }
+  });
+
+  const saved = store.get();
+  if (saved && saved.trim()) { textarea.value = saved; sync(); } else { choosePreset('Crowd-pleasers'); }
+})();
+</script>
+</body>
+</html>

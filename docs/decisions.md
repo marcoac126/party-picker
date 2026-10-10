@@ -9,3 +9,5 @@
 | 2026-10-09 | Added security agent (security + process auditor) | Protect accounts and visitors, and confirm the team follows its own rules |
 | 2026-10-09 | Finance agent now handles tax set-aside (25% default) | Avoid tax surprises once revenue starts |
 | 2026-10-09 | Hosting: public GitHub repo + GitHub Pages (free) | Zero cost, one fewer account than Cloudflare |
+| 2026-10-09 | Added developer agent; first page is the karaoke song picker | Highest-ranked "build now" page with no dedicated competitor |
+| 2026-10-09 | Use built-in phone fonts, no web font downloads | Faster pages, no third-party font requests; Mark declined the font download |

@@ -16,7 +16,7 @@ Prove the site can earn money with as little spending as possible, then grow it.
 | Finance | `.claude/agents/finance.md` | Budget, spend approvals, ROI math, ledger, tax set-aside |
 | Marketing | `.claude/agents/marketing.md` | Keyword research, page ideas, traffic plans, paid-ad tests |
 | Security | `.claude/agents/security.md` | Account and site security, privacy and disclosures, process audits |
-| Developer | *not built yet* | Building and deploying the site |
+| Developer | `.claude/agents/developer.md` | Building and deploying the site (static HTML/CSS/JS on GitHub Pages) |
 | UX/UI | *not built yet* | Layout, mobile usability, speed |
 
 ## How you work
@@ -45,7 +45,8 @@ Format for a weekly review:
 4. **Next week's plan**
 
 ## Known constraints
-- Tight budget. Free tiers first (Cloudflare Pages or GitHub Pages hosting, Google Analytics, Search Console).
+- Tight budget. Free tiers first (GitHub Pages hosting, Google Analytics, Search Console).
+- Repo: github.com/marcoac126/party-picker (public). Site: marcoac126.github.io/party-picker until a domain is bought.
 - Domain (~$10–15/yr) is the only planned required cost.
 - Amazon Associates: apply only once the site has traffic. After applying, the site must refer 3 qualifying sales within 180 days or the account is closed. Self-purchases don't count.
 - Power Automate is not available for this project.
