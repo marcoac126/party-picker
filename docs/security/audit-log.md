@@ -45,3 +45,8 @@
 - Apple Books US top-paid feed: same source, pattern, and safeguards as the Current hits feed (read-only, no keys, plain text, keep-old-list on failure). Filters out kids/YA, comics & manga, erotica, and box sets. Tested against a sample feed.
 - Outbound links (`assets/links.js`): store search links only, built from text with URL encoding, opened in a new tab with `rel="noopener"`. No tracking scripts.
 - **Affiliate switch-on checklist** (for later): Mark approves → program added to third-parties list → ID set in `assets/links.js` → links automatically get `rel="sponsored"` and the disclosure line appears. Security re-reviews before the change goes live.
+
+## 2026-10-09 — Review: multi-store book links
+
+**Passed.** Six plain search links (Goodreads, Bookshop.org, Libro.fm, Amazon, Audible, WorldCat library search). No widgets or third-party scripts; text is URL-encoded; new tab with `rel="noopener"`. No affiliate IDs active, so no disclosure required yet.
+**Note:** affiliate parameter names for Bookshop.org and Libro.fm in `assets/links.js` are placeholders. Confirm exact formats from each program's dashboard at approval, and re-review before the change goes live.

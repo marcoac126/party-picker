@@ -251,11 +251,17 @@ p.field-legend { margin: 0.5rem 0 0.5rem; }
 .chip-group .chips { margin-top: 0; }
 .chip[aria-pressed="false"] { color: var(--cream-dim); text-decoration: line-through; text-decoration-color: rgba(255,244,226,0.4); }
 .book-list { list-style: none; padding: 0; margin: 0; }
-.book-list li {
-  display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
-  padding: 0.6rem 0; border-bottom: 1px solid var(--plum-2);
-}
-.book-list a { flex: none; font-weight: 700; padding: 0.25rem 0; }
-.result-link { margin: 0.6rem 0 0; }
-.result-link a { font-weight: 750; }
+.book-list li { padding: 0.35rem 0; border-bottom: 1px solid var(--plum-2); }
+.book-row { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+.options-btn { flex: none; }
+.book-list .store-links { padding: 0 0 0.6rem; text-align: left; }
+
+/* Store links: task first, store second. Three visible, rest under "More". */
+.store-links { margin-top: 0.85rem; }
+.store-main { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.15rem; }
+.store-main a { display: inline-block; padding: 0.45rem 0; min-height: 2.75rem; line-height: 1.9rem; font-weight: 750; }
+.store-more { margin: 0.25rem 0 0; color: var(--cream-dim); font-size: 0.95rem; display: flex; flex-wrap: wrap; gap: 0 1rem; align-items: baseline; }
+.result .store-more { justify-content: center; }
+.store-more a { display: inline-block; padding: 0.55rem 0; }
+.book-list .store-main li { border: 0; padding: 0; }
 .disclosure { color: var(--cream-dim); font-size: 0.9rem; margin-top: 1rem; }

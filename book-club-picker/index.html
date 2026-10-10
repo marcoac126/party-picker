@@ -170,11 +170,7 @@
       const main = document.createElement('p'); main.className = 'lyric'; main.textContent = title;
       result.append(label, main);
       if (author) { const a = document.createElement('p'); a.className = 'artist'; a.textContent = 'by ' + author; result.append(a); }
-      if (state.mode === 'book') {
-        const p = document.createElement('p'); p.className = 'result-link';
-        p.append(L.bookLink(title, author, `Find it on ${L.storeName()}`));
-        result.append(p);
-      }
+      if (state.mode === 'book') result.append(L.bookLinks(title, author));
       requestAnimationFrame(() => main.classList.add('sing'));
       const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       result.scrollIntoView({ behavior: still ? 'auto' : 'smooth', block: 'nearest' });
@@ -200,12 +196,21 @@
 
   function renderBookList() {
     const ul = $('book-list'); ul.innerHTML = '';
-    state.dealt.forEach(([t, a]) => {
+    state.dealt.forEach(([t, a], i) => {
       const li = document.createElement('li');
+      const row = document.createElement('div'); row.className = 'book-row';
       const name = document.createElement('span'); name.textContent = a ? `${t} – ${a}` : t;
-      li.append(name, L.bookLink(t, a, 'Find'));
-      li.lastChild.setAttribute('aria-label', `Find ${t}`);
-      ul.append(li);
+      const btn = document.createElement('button');
+      btn.type = 'button'; btn.className = 'text-btn options-btn'; btn.textContent = 'Options';
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-label', `Options for ${t}`);
+      const panelId = `book-opts-${i}`; btn.setAttribute('aria-controls', panelId);
+      const panel = L.bookLinks(t, a); panel.id = panelId; panel.hidden = true;
+      btn.addEventListener('click', () => {
+        const open = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!open)); panel.hidden = open;
+      });
+      row.append(name, btn); li.append(row, panel); ul.append(li);
     });
   }
 

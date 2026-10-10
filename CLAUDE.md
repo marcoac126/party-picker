@@ -17,7 +17,7 @@ Prove the site can earn money with as little spending as possible, then grow it.
 | Marketing | `.claude/agents/marketing.md` | Keyword research, page ideas, traffic plans, paid-ad tests |
 | Security | `.claude/agents/security.md` | Account and site security, privacy and disclosures, process audits |
 | Developer | `.claude/agents/developer.md` | Building and deploying the site (static HTML/CSS/JS on GitHub Pages) |
-| UX/UI | *not built yet* | Layout, mobile usability, speed |
+| UX/UI | `.claude/agents/ux.md` | Layout, wording, mobile usability, accessibility |
 
 ## How you work
 1. **Delegate, don't do.** Send research and money questions to the right agent. Give each one a clear task, the context it needs, and the output you expect.

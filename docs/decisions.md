@@ -17,3 +17,4 @@
 | 2026-10-09 | Bought thepartywheel.com ($10.46/yr, Cloudflare); site renamed "The Party Wheel" | partypicker.com taken; broad name fits every picker; finance-approved registrar with flat renewal |
 | 2026-10-09 | Book club redesign: Suggested vs club-list switch, multi-genre chips, weekly "New & popular" (Apple Books), book links ready for affiliates | Mark's request; clearer choices and groundwork for revenue |
 | 2026-10-09 | Default book store for links: Bookshop.org (search links, no affiliate yet) | Pays 10% vs Amazon's 4.5% on books and has no 3-sales-in-180-days rule; Amazon stays a one-line switch |
+| 2026-10-09 | Added UX/UI agent; book links now: Goodreads reviews, Bookshop.org, Libro.fm visible + Amazon, Audible, library under "More"; list rows use an Options toggle | Book-club feedback (Goodreads); UX rule of 3 visible choices; finance join order: Bookshop + Libro.fm now, Amazon/Audible after traffic |
