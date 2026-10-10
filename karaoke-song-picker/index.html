@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Karaoke Song Picker Wheel – Spin for Your Next Song</title>
-<meta name="description" content="Can't decide what to sing? Spin the karaoke wheel for a random song from the 80s, 90s, 2000s, duets, or your own list. Free, works on any phone.">
+<meta name="description" content="Can't decide what to sing? Spin the karaoke wheel for a random song by decade (60s to today) or style: pop, rock, country, R&B, hip-hop, or duets. Free, works on any phone.">
 <meta name="theme-color" content="#2B1342">
 <link rel="stylesheet" href="../assets/style.css">
 </head>
@@ -15,7 +15,7 @@
 
 <main class="wrap">
   <h1>Karaoke song picker</h1>
-  <p class="lede">Spin the wheel and sing whatever it lands on. Pick a song list below or type your own.</p>
+  <p class="lede">Spin the wheel and sing whatever it lands on. Narrow it down by decade or style, or use your own list.</p>
 
   <div class="stage">
     <div class="pointer" aria-hidden="true"></div>
@@ -29,16 +29,50 @@
 
   <section class="controls" aria-labelledby="songs-heading">
     <h2 id="songs-heading">Songs on the wheel</h2>
-    <ul class="chips" id="presets"></ul>
 
-    <label for="entries">Your list</label>
-    <p class="help" id="entries-help">One song per line. Add the artist after a dash, like “Dancing Queen – ABBA”.</p>
-    <textarea id="entries" aria-describedby="entries-help" spellcheck="false"></textarea>
+    <div class="filters">
+      <div class="field">
+        <label for="decade">Decade</label>
+        <select id="decade">
+          <option value="any">Any decade</option>
+          <option value="1960">1960s</option>
+          <option value="1970">1970s</option>
+          <option value="1980">1980s</option>
+          <option value="1990">1990s</option>
+          <option value="2000">2000s</option>
+          <option value="2010">2010s</option>
+          <option value="2020">2020s</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="style">Style</label>
+        <select id="style">
+          <option value="any">Any style</option>
+          <option value="pop">Pop</option>
+          <option value="rock">Rock</option>
+          <option value="country">Country</option>
+          <option value="rnb">R&amp;B &amp; hip-hop</option>
+          <option value="duet">Duets</option>
+        </select>
+      </div>
+    </div>
 
     <div class="row">
-      <p class="check"><input type="checkbox" id="remove"><label for="remove" style="margin:0">Remove each song after it’s picked</label></p>
-      <button class="text-btn" id="shuffle" type="button">Shuffle list</button>
+      <p class="status" id="status" aria-live="polite"></p>
+      <button class="text-btn" id="deal" type="button">Deal new songs</button>
     </div>
+
+    <p class="check"><input type="checkbox" id="remove"><label for="remove">Remove each song after it’s picked</label></p>
+
+    <details class="own-list" id="own">
+      <summary>Use your own list</summary>
+      <label for="entries">Your list</label>
+      <p class="help" id="entries-help">One song per line. Add the artist after a dash, like “Dancing Queen – ABBA”. Editing here replaces the dealt songs.</p>
+      <textarea id="entries" aria-describedby="entries-help" spellcheck="false"></textarea>
+      <div class="row">
+        <button class="text-btn" id="shuffle" type="button">Shuffle list</button>
+      </div>
+    </details>
   </section>
 
   <article class="guide">
@@ -47,17 +81,17 @@
 
     <h3>Ways to play</h3>
     <ul>
-      <li><strong>Decade night:</strong> pick one decade list and stick with it all evening.</li>
+      <li><strong>Decade night:</strong> set the decade and stick with it all evening. Tap “Deal new songs” whenever the wheel gets stale.</li>
       <li><strong>No repeats:</strong> turn on “Remove each song after it’s picked” so every spin is new.</li>
-      <li><strong>Duet roulette:</strong> spin the duets list, then spin a second wheel of names to pick partners.</li>
-      <li><strong>Crowd’s choice:</strong> have everyone add one song to the list before the first spin.</li>
+      <li><strong>Duet roulette:</strong> set the style to Duets, then spin a second wheel of names to pick partners.</li>
+      <li><strong>Crowd’s choice:</strong> open “Use your own list” and have everyone add one song before the first spin.</li>
     </ul>
 
     <h3>Picking a good karaoke song</h3>
     <p>Songs with a big, well-known chorus get the room singing along, which takes pressure off the singer. Mid-tempo songs are easier than fast ones, and a song in a comfortable range beats a show-off song every time.</p>
 
     <h3>Is the wheel random?</h3>
-    <p>Yes. Each spin uses your browser’s built-in random number generator, so every song has the same chance. Your list stays on your device and isn’t sent anywhere.</p>
+    <p>Yes, twice over. Each visit deals a random set of 12 songs from the ones that match your decade and style, and each spin uses your browser’s built-in random number generator, so every song on the wheel has the same chance. Your list stays on your device and isn’t sent anywhere.</p>
   </article>
 </main>
 
@@ -66,49 +100,24 @@
 </footer>
 
 <script src="../assets/wheel.js"></script>
+<script src="songs.js"></script>
 <script>
 (function () {
-  const LISTS = {
-    'Crowd-pleasers': [
-      "Don't Stop Believin' – Journey", 'Sweet Caroline – Neil Diamond', 'Bohemian Rhapsody – Queen',
-      'Livin’ on a Prayer – Bon Jovi', 'I Wanna Dance with Somebody – Whitney Houston', 'Mr. Brightside – The Killers',
-      'Dancing Queen – ABBA', 'Shut Up and Dance – Walk the Moon', 'Wannabe – Spice Girls',
-      'Friends in Low Places – Garth Brooks', 'September – Earth, Wind & Fire', 'Africa – Toto'
-    ],
-    '80s': [
-      'Girls Just Want to Have Fun – Cyndi Lauper', 'Take On Me – a-ha', 'Total Eclipse of the Heart – Bonnie Tyler',
-      'Jessie’s Girl – Rick Springfield', 'Like a Prayer – Madonna', 'Footloose – Kenny Loggins',
-      'Here I Go Again – Whitesnake', 'Billie Jean – Michael Jackson', 'Eye of the Tiger – Survivor',
-      'Come On Eileen – Dexys Midnight Runners', 'Material Girl – Madonna', 'Don’t You (Forget About Me) – Simple Minds'
-    ],
-    '90s': [
-      'Wonderwall – Oasis', 'I Want It That Way – Backstreet Boys', 'Torn – Natalie Imbruglia',
-      'No Scrubs – TLC', 'Semi-Charmed Life – Third Eye Blind', 'Man! I Feel Like a Woman! – Shania Twain',
-      'Baby One More Time – Britney Spears', 'Gangsta’s Paradise – Coolio', 'Losing My Religion – R.E.M.',
-      'Waterfalls – TLC', 'Mambo No. 5 – Lou Bega', 'You Oughta Know – Alanis Morissette'
-    ],
-    '2000s': [
-      'Since U Been Gone – Kelly Clarkson', 'Hey Ya! – OutKast', 'Crazy in Love – Beyoncé',
-      'Toxic – Britney Spears', 'Bye Bye Bye – *NSYNC', 'Complicated – Avril Lavigne',
-      'Sk8er Boi – Avril Lavigne', 'Umbrella – Rihanna', 'Hips Don’t Lie – Shakira',
-      'Before He Cheats – Carrie Underwood', 'Seven Nation Army – The White Stripes', 'I Gotta Feeling – The Black Eyed Peas'
-    ],
-    'Duets': [
-      'Islands in the Stream – Kenny Rogers & Dolly Parton', 'Don’t Go Breaking My Heart – Elton John & Kiki Dee',
-      'Shallow – Lady Gaga & Bradley Cooper', 'I Got You Babe – Sonny & Cher', 'Endless Love – Diana Ross & Lionel Richie',
-      'Summer Nights – Grease', 'Picture – Kid Rock & Sheryl Crow', 'Up Where We Belong – Joe Cocker & Jennifer Warnes',
-      'Ain’t No Mountain High Enough – Marvin Gaye & Tammi Terrell', 'Time of My Life – Bill Medley & Jennifer Warnes'
-    ]
-  };
-
-  const STORE_KEY = 'pp-karaoke-list';
+  const WHEEL_SIZE = 12;
+  const STORE_KEY = 'pp-karaoke-v2';
   const $ = (id) => document.getElementById(id);
-  const textarea = $('entries'), spinBtn = $('spin'), result = $('result'), presets = $('presets');
+  const textarea = $('entries'), spinBtn = $('spin'), result = $('result'), status = $('status');
+  const decadeSel = $('decade'), styleSel = $('style'), own = $('own');
+  const SONGS = window.KARAOKE_SONGS || [];
+  let mode = 'dealt'; // 'dealt' or 'own'
 
   const store = {
-    get() { try { return localStorage.getItem(STORE_KEY); } catch (e) { return null; } },
-    set(v) { try { localStorage.setItem(STORE_KEY, v); } catch (e) {} }
+    get() { try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; } catch (e) { return {}; } },
+    set(v) { try { localStorage.setItem(STORE_KEY, JSON.stringify(v)); } catch (e) {} }
   };
+  function save() {
+    store.set({ decade: decadeSel.value, style: styleSel.value, mode, own: mode === 'own' ? textarea.value : '' });
+  }
 
   const wheel = new Wheel($('wheel'), {
     colors: ['#FF4F86', '#FFC93C', '#22B8A7', '#FFF4E2'],
@@ -127,9 +136,12 @@
 
       if ($('remove').checked) {
         const items = readList(); items.splice(index, 1);
-        textarea.value = items.join('\n'); sync();
+        textarea.value = items.join('\n');
+        refreshWheel();
+        if (mode === 'dealt') status.textContent = `${items.length} songs left on the wheel.`;
+        else save();
       }
-      spinBtn.disabled = false;
+      spinBtn.disabled = readList().length < 2;
       spinBtn.textContent = 'Spin again';
     }
   });
@@ -137,36 +149,58 @@
   function readList() {
     return textarea.value.split('\n').map((s) => s.trim()).filter(Boolean);
   }
-  function sync() {
+  function refreshWheel() {
     const items = readList();
     wheel.setItems(items);
-    store.set(textarea.value);
     spinBtn.disabled = items.length < 2;
   }
-  function choosePreset(name) {
-    textarea.value = LISTS[name].join('\n');
-    presets.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.list === name)));
-    sync();
+  function randomInt(n) {
+    const r = new Uint32Array(1); crypto.getRandomValues(r); return r[0] % n;
+  }
+  function sample(arr, n) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) { const j = randomInt(i + 1); [a[i], a[j]] = [a[j], a[i]]; }
+    return a.slice(0, n);
+  }
+  function matches() {
+    const d = decadeSel.value, s = styleSel.value;
+    return SONGS.filter(([, , decade, style, duet]) =>
+      (d === 'any' || String(decade) === d) &&
+      (s === 'any' || (s === 'duet' ? duet : style === s)));
+  }
+  function deal() {
+    mode = 'dealt';
+    const pool = matches();
+    const picked = sample(pool, WHEEL_SIZE);
+    textarea.value = picked.map(([t, a]) => `${t} – ${a}`).join('\n');
+    refreshWheel();
+    if (pool.length < 2) {
+      status.textContent = 'Not enough songs match. Try a different decade or style.';
+    } else if (pool.length <= WHEEL_SIZE) {
+      status.textContent = `All ${pool.length} matching songs are on the wheel.`;
+    } else {
+      status.textContent = `12 random songs from ${pool.length} matches.`;
+    }
+    $('deal').hidden = pool.length <= WHEEL_SIZE;
+    save();
   }
 
-  Object.keys(LISTS).forEach((name) => {
-    const li = document.createElement('li');
-    const b = document.createElement('button');
-    b.type = 'button'; b.className = 'chip'; b.textContent = name; b.dataset.list = name;
-    b.setAttribute('aria-pressed', 'false');
-    b.addEventListener('click', () => choosePreset(name));
-    li.append(b); presets.append(li);
-  });
+  decadeSel.addEventListener('change', deal);
+  styleSel.addEventListener('change', deal);
+  $('deal').addEventListener('click', deal);
 
   textarea.addEventListener('input', () => {
-    presets.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', 'false'));
-    sync();
+    mode = 'own';
+    status.textContent = 'Using your own list.';
+    $('deal').hidden = false;
+    refreshWheel();
+    save();
   });
 
   $('shuffle').addEventListener('click', () => {
-    const items = readList();
-    for (let i = items.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [items[i], items[j]] = [items[j], items[i]]; }
-    textarea.value = items.join('\n'); sync();
+    textarea.value = sample(readList(), Infinity).join('\n');
+    refreshWheel();
+    if (mode === 'own') save();
   });
 
   spinBtn.addEventListener('click', () => {
@@ -177,8 +211,19 @@
     }
   });
 
+  // Restore last settings. Dealt lists are re-dealt so every visit is fresh.
   const saved = store.get();
-  if (saved && saved.trim()) { textarea.value = saved; sync(); } else { choosePreset('Crowd-pleasers'); }
+  if (saved.decade) decadeSel.value = saved.decade;
+  if (saved.style) styleSel.value = saved.style;
+  if (saved.mode === 'own' && saved.own && saved.own.trim()) {
+    mode = 'own';
+    textarea.value = saved.own;
+    own.open = true;
+    status.textContent = 'Using your own list.';
+    refreshWheel();
+  } else {
+    deal();
+  }
 })();
 </script>
 </body>
