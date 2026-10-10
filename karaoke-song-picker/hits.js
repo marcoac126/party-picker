@@ -47,6 +47,10 @@ window.KARAOKE_HITS = {
    "Morgan Wallen"
   ],
   [
+   "pop it",
+   "Gunna"
+  ],
+  [
    "Broken Window Serenade",
    "Whiskey Myers"
   ],
@@ -59,24 +63,20 @@ window.KARAOKE_HITS = {
    "Morgan Wallen"
   ],
   [
-   "Classic PT2",
-   "Drake"
-  ],
-  [
    "Man I Need",
    "Olivia Dean"
   ],
   [
-   "pop it",
-   "Gunna"
+   "Boston",
+   "STELLA LEFTY"
+  ],
+  [
+   "Classic PT2",
+   "Drake"
   ],
   [
    "Great Expectation",
    "SIENNA SPIRO"
-  ],
-  [
-   "Boston",
-   "STELLA LEFTY"
   ],
   [
    "Thinkin’ Bout Me",
