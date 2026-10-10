@@ -22,3 +22,4 @@
 | 2026-10-09 | Google Search Console set up (Domain property) and sitemap submitted | Gets the site indexed; first real demand data for marketing in ~2 weeks |
 | 2026-10-09 | Published privacy policy and affiliate disclosure (no affiliate links yet), linked in every footer | Lists stored on device + Search Console already in use; affiliate programs check for these when reviewing applications |
 | 2026-10-09 | Built party game picker: group size + kind-of-game chips, suggested vs "games we own", quick rules for free games, how-to video + Amazon link for card/board games | Third "build now" page; Amazon is the main board-game affiliate (3% on toys); Target skipped (toys pay 0–1%) |
+| 2026-10-09 | Applied to Bookshop.org affiliates (ID 129730, shop: bookshop.org/shop/thepartywheel) | First revenue channel; switch links on only after verification + confirmed link format |

@@ -8,3 +8,4 @@
 | Claude | AI agent team | Mark (personal) | — | 2026-10-09 |
 | Cloudflare | Domain registrar, DNS, and email forwarding (hello@) for thepartywheel.com | Mark (personal) | ✅ | 2026-10-09 |
 | Google Search Console | Search visibility + demand data for thepartywheel.com (Domain property, DNS-verified) | Mark (personal Google) | Google account | 2026-10-09 |
+| Bookshop.org Affiliates | Book links (10% commission) | Mark (hello@thepartywheel.com) | — | Applied 2026-10-09, affiliate ID 129730, verification pending; links NOT yet switched on |
