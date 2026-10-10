@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>White Elephant Gift Ideas Picker Wheel – Under $10 to $50</title>
+<meta name="description" content="Stuck on a white elephant gift? Spin for ideas under $10, $10–25 or $25–50: funny, useful, cozy or snacks. Each idea links to shop it. Free on any phone.">
+<link rel="canonical" href="https://thepartywheel.com/white-elephant-gift-ideas/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Party Wheel">
+<meta property="og:title" content="White Elephant Gift Ideas Picker Wheel – Under $10 to $50">
+<meta property="og:description" content="Stuck on a white elephant gift? Spin for ideas under $10, $10–25 or $25–50: funny, useful, cozy or snacks. Each idea links to shop it. Free on any phone.">
+<meta property="og:url" content="https://thepartywheel.com/white-elephant-gift-ideas/">
+<meta property="og:image" content="https://thepartywheel.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A colorful spinning wheel next to the words The Party Wheel: karaoke songs, book club picks, party games">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#2B1342">
+<link rel="stylesheet" href="../assets/style.css?v=20261009e">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap"><a href="../">The Party Wheel</a></div>
+</header>
+
+<main class="wrap">
+  <h1>White elephant gift ideas</h1>
+  <p class="lede">Spin for a gift idea people will actually want to steal. Set your price limit below the wheel.</p>
+
+  <div class="stage">
+    <div class="pointer" aria-hidden="true"></div>
+    <canvas id="wheel" role="img" aria-label="Spinning wheel of white elephant gift ideas"></canvas>
+  </div>
+  <button class="spin-btn" id="spin" type="button">Spin</button>
+
+  <div class="result" id="result" aria-live="polite">
+    <p class="result-hint">Your gift idea shows up here.</p>
+  </div>
+
+  <section class="controls" aria-labelledby="list-heading">
+    <h2 id="list-heading">Ideas on the wheel</h2>
+
+    <div class="filters">
+      <div class="field">
+        <label for="price">What’s the price limit?</label>
+        <select id="price">
+          <option value="any">Any price</option>
+          <option value="u10">Under $10</option>
+          <option value="u25">$10 to $25</option>
+          <option value="u50">$25 to $50</option>
+        </select>
+      </div>
+    </div>
+    <fieldset class="chip-group" style="margin-top:1rem">
+      <legend class="field-legend">What kind of gift? <span class="legend-note">Tap to include or leave out</span></legend>
+      <ul class="chips" id="vibes"></ul>
+    </fieldset>
+    <div class="row">
+      <p class="status" id="status" aria-live="polite"></p>
+      <button class="text-btn" id="deal" type="button">Deal new ideas</button>
+    </div>
+    <details class="own-list">
+      <summary>See the ideas on the wheel</summary>
+      <ul class="book-list" id="gift-list"></ul>
+    </details>
+    <p class="disclosure" id="disclosure" hidden></p>
+  </section>
+
+  <article class="guide">
+    <h2>How to pick a white elephant gift</h2>
+    <p>Stick to the group’s price limit, then aim for something people will fight over. The most-stolen gifts are usually cozy (a soft blanket), useful (a phone charger or tumbler), or so ridiculous everyone wants it (a giant gummy bear). Spin, and the wheel shows why the idea works plus a link to shop it.</p>
+
+    <h3>What makes a good white elephant gift?</h3>
+    <ul>
+      <li><strong>Anyone could use it.</strong> You don’t know who’ll end up with it, so skip anything too personal.</li>
+      <li><strong>It gets a reaction.</strong> Funny gifts make the game more fun, as long as they’re not mean or too adult for the crowd.</li>
+      <li><strong>It’s worth the limit.</strong> A gift that looks like more than it cost tends to get stolen.</li>
+    </ul>
+
+    <h3>Popular price limits</h3>
+    <p>Most office and family exchanges set a limit of $20 or $25. Use “$10 to $25” for those. For a $20 limit, pick “$10 to $25” and check the price before you buy. “Under $10” works for big groups and dollar-store rules, and “$25 to $50” for friend groups that go big.</p>
+
+    <h3>Is the wheel random?</h3>
+    <p>Yes. Each spin uses your browser’s built-in random number generator, so every idea on the wheel has the same chance. Nothing you pick is sent anywhere.</p>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">The Party Wheel · Free spinning wheels for parties, game nights, and movie nights.
+    <nav class="footer-links" aria-label="Site information"><a href="../about/">About</a><a href="../privacy/">Privacy policy</a><a href="../affiliate-disclosure/">Affiliate disclosure</a></nav>
+  </div>
+</footer>
+
+<script src="../assets/wheel.js?v=20261009e"></script>
+<script src="../assets/links.js?v=20261010c"></script>
+<script src="gifts.js?v=20261010c"></script>
+<script>
+(function () {
+  const WHEEL_SIZE = 12;
+  const STORE_KEY = 'pp-gifts-v1';
+  const $ = (id) => document.getElementById(id);
+  const spinBtn = $('spin'), result = $('result'), status = $('status'), priceSel = $('price');
+  const GIFTS = window.GIFT_IDEAS || [];
+  const L = window.PartyLinks;
+  const VIBES = [['funny', 'Funny'], ['useful', 'Useful'], ['cozy', 'Cozy'], ['food', 'Food & drink'], ['games', 'Games']];
+  const PRICES = { u10: 'Under $10', u25: '$10 to $25', u50: '$25 to $50' };
+  const vibeLabel = Object.fromEntries(VIBES);
+  const byName = Object.fromEntries(GIFTS.map((g) => [g[0].toLowerCase(), g]));
+  const has = (o, k) => typeof k === 'string' && Object.prototype.hasOwnProperty.call(o, k);
+
+  const state = { price: 'any', vibes: VIBES.map(([id]) => id), dealt: [] };
+  const store = {
+    get() { try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; } catch (e) { return {}; } },
+    set(v) { try { localStorage.setItem(STORE_KEY, JSON.stringify(v)); } catch (e) {} }
+  };
+  const save = () => store.set({ price: state.price, vibes: state.vibes });
+
+  const wheel = new Wheel($('wheel'), {
+    colors: ['#FF6B6B', '#FFC93C', '#7BD389', '#FFF4E2'],
+    labelFn: (name) => { const g = byName[name.toLowerCase()]; return (g && g[5]) || name; },
+    onResult(name) {
+      const g = byName[name.toLowerCase()];
+      result.innerHTML = '';
+      const label = document.createElement('p'); label.className = 'result-label'; label.textContent = 'Gift idea';
+      const main = document.createElement('p'); main.className = 'lyric'; main.textContent = name;
+      result.append(label, main);
+      if (g) {
+        const meta = document.createElement('p'); meta.className = 'artist';
+        meta.textContent = `Typical budget: ${PRICES[g[1]].replace('Under', 'under')} · ${vibeLabel[g[2]]}`;
+        const how = document.createElement('p'); how.className = 'how-to'; how.textContent = g[4];
+        const note = document.createElement('p'); note.className = 'help'; note.textContent = 'Prices vary. Check the price before you buy.';
+        result.append(meta, how, L.giftLinks(g[3]), note);
+        if (L.isAffiliate()) { const d = document.createElement('p'); d.className = 'disclosure'; d.textContent = L.disclosure(); result.append(d); }
+      }
+      requestAnimationFrame(() => main.classList.add('sing'));
+      const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      result.scrollIntoView({ behavior: still ? 'auto' : 'smooth', block: 'nearest' });
+      spinBtn.disabled = state.dealt.length < 2;
+      spinBtn.textContent = 'Spin again';
+    }
+  });
+
+  function refresh() { wheel.setItems(state.dealt.map((g) => g[0])); spinBtn.disabled = state.dealt.length < 2; }
+
+  function renderList() {
+    const ul = $('gift-list'); ul.innerHTML = '';
+    state.dealt.forEach((g, i) => {
+      const li = document.createElement('li');
+      const row = document.createElement('div'); row.className = 'book-row';
+      const name = document.createElement('span'); name.textContent = `${g[0]} (${PRICES[g[1]]})`;
+      const btn = document.createElement('button');
+      btn.type = 'button'; btn.className = 'text-btn options-btn'; btn.textContent = 'Options';
+      btn.setAttribute('aria-expanded', 'false'); btn.setAttribute('aria-label', `Options for ${g[0]}`);
+      const panel = L.giftLinks(g[3]);
+      panel.id = `gift-opts-${i}`; panel.hidden = true; btn.setAttribute('aria-controls', panel.id);
+      btn.addEventListener('click', () => { const open = btn.getAttribute('aria-expanded') === 'true'; btn.setAttribute('aria-expanded', String(!open)); panel.hidden = open; });
+      row.append(name, btn); li.append(row, panel); ul.append(li);
+    });
+  }
+
+  function randomInt(n) { const r = new Uint32Array(1); crypto.getRandomValues(r); return r[0] % n; }
+  function sample(arr, n) { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = randomInt(i + 1); [a[i], a[j]] = [a[j], a[i]]; } return a.slice(0, n); }
+
+  function deal() {
+    const on = new Set(state.vibes);
+    const pool = GIFTS.filter((g) => on.has(g[2]) && (state.price === 'any' || g[1] === state.price));
+    state.dealt = sample(pool, WHEEL_SIZE);
+    renderList();
+    if (!on.size) status.textContent = 'Turn on at least one kind of gift.';
+    else if (pool.length < 2) status.textContent = 'Not enough ideas match. Try another price or kind of gift.';
+    else if (pool.length <= WHEEL_SIZE) status.textContent = `All ${pool.length} matching ideas are on the wheel.`;
+    else status.textContent = `12 random ideas from ${pool.length} that match.`;
+    $('deal').hidden = pool.length <= WHEEL_SIZE;
+    result.innerHTML = '<p class="result-hint">Your gift idea shows up here.</p>';
+    spinBtn.textContent = 'Spin';
+    refresh(); save();
+  }
+
+  VIBES.forEach(([id, name]) => {
+    const li = document.createElement('li'); const b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip'; b.dataset.vibe = id; b.textContent = name;
+    b.addEventListener('click', () => {
+      const i = state.vibes.indexOf(id); if (i >= 0) state.vibes.splice(i, 1); else state.vibes.push(id);
+      syncChips(); deal();
+    });
+    li.append(b); $('vibes').append(li);
+  });
+  function syncChips() { $('vibes').querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(state.vibes.includes(b.dataset.vibe)))); }
+
+  priceSel.addEventListener('change', () => { state.price = priceSel.value; deal(); });
+  $('deal').addEventListener('click', deal);
+  spinBtn.addEventListener('click', () => {
+    if (wheel.spin()) { spinBtn.disabled = true; spinBtn.textContent = 'Spinning…'; result.innerHTML = '<p class="result-hint">Spinning…</p>'; }
+  });
+
+  const saved = store.get();
+  if (has(PRICES, saved.price)) state.price = saved.price;
+  if (Array.isArray(saved.vibes)) state.vibes = saved.vibes.filter((t) => has(vibeLabel, t));
+  // Preset links: ?price=u25&vibes=funny,cozy. Only known values are accepted.
+  const qp = new URLSearchParams(location.search);
+  let preset = false;
+  if (has(PRICES, qp.get('price'))) { state.price = qp.get('price'); preset = true; }
+  if (qp.get('vibes')) {
+    const t = qp.get('vibes').split(',').filter((x) => has(vibeLabel, x));
+    if (t.length) { state.vibes = t; preset = true; }
+  }
+  if (preset) {
+    if (!qp.get('vibes')) state.vibes = VIBES.map(([id]) => id);
+    if (!has(PRICES, qp.get('price'))) state.price = 'any';
+  }
+  priceSel.value = state.price;
+  const showDisc = L.isAffiliate();
+  $('disclosure').hidden = !showDisc; $('disclosure').textContent = showDisc ? L.disclosure() : '';
+  syncChips(); deal();
+})();
+</script>
+</body>
+</html>

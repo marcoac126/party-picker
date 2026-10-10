@@ -1,0 +1,89 @@
+// Christmas movie library. Each entry: [title, year, mood, oneLiner]
+// Moods: classic, family (kid-friendly, no PG-13/R), comedy, romance, animated, offbeat (action + "is it a Christmas movie?").
+// Keep every mood at 12+ so a filtered wheel is full.
+window.XMAS_MOVIES = [
+  // Classics
+  ['It’s a Wonderful Life', 1946, 'classic', 'George Bailey gets to see what his town would be like if he’d never been born.', 'Wonderful Life'],
+  ['Miracle on 34th Street', 1947, 'classic', 'A department-store Santa says he’s the real one, and ends up proving it in court.', 'Miracle on 34th'],
+  ['White Christmas', 1954, 'classic', 'Bing Crosby and Danny Kaye put on a show to save their old general’s Vermont inn.'],
+  ['Holiday Inn', 1942, 'classic', 'An inn that only opens on holidays, and the movie that introduced the song “White Christmas.”'],
+  ['Scrooge', 1951, 'classic', 'Alastair Sim’s Scrooge, still a favorite version of A Christmas Carol.'],
+  ['The Bishop’s Wife', 1947, 'classic', 'Cary Grant plays an angel sent to help a busy bishop at Christmas.', 'Bishop’s Wife'],
+  ['The Shop Around the Corner', 1940, 'classic', 'Two feuding coworkers don’t know they’re secret pen pals.', 'Shop Around'],
+  ['Meet Me in St. Louis', 1944, 'classic', 'Judy Garland sings “Have Yourself a Merry Little Christmas.”', 'St. Louis'],
+  ['A Christmas Story', 1983, 'classic', 'All Ralphie wants is a Red Ryder BB gun. You’ll shoot your eye out.', 'Christmas Story'],
+  ['Christmas in Connecticut', 1945, 'classic', 'A food writer who can’t cook has to fake a perfect country Christmas.', 'In Connecticut'],
+  ['Remember the Night', 1940, 'classic', 'A prosecutor takes the shoplifter he’s prosecuting home for Christmas.'],
+  ['We’re No Angels', 1955, 'classic', 'Three escaped convicts end up helping a struggling family at Christmas.'],
+
+  // Family & kids
+  ['Home Alone', 1990, 'family', 'Kevin gets left behind and booby-traps the house against two burglars.'],
+  ['Home Alone 2: Lost in New York', 1992, 'family', 'Kevin takes the wrong plane and has New York City to himself.', 'Home Alone 2'],
+  ['Elf', 2003, 'family', 'Buddy, raised by elves at the North Pole, goes to New York to find his dad.'],
+  ['The Santa Clause', 1994, 'family', 'A divorced dad accidentally becomes Santa Claus.'],
+  ['The Muppet Christmas Carol', 1992, 'family', 'Michael Caine as Scrooge, with Kermit as Bob Cratchit.', 'Muppet Carol'],
+  ['Jingle All the Way', 1996, 'family', 'Two dads battle for the last must-have toy on Christmas Eve.'],
+  ['How the Grinch Stole Christmas', 2000, 'family', 'Jim Carrey as the Grinch in the live-action Whoville.', 'Grinch (2000)'],
+  ['The Christmas Chronicles', 2018, 'family', 'Two siblings try to catch Santa on camera and end up saving Christmas with him.', 'Xmas Chronicles'],
+  ['Noelle', 2019, 'family', 'Santa’s daughter has to find her brother and take over the family business.'],
+  ['Jingle Jangle: A Christmas Journey', 2020, 'family', 'A musical about a toymaker, his granddaughter, and a stolen invention.', 'Jingle Jangle'],
+  ['Fred Claus', 2007, 'family', 'Santa’s troublemaker older brother has to help out at the North Pole.'],
+  ['Prancer', 1989, 'family', 'A farm girl nurses an injured reindeer she’s sure belongs to Santa.'],
+
+  // Comedies
+  ['National Lampoon’s Christmas Vacation', 1989, 'comedy', 'Clark Griswold wants a perfect family Christmas. Everything goes wrong.', 'Xmas Vacation'],
+  ['Scrooged', 1988, 'comedy', 'Bill Murray as a TV executive visited by three very modern ghosts.'],
+  ['The Night Before', 2015, 'comedy', 'Three friends’ last wild Christmas Eve together in New York.'],
+  ['Four Christmases', 2008, 'comedy', 'A couple has to visit all four of their divorced parents on Christmas Day.'],
+  ['Christmas with the Kranks', 2004, 'comedy', 'A couple tries to skip Christmas. The neighborhood won’t let them.', 'The Kranks'],
+  ['Office Christmas Party', 2016, 'comedy', 'A branch manager throws an out-of-control party to save his office.', 'Office Party'],
+  ['A Bad Moms Christmas', 2017, 'comedy', 'Three overworked moms host their own mothers for the holidays.', 'Bad Moms Xmas'],
+  ['Deck the Halls', 2006, 'comedy', 'Two neighbors go to war over Christmas lights.'],
+  ['The Family Stone', 2005, 'comedy', 'A man brings his uptight girlfriend home to his very opinionated family.'],
+  ['Spirited', 2022, 'comedy', 'A musical twist on A Christmas Carol with Will Ferrell and Ryan Reynolds.'],
+  ['Daddy’s Home 2', 2017, 'comedy', 'Two co-dads survive Christmas with both of their own dads.'],
+  ['Surviving Christmas', 2004, 'comedy', 'A lonely rich guy pays a family to let him spend Christmas with them.', 'Surviving Xmas'],
+
+  // Rom-coms
+  ['Love Actually', 2003, 'romance', 'Ten love stories in London, all in the weeks before Christmas.'],
+  ['The Holiday', 2006, 'romance', 'Two women swap homes for the holidays and both find romance.'],
+  ['Last Christmas', 2019, 'romance', 'A struggling Christmas-shop elf meets someone who changes her year.'],
+  ['While You Were Sleeping', 1995, 'romance', 'A lonely token collector is mistaken for a stranger’s fiancée.'],
+  ['Serendipity', 2001, 'romance', 'Two strangers meet while holiday shopping and leave the rest to fate.'],
+  ['Happiest Season', 2020, 'romance', 'A woman plans to propose at her girlfriend’s family Christmas.'],
+  ['Holidate', 2020, 'romance', 'Two single people agree to be each other’s date for every holiday.'],
+  ['A Christmas Prince', 2017, 'romance', 'A reporter goes undercover to get the scoop on a playboy prince.', 'Xmas Prince'],
+  ['The Princess Switch', 2018, 'romance', 'A baker and a duchess who look exactly alike trade places.', 'Princess Switch'],
+  ['Single All the Way', 2021, 'romance', 'A man brings his best friend home so his family stops asking about his love life.'],
+  ['Let It Snow', 2019, 'romance', 'A snowstorm on Christmas Eve tangles up a small town’s love lives.'],
+  ['Love Hard', 2021, 'romance', 'A dating columnist flies across the country to surprise her online match.'],
+  ['Falling for Christmas', 2022, 'romance', 'A spoiled heiress loses her memory at a ski lodge.', 'Falling for Xmas'],
+
+  // Animated
+  ['Rudolph the Red-Nosed Reindeer', 1964, 'animated', 'The stop-motion special with Rudolph, Hermey, and the Island of Misfit Toys.', 'Rudolph'],
+  ['How the Grinch Stole Christmas!', 1966, 'animated', 'The original 26-minute cartoon, narrated by Boris Karloff.', 'Grinch (1966)'],
+  ['A Charlie Brown Christmas', 1965, 'animated', 'Charlie Brown looks for the real meaning of Christmas, and a very small tree.', 'Charlie Brown'],
+  ['Frosty the Snowman', 1969, 'animated', 'A magic hat brings a snowman to life. Happy birthday!', 'Frosty'],
+  ['The Year Without a Santa Claus', 1974, 'animated', 'Santa takes a year off, and the Heat Miser and Snow Miser get involved.', 'Year w/o Santa'],
+  ['The Polar Express', 2004, 'animated', 'A boy boards a mysterious train to the North Pole on Christmas Eve.', 'Polar Express'],
+  ['The Nightmare Before Christmas', 1993, 'animated', 'Jack Skellington of Halloween Town tries to take over Christmas.', 'Nightmare'],
+  ['Arthur Christmas', 2011, 'animated', 'Santa’s clumsy younger son has one night to deliver a missed present.'],
+  ['Klaus', 2019, 'animated', 'A selfish postman and a reclusive toymaker start a Christmas legend.'],
+  ['The Grinch', 2018, 'animated', 'The Grinch’s story in a bright, modern animated movie.'],
+  ['A Christmas Carol', 2009, 'animated', 'Jim Carrey plays Scrooge and all three ghosts.', 'Christmas Carol'],
+  ['Shrek the Halls', 2007, 'animated', 'Shrek tries to throw his family a perfect first Christmas.'],
+
+  // Action & "is it a Christmas movie?"
+  ['Die Hard', 1988, 'offbeat', 'John McClane takes on terrorists at an office Christmas party. Yes, it counts.'],
+  ['Lethal Weapon', 1987, 'offbeat', 'Two mismatched cops, a drug ring, and Christmas in Los Angeles.'],
+  ['Batman Returns', 1992, 'offbeat', 'Batman faces the Penguin and Catwoman in a snowy Gotham at Christmas.'],
+  ['Gremlins', 1984, 'offbeat', 'A Christmas gift with three rules. Someone breaks all of them.'],
+  ['Edward Scissorhands', 1990, 'offbeat', 'A gentle man with scissor hands, and the reason it snows.', 'Scissorhands'],
+  ['Violent Night', 2022, 'offbeat', 'Santa fights mercenaries who take a rich family hostage.'],
+  ['Krampus', 2015, 'offbeat', 'A family that’s lost its Christmas spirit gets a visit from Santa’s dark side.'],
+  ['Trading Places', 1983, 'offbeat', 'A con man and a rich broker are swapped as part of a bet, over Christmas.'],
+  ['Bad Santa', 2003, 'offbeat', 'A con man plays a mall Santa so he can rob the store.'],
+  ['The Long Kiss Goodnight', 1996, 'offbeat', 'A small-town teacher remembers she used to be a spy.', 'Long Kiss'],
+  ['Kiss Kiss Bang Bang', 2005, 'offbeat', 'A thief stumbles into a Hollywood murder mystery at Christmas.', 'Kiss Kiss Bang'],
+  ['Tokyo Godfathers', 2003, 'offbeat', 'Three people living on the streets of Tokyo find an abandoned baby on Christmas Eve.']
+];

@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Christmas Movie Picker Wheel – Classics, Family &amp; Rom-Coms</title>
+<meta name="description" content="Can't agree on a Christmas movie? Spin from classics, family films, rom-coms and Die Hard. Each pick links to where to watch it. Free on any phone.">
+<link rel="canonical" href="https://thepartywheel.com/christmas-movie-picker/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Party Wheel">
+<meta property="og:title" content="Christmas Movie Picker Wheel – Classics, Family &amp; Rom-Coms">
+<meta property="og:description" content="Can't agree on a Christmas movie? Spin from classics, family films, rom-coms and Die Hard. Each pick links to where to watch it. Free on any phone.">
+<meta property="og:url" content="https://thepartywheel.com/christmas-movie-picker/">
+<meta property="og:image" content="https://thepartywheel.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A colorful spinning wheel next to the words The Party Wheel: karaoke songs, book club picks, party games">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#2B1342">
+<link rel="stylesheet" href="../assets/style.css?v=20261009e">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap"><a href="../">The Party Wheel</a></div>
+</header>
+
+<main class="wrap">
+  <h1>Christmas movie picker</h1>
+  <p class="lede">Classics, family favorites, rom-coms and a few “is it a Christmas movie?” picks. Spin, then press play.</p>
+
+  <div class="stage">
+    <div class="pointer" aria-hidden="true"></div>
+    <canvas id="wheel" role="img" aria-label="Spinning wheel of Christmas movies"></canvas>
+  </div>
+  <button class="spin-btn" id="spin" type="button">Spin</button>
+  <p class="share-row"><button class="text-btn" id="share" type="button">Share this wheel</button><span class="share-status" id="share-status" aria-live="polite"></span></p>
+
+  <div class="result" id="result" aria-live="polite">
+    <p class="result-hint">Your movie shows up here.</p>
+  </div>
+
+  <section class="controls" aria-labelledby="list-heading">
+    <h2 id="list-heading">Movies on the wheel</h2>
+
+    <p class="field-legend" aria-hidden="true">Where should the movies come from?</p>
+    <fieldset class="segmented small">
+      <legend class="sr-only">Where should the movies come from?</legend>
+      <input type="radio" name="source" id="src-suggested" value="suggested" checked>
+      <label for="src-suggested">Suggested movies</label>
+      <input type="radio" name="source" id="src-own" value="own">
+      <label for="src-own">Our own list</label>
+    </fieldset>
+
+    <div id="suggested-panel">
+      <fieldset class="chip-group">
+        <legend class="field-legend">What are you in the mood for? <span class="legend-note">Tap to include or leave out</span></legend>
+        <ul class="chips" id="moods"></ul>
+      </fieldset>
+      <div class="row">
+        <p class="status" id="status" aria-live="polite"></p>
+        <button class="text-btn" id="deal" type="button">Deal new movies</button>
+      </div>
+      <details class="own-list">
+        <summary>See the movies on the wheel</summary>
+        <ul class="book-list" id="movie-list"></ul>
+      </details>
+    </div>
+
+    <div id="own-panel" hidden>
+      <label for="own-entries">Your movies</label>
+      <p class="help" id="own-help">One movie per line. Good for a watchlist everyone added to.</p>
+      <textarea id="own-entries" aria-describedby="own-help" spellcheck="false" placeholder="Elf&#10;The Holiday&#10;Die Hard"></textarea>
+    </div>
+
+    <p class="check"><input type="checkbox" id="remove"><label for="remove">Remove each movie after it’s picked</label></p>
+    <p class="disclosure" id="disclosure" hidden></p>
+  </section>
+
+  <article class="guide">
+    <h2>How to pick a Christmas movie</h2>
+    <p>Start with who’s watching. With kids in the room, keep only “Family” and “Animated” on, since those leave out PG-13 and R-rated picks. For a grown-up night, add comedies, rom-coms, or the action picks. Spin, and the wheel shows a one-line summary plus where to stream, rent, or watch the trailer.</p>
+
+    <h3>Ways to use it</h3>
+    <ul>
+      <li><strong>Movie night with friends:</strong> switch to “Our own list”, have everyone add one movie, and spin.</li>
+      <li><strong>A movie a night in December:</strong> turn on “Remove each movie” so you never repeat one before Christmas.</li>
+      <li><strong>Settling the Die Hard debate:</strong> leave “Action &amp; offbeat” on and let the wheel decide.</li>
+    </ul>
+
+    <h3>Where can I watch it?</h3>
+    <p>Streaming services shuffle their holiday movies every year, so each pick links to a JustWatch search that shows where it’s streaming right now, plus Amazon to rent or buy it.</p>
+
+    <h3>Is the wheel random?</h3>
+    <p>Yes. Each spin uses your browser’s built-in random number generator, so every movie on the wheel has the same chance. Your lists stay on your device and aren’t sent anywhere.</p>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">The Party Wheel · Free spinning wheels for parties, game nights, and movie nights.
+    <nav class="footer-links" aria-label="Site information"><a href="../about/">About</a><a href="../privacy/">Privacy policy</a><a href="../affiliate-disclosure/">Affiliate disclosure</a></nav>
+  </div>
+</footer>
+
+<script src="../assets/wheel.js?v=20261009e"></script>
+<script src="../assets/share.js?v=20261009e"></script>
+<script src="../assets/links.js?v=20261010c"></script>
+<script src="movies.js?v=20261010c"></script>
+<script>
+(function () {
+  const WHEEL_SIZE = 12;
+  const STORE_KEY = 'pp-movies-v1';
+  const $ = (id) => document.getElementById(id);
+  const spinBtn = $('spin'), result = $('result'), status = $('status'), ownTA = $('own-entries');
+  const MOVIES = window.XMAS_MOVIES || [];
+  const L = window.PartyLinks;
+  const MOODS = [['classic', 'Classics'], ['family', 'Family'], ['comedy', 'Comedies'], ['romance', 'Rom-coms'], ['animated', 'Animated'], ['offbeat', 'Action & offbeat']];
+  const moodLabel = Object.fromEntries(MOODS);
+  const byName = Object.fromEntries(MOVIES.map((m) => [m[0].toLowerCase(), m]));
+  const has = (o, k) => typeof k === 'string' && Object.prototype.hasOwnProperty.call(o, k);
+
+  const state = { source: 'suggested', moods: MOODS.map(([id]) => id), dealt: [], own: '' };
+  const store = {
+    get() { try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; } catch (e) { return {}; } },
+    set(v) { try { localStorage.setItem(STORE_KEY, JSON.stringify(v)); } catch (e) {} }
+  };
+  const save = () => store.set({ source: state.source, moods: state.moods, own: state.own });
+  const lines = (t) => t.split('\n').map((s) => s.trim()).filter(Boolean);
+
+  function currentNames() { return state.source === 'own' ? lines(ownTA.value) : state.dealt.map((m) => m[0]); }
+
+  const wheel = new Wheel($('wheel'), {
+    colors: ['#FF6B6B', '#FFC93C', '#7BD389', '#FFF4E2'],
+    labelFn: (name) => { const m = byName[name.toLowerCase()]; return (m && m[4]) || name; },
+    onResult(name, index) {
+      const m = byName[name.toLowerCase()];
+      result.innerHTML = '';
+      const label = document.createElement('p'); label.className = 'result-label'; label.textContent = 'Tonight’s movie';
+      const main = document.createElement('p'); main.className = 'lyric'; main.textContent = name;
+      result.append(label, main);
+      if (m) {
+        const meta = document.createElement('p'); meta.className = 'artist';
+        meta.textContent = `${m[1]} · ${moodLabel[m[2]]}`;
+        const how = document.createElement('p'); how.className = 'how-to'; how.textContent = m[3];
+        result.append(meta, how);
+      }
+      result.append(L.movieLinks(name, m ? m[1] : ''));
+      if (L.isAffiliate()) { const d = document.createElement('p'); d.className = 'disclosure'; d.textContent = L.disclosure(); result.append(d); }
+      requestAnimationFrame(() => main.classList.add('sing'));
+      const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      result.scrollIntoView({ behavior: still ? 'auto' : 'smooth', block: 'nearest' });
+
+      if ($('remove').checked) {
+        if (state.source === 'own') { const l = lines(ownTA.value); l.splice(index, 1); ownTA.value = l.join('\n'); state.own = ownTA.value; save(); }
+        else { state.dealt.splice(index, 1); renderList(); status.textContent = `${state.dealt.length} movies left on the wheel.`; }
+        refresh();
+      }
+      spinBtn.disabled = currentNames().length < 2;
+      spinBtn.textContent = 'Spin again';
+    }
+  });
+
+  function refresh() { const n = currentNames(); wheel.setItems(n); spinBtn.disabled = n.length < 2; }
+
+  function renderList() {
+    const ul = $('movie-list'); ul.innerHTML = '';
+    state.dealt.forEach((m, i) => {
+      const li = document.createElement('li');
+      const row = document.createElement('div'); row.className = 'book-row';
+      const name = document.createElement('span'); name.textContent = `${m[0]} (${m[1]})`;
+      const btn = document.createElement('button');
+      btn.type = 'button'; btn.className = 'text-btn options-btn'; btn.textContent = 'Options';
+      btn.setAttribute('aria-expanded', 'false'); btn.setAttribute('aria-label', `Options for ${m[0]}`);
+      const panel = L.movieLinks(m[0], m[1]);
+      panel.id = `movie-opts-${i}`; panel.hidden = true; btn.setAttribute('aria-controls', panel.id);
+      btn.addEventListener('click', () => { const open = btn.getAttribute('aria-expanded') === 'true'; btn.setAttribute('aria-expanded', String(!open)); panel.hidden = open; });
+      row.append(name, btn); li.append(row, panel); ul.append(li);
+    });
+  }
+
+  function randomInt(n) { const r = new Uint32Array(1); crypto.getRandomValues(r); return r[0] % n; }
+  function sample(arr, n) { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = randomInt(i + 1); [a[i], a[j]] = [a[j], a[i]]; } return a.slice(0, n); }
+
+  function deal() {
+    const on = new Set(state.moods);
+    const pool = MOVIES.filter((m) => on.has(m[2]));
+    state.dealt = sample(pool, WHEEL_SIZE);
+    renderList();
+    if (!on.size) status.textContent = 'Turn on at least one kind of movie.';
+    else if (pool.length <= WHEEL_SIZE) status.textContent = `All ${pool.length} matching movies are on the wheel.`;
+    else status.textContent = `12 random movies from ${pool.length} that match.`;
+    $('deal').hidden = pool.length <= WHEEL_SIZE;
+    refresh(); save();
+  }
+
+  MOODS.forEach(([id, name]) => {
+    const li = document.createElement('li'); const b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip'; b.dataset.mood = id; b.textContent = name;
+    b.addEventListener('click', () => {
+      const i = state.moods.indexOf(id); if (i >= 0) state.moods.splice(i, 1); else state.moods.push(id);
+      syncChips(); deal();
+    });
+    li.append(b); $('moods').append(li);
+  });
+  function syncChips() { $('moods').querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(state.moods.includes(b.dataset.mood)))); }
+
+  function render() {
+    $('suggested-panel').hidden = state.source !== 'suggested';
+    $('own-panel').hidden = state.source !== 'own';
+    result.innerHTML = '<p class="result-hint">Your movie shows up here.</p>';
+    spinBtn.textContent = 'Spin';
+    const showDisc = L.isAffiliate();
+    $('disclosure').hidden = !showDisc; $('disclosure').textContent = showDisc ? L.disclosure() : '';
+    refresh();
+  }
+
+  document.querySelectorAll('input[name="source"]').forEach((r) => r.addEventListener('change', () => { state.source = r.value; save(); render(); }));
+  $('deal').addEventListener('click', deal);
+  ownTA.addEventListener('input', () => { state.own = ownTA.value; save(); refresh(); });
+
+  $('share').addEventListener('click', () => window.PartyShare.share(currentNames(), 'movies', 'Christmas movies', $('share-status')));
+  spinBtn.addEventListener('click', () => {
+    if (wheel.spin()) { spinBtn.disabled = true; spinBtn.textContent = 'Spinning…'; result.innerHTML = '<p class="result-hint">Spinning…</p>'; }
+  });
+
+  const saved = store.get();
+  if (saved.source === 'own') state.source = 'own';
+  if (Array.isArray(saved.moods)) state.moods = saved.moods.filter((t) => has(moodLabel, t));
+  state.own = saved.own || '';
+  // Preset links: ?moods=family,animated. Only known values are accepted.
+  const qp = new URLSearchParams(location.search);
+  if (qp.get('moods')) {
+    const t = qp.get('moods').split(',').filter((x) => has(moodLabel, x));
+    if (t.length) { state.moods = t; state.source = 'suggested'; }
+  }
+  ownTA.value = state.own;
+  const shared = window.PartyShare.read();
+  if (shared) {
+    state.source = 'own'; state.own = shared.items.join('\n'); ownTA.value = state.own;
+    document.querySelector('.stage').insertAdjacentHTML('beforebegin', '<p class="shared-note">Someone shared this wheel with you. The list was made by whoever sent the link, not The Party Wheel. Spin away, or change it below.</p>');
+  }
+  $('src-' + state.source).checked = true;
+  syncChips(); deal(); render();
+})();
+</script>
+</body>
+</html>

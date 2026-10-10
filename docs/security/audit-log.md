@@ -89,3 +89,31 @@
 - **Low:** pin links use only the site's own preset parameters (e.g., `?style=holiday`). No shared-wheel `#` links in pins, no URL shorteners.
 - **Website claim: OK, use the DNS TXT record.** Pinterest offers an HTML meta tag, an uploaded file, or a DNS TXT record. TXT matches how GitHub and Search Console were verified, needs no code change, and keeps it in Cloudflare where 2FA is on. Mark adds it himself in Cloudflare DNS and leaves it in place (removing it can unclaim the site). The value is not a secret. Claiming adds no scripts and collects no visitor data.
 - **Monthly audit:** check 2FA still on, no connected apps, pin count and wording.
+
+## 2026-10-10 — Review: Christmas movie + White Elephant pages
+Scope: `christmas-movie-picker/` (index.html, movies.js), `white-elephant-gift-ideas/` (index.html, gifts.js), new `movieLinks` / `giftLinks` / `makeList` in `assets/links.js`. Not pushed yet.
+
+**Verdict: OK to publish once Mark approves and the Low process item is done. No High or Medium findings.**
+
+**Medium (before an Amazon tag is ever set, not before launch)**
+- **Affiliate disclosure sits far from the gift links.** On the gift page, the "Shop this idea on Amazon" link appears in the result box under the wheel, but the disclosure line is at the bottom of the controls section. The FTC wants the disclosure close to the link, not a scroll away. Fix: when the Amazon tag goes in, also show the disclosure line inside the result box (same for the movie page's Amazon link). Not needed today because no tag is set.
+- **Affiliate disclosure page only mentions books and games.** "Plain links that help you find a book or game" no longer covers movies or gift ideas. Fix: update wording to cover movies and gift ideas at the same time the Amazon program is listed there.
+
+**Low**
+- **Price bands next to an Amazon link.** "Usually $10 to $25" beside "Shop this idea on Amazon" could look like an Amazon price. Amazon's policies only allow showing prices pulled from Amazon's own data feed. Fix: before applying to Amazon, reword to "Typical budget: $10 to $25" (clearly our estimate for a generic idea, not a product price) and re-check the current policy.
+- **Privacy policy is a little out of date.** The "Links to other sites" list doesn't name JustWatch, and "songs, books, games, and names you type in" doesn't mention movie lists or gift filters. Fix: add JustWatch and "movies" to those two sentences and update the date.
+- **Preset checks can be fooled by built-in names.** `?moods=constructor` or `?price=constructor` passes the "known values only" check, because plain objects have hidden built-in properties. Harmless (nothing runs, the wheel just comes up empty), but the check isn't strict. Fix: use `Object.hasOwn(moodLabel, x)` (and the same for `vibeLabel` and `PRICES`), including for saved settings.
+- **Gift list, office crowd.** "What Do You Meme?" (core deck has crude cards; our own text calls it an "Adult party favorite"), Toilet golf (bathroom humor), and two alcohol items (Electric wine opener, Cocktail smoker kit) may be awkward at work or family exchanges with kids. Nothing explicit, and nothing on Amazon's restricted list for Associates links. Fix (marketing's call): swap What Do You Meme? for a family-safe game, or add a "Keep it office-friendly" filter that hides these.
+- **Process: no decision entry for these two pages.** `docs/marketing/keywords.md` still lists White elephant as "Later". Fix: coordinator logs the decision in `docs/decisions.md` and Mark approves before pushing.
+
+**Passed**
+- Outbound links are plain `<a>` links only: JustWatch search, YouTube search, Amazon search. Search text is URL-encoded. All open in a new tab with `rel="noopener"`.
+- No new scripts, embeds, fonts, images, or trackers. Only the site's own JS files load.
+- All list text (built-in, own list, shared list) is shown with `textContent`, never as HTML. The one `insertAdjacentHTML` is a fixed sentence with no user text in it. Movie page reuses the already-reviewed `PartyShare` (capped, plain text, # cleared). Gift page has no share or free-text input.
+- Query-string presets are filtered against known values (see the Low item above for the one gap); the movie page's own-list text is never read from the query string.
+- localStorage reads and writes are wrapped in try/catch on both pages, so private browsing and blocked storage don't break the page.
+- Affiliate logic is correct once a tag is set: Amazon movie and gift links pick up `&tag=`, get `rel="sponsored noopener"`, `isAffiliate()` turns true, and the disclosure includes Amazon's required sentence: "As an Amazon Associate I earn from qualifying purchases." No tag is set today, so links are plain and no disclosure shows, which is correct.
+- Family/Animated movie moods contain only G/PG titles, matching the page's claim that they leave out PG-13 and R picks.
+- JustWatch added to `docs/security/third-parties.md` as a plain outbound link (no account, no script).
+
+Sources: [Amazon Associates Program Policies, price display rule (summary)](https://conductatlas.com/platform/amazon-associates/amazon-associates-program-policies/provision/CA-P-064489/price-display-requires-api-feed-or-amazon-served-link/). Re-check against Amazon's own Program Policies page at application time.

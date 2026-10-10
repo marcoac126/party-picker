@@ -132,6 +132,39 @@
     return wrap;
   }
 
+  function makeList(items) {
+    const wrap = document.createElement('div');
+    wrap.className = 'store-links';
+    const ul = document.createElement('ul');
+    ul.className = 'store-main';
+    items.forEach(([href, text, sponsored]) => {
+      const a = document.createElement('a');
+      a.href = href; a.textContent = text; a.target = '_blank';
+      a.rel = sponsored ? 'sponsored noopener' : 'noopener';
+      const li = document.createElement('li'); li.append(a); ul.append(li);
+    });
+    wrap.append(ul);
+    return wrap;
+  }
+
+  // Movies: where to stream (JustWatch search), trailer, and Amazon rent/buy.
+  function movieLinks(title, year) {
+    const t = cleanText(title);
+    const ty = year ? `${t} ${year}` : t;
+    return makeList([
+      [`https://www.justwatch.com/us/search?q=${q(t)}`, 'Find where to stream it', false],
+      [`https://www.youtube.com/results?search_query=${q(ty + ' trailer')}`, 'Watch the trailer', false],
+      [`https://www.amazon.com/s?k=${q(ty)}&i=instant-video` + (IDS.amazon ? `&tag=${q(IDS.amazon)}` : ''), 'Rent or buy on Amazon', !!IDS.amazon]
+    ]);
+  }
+
+  // Gift ideas: one Amazon search per idea.
+  function giftLinks(search) {
+    return makeList([
+      [`https://www.amazon.com/s?k=${q(search)}` + (IDS.amazon ? `&tag=${q(IDS.amazon)}` : ''), 'Shop this idea on Amazon', !!IDS.amazon]
+    ]);
+  }
+
   function isAffiliate() { return Object.values(STORES).some((s) => s.aff()); }
 
   function disclosure() {
@@ -142,5 +175,5 @@
     return parts.join(' ');
   }
 
-  window.PartyLinks = { bookLinks, gameLinks, link, isAffiliate, disclosure, searchTerms, STORE_IDS: Object.keys(STORES) };
+  window.PartyLinks = { bookLinks, gameLinks, movieLinks, giftLinks, link, isAffiliate, disclosure, searchTerms, STORE_IDS: Object.keys(STORES) };
 })();
