@@ -134,6 +134,13 @@
   const textarea = $('entries'), spinBtn = $('spin'), result = $('result'), status = $('status');
   const decadeSel = $('decade'), styleSel = $('style'), own = $('own');
   const SONGS = window.KARAOKE_SONGS || [];
+  function listDates(iso) {
+    // "Oct 10" for the list date, "Mon, Oct 12" for the next scheduled Monday refresh after it.
+    const d = new Date(iso + 'T12:00:00');
+    const fmt = (x, o) => x.toLocaleDateString(undefined, o);
+    const next = new Date(d); next.setDate(d.getDate() + (((8 - d.getDay()) % 7) || 7));
+    return { from: fmt(d, { month: 'short', day: 'numeric' }), next: fmt(next, { weekday: 'short', month: 'short', day: 'numeric' }) };
+  }
   const HITS = window.KARAOKE_HITS || { updated: null, songs: [] };
   let mode = 'dealt'; // 'dealt' or 'own'
 
@@ -208,8 +215,8 @@
     if (styleSel.value === 'hits' && pool.length < 2) {
       status.textContent = 'This week’s hits list isn’t ready yet. Try another style.';
     } else if (styleSel.value === 'hits') {
-      const when = HITS.updated ? new Date(HITS.updated + 'T12:00:00').toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) : '';
-      status.textContent = `${Math.min(pool.length, WHEEL_SIZE)} of this week’s top songs${when ? ' (updated ' + when + ')' : ''}.`;
+      const dt = HITS.updated ? listDates(HITS.updated) : null;
+      status.textContent = `${Math.min(pool.length, WHEEL_SIZE)} of this week’s top songs.${dt ? ' Chart from ' + dt.from + '. Next update ' + dt.next + '.' : ''}`;
     } else if (pool.length < 2) {
       status.textContent = 'Not enough songs match. Try a different decade or style.';
     } else if (pool.length <= WHEEL_SIZE) {

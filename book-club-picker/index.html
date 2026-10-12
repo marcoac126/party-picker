@@ -140,6 +140,13 @@
   const $ = (id) => document.getElementById(id);
   const spinBtn = $('spin'), result = $('result'), status = $('status');
   const clubTA = $('club-entries'), hostTA = $('host-entries');
+  function listDates(iso) {
+    // "Oct 10" for the list date, "Mon, Oct 12" for the next scheduled Monday refresh after it.
+    const d = new Date(iso + 'T12:00:00');
+    const fmt = (x, o) => x.toLocaleDateString(undefined, o);
+    const next = new Date(d); next.setDate(d.getDate() + (((8 - d.getDay()) % 7) || 7));
+    return { from: fmt(d, { month: 'short', day: 'numeric' }), next: fmt(next, { weekday: 'short', month: 'short', day: 'numeric' }) };
+  }
   const CURRENT = window.CURRENT_BOOKS || { updated: null, books: [] };
   const LIBRARY = (window.BOOK_CLUB_BOOKS || []).concat(CURRENT.books || []);
   const L = window.PartyLinks;
@@ -256,8 +263,8 @@
     else if (pool.length <= WHEEL_SIZE) status.textContent = `All ${pool.length} books from your genres are on the wheel.`;
     else status.textContent = `12 random books from ${pool.length} in ${on.size} genre${on.size > 1 ? 's' : ''}.`;
     if (on.has('current') && CURRENT.updated) {
-      const when = new Date(CURRENT.updated + 'T12:00:00').toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
-      status.textContent += ` Bestsellers updated ${when}.`;
+      const dt = listDates(CURRENT.updated);
+      status.textContent += ` Bestseller list from ${dt.from}. Next update ${dt.next}.`;
     }
     $('deal').hidden = pool.length <= WHEEL_SIZE;
     refresh(); save();
