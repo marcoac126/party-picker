@@ -14,3 +14,7 @@
 - **Skip:** r/books, r/bookclub (ban self-promo), r/partygames and r/whiteelephant (activity not confirmed).
 - **Rules:** personal account, say "I made this", comment genuinely for 2–3 weeks first, one sub every few days, never the same link in several subs on one day.
 - **Search strategy:** don't compete on generic "spin the wheel" terms. Compete on ready-made + where-to-find-it + weekly-fresh long tail. Expect search payoff mostly in Dec 2027; this season's traffic comes from Pinterest, Reddit, and shared wheels.
+
+## Video pin test (2026-10-11)
+- Book club video pin v2: 14s, 9:16, silent, opens on the spinning wheel, captions in Pinterest's safe zone (y≈290–440), genre taps → spin → result links → end card, hard cut to loop. Rendered frame by frame from the live site (v1 screen recording was choppy and 21s).
+- Post Thu 10/15, Book Club Ideas board. Measure 7-day outbound clicks and saves vs. the static book club pin. If it wins, make karaoke and Christmas movie versions.
