@@ -122,8 +122,8 @@
   </div>
 </footer>
 
-<script src="../assets/share.js?v=20261009e"></script>
-<script src="../assets/wheel.js?v=20261009e"></script>
+<script src="../assets/share.js?v=20261011a"></script>
+<script src="../assets/wheel.js?v=20261011a"></script>
 <script src="songs.js?v=20261009f"></script>
 <script src="hits.js?v=20261009e"></script>
 <script>
@@ -163,6 +163,7 @@
       const lyric = document.createElement('p'); lyric.className = 'lyric'; lyric.textContent = title;
       result.append(label, lyric);
       if (artist) { const a = document.createElement('p'); a.className = 'artist'; a.textContent = artist; result.append(a); }
+      result.append(window.PartyShare.resultButton(wheel, 'songs', 'Karaoke songs'));
       requestAnimationFrame(() => lyric.classList.add('sing'));
       const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       result.scrollIntoView({ behavior: still ? 'auto' : 'smooth', block: 'nearest' });
@@ -273,7 +274,7 @@
     mode = 'own'; textarea.value = shared.items.join('\n'); own.open = true;
     status.textContent = 'Using a shared list.';
     $('deal').hidden = false; refreshWheel(); save();
-    document.querySelector('.stage').insertAdjacentHTML('beforebegin', '<p class="shared-note">Someone shared this wheel with you. The list was made by whoever sent the link, not The Party Wheel. Spin away, or change it below.</p>');
+    document.querySelector('.stage').insertAdjacentHTML('beforebegin', '<p class="shared-note">' + window.PartyShare.note(shared) + '</p>');
   } else if (!preset && saved.mode === 'own' && saved.own && saved.own.trim()) {
     mode = 'own';
     textarea.value = saved.own;
@@ -283,6 +284,8 @@
   } else {
     deal();
   }
+  // Shared result link: land on the same pick the sender got.
+  if (shared && shared.result !== null && wheel.items.length === shared.items.length) wheel.land(shared.result);
 })();
 </script>
 </body>

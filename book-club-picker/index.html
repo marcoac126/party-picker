@@ -128,8 +128,8 @@
   </div>
 </footer>
 
-<script src="../assets/wheel.js?v=20261009e"></script>
-<script src="../assets/share.js?v=20261009e"></script>
+<script src="../assets/wheel.js?v=20261011a"></script>
+<script src="../assets/share.js?v=20261011a"></script>
 <script src="../assets/links.js?v=20261010a"></script>
 <script src="books.js?v=20261009e"></script>
 <script src="current-books.js?v=20261009e"></script>
@@ -197,6 +197,7 @@
       result.append(label, main);
       if (author) { const a = document.createElement('p'); a.className = 'artist'; a.textContent = 'by ' + author; result.append(a); }
       if (state.mode === 'book') result.append(L.bookLinks(title, author));
+      result.append(window.PartyShare.resultButton(wheel, (state.mode === 'host' ? 'hosts' : 'books'), 'Book club picks'));
       requestAnimationFrame(() => main.classList.add('sing'));
       const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       result.scrollIntoView({ behavior: still ? 'auto' : 'smooth', block: 'nearest' });
@@ -347,11 +348,13 @@
     if (shared.kind === 'hosts') { state.mode = 'host'; state.hosts = text; hostTA.value = text; }
     else { state.mode = 'book'; state.source = 'club'; state.club = text; clubTA.value = text; }
     $('mode-' + state.mode).checked = true; $('src-' + state.source).checked = true;
-    document.querySelector('.segmented').insertAdjacentHTML('afterend', '<p class="shared-note">Someone shared this wheel with you. The list was made by whoever sent the link, not The Party Wheel. Spin away, or change it below.</p>');
+    document.querySelector('.segmented').insertAdjacentHTML('afterend', '<p class="shared-note">' + window.PartyShare.note(shared) + '</p>');
   }
   syncChips();
   deal();
   render();
+  // Shared result link: land on the same pick the sender got.
+  if (shared && shared.result !== null && wheel.items.length === shared.items.length) wheel.land(shared.result);
 })();
 </script>
 </body>

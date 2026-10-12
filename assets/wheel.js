@@ -96,6 +96,17 @@
       return Math.floor(a / slice) % this.items.length;
     }
 
+    // Show a known result without spinning (used for shared results).
+    land(index) {
+      if (!(index >= 0 && index < this.items.length)) return false;
+      const slice = (Math.PI * 2) / this.items.length;
+      this.angle = (-Math.PI / 2) - (index + 0.5) * slice;
+      this.draw();
+      this.lastSpin = { items: this.items.slice(), index };
+      this.onResult(this.items[index], index);
+      return true;
+    }
+
     spin() {
       if (this.spinning || this.items.length < 2) return false;
       this.spinning = true;
@@ -116,6 +127,7 @@
         this.angle = target % (Math.PI * 2);
         this.draw();
         this.spinning = false;
+        this.lastSpin = { items: this.items.slice(), index: winner };
         this.onResult(this.items[winner], winner);
       };
 

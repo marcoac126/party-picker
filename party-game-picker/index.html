@@ -125,8 +125,8 @@
   </div>
 </footer>
 
-<script src="../assets/wheel.js?v=20261009e"></script>
-<script src="../assets/share.js?v=20261009e"></script>
+<script src="../assets/wheel.js?v=20261011a"></script>
+<script src="../assets/share.js?v=20261011a"></script>
 <script src="../assets/links.js?v=20261010a"></script>
 <script src="games.js?v=20261009e"></script>
 <script>
@@ -168,6 +168,7 @@
       }
       const buyable = state.source === 'suggested' && g && (g[1] === 'card' || g[1] === 'board');
       if (g) result.append(L.gameLinks(name, buyable)); // unknown homemade games get no links
+      result.append(window.PartyShare.resultButton(wheel, 'games', 'Party games'));
       requestAnimationFrame(() => main.classList.add('sing'));
       const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       result.scrollIntoView({ behavior: still ? 'auto' : 'smooth', block: 'nearest' });
@@ -276,10 +277,12 @@
   const shared = window.PartyShare.read();
   if (shared) {
     state.source = 'own'; state.own = shared.items.join('\n'); ownTA.value = state.own;
-    document.querySelector('.stage').insertAdjacentHTML('beforebegin', '<p class="shared-note">Someone shared this wheel with you. The list was made by whoever sent the link, not The Party Wheel. Spin away, or change it below.</p>');
+    document.querySelector('.stage').insertAdjacentHTML('beforebegin', '<p class="shared-note">' + window.PartyShare.note(shared) + '</p>');
   }
   $('src-' + state.source).checked = true;
   syncChips(); deal(); render();
+  // Shared result link: land on the same pick the sender got.
+  if (shared && shared.result !== null && wheel.items.length === shared.items.length) wheel.land(shared.result);
 })();
 </script>
 </body>
