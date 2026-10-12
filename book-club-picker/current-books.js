@@ -1,6 +1,6 @@
 // Generated weekly by scripts/update-books.mjs from Apple Books' US top-paid chart. Do not edit by hand.
 window.CURRENT_BOOKS = {
- "updated": "2026-10-10",
+ "updated": "2026-10-12",
  "books": [
   [
    "The French Illusion",
@@ -13,13 +13,23 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
+   "The Law Student",
+   "John Grisham",
+   "current"
+  ],
+  [
    "Threshing Day",
    "Rebecca Yarros",
    "current"
   ],
   [
-   "The Law Student",
-   "John Grisham",
+   "Secret Prey",
+   "John Sandford",
+   "current"
+  ],
+  [
+   "One Helluva Ride",
+   "Michael Douglas",
    "current"
   ],
   [
@@ -33,38 +43,8 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "One Helluva Ride",
-   "Michael Douglas",
-   "current"
-  ],
-  [
    "Double Tap",
    "Vince Flynn & Don Bentley",
-   "current"
-  ],
-  [
-   "The Day of the Storm",
-   "Rosamunde Pilcher",
-   "current"
-  ],
-  [
-   "Ransom",
-   "Daniel Silva",
-   "current"
-  ],
-  [
-   "Hollow Bones",
-   "Jodi Picoult",
-   "current"
-  ],
-  [
-   "Other Worlds Than These",
-   "Stephen King & Peter Straub",
-   "current"
-  ],
-  [
-   "Theo of Golden",
-   "Allen Levi",
    "current"
   ],
   [
@@ -73,48 +53,28 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "Blockers",
-   "Michael Lewis",
-   "current"
-  ],
-  [
-   "East of Eden",
-   "John Steinbeck",
-   "current"
-  ],
-  [
-   "Ruthless",
+   "Weddings",
    "Danielle Steel",
    "current"
   ],
   [
-   "When All Is Said",
-   "Anne Griffin",
+   "Hollow Bones",
+   "Jodi Picoult",
    "current"
   ],
   [
-   "Birth of the Witch",
-   "Nora Roberts",
+   "Ransom",
+   "Daniel Silva",
    "current"
   ],
   [
-   "Swamp Shoot",
-   "Jana DeLeon",
+   "Theo of Golden",
+   "Allen Levi",
    "current"
   ],
   [
-   "The Missing Half",
-   "Ashley Flowers & Alex Kiester",
-   "current"
-  ],
-  [
-   "Adam and Eve",
-   "Jeffrey Archer",
-   "current"
-  ],
-  [
-   "Whistler",
-   "Ann Patchett",
+   "Blockers",
+   "Michael Lewis",
    "current"
   ],
   [
@@ -123,28 +83,33 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "Fourth Wing",
-   "Rebecca Yarros",
+   "Ruthless",
+   "Danielle Steel",
    "current"
   ],
   [
-   "The Southern Book Club's Guide to Slaying Vampires",
-   "Grady Hendrix",
+   "Adam and Eve",
+   "Jeffrey Archer",
    "current"
   ],
   [
-   "A Trick of the Light",
-   "Louise Penny",
+   "East of Eden",
+   "John Steinbeck",
+   "current"
+  ],
+  [
+   "Big Little Truths: Reese's Book Club",
+   "Liane Moriarty",
+   "current"
+  ],
+  [
+   "The Munich Affair",
+   "James Patterson & David Ellis",
    "current"
   ],
   [
    "London Station",
    "David McCloskey",
-   "current"
-  ],
-  [
-   "The Revelation of Dionne Daphne",
-   "Mara Brock Akil",
    "current"
   ],
   [
@@ -163,18 +128,23 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
+   "Whistler",
+   "Ann Patchett",
+   "current"
+  ],
+  [
    "The Love Hypothesis",
    "Ali Hazelwood",
    "current"
   ],
   [
-   "Chasing Perfect",
-   "Susan Mallery",
+   "My Sister's Keeper",
+   "Jodi Picoult",
    "current"
   ],
   [
-   "The Munich Affair",
-   "James Patterson & David Ellis",
+   "Other Worlds Than These",
+   "Stephen King & Peter Straub",
    "current"
   ],
   [
@@ -183,48 +153,28 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "Big Little Truths: Reese's Book Club",
-   "Liane Moriarty",
+   "Shiner",
+   "Amy Jo Burns",
    "current"
   ],
   [
-   "Yesteryear: A GMA Book Club Pick",
-   "Caro Claire Burke",
+   "The Believers (1)",
+   "Witness Lee",
    "current"
   ],
   [
-   "The Last Letter from Your Lover",
-   "Jojo Moyes",
+   "Perfect",
+   "Judith McNaught",
    "current"
   ],
   [
-   "An Inside Job",
-   "Daniel Silva",
+   "The Rush",
+   "Nathaniel Philbrick",
    "current"
   ],
   [
-   "The Fires of December",
-   "Brandon Sanderson",
-   "current"
-  ],
-  [
-   "East of Eden",
-   "John Steinbeck, David Wyatt & Susan Shillinglaw",
-   "current"
-  ],
-  [
-   "Bound and Unbound",
-   "Ali Hazelwood",
-   "current"
-  ],
-  [
-   "Big Bad Wolf",
-   "Laurie Gilmore",
-   "current"
-  ],
-  [
-   "The Thoroughbreds",
-   "Elin Hilderbrand & Shelby Cunningham",
+   "A Fine and Bitter Snow",
+   "Dana Stabenow",
    "current"
   ],
   [
@@ -233,13 +183,68 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "Malibu Rising: A Read with Jenna Pick",
-   "Taylor Jenkins Reid",
+   "Chronicles",
+   "Bob Dylan",
    "current"
   ],
   [
-   "The Cold Moon",
-   "Jeffery Deaver",
+   "Swamp Shoot",
+   "Jana DeLeon",
+   "current"
+  ],
+  [
+   "Train Dreams",
+   "Denis Johnson",
+   "current"
+  ],
+  [
+   "Fourth Wing",
+   "Rebecca Yarros",
+   "current"
+  ],
+  [
+   "Iron Flame",
+   "Rebecca Yarros",
+   "current"
+  ],
+  [
+   "Today a Woman Went Mad in the Supermarket",
+   "Hilma Wolitzer",
+   "current"
+  ],
+  [
+   "World War Z",
+   "Max Brooks",
+   "current"
+  ],
+  [
+   "A Court of Thorns and Roses",
+   "Sarah J. Maas",
+   "current"
+  ],
+  [
+   "Carrie",
+   "Stephen King & Margaret Atwood",
+   "current"
+  ],
+  [
+   "Yesteryear: A GMA Book Club Pick",
+   "Caro Claire Burke",
+   "current"
+  ],
+  [
+   "The House of Morgan",
+   "Ron Chernow",
+   "current"
+  ],
+  [
+   "The Southern Book Club's Guide to Slaying Vampires",
+   "Grady Hendrix",
+   "current"
+  ],
+  [
+   "An Heir of His Own",
+   "Janice Maynard",
    "current"
   ]
  ]
