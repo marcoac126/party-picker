@@ -1,0 +1,78 @@
+{
+  "_about": "Pinterest pin queue. Marketing writes pins, security reviews them, Mark approves by merging. A daily GitHub Action (scripts/build-pin-feeds.mjs) adds each pin to its board's RSS feed on or after its publish date; Pinterest then posts it. Links must be thepartywheel.com URLs using only the pages' own preset parameters. No # share links, no shorteners.",
+  "feeds": {
+    "holiday": {
+      "file": "pins/feeds/holiday.xml",
+      "board": "Holiday Party Ideas",
+      "title": "The Party Wheel: Holiday party ideas"
+    }
+  },
+  "pins": [
+    {
+      "id": "family-christmas-movies",
+      "feed": "holiday",
+      "publish": "2026-10-12",
+      "title": "Family Christmas Movie Night: Spin to Pick a Movie",
+      "description": "Can't agree on a family Christmas movie? Spin a free wheel of kid-friendly picks like Elf, Home Alone, Klaus, The Polar Express, and Arthur Christmas. No PG-13 or R picks, and each pick shows where to stream it. Free, no sign-up.",
+      "link": "https://thepartywheel.com/christmas-movie-picker/?moods=family,animated",
+      "image": "/pins/img/family-christmas-movies.jpg",
+      "alt": "A spinning wheel of family Christmas movies with the headline Family Christmas Movie Night",
+      "headline": "Family Christmas Movie Night",
+      "subhead": "Kid-friendly picks only. Spin, then press play.",
+      "wheel": [
+        "Elf",
+        "Home Alone",
+        "Klaus",
+        "Polar Express",
+        "Frosty",
+        "Arthur Christmas",
+        "Santa Clause",
+        "Charlie Brown"
+      ]
+    },
+    {
+      "id": "white-elephant-under-10",
+      "feed": "holiday",
+      "publish": "2026-10-15",
+      "title": "White Elephant Gifts Under $10 (That Still Get Stolen)",
+      "description": "Small budget, big laughs. Spin for white elephant gift ideas under $10: fuzzy socks, hot cocoa, a pickle ornament, gross-flavor jelly beans, pocket card games, and more. Each idea links to shop it. Free, no sign-up.",
+      "link": "https://thepartywheel.com/white-elephant-gift-ideas/?price=u10",
+      "image": "/pins/img/white-elephant-under-10.jpg",
+      "alt": "A spinning wheel of cheap white elephant gift ideas with the headline White Elephant Gifts Under $10",
+      "headline": "White Elephant Gifts Under $10",
+      "subhead": "Cheap, fun, and worth stealing.",
+      "accent": "#FF4F86",
+      "wheel": [
+        "Fuzzy socks",
+        "Hot cocoa",
+        "Pickle ornament",
+        "Jelly bean dare",
+        "Hand warmers",
+        "Card game",
+        "Mini candle",
+        "Rubber chicken"
+      ]
+    },
+    {
+      "id": "funny-white-elephant",
+      "feed": "holiday",
+      "publish": "2026-10-18",
+      "title": "Funny White Elephant Gift Ideas: Spin for One",
+      "description": "Want the gift everyone fights over? Spin for funny white elephant ideas, from a rubber chicken and a prank gift box to a giant gummy bear and a singing fish. Pick a budget from under $10 to $50. Free, no sign-up.",
+      "link": "https://thepartywheel.com/white-elephant-gift-ideas/?vibes=funny",
+      "image": "/pins/img/funny-white-elephant.jpg",
+      "alt": "A spinning wheel of funny white elephant gift ideas with the headline Funny White Elephant Gifts",
+      "headline": "Funny White Elephant Gifts",
+      "subhead": "The gift everyone fights over.",
+      "wheel": [
+        "Rubber chicken",
+        "Prank gift box",
+        "Giant gummy",
+        "Singing fish",
+        "Pickle ornament",
+        "Dino costume",
+        "Support pickle"
+      ]
+    }
+  ]
+}
