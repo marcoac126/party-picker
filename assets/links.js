@@ -10,11 +10,16 @@
 (function () {
   const IDS = {
     bookshop: '', // Bookshop.org affiliate ID (10% on books)
-    librofm: '',  // Libro.fm affiliate code (10% audiobooks, 30% new memberships)
+    librofm: '',  // Set to 'awin' once Libro.fm approves us on Awin (10% audiobooks, 30% new memberships)
     amazon: ''    // Amazon Associates tag, e.g. 'thepartywheel-20' (4.5% books; also used for Audible)
   };
 
   const q = (s) => encodeURIComponent(s.trim());
+
+  // Awin (network for Libro.fm). Publisher ID is public: it appears in every affiliate link.
+  // Link format per Awin: https://www.awin1.com/cread.php?awinmid=<advertiser>&awinaffid=<publisher>&ued=<encoded destination>
+  const AWIN = { publisher: '3121688', librofm: '25361' };
+  const awin = (mid, dest) => `https://www.awin1.com/cread.php?awinmid=${mid}&awinaffid=${AWIN.publisher}&ued=${encodeURIComponent(dest)}`;
 
   // ---- Search wording per store ----
   // Store searches are picky in different ways (curly apostrophes, subtitles,
@@ -63,8 +68,8 @@
       url: (t) => `https://bookshop.org/search?keywords=${q(t)}` + (IDS.bookshop ? `&affiliate=${q(IDS.bookshop)}` : ''),
       aff: () => !!IDS.bookshop },
     librofm: { action: 'Listen', name: 'Libro.fm',
-      url: (t) => `https://libro.fm/search?q=${q(t)}` + (IDS.librofm ? `&ref=${q(IDS.librofm)}` : ''),
-      aff: () => !!IDS.librofm },
+      url: (t) => { const dest = `https://libro.fm/search?q=${q(t)}`; return IDS.librofm === 'awin' ? awin(AWIN.librofm, dest) : dest; },
+      aff: () => IDS.librofm === 'awin' },
     amazon: { action: 'Buy', name: 'Amazon',
       url: (t) => `https://www.amazon.com/s?k=${q(t)}&i=stripbooks` + (IDS.amazon ? `&tag=${q(IDS.amazon)}` : ''),
       aff: () => !!IDS.amazon },
