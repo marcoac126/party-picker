@@ -22,5 +22,5 @@
 - Approval rate about 91%. Sales auto-validate after 60 days. Payment about 24 days after Libro.fm pays Awin.
 - Advertiser payment level: "Exposure Level 1" (over its credit limit with Awin but pays by direct debit). Small risk of slow payouts; watch it.
 - App tracking: No. Sales made in the Libro.fm app after a click may not count; web purchases do.
-- Rough math: about 6 cents of earnings per Libro.fm click → 100 clicks ≈ $16. Memberships are the big earners.
+- Rough math: about $0.16 earned per Libro.fm click (network average) → 100 clicks ≈ $16. Memberships are the big earners.
 - Program terms (allowed promotion methods) still to be read once the program is joined.
