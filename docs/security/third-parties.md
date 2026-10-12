@@ -11,3 +11,4 @@
 | Bookshop.org Affiliates | Book links (10% commission) | Mark (hello@thepartywheel.com) | — | Applied 2026-10-09, affiliate ID 129730, verification pending; links NOT yet switched on |
 | Pinterest Business (free) | Hand-posted pins linking to thepartywheel.com; website claim via DNS TXT. No Pinterest tag, no connected apps, no paid promotion | Mark (hello@thepartywheel.com) | Required (authenticator app) | Approved 2026-10-10, account not yet created |
 | JustWatch (justwatch.com/us/search) | "Find where to stream it" on the Christmas movie picker. Plain outbound search link only: no script, embed, or account | — (public, no account) | — | 2026-10-10 |
+| Awin (affiliate network) | Hosts the Libro.fm affiliate program (audiobooks: 10%, new memberships: 30%) | Mark (hello@thepartywheel.com) | Turn on if offered | Publisher account approved 2026-10-12 after re-review; Libro.fm program status to confirm; links NOT yet switched on |
