@@ -1,0 +1,33 @@
+name: Update Pinterest pin feeds
+
+# Adds queued pins (pins/queue.json) to their board's RSS feed on their publish date.
+# Pinterest reads the feeds and posts new pins. No Pinterest login or token is used here.
+on:
+  schedule:
+    - cron: '52 12 * * *'   # daily ~7:52 AM Central (6:52 AM in winter)
+  workflow_dispatch:        # lets Mark run it by hand from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  feeds:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: node scripts/build-pin-feeds.mjs
+      - name: Commit if a feed changed
+        run: |
+          if git diff --quiet -- pins/feeds; then
+            echo "No change."
+            exit 0
+          fi
+          git config user.name "pin-feed-updater"
+          git config user.email "actions@users.noreply.github.com"
+          git add pins/feeds
+          git commit -m "Add today's pins to Pinterest feeds"
+          git push

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>The Party Wheel: Holiday party ideas</title>
+    <link>https://thepartywheel.com/</link>
+    <description>Spin-the-wheel pickers from The Party Wheel. Feed for the Pinterest board "Holiday Party Ideas".</description>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 12 Oct 2026 18:00:00 GMT</lastBuildDate>
+    <item>
+      <title>Family Christmas Movie Night: Spin to Pick a Movie</title>
+      <link>https://thepartywheel.com/christmas-movie-picker/?moods=family,animated</link>
+      <guid isPermaLink="false">thepartywheel-pin-family-christmas-movies</guid>
+      <pubDate>Mon, 12 Oct 2026 18:00:00 GMT</pubDate>
+      <description>Can't agree on a family Christmas movie? Spin a free wheel of kid-friendly picks like Elf, Home Alone, Klaus, The Polar Express, and Arthur Christmas. No PG-13 or R picks, and each pick shows where to stream it. Free, no sign-up.</description>
+      <enclosure url="https://thepartywheel.com/pins/img/family-christmas-movies.jpg" type="image/jpeg" length="147675" />
+      <media:content url="https://thepartywheel.com/pins/img/family-christmas-movies.jpg" medium="image" type="image/jpeg" width="1000" height="1500">
+        <media:description type="plain">A spinning wheel of family Christmas movies with the headline Family Christmas Movie Night</media:description>
+      </media:content>
+    </item>
+  </channel>
+</rss>
