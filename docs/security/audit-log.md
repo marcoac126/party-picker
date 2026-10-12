@@ -117,3 +117,23 @@ Scope: `christmas-movie-picker/` (index.html, movies.js), `white-elephant-gift-i
 - JustWatch added to `docs/security/third-parties.md` as a plain outbound link (no account, no script).
 
 Sources: [Amazon Associates Program Policies, price display rule (summary)](https://conductatlas.com/platform/amazon-associates/amazon-associates-program-policies/provision/CA-P-064489/price-display-requires-api-feed-or-amazon-served-link/). Re-check against Amazon's own Program Policies page at application time.
+
+## 2026-10-11 — Review: "Share this result" + compressed share links (`assets/share.js`, not pushed)
+
+**Verdict: OK to push once Mark approves. No High findings. One Medium (privacy policy wording) should go out in the same push.** This was a code read only. I didn't run anything; the coordinator's fuzz and round-trip tests cover runtime behavior.
+
+**Medium**
+- **Privacy policy doesn't mention share links.** It says lists "are never sent to us or anyone else," but Share puts the whole list (and now the winning pick) inside the link, so anyone the link reaches can read it, including the chat app it passes through. The "never sent to us" part is still true, because browsers don't send the part after `#` to the host. Fix: add one sentence under "Your lists stay on your device," for example: "If you use Share, your list (and the winning pick, if you share a result) is packed into the link itself. Anyone with the link can see it. We never receive it." Then update the date.
+
+**Low**
+- **No length cap before decoding.** Output is capped at 16 KB, but the input isn't. A very long crafted link made of thousands of tiny compressed blocks could keep the tab busy for a moment. It always finishes and only affects whoever opens that link. Fix: in `read()`, return null if `m[2].length > 24000` before decoding (covers both `#z` and `#w`).
+- **The biggest legitimate lists can exceed the 16 KB cap.** 60 items × 120 characters of non-English text or emoji can be more than 16 KB once encoded, so `makeUrl` would build a `#z` link that `read()` rejects. Fix: in `makeUrl`, fall back to `#w` (or warn) when the raw data is over `MAX_OUT`, or raise `MAX_OUT` to 32 KB.
+- **A failed decode leaves the `#` data in the address bar.** `replaceState` only runs on success. This is harmless and just cosmetic. Fix: clear the `#` in `finally`.
+
+**Passed**
+- Inflate can't loop forever. Every loop step either reads input bits (and throws when input runs out) or writes output (capped at 16 KB). Repeat counts top out at 138, and overshooting the declared length is rejected. All-zero code lengths throw after 15 bits. Long matches are bounded by the output cap. Distances past the start of the output, length symbols 286–287, and distance symbols 30–31 all throw. Lookups stay inside the symbol table even for malformed (over- or under-full) codes, so bad data can't cause a crash.
+- Memory: output is at most 16,384 entries, and the code-length tables are at most about 450 entries.
+- JSON.parse can't change built-in object behavior (prototype pollution). A `__proto__` key becomes a plain property of that one object. Only `i`, `k`, and `r` are read, each with a type check. `k` is only compared to `'hosts'`.
+- Shared text never reaches HTML. Items go to textareas, `textContent`, and canvas `fillText`. `note()` returns one of two fixed sentences, so the `insertAdjacentHTML` calls still contain no user text. `land()` re-checks the index range, and pages only call it when the list length matches.
+- Outgoing share text ("The wheel landed on: …") goes only to the native share sheet or clipboard, as plain text.
+- No new third-party code. `CompressionStream` is built into the browser, and the decoder is our own code.
