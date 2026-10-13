@@ -1,10 +1,50 @@
 // Generated weekly by scripts/update-books.mjs from Apple Books' US top-paid chart. Do not edit by hand.
 window.CURRENT_BOOKS = {
- "updated": "2026-10-12",
+ "updated": "2026-10-13",
  "books": [
+  [
+   "In the Shadow of Eight",
+   "Collin Gosselin",
+   "current"
+  ],
   [
    "The French Illusion",
    "John Grisham",
+   "current"
+  ],
+  [
+   "Peck & Peck",
+   "Bonnie Garmus",
+   "current"
+  ],
+  [
+   "Contend",
+   "Philip Anthony Mitchell",
+   "current"
+  ],
+  [
+   "Out of the Shadows",
+   "Jay Stratton",
+   "current"
+  ],
+  [
+   "I'll Believe in Anything",
+   "Jacob Tierney & Rachel Reid",
+   "current"
+  ],
+  [
+   "The Ferryman's Rest Inn & Grogshop",
+   "Seana Kelly",
+   "current"
+  ],
+  [
+   "The Thrice-Bound Fool",
+   "Christopher Buehlman",
+   "current"
+  ],
+  [
+   "Bark Humbug",
+   "David Rosenfelt",
    "current"
   ],
   [
@@ -23,13 +63,13 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "Secret Prey",
-   "John Sandford",
+   "D",
+   "Neal Stephenson",
    "current"
   ],
   [
-   "One Helluva Ride",
-   "Michael Douglas",
+   "The Calamity Club",
+   "Kathryn Stockett",
    "current"
   ],
   [
@@ -38,8 +78,18 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "The Calamity Club",
-   "Kathryn Stockett",
+   "One Helluva Ride",
+   "Michael Douglas",
+   "current"
+  ],
+  [
+   "A Date with Santa",
+   "Debbie Macomber",
+   "current"
+  ],
+  [
+   "Ice Covered Heart",
+   "Cynthia Eden",
    "current"
   ],
   [
@@ -53,8 +103,23 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "Weddings",
-   "Danielle Steel",
+   "The Game",
+   "Peter King",
+   "current"
+  ],
+  [
+   "The End of Everything",
+   "M. John Harrison",
+   "current"
+  ],
+  [
+   "Vibe",
+   "Adam Grant",
+   "current"
+  ],
+  [
+   "Secret Prey",
+   "John Sandford",
    "current"
   ],
   [
@@ -63,8 +128,23 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "Ransom",
-   "Daniel Silva",
+   "Win Me Back",
+   "Camilla Isley",
+   "current"
+  ],
+  [
+   "As You Wake, Break the Shell",
+   "Becky Chambers",
+   "current"
+  ],
+  [
+   "The Stones Cry Out",
+   "Dinesh D'Souza",
+   "current"
+  ],
+  [
+   "Malice",
+   "LeAnn Ashers",
    "current"
   ],
   [
@@ -73,43 +153,13 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "Blockers",
-   "Michael Lewis",
+   "Ethel Kennedy",
+   "Kerry Kennedy",
    "current"
   ],
   [
-   "Murder at the Grand Alpine Hotel",
-   "Lucy Foley & Agatha Christie",
-   "current"
-  ],
-  [
-   "Ruthless",
-   "Danielle Steel",
-   "current"
-  ],
-  [
-   "Adam and Eve",
-   "Jeffrey Archer",
-   "current"
-  ],
-  [
-   "East of Eden",
-   "John Steinbeck",
-   "current"
-  ],
-  [
-   "Big Little Truths: Reese's Book Club",
-   "Liane Moriarty",
-   "current"
-  ],
-  [
-   "The Munich Affair",
-   "James Patterson & David Ellis",
-   "current"
-  ],
-  [
-   "London Station",
-   "David McCloskey",
+   "Ransom",
+   "Daniel Silva",
    "current"
   ],
   [
@@ -118,23 +168,58 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
+   "Weddings",
+   "Danielle Steel",
+   "current"
+  ],
+  [
+   "London Station",
+   "David McCloskey",
+   "current"
+  ],
+  [
+   "East of Eden",
+   "John Steinbeck",
+   "current"
+  ],
+  [
+   "Blockers",
+   "Michael Lewis",
+   "current"
+  ],
+  [
+   "Adam and Eve",
+   "Jeffrey Archer",
+   "current"
+  ],
+  [
+   "The Way You Always Hold Me",
+   "Ava Miles",
+   "current"
+  ],
+  [
+   "Ruthless",
+   "Danielle Steel",
+   "current"
+  ],
+  [
+   "Music Against the Night",
+   "Yiyun Li",
+   "current"
+  ],
+  [
+   "Big Little Truths: Reese's Book Club",
+   "Liane Moriarty",
+   "current"
+  ],
+  [
    "The Pirate Queen",
    "Ariel Lawhon",
    "current"
   ],
   [
-   "Pretty Girls",
-   "Karin Slaughter",
-   "current"
-  ],
-  [
-   "Whistler",
-   "Ann Patchett",
-   "current"
-  ],
-  [
-   "The Love Hypothesis",
-   "Ali Hazelwood",
+   "Why Am I Like This?",
+   "Sabrina Zohar",
    "current"
   ],
   [
@@ -143,108 +228,18 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "Other Worlds Than These",
-   "Stephen King & Peter Straub",
+   "Mystery Play",
+   "Elizabeth Kostova",
    "current"
   ],
   [
-   "American Hagwon",
-   "Min Jin Lee",
+   "Whistler",
+   "Ann Patchett",
    "current"
   ],
   [
-   "Shiner",
-   "Amy Jo Burns",
-   "current"
-  ],
-  [
-   "The Believers (1)",
-   "Witness Lee",
-   "current"
-  ],
-  [
-   "Perfect",
-   "Judith McNaught",
-   "current"
-  ],
-  [
-   "The Rush",
-   "Nathaniel Philbrick",
-   "current"
-  ],
-  [
-   "A Fine and Bitter Snow",
-   "Dana Stabenow",
-   "current"
-  ],
-  [
-   "The Kitchen House",
-   "Kathleen Grissom",
-   "current"
-  ],
-  [
-   "Chronicles",
-   "Bob Dylan",
-   "current"
-  ],
-  [
-   "Swamp Shoot",
-   "Jana DeLeon",
-   "current"
-  ],
-  [
-   "Train Dreams",
-   "Denis Johnson",
-   "current"
-  ],
-  [
-   "Fourth Wing",
-   "Rebecca Yarros",
-   "current"
-  ],
-  [
-   "Iron Flame",
-   "Rebecca Yarros",
-   "current"
-  ],
-  [
-   "Today a Woman Went Mad in the Supermarket",
-   "Hilma Wolitzer",
-   "current"
-  ],
-  [
-   "World War Z",
-   "Max Brooks",
-   "current"
-  ],
-  [
-   "A Court of Thorns and Roses",
-   "Sarah J. Maas",
-   "current"
-  ],
-  [
-   "Carrie",
-   "Stephen King & Margaret Atwood",
-   "current"
-  ],
-  [
-   "Yesteryear: A GMA Book Club Pick",
-   "Caro Claire Burke",
-   "current"
-  ],
-  [
-   "The House of Morgan",
-   "Ron Chernow",
-   "current"
-  ],
-  [
-   "The Southern Book Club's Guide to Slaying Vampires",
-   "Grady Hendrix",
-   "current"
-  ],
-  [
-   "An Heir of His Own",
-   "Janice Maynard",
+   "Murder at the Grand Alpine Hotel",
+   "Lucy Foley & Agatha Christie",
    "current"
   ]
  ]
