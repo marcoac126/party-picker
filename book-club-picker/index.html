@@ -75,6 +75,7 @@
         </div>
         <details class="own-list" id="book-list-details">
           <summary>See the books on the wheel</summary>
+          <p class="disclosure" id="list-disclosure" hidden></p>
           <ul class="book-list" id="book-list"></ul>
         </details>
       </div>
@@ -197,7 +198,10 @@
       const main = document.createElement('p'); main.className = 'lyric'; main.textContent = title;
       result.append(label, main);
       if (author) { const a = document.createElement('p'); a.className = 'artist'; a.textContent = 'by ' + author; result.append(a); }
-      if (state.mode === 'book') result.append(L.bookLinks(title, author));
+      if (state.mode === 'book') {
+        result.append(L.bookLinks(title, author));
+        if (L.isAffiliate()) { const d = document.createElement('p'); d.className = 'disclosure'; d.textContent = L.disclosure(); result.append(d); }
+      }
       result.append(window.PartyShare.resultButton(wheel, (state.mode === 'host' ? 'hosts' : 'books'), 'Book club picks'));
       requestAnimationFrame(() => main.classList.add('sing'));
       const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -301,6 +305,7 @@
     const showDisc = !host && L.isAffiliate();
     $('disclosure').hidden = !showDisc;
     $('disclosure').textContent = showDisc ? L.disclosure() : '';
+    $('list-disclosure').hidden = !showDisc; $('list-disclosure').textContent = showDisc ? L.disclosure() : '';
     refresh();
   }
 

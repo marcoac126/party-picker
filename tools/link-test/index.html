@@ -22,10 +22,13 @@
 <main class="wrap prose">
   <h1>Store link test</h1>
   <p>Internal page (hidden from search). Tap each store for each book. Note any that show “no results” or the wrong book, and tell the team which store and which book.</p>
+  <p class="disclosure">Preview: Bookshop.org links on this page are affiliate links (ID 129730). We may earn a commission from Bookshop.org, whose fees support independent bookstores.</p>
   <div id="out"></div>
 </main>
 <script>window.PARTY_AFF_PREVIEW = { bookshop: '129730' }; // preview only on this hidden page</script>
 <script src="../../book-club-picker/isbns.js"></script>
+<script src="../../book-club-picker/books.js"></script>
+<script src="../../book-club-picker/current-books.js"></script>
 <script src="../../assets/links.js?v=20261013a"></script>
 <script>
 (function () {
@@ -42,6 +45,19 @@
   ];
   const NAMES = { goodreads: 'Goodreads', bookshop: 'Bookshop', librofm: 'Libro.fm', amazon: 'Amazon', audible: 'Audible', library: 'OverDrive' };
   const out = document.getElementById('out');
+  // Bookshop check: every book with an ISBN, numbered. Tap a sample; report any that open the wrong book or "not found".
+  const bs = document.createElement('section');
+  const h = document.createElement('h2'); h.textContent = 'Bookshop check (affiliate preview)'; bs.append(h);
+  const all = [...(window.CURRENT_BOOKS ? window.CURRENT_BOOKS.books : []), ...(window.BOOK_CLUB_BOOKS || [])];
+  const ol = document.createElement('ol'); let n = 0, none = [];
+  const seen = new Set();
+  all.forEach(([t, a]) => {
+    const k = L.bookKey(t, a); if (seen.has(k)) return; seen.add(k);
+    if (!L.isbnFor(t, a)) { none.push(`${t} – ${a}`); return; }
+    const li = document.createElement('li'); li.append(L.link('bookshop', t, a, `${t} – ${a}`)); ol.append(li); n++;
+  });
+  const p = document.createElement('p'); p.textContent = `${n} books link straight to the book. ${none.length} fall back to a search: ${none.join('; ')}.`;
+  bs.append(p, ol); out.append(bs);
   BOOKS.forEach(([t, a]) => {
     const h = document.createElement('h2'); h.textContent = `${t} – ${a}`; out.append(h);
     const table = document.createElement('table'); table.className = 't';

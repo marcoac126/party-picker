@@ -190,8 +190,8 @@
   function disclosure() {
     const parts = [];
     if (IDS.amazon) parts.push('As an Amazon Associate I earn from qualifying purchases.');
-    const others = ['bookshop', 'librofm'].filter((id) => STORES[id].aff()).map((id) => STORES[id].name);
-    if (others.length) parts.push(`We may earn a commission when you buy through ${others.join(' or ')} links, at no extra cost to you.`);
+    if (STORES.bookshop.aff()) parts.push('If you buy a book through a Bookshop.org link, we may earn a commission from Bookshop.org, whose fees support independent bookstores.');
+    if (STORES.librofm.aff()) parts.push('We may also earn a commission from Libro.fm links, at no extra cost to you.');
     return parts.join(' ');
   }
 
