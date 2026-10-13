@@ -42,22 +42,30 @@ function loadBooks() {
 function loadExisting() {
   try {
     const txt = readFileSync(OUT, 'utf8');
-    const m = txt.match(/window\.BOOK_ISBNS\s*=\s*(\{[\s\S]*\});/);
-    const obj = m ? JSON.parse(m[1]) : {};
-    return Object.fromEntries(Object.entries(obj).filter(([, v]) => /^97[89]\d{10}$/.test(v)));
-  } catch { return {}; }
+    const m = txt.match(/window\.BOOK_ISBNS\s*=\s*(\{[\s\S]*?\});/);
+    const x = txt.match(/window\.BOOK_ISBN_MISSES\s*=\s*(\{[\s\S]*?\});/);
+    const ok = m ? JSON.parse(m[1]) : {};
+    return {
+      isbns: Object.fromEntries(Object.entries(ok).filter(([, v]) => /^97[89]\d{10}$/.test(v))),
+      misses: x ? Object.fromEntries(Object.entries(JSON.parse(x[1])).filter(([, v]) => /^\d{4}-\d{2}-\d{2}$/.test(v))) : {}
+    };
+  } catch { return { isbns: {}, misses: {} }; }
 }
 
-function pick(items, want, wantLast) {
+const stats = { google: 0, openlibrary: 0, checks: 0, errors: {}, bookshop: {} };
+const err = (m) => { stats.errors[m] = (stats.errors[m] || 0) + 1; };
+
+// Candidate ISBNs (US/UK English groups 978-0 / 978-1) from matching titles by the same author.
+function candidates(items, want, wantLast) {
+  const out = [];
   for (const it of items) {
     const vt = norm(it.title || '');
     if (!vt || SKIP.test(`${it.title} ${it.subtitle || ''}`)) continue;
     if (!(vt === want || vt.startsWith(want + ' ') || want.startsWith(vt + ' '))) continue;
     if (!(it.authors || []).some((a) => norm(a).split(' ').includes(wantLast))) continue;
-    const isbn = (it.isbns || []).find((x) => /^97[89]\d{10}$/.test(x));
-    if (isbn) return isbn;
+    (it.isbns || []).forEach((x) => { if (/^97[89][01]\d{9}$/.test(x) && !out.includes(x)) out.push(x); });
   }
-  return null;
+  return out;
 }
 
 async function google(t, last) {
@@ -69,49 +77,87 @@ async function google(t, last) {
     isbns: (v.industryIdentifiers || []).filter((x) => x.type === 'ISBN_13').map((x) => x.identifier) }; });
 }
 
-// Backup source: Open Library (public, no key). Asks for English editions with ISBNs.
+// Backup source: Open Library (public, no key).
 async function openLibrary(t, last) {
-  const url = `https://openlibrary.org/search.json?title=${encodeURIComponent(t)}&author=${encodeURIComponent(last)}&limit=5&fields=title,subtitle,author_name,isbn,language`;
-  const res = await fetch(url, { headers: { accept: 'application/json', 'user-agent': 'ThePartyWheel/1.0 (hello@thepartywheel.com)' } });
+  const url = `https://openlibrary.org/search.json?title=${encodeURIComponent(t)}&author=${encodeURIComponent(last)}&limit=5&fields=title,subtitle,author_name,isbn`;
+  const res = await fetch(url, { headers: { accept: 'application/json', 'user-agent': UA } });
   if (!res.ok) throw new Error(`OpenLibrary HTTP ${res.status}`);
   const data = await res.json();
-  if (stats.sample === undefined) stats.sample = `${(data.docs || []).length} docs, first isbns ${((data.docs || [])[0]?.isbn || []).length}`;
-  // English-language ISBN groups are 978-0 and 978-1; prefer those.
-  return (data.docs || []).map((d) => ({ title: d.title, subtitle: d.subtitle, authors: d.author_name,
-    isbns: (d.isbn || []).filter((x) => /^97[89][01]\d{9}$/.test(x)).sort() }));
+  return (data.docs || []).map((d) => ({ title: d.title, subtitle: d.subtitle, authors: d.author_name, isbns: d.isbn || [] }));
 }
 
-const stats = { google: 0, openlibrary: 0, errors: {} };
+// Bookshop check: a normal (non-affiliate) Bookshop search for the ISBN. If Bookshop carries that edition,
+// the search lands on the book's page (/p/books/...). Polite: identified, slow, capped, and only if robots.txt allows /search.
+const UA = 'ThePartyWheel-linkcheck/1.0 (+https://thepartywheel.com; hello@thepartywheel.com)';
+const MAX_CHECKS = 300, CHECK_GAP = 1500, PER_BOOK = 6;
+async function bookshopAllows() {
+  try {
+    const res = await fetch('https://bookshop.org/robots.txt', { headers: { 'user-agent': UA } });
+    if (!res.ok) return true;
+    let applies = false, blocked = false;
+    for (const raw of (await res.text()).split('\n')) {
+      const line = raw.replace(/#.*/, '').trim(); const [k, ...rest] = line.split(':'); const v = rest.join(':').trim();
+      if (/^user-agent$/i.test(k)) applies = v === '*';
+      else if (applies && /^disallow$/i.test(k) && v && ('/search'.startsWith(v) || v.startsWith('/search'))) blocked = true;
+    }
+    return !blocked;
+  } catch { return true; }
+}
+async function onBookshop(isbn) {
+  if (stats.checks >= MAX_CHECKS) return null;
+  stats.checks++;
+  await sleep(CHECK_GAP);
+  try {
+    const res = await fetch(`https://bookshop.org/search?keywords=${isbn}`, { headers: { 'user-agent': UA }, redirect: 'follow' });
+    const tag = `${res.status}${/\/p\/books\//.test(res.url) ? ' book' : ''}`;
+    stats.bookshop[tag] = (stats.bookshop[tag] || 0) + 1;
+    return res.ok && /\/p\/books\//.test(res.url);
+  } catch (e) { err('Bookshop ' + e.message); return null; }
+}
+
 async function lookup(title, author) {
   const t = cleanTitle(title), last = lastName(author);
   const want = norm(t), wantLast = norm(last);
+  let cands = [];
   for (const [name, fn] of [['google', google], ['openlibrary', openLibrary]]) {
-    try {
-      const isbn = pick(await fn(t, last), want, wantLast);
-      if (isbn) { stats[name]++; return isbn; }
-    } catch (e) { stats.errors[e.message] = (stats.errors[e.message] || 0) + 1; }
+    try { const c = candidates(await fn(t, last), want, wantLast); if (c.length) stats[name]++; cands.push(...c.filter((x) => !cands.includes(x))); }
+    catch (e) { err(e.message); }
+  }
+  for (const isbn of cands.slice(0, PER_BOOK)) {
+    const ok = await onBookshop(isbn);
+    if (ok) return isbn;
+    if (ok === null) return undefined; // out of checks or network trouble: try again next run
   }
   return null;
 }
 
 const books = loadBooks();
-const isbns = loadExisting();
+const { isbns, misses } = loadExisting();
+const today = new Date().toISOString().slice(0, 10);
+const allowed = await bookshopAllows();
 let looked = 0, found = 0, missed = [];
-for (const [t, a] of books) {
-  const k = bookKey(t, a);
-  if (isbns[k] || looked >= MAX_LOOKUPS) continue;
-  looked++;
-  const isbn = await lookup(t, a);
-  if (isbn) { isbns[k] = isbn; found++; } else missed.push(`${t} – ${a}`);
-  await sleep(400);
+const RETRY_DAYS = 28;
+if (allowed) {
+  for (const [t, a] of books) {
+    const k = bookKey(t, a);
+    if (isbns[k] || looked >= MAX_LOOKUPS || stats.checks >= MAX_CHECKS) continue;
+    if (misses[k] && (Date.parse(today) - Date.parse(misses[k])) / 864e5 < RETRY_DAYS) continue;
+    looked++;
+    const isbn = await lookup(t, a);
+    if (isbn) { isbns[k] = isbn; found++; delete misses[k]; }
+    else if (isbn === null) { misses[k] = today; missed.push(`${t} – ${a}`); }
+    await sleep(400);
+  }
 }
 // Keep only keys for books still on the page, so the file doesn't grow forever.
 const live = new Set(books.map(([t, a]) => bookKey(t, a)));
-const kept = Object.fromEntries(Object.entries(isbns).filter(([k]) => live.has(k)).sort());
+const keep = (o) => Object.fromEntries(Object.entries(o).filter(([k]) => live.has(k)).sort());
+const kept = keep(isbns);
+const clean = (o) => JSON.stringify(o).replace(/[^\w :,{}"]/g, '');
 writeFileSync(OUT,
-  `// Generated by scripts/lookup-isbns.mjs (Google Books). Do not edit by hand.\n` +
-  `// Key: "<title without subtitle>|<author last name>" in lowercase. Value: ISBN-13.\n` +
-  `// Last run ${new Date().toISOString().slice(0, 10)}: looked up ${looked}, found ${found} (Google ${stats.google}, Open Library ${stats.openlibrary}), missing ${missed.length}. Sample: ${String(stats.sample || '').replace(/[^\w ,]/g, '')}. Errors: ${JSON.stringify(stats.errors).replace(/[^\w :,{}"]/g, '')}\n` +
-  `window.BOOK_ISBNS = ${JSON.stringify(kept, null, 1)};\n`);
-console.log(`Books: ${books.length}. Looked up: ${looked}. Found: ${found}. Total with ISBN: ${Object.keys(kept).length}.`);
-if (missed.length) console.log('No ISBN found for:\n  ' + missed.join('\n  '));
+  `// Generated by scripts/lookup-isbns.mjs. Do not edit by hand.\n` +
+  `// Key: "<title without subtitle>|<author last name>" in lowercase. Value: ISBN-13 confirmed to open a book page on Bookshop.org.\n` +
+  `// Last run ${today}: robots ${allowed ? 'ok' : 'disallow, skipped'}; looked up ${looked}, confirmed ${found}, missing ${missed.length}; Bookshop checks ${stats.checks} ${clean(stats.bookshop)}; sources Google ${stats.google}, Open Library ${stats.openlibrary}; errors ${clean(stats.errors)}\n` +
+  `window.BOOK_ISBNS = ${JSON.stringify(kept, null, 1)};\n` +
+  `window.BOOK_ISBN_MISSES = ${JSON.stringify(keep(misses))};\n`);
+console.log(`Books: ${books.length}. Looked up: ${looked}. Confirmed: ${found}. Total with ISBN: ${Object.keys(kept).length}.`);
