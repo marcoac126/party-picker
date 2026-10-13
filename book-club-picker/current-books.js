@@ -53,23 +53,23 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "The Law Student",
-   "John Grisham",
-   "current"
-  ],
-  [
    "Threshing Day",
    "Rebecca Yarros",
    "current"
   ],
   [
-   "D",
-   "Neal Stephenson",
+   "The Law Student",
+   "John Grisham",
    "current"
   ],
   [
    "The Calamity Club",
    "Kathryn Stockett",
+   "current"
+  ],
+  [
+   "D",
+   "Neal Stephenson",
    "current"
   ],
   [
@@ -83,13 +83,8 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "A Date with Santa",
-   "Debbie Macomber",
-   "current"
-  ],
-  [
-   "Ice Covered Heart",
-   "Cynthia Eden",
+   "Mad Mabel",
+   "Sally Hepworth",
    "current"
   ],
   [
@@ -98,8 +93,13 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "Mad Mabel",
-   "Sally Hepworth",
+   "Ice Covered Heart",
+   "Cynthia Eden",
+   "current"
+  ],
+  [
+   "A Date with Santa",
+   "Debbie Macomber",
    "current"
   ],
   [
@@ -108,13 +108,13 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "The End of Everything",
-   "M. John Harrison",
+   "Hollow Bones",
+   "Jodi Picoult",
    "current"
   ],
   [
-   "Vibe",
-   "Adam Grant",
+   "The End of Everything",
+   "M. John Harrison",
    "current"
   ],
   [
@@ -123,8 +123,8 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "Hollow Bones",
-   "Jodi Picoult",
+   "Vibe",
+   "Adam Grant",
    "current"
   ],
   [
@@ -133,13 +133,13 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "As You Wake, Break the Shell",
-   "Becky Chambers",
+   "Theo of Golden",
+   "Allen Levi",
    "current"
   ],
   [
-   "The Stones Cry Out",
-   "Dinesh D'Souza",
+   "As You Wake, Break the Shell",
+   "Becky Chambers",
    "current"
   ],
   [
@@ -148,13 +148,13 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "Theo of Golden",
-   "Allen Levi",
+   "The Stones Cry Out",
+   "Dinesh D'Souza",
    "current"
   ],
   [
-   "Ethel Kennedy",
-   "Kerry Kennedy",
+   "Weddings",
+   "Danielle Steel",
    "current"
   ],
   [
@@ -168,13 +168,8 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "Weddings",
-   "Danielle Steel",
-   "current"
-  ],
-  [
-   "London Station",
-   "David McCloskey",
+   "Ethel Kennedy",
+   "Kerry Kennedy",
    "current"
   ],
   [
@@ -188,13 +183,13 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "Adam and Eve",
-   "Jeffrey Archer",
+   "London Station",
+   "David McCloskey",
    "current"
   ],
   [
-   "The Way You Always Hold Me",
-   "Ava Miles",
+   "Adam and Eve",
+   "Jeffrey Archer",
    "current"
   ],
   [
@@ -203,8 +198,8 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "Music Against the Night",
-   "Yiyun Li",
+   "The Way You Always Hold Me",
+   "Ava Miles",
    "current"
   ],
   [
@@ -213,8 +208,23 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
+   "My Sister's Keeper",
+   "Jodi Picoult",
+   "current"
+  ],
+  [
+   "Music Against the Night",
+   "Yiyun Li",
+   "current"
+  ],
+  [
    "The Pirate Queen",
    "Ariel Lawhon",
+   "current"
+  ],
+  [
+   "Whistler",
+   "Ann Patchett",
    "current"
   ],
   [
@@ -223,18 +233,8 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "My Sister's Keeper",
-   "Jodi Picoult",
-   "current"
-  ],
-  [
    "Mystery Play",
    "Elizabeth Kostova",
-   "current"
-  ],
-  [
-   "Whistler",
-   "Ann Patchett",
    "current"
   ],
   [

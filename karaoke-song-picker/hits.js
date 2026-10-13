@@ -11,12 +11,12 @@ window.KARAOKE_HITS = {
    "KAROL G, Judeline & rusowsky"
   ],
   [
-   "Cold Shoulder",
-   "Drake, Don Toliver & Yebba"
-  ],
-  [
    "Last Thing You Need",
    "Morgan Wallen"
+  ],
+  [
+   "Cold Shoulder",
+   "Drake, Don Toliver & Yebba"
   ],
   [
    "Been By Now",
@@ -35,16 +35,16 @@ window.KARAOKE_HITS = {
    "Ella Langley & Morgan Wallen"
   ],
   [
-   "Broken Window Serenade",
-   "Whiskey Myers"
-  ],
-  [
    "Be Her",
    "Ella Langley"
   ],
   [
    "I'm The Problem",
    "Morgan Wallen"
+  ],
+  [
+   "Broken Window Serenade",
+   "Whiskey Myers"
   ],
   [
    "Don't We",
@@ -63,19 +63,27 @@ window.KARAOKE_HITS = {
    "Morgan Wallen"
   ],
   [
-   "Dope Girl",
-   "Rod Wave"
-  ],
-  [
    "Man I Need",
    "Olivia Dean"
   ],
   [
-   "Sweater Weather",
-   "The Neighbourhood"
+   "Dope Girl",
+   "Rod Wave"
   ],
   [
    "Thinkin’ Bout Me",
+   "Morgan Wallen"
+  ],
+  [
+   "Wasted On You",
+   "Morgan Wallen"
+  ],
+  [
+   "Boston",
+   "STELLA LEFTY"
+  ],
+  [
+   "Cowgirls (feat. ERNEST)",
    "Morgan Wallen"
   ]
  ]
