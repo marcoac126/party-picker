@@ -11,7 +11,7 @@ permissions:
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -19,10 +19,13 @@ jobs:
           node-version: '20'
       - run: node scripts/update-hits.mjs
       - run: node scripts/update-books.mjs
+      - run: node scripts/lookup-isbns.mjs
+        continue-on-error: true   # a lookup problem should never block the weekly lists
       - name: Commit if a list changed
         run: |
-          FILES="karaoke-song-picker/hits.js book-club-picker/current-books.js"
-          if git diff --quiet -- $FILES; then
+          FILES="karaoke-song-picker/hits.js book-club-picker/current-books.js book-club-picker/isbns.js"
+          touch book-club-picker/isbns.js
+          if git diff --quiet -- $FILES && [ -z "$(git ls-files --others --exclude-standard -- $FILES)" ]; then
             echo "No change."
             exit 0
           fi

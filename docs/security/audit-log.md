@@ -137,3 +137,35 @@ Sources: [Amazon Associates Program Policies, price display rule (summary)](http
 - Shared text never reaches HTML. Items go to textareas, `textContent`, and canvas `fillText`. `note()` returns one of two fixed sentences, so the `insertAdjacentHTML` calls still contain no user text. `land()` re-checks the index range, and pages only call it when the list length matches.
 - Outgoing share text ("The wheel landed on: …") goes only to the native share sheet or clipboard, as plain text.
 - No new third-party code. `CompressionStream` is built into the browser, and the decoder is our own code.
+
+## 2026-10-13 — Review: Bookshop.org affiliate links + Google Books ISBN lookup (not pushed)
+Scope: `scripts/lookup-isbns.mjs`, `.github/workflows/update-hits.yml`, `assets/links.js`, `book-club-picker/index.html`, `tools/link-test/index.html`, `affiliate-disclosure/index.html`, `privacy/index.html`. Code read only; nothing was run.
+
+**Verdict: the code is OK to push now with the Bookshop ID still blank. Don't fill in `IDS.bookshop` until items 1–3 are fixed in the same push.**
+
+**High (blocks switching Bookshop links on)**
+1. **Affiliate disclosure page will become false.** It says "None of our links earn us money yet." Once the ID is set, that's an untrue statement on a live page. Fix: replace "Right now" with a list of active programs (Bookshop.org, with date). Bookshop requires affiliates to disclose and suggests: "I am an affiliate of Bookshop.org and I will earn a commission if you click through and make a purchase." Also add movies and gift ideas to "book, game…" (open item from 2026-10-10). Update the date.
+
+**Medium (also fix before switching on)**
+2. **Disclosure is a scroll away from the Buy links on the book club page.** `#disclosure` sits at the bottom of the controls. The Buy link shows up in the result box under the wheel and in each book's Options panel, both well above it on a phone. The FTC wants the disclosure close to the link. Fix: add the disclosure line inside the result box when `L.isAffiliate()` is true, as the movie and gift pages already do. Also add it once above the book list (or inside each Options panel).
+3. **Privacy policy is out of date.** It says links "may become affiliate links in the future." Fix: say Bookshop.org links are affiliate links. The link carries our ID, not anything about the visitor. Bookshop may use its own cookies on bookshop.org to credit the sale, and we never learn who bought what. Add one line like the Apple sentence: "Book identifiers (ISBNs) come from Google Books, fetched on our side; your browser never contacts Google." Update the date.
+
+**Low**
+4. **Link-test page shows live affiliate links with no disclosure.** `/tools/link-test/` is noindex but public, and the preview switch makes its Bookshop links sponsored. Fix: add one line there, e.g. "Bookshop links on this page are affiliate links."
+5. **Bookshop account 2FA unknown.** That account will hold payout and tax details. Two-factor authentication (a second code at login) stops someone with a stolen password. Fix: Mark checks Bookshop's account settings and turns on 2FA if offered. If it isn't offered, use a unique password from a password manager. Note the result in third-parties.md.
+6. **`new Function` in the Actions script.** It runs a file as code in a job that can push to the repo. That's acceptable today: `books.js` is ours, and `current-books.js` is `JSON.stringify` output of cleaned Apple text, so feed text can't become code. Fix (hardening): read `current-books.js` with the same regex + `JSON.parse` approach `loadExisting()` uses. Keep `new Function` only for the hand-written `books.js`.
+7. **Possible wrong-book matches.** Prefix matching (`vt.startsWith(want + ' ')` and the reverse) plus an author last-name check can still pick a different book, or an edition Bookshop doesn't carry. A sponsored link to the wrong product hurts trust. Fix: tap-test the Bookshop column on the link-test page after the first run. Consider a small hand-kept override list for misses and mismatches.
+8. **Stale comment.** The `links.js` header still says link formats are "placeholders" except Amazon's. Fix: note that Bookshop's format is confirmed (/a/&lt;id&gt;/&lt;isbn&gt;) and Libro.fm's is Awin's documented format.
+
+**Passed**
+- Google Books data can't reach the page as code. Each ISBN is checked as digits only (`^97[89]\d{10}$`) three times: at lookup, when reloading the old file, and in the browser (`isbnFor`). Keys come from our own book data, not from Google. The file is written with `JSON.stringify`. The ISBN only goes into an `href` path, and link text uses `textContent`. Keys always contain `|`, so they can't hit built-in object properties.
+- Preview switch: it's only set by an inline script on the hidden test page. Nothing reads it from the URL or the hash. It only fills blank IDs, so it can't override a real one. Its `typeof === 'string'` check also blocks a page element with that id from being mistaken for a setting.
+- `rel` is correct. Bookshop links get `sponsored noopener` only when they actually carry our ID (ID set and ISBN known). Search fallbacks have no affiliate parameter and stay plain `noopener`. The old undocumented `&affiliate=` placeholder is gone.
+- Disclosure logic: `isAffiliate()` turns true as soon as `IDS.bookshop` is set (`aff()` doesn't depend on ISBNs), and `disclosure()` names Bookshop.org. If some links are plain searches, the page over-discloses, which is the safe direction.
+- No Bookshop widget or script. Links are plain `<a>` tags.
+- Workflow: the lookup step is `continue-on-error`, capped at 250 lookups with 400 ms pacing, uses no key or secret, and sends only title + author last name. Old results are kept, and entries for books no longer listed are pruned.
+- Google Books branding rules apply when Google content is displayed. We only store and use ISBNs (bare identifiers) and show no Google content, so they don't appear to apply. Re-check if we ever show covers or descriptions.
+- Google Books API added to `docs/security/third-parties.md`. Bookshop row updated with the confirmed link format.
+- Process: Bookshop approval and next steps are logged in `docs/decisions.md` (2026-10-13). Switching on still needs Mark's approval and a tap test.
+
+Sources: [Bookshop.org — affiliate disclosure requirement](https://support.bookshop.org/support/solutions/articles/65000168990-if-i-m-an-affiliate-do-i-have-to-disclose-that-on-my-website-newsletter-or-social-media-posts-); [FTC — Endorsement Guides: What People Are Asking](https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking); [Google Books API branding guidelines](https://developers.google.com/books/branding); [Google Books API Terms](https://developers.google.com/books/terms).
