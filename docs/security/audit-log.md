@@ -169,3 +169,9 @@ Scope: `scripts/lookup-isbns.mjs`, `.github/workflows/update-hits.yml`, `assets/
 - Process: Bookshop approval and next steps are logged in `docs/decisions.md` (2026-10-13). Switching on still needs Mark's approval and a tap test.
 
 Sources: [Bookshop.org — affiliate disclosure requirement](https://support.bookshop.org/support/solutions/articles/65000168990-if-i-m-an-affiliate-do-i-have-to-disclose-that-on-my-website-newsletter-or-social-media-posts-); [FTC — Endorsement Guides: What People Are Asking](https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking); [Google Books API branding guidelines](https://developers.google.com/books/branding); [Google Books API Terms](https://developers.google.com/books/terms).
+
+## 2026-10-13 — Incident: ISBN checker hit a disallowed Bookshop path
+- **What happened:** to confirm which ISBNs Bookshop carries, `scripts/lookup-isbns.mjs` was set to check each ISBN with a normal Bookshop search, only if robots.txt allowed `/search`. The first run correctly skipped (robots.txt disallows `/search`). A follow-up edit, made to log the robots rules, introduced an ordering bug that bypassed the disallow check. The next run made 300 search requests (1.5 s apart, identified user agent with our contact email). Bookshop refused all of them (HTTP 403). No data was collected and nothing was published.
+- **Fix:** Bookshop checking is now hard-disabled in the script (`allowed = false`), and the parser bug is fixed. Re-enabling requires a security review and a method Bookshop allows.
+- **Process lesson:** any automated request to a third-party site needs a test of its robots/permission check before it runs live, and edits to that check get re-reviewed.
+- **Status:** Bookshop affiliate links stay off. Coordinator to ask Bookshop (via Mark) for a supported way to link titles or search results.

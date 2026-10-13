@@ -98,8 +98,8 @@ async function bookshopAllows() {
     for (const raw of (await res.text()).split('\n')) {
       const line = raw.replace(/#.*/, '').trim(); const [k, ...rest] = line.split(':'); const v = rest.join(':').trim();
       if (/^user-agent$/i.test(k)) applies = v === '*';
-      else if (applies && /^(dis)?allow$/i.test(k) && v) stats.robots.push(`${k[0].toLowerCase()}:${v}`);
       else if (applies && /^disallow$/i.test(k) && v && ('/search'.startsWith(v) || v.startsWith('/search'))) blocked = true;
+      if (applies && /^(dis)?allow$/i.test(k) && v) stats.robots.push(`${k[0].toLowerCase()}:${v}`);
     }
     return !blocked;
   } catch { return true; }
@@ -135,7 +135,7 @@ async function lookup(title, author) {
 const books = loadBooks();
 const { isbns, misses } = loadExisting();
 const today = new Date().toISOString().slice(0, 10);
-const allowed = await bookshopAllows();
+const allowed = false; // Bookshop checks disabled 2026-10-13: robots.txt disallows /search, and a parsing bug let one run make 300 requests anyway (all refused). Do not re-enable without a security review.
 let looked = 0, found = 0, missed = [];
 const RETRY_DAYS = 28;
 if (allowed) {
