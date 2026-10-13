@@ -1,6 +1,6 @@
 // Generated weekly by scripts/update-hits.mjs from Apple Music's US top songs feed. Do not edit by hand.
 window.KARAOKE_HITS = {
- "updated": "2026-10-12",
+ "updated": "2026-10-13",
  "songs": [
   [
    "Choosin' Texas",
@@ -35,16 +35,16 @@ window.KARAOKE_HITS = {
    "Ella Langley & Morgan Wallen"
   ],
   [
+   "Broken Window Serenade",
+   "Whiskey Myers"
+  ],
+  [
    "Be Her",
    "Ella Langley"
   ],
   [
    "I'm The Problem",
    "Morgan Wallen"
-  ],
-  [
-   "Broken Window Serenade",
-   "Whiskey Myers"
   ],
   [
    "Don't We",
@@ -55,19 +55,11 @@ window.KARAOKE_HITS = {
    "Gunna"
   ],
   [
-   "Just In Case",
-   "Morgan Wallen"
-  ],
-  [
-   "Man I Need",
-   "Olivia Dean"
-  ],
-  [
    "Great Expectation",
    "SIENNA SPIRO"
   ],
   [
-   "Thinkin’ Bout Me",
+   "Just In Case",
    "Morgan Wallen"
   ],
   [
@@ -75,15 +67,15 @@ window.KARAOKE_HITS = {
    "Rod Wave"
   ],
   [
-   "Wasted On You",
-   "Morgan Wallen"
+   "Man I Need",
+   "Olivia Dean"
   ],
   [
-   "Boston",
-   "STELLA LEFTY"
+   "Sweater Weather",
+   "The Neighbourhood"
   ],
   [
-   "Cowgirls (feat. ERNEST)",
+   "Thinkin’ Bout Me",
    "Morgan Wallen"
   ]
  ]
