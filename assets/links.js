@@ -11,7 +11,7 @@
   // Preview switch for the hidden /tools/link-test/ page only: shows affiliate links before they go live.
   const PREVIEW = window.PARTY_AFF_PREVIEW || {};
   const IDS = {
-    bookshop: '', // Bookshop.org affiliate ID '129730' (10% on books). Approved 2026-10-13; switch on after security review + tap test
+    bookshop: '129730', // Bookshop.org affiliate ID (10% on books). Live 2026-10-14 after tap test + security re-check
     librofm: '',  // Set to 'awin' once Libro.fm approves us on Awin (10% audiobooks, 30% new memberships)
     amazon: ''    // Amazon Associates tag, e.g. 'thepartywheel-20' (4.5% books; also used for Audible)
   };
