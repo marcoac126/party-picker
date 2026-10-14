@@ -1,0 +1,32 @@
+name: Bookshop list prep (by hand)
+
+on:
+  workflow_dispatch:
+    inputs:
+      round:
+        description: 'Round (1 = best edition, 2 = next best for books not confirmed yet)'
+        default: '1'
+
+permissions:
+  contents: write
+
+jobs:
+  prep:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: node scripts/bookshop-candidates.mjs
+        env:
+          ROUND: ${{ github.event.inputs.round }}
+      - name: Commit candidate files
+        run: |
+          git config user.name "list-updater"
+          git config user.email "actions@users.noreply.github.com"
+          git add docs/bookshop
+          git diff --cached --quiet && exit 0
+          git commit -m "Bookshop list prep: candidate ISBNs"
+          git push
