@@ -1,0 +1,281 @@
+{
+ "round": 3,
+ "made": "2026-10-14",
+ "note": "Hand-picked standard US editions",
+ "picks": [
+  {
+   "title": "Lessons in Chemistry",
+   "author": "Bonnie Garmus",
+   "genre": "fiction",
+   "key": "lessons in chemistry|garmus",
+   "isbn": "9780385547345"
+  },
+  {
+   "title": "The Seven Husbands of Evelyn Hugo",
+   "author": "Taylor Jenkins Reid",
+   "genre": "fiction",
+   "key": "the seven husbands of evelyn hugo|reid",
+   "isbn": "9781501161933"
+  },
+  {
+   "title": "A Man Called Ove",
+   "author": "Fredrik Backman",
+   "genre": "fiction",
+   "key": "a man called ove|backman",
+   "isbn": "9781476738024"
+  },
+  {
+   "title": "Anxious People",
+   "author": "Fredrik Backman",
+   "genre": "fiction",
+   "key": "anxious people|backman",
+   "isbn": "9781501160844"
+  },
+  {
+   "title": "Little Fires Everywhere",
+   "author": "Celeste Ng",
+   "genre": "fiction",
+   "key": "little fires everywhere|ng",
+   "isbn": "9780735224315"
+  },
+  {
+   "title": "The Covenant of Water",
+   "author": "Abraham Verghese",
+   "genre": "fiction",
+   "key": "the covenant of water|verghese",
+   "isbn": "9780802162175"
+  },
+  {
+   "title": "The Women",
+   "author": "Kristin Hannah",
+   "genre": "fiction",
+   "key": "the women|hannah",
+   "isbn": "9781250178633"
+  },
+  {
+   "title": "The Kite Runner",
+   "author": "Khaled Hosseini",
+   "genre": "fiction",
+   "key": "the kite runner|hosseini",
+   "isbn": "9781594631931"
+  },
+  {
+   "title": "Olive Kitteridge",
+   "author": "Elizabeth Strout",
+   "genre": "fiction",
+   "key": "olive kitteridge|strout",
+   "isbn": "9780812971231"
+  },
+  {
+   "title": "Gone Girl",
+   "author": "Gillian Flynn",
+   "genre": "mystery",
+   "key": "gone girl|flynn",
+   "isbn": "9780307588371"
+  },
+  {
+   "title": "The Girl with the Dragon Tattoo",
+   "author": "Stieg Larsson",
+   "genre": "mystery",
+   "key": "the girl with the dragon tattoo|larsson",
+   "isbn": "9780307949486"
+  },
+  {
+   "title": "The Guest List",
+   "author": "Lucy Foley",
+   "genre": "mystery",
+   "key": "the guest list|foley",
+   "isbn": "9780062868930"
+  },
+  {
+   "title": "In the Woods",
+   "author": "Tana French",
+   "genre": "mystery",
+   "key": "in the woods|french",
+   "isbn": "9780143113492"
+  },
+  {
+   "title": "People We Meet on Vacation",
+   "author": "Emily Henry",
+   "genre": "romance",
+   "key": "people we meet on vacation|henry",
+   "isbn": "9781984806758"
+  },
+  {
+   "title": "The Hating Game",
+   "author": "Sally Thorne",
+   "genre": "romance",
+   "key": "the hating game|thorne",
+   "isbn": "9780062439598"
+  },
+  {
+   "title": "Outlander",
+   "author": "Diana Gabaldon",
+   "genre": "romance",
+   "key": "outlander|gabaldon",
+   "isbn": "9780440212560"
+  },
+  {
+   "title": "Me Before You",
+   "author": "Jojo Moyes",
+   "genre": "romance",
+   "key": "me before you|moyes",
+   "isbn": "9780143124542"
+  },
+  {
+   "title": "Station Eleven",
+   "author": "Emily St. John Mandel",
+   "genre": "scifi",
+   "key": "station eleven|mandel",
+   "isbn": "9780804172448"
+  },
+  {
+   "title": "Educated",
+   "author": "Tara Westover",
+   "genre": "nonfiction",
+   "key": "educated|westover",
+   "isbn": "9780399590528"
+  },
+  {
+   "title": "The Immortal Life of Henrietta Lacks",
+   "author": "Rebecca Skloot",
+   "genre": "nonfiction",
+   "key": "the immortal life of henrietta lacks|skloot",
+   "isbn": "9781400052189"
+  },
+  {
+   "title": "Atomic Habits",
+   "author": "James Clear",
+   "genre": "nonfiction",
+   "key": "atomic habits|clear",
+   "isbn": "9780735211292"
+  },
+  {
+   "title": "The Wager",
+   "author": "David Grann",
+   "genre": "nonfiction",
+   "key": "the wager|grann",
+   "isbn": "9780385534260"
+  },
+  {
+   "title": "The Boys in the Boat",
+   "author": "Daniel James Brown",
+   "genre": "nonfiction",
+   "key": "the boys in the boat|brown",
+   "isbn": "9780143125471"
+  },
+  {
+   "title": "Into Thin Air",
+   "author": "Jon Krakauer",
+   "genre": "nonfiction",
+   "key": "into thin air|krakauer",
+   "isbn": "9780385494786"
+  },
+  {
+   "title": "Pride and Prejudice",
+   "author": "Jane Austen",
+   "genre": "classics",
+   "key": "pride and prejudice|austen",
+   "isbn": "9780141439518"
+  },
+  {
+   "title": "Jane Eyre",
+   "author": "Charlotte Brontë",
+   "genre": "classics",
+   "key": "jane eyre|brontë",
+   "isbn": "9780141441146"
+  },
+  {
+   "title": "Wuthering Heights",
+   "author": "Emily Brontë",
+   "genre": "classics",
+   "key": "wuthering heights|brontë",
+   "isbn": "9780141439556"
+  },
+  {
+   "title": "The Great Gatsby",
+   "author": "F. Scott Fitzgerald",
+   "genre": "classics",
+   "key": "the great gatsby|fitzgerald",
+   "isbn": "9780743273565"
+  },
+  {
+   "title": "Frankenstein",
+   "author": "Mary Shelley",
+   "genre": "classics",
+   "key": "frankenstein|shelley",
+   "isbn": "9780141439471"
+  },
+  {
+   "title": "1984",
+   "author": "George Orwell",
+   "genre": "classics",
+   "key": "1984|orwell",
+   "isbn": "9780451524935"
+  },
+  {
+   "title": "Little Women",
+   "author": "Louisa May Alcott",
+   "genre": "classics",
+   "key": "little women|alcott",
+   "isbn": "9780143106654"
+  },
+  {
+   "title": "The Picture of Dorian Gray",
+   "author": "Oscar Wilde",
+   "genre": "classics",
+   "key": "the picture of dorian gray|wilde",
+   "isbn": "9780141439570"
+  },
+  {
+   "title": "The Handmaid’s Tale",
+   "author": "Margaret Atwood",
+   "genre": "challenged",
+   "key": "the handmaid's tale|atwood",
+   "isbn": "9780385490818"
+  },
+  {
+   "title": "Brave New World",
+   "author": "Aldous Huxley",
+   "genre": "challenged",
+   "key": "brave new world|huxley",
+   "isbn": "9780060850524"
+  },
+  {
+   "title": "The Absolutely True Diary of a Part-Time Indian",
+   "author": "Sherman Alexie",
+   "genre": "challenged",
+   "key": "the absolutely true diary of a part-time indian|alexie",
+   "isbn": "9780316013697"
+  },
+  {
+   "title": "All Boys Aren’t Blue",
+   "author": "George M. Johnson",
+   "genre": "challenged",
+   "key": "all boys aren't blue|johnson",
+   "isbn": "9780374312718"
+  },
+  {
+   "title": "Slaughterhouse-Five",
+   "author": "Kurt Vonnegut",
+   "genre": "challenged",
+   "key": "slaughterhouse-five|vonnegut",
+   "isbn": "9780385333849"
+  },
+  {
+   "title": "The Kite Runner",
+   "author": "Khaled Hosseini",
+   "genre": "challenged",
+   "key": "the kite runner|hosseini",
+   "isbn": "9781594631931"
+  },
+  {
+   "title": "1984",
+   "author": "George Orwell",
+   "genre": "challenged",
+   "key": "1984|orwell",
+   "isbn": "9780451524935"
+  }
+ ],
+ "missing": []
+}
