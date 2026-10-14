@@ -1,0 +1,809 @@
+{
+ "round": 2,
+ "made": "2026-10-14",
+ "files": [
+  "batch2-contemporary-fiction.csv (12)",
+  "batch2-mystery-thriller.csv (10)",
+  "batch2-romance.csv (11)",
+  "batch2-scifi-fantasy.csv (13)",
+  "batch2-nonfiction.csv (13)",
+  "batch2-classics.csv (14)",
+  "batch2-frequently-challenged.csv (20)"
+ ],
+ "picks": [
+  {
+   "title": "Tomorrow, and Tomorrow, and Tomorrow",
+   "author": "Gabrielle Zevin",
+   "genre": "fiction",
+   "key": "tomorrow and tomorrow and tomorrow|zevin",
+   "isbn": "9780593321201",
+   "year": 2022
+  },
+  {
+   "title": "The Seven Husbands of Evelyn Hugo",
+   "author": "Taylor Jenkins Reid",
+   "genre": "fiction",
+   "key": "the seven husbands of evelyn hugo|reid",
+   "isbn": "9781761102943",
+   "year": 0
+  },
+  {
+   "title": "Where the Crawdads Sing",
+   "author": "Delia Owens",
+   "genre": "fiction",
+   "key": "where the crawdads sing|owens",
+   "isbn": "9780593540480",
+   "year": 2022
+  },
+  {
+   "title": "Anxious People",
+   "author": "Fredrik Backman",
+   "genre": "fiction",
+   "key": "anxious people|backman",
+   "isbn": "9781432889807",
+   "year": 2021
+  },
+  {
+   "title": "Little Fires Everywhere",
+   "author": "Celeste Ng",
+   "genre": "fiction",
+   "key": "little fires everywhere|ng",
+   "isbn": "9780525505556",
+   "year": 2018
+  },
+  {
+   "title": "James",
+   "author": "Percival Everett",
+   "genre": "fiction",
+   "key": "james|everett",
+   "isbn": "9780593862735",
+   "year": 2024
+  },
+  {
+   "title": "Small Things Like These",
+   "author": "Claire Keegan",
+   "genre": "fiction",
+   "key": "small things like these|keegan",
+   "isbn": "9780802158741",
+   "year": 2021
+  },
+  {
+   "title": "Homegoing",
+   "author": "Yaa Gyasi",
+   "genre": "fiction",
+   "key": "homegoing|gyasi",
+   "isbn": "9781101971062",
+   "year": 2017
+  },
+  {
+   "title": "The Kite Runner",
+   "author": "Khaled Hosseini",
+   "genre": "fiction",
+   "key": "the kite runner|hosseini",
+   "isbn": "9781594632204",
+   "year": 2014
+  },
+  {
+   "title": "The Book Thief",
+   "author": "Markus Zusak",
+   "genre": "fiction",
+   "key": "the book thief|zusak",
+   "isbn": "9781101934180",
+   "year": 2016
+  },
+  {
+   "title": "Normal People",
+   "author": "Sally Rooney",
+   "genre": "fiction",
+   "key": "normal people|rooney",
+   "isbn": "9780593168202",
+   "year": 2019
+  },
+  {
+   "title": "Olive Kitteridge",
+   "author": "Elizabeth Strout",
+   "genre": "fiction",
+   "key": "olive kitteridge|strout",
+   "isbn": "9780743467728",
+   "year": 2008
+  },
+  {
+   "title": "Gone Girl",
+   "author": "Gillian Flynn",
+   "genre": "mystery",
+   "key": "gone girl|flynn",
+   "isbn": "9781524763671",
+   "year": 2018
+  },
+  {
+   "title": "The Silent Patient",
+   "author": "Alex Michaelides",
+   "genre": "mystery",
+   "key": "the silent patient|michaelides",
+   "isbn": "9781250301703",
+   "year": 2021
+  },
+  {
+   "title": "Big Little Lies",
+   "author": "Liane Moriarty",
+   "genre": "mystery",
+   "key": "big little lies|moriarty",
+   "isbn": "9780399587191",
+   "year": 2017
+  },
+  {
+   "title": "The Thursday Murder Club",
+   "author": "Richard Osman",
+   "genre": "mystery",
+   "key": "the thursday murder club|osman",
+   "isbn": "9780593513033",
+   "year": 2025
+  },
+  {
+   "title": "In the Woods",
+   "author": "Tana French",
+   "genre": "mystery",
+   "key": "in the woods|french",
+   "isbn": "9780143134824",
+   "year": 2019
+  },
+  {
+   "title": "The Last Thing He Told Me",
+   "author": "Laura Dave",
+   "genre": "mystery",
+   "key": "the last thing he told me|dave",
+   "isbn": "9781501171345",
+   "year": 2021
+  },
+  {
+   "title": "Verity",
+   "author": "Colleen Hoover",
+   "genre": "mystery",
+   "key": "verity|hoover",
+   "isbn": "9781538724736",
+   "year": 2021
+  },
+  {
+   "title": "And Then There Were None",
+   "author": "Agatha Christie",
+   "genre": "mystery",
+   "key": "and then there were none|christie",
+   "isbn": "9780062325549",
+   "year": 2021
+  },
+  {
+   "title": "The Housemaid",
+   "author": "Freida McFadden",
+   "genre": "mystery",
+   "key": "the housemaid|mcfadden",
+   "isbn": "9781538742570",
+   "year": 2022
+  },
+  {
+   "title": "Magpie Murders",
+   "author": "Anthony Horowitz",
+   "genre": "mystery",
+   "key": "magpie murders|horowitz",
+   "isbn": "9780063036673",
+   "year": 2020
+  },
+  {
+   "title": "Beach Read",
+   "author": "Emily Henry",
+   "genre": "romance",
+   "key": "beach read|henry",
+   "isbn": "9780593336120",
+   "year": 2021
+  },
+  {
+   "title": "Book Lovers",
+   "author": "Emily Henry",
+   "genre": "romance",
+   "key": "book lovers|henry",
+   "isbn": "9780593440872",
+   "year": 2022
+  },
+  {
+   "title": "People We Meet on Vacation",
+   "author": "Emily Henry",
+   "genre": "romance",
+   "key": "people we meet on vacation|henry",
+   "isbn": "9780241992234",
+   "year": 2021
+  },
+  {
+   "title": "Funny Story",
+   "author": "Emily Henry",
+   "genre": "romance",
+   "key": "funny story|henry",
+   "isbn": "9780593441282",
+   "year": 2024
+  },
+  {
+   "title": "The Love Hypothesis",
+   "author": "Ali Hazelwood",
+   "genre": "romance",
+   "key": "the love hypothesis|hazelwood",
+   "isbn": "9780593336823",
+   "year": 2021
+  },
+  {
+   "title": "Red, White & Royal Blue",
+   "author": "Casey McQuiston",
+   "genre": "romance",
+   "key": "red white royal blue|mcquiston",
+   "isbn": "9781250316776",
+   "year": 2019
+  },
+  {
+   "title": "The Hating Game",
+   "author": "Sally Thorne",
+   "genre": "romance",
+   "key": "the hating game|thorne",
+   "isbn": "9780349414263",
+   "year": 2017
+  },
+  {
+   "title": "Outlander",
+   "author": "Diana Gabaldon",
+   "genre": "romance",
+   "key": "outlander|gabaldon",
+   "isbn": "9781400026579",
+   "year": 2014
+  },
+  {
+   "title": "The Flatshare",
+   "author": "Beth O’Leary",
+   "genre": "romance",
+   "key": "the flatshare|o'leary",
+   "isbn": "9781250295651",
+   "year": 2021
+  },
+  {
+   "title": "Me Before You",
+   "author": "Jojo Moyes",
+   "genre": "romance",
+   "key": "me before you|moyes",
+   "isbn": "9780143109464",
+   "year": 2016
+  },
+  {
+   "title": "It Ends with Us",
+   "author": "Colleen Hoover",
+   "genre": "romance",
+   "key": "it ends with us|hoover",
+   "isbn": "9781432899790",
+   "year": 2022
+  },
+  {
+   "title": "Project Hail Mary",
+   "author": "Andy Weir",
+   "genre": "scifi",
+   "key": "project hail mary|weir",
+   "isbn": "9780593135228",
+   "year": 2022
+  },
+  {
+   "title": "The Martian",
+   "author": "Andy Weir",
+   "genre": "scifi",
+   "key": "the martian|weir",
+   "isbn": "9780593357132",
+   "year": 2021
+  },
+  {
+   "title": "Circe",
+   "author": "Madeline Miller",
+   "genre": "scifi",
+   "key": "circe|miller",
+   "isbn": "9780316556323",
+   "year": 2020
+  },
+  {
+   "title": "The Song of Achilles",
+   "author": "Madeline Miller",
+   "genre": "scifi",
+   "key": "the song of achilles|miller",
+   "isbn": "9780062060617",
+   "year": 2024
+  },
+  {
+   "title": "Fourth Wing",
+   "author": "Rebecca Yarros",
+   "genre": "scifi",
+   "key": "fourth wing|yarros",
+   "isbn": "9781649377371",
+   "year": 2024
+  },
+  {
+   "title": "The Night Circus",
+   "author": "Erin Morgenstern",
+   "genre": "scifi",
+   "key": "the night circus|morgenstern",
+   "isbn": "9780385534635",
+   "year": 2011
+  },
+  {
+   "title": "Klara and the Sun",
+   "author": "Kazuo Ishiguro",
+   "genre": "scifi",
+   "key": "klara and the sun|ishiguro",
+   "isbn": "9780593396568",
+   "year": 2021
+  },
+  {
+   "title": "Station Eleven",
+   "author": "Emily St. John Mandel",
+   "genre": "scifi",
+   "key": "station eleven|mandel",
+   "isbn": "9781443434874",
+   "year": 2017
+  },
+  {
+   "title": "The House in the Cerulean Sea",
+   "author": "TJ Klune",
+   "genre": "scifi",
+   "key": "the house in the cerulean sea|klune",
+   "isbn": "9781250217318",
+   "year": 2021
+  },
+  {
+   "title": "Dune",
+   "author": "Frank Herbert",
+   "genre": "scifi",
+   "key": "dune|herbert",
+   "isbn": "9780593438374",
+   "year": 2021
+  },
+  {
+   "title": "The Invisible Life of Addie LaRue",
+   "author": "V.E. Schwab",
+   "genre": "scifi",
+   "key": "the invisible life of addie larue|schwab",
+   "isbn": "9781250830746",
+   "year": 2021
+  },
+  {
+   "title": "A Court of Thorns and Roses",
+   "author": "Sarah J. Maas",
+   "genre": "scifi",
+   "key": "a court of thorns and roses|maas",
+   "isbn": "9781635575569",
+   "year": 2020
+  },
+  {
+   "title": "The Hobbit",
+   "author": "J.R.R. Tolkien",
+   "genre": "scifi",
+   "key": "the hobbit|tolkien",
+   "isbn": "9780618260300",
+   "year": 2021
+  },
+  {
+   "title": "Educated",
+   "author": "Tara Westover",
+   "genre": "nonfiction",
+   "key": "educated|westover",
+   "isbn": "9781443452489",
+   "year": 2018
+  },
+  {
+   "title": "Becoming",
+   "author": "Michelle Obama",
+   "genre": "nonfiction",
+   "key": "becoming|obama",
+   "isbn": "9781524763145",
+   "year": 2021
+  },
+  {
+   "title": "Born a Crime",
+   "author": "Trevor Noah",
+   "genre": "nonfiction",
+   "key": "born a crime|noah",
+   "isbn": "9780399588198",
+   "year": 2019
+  },
+  {
+   "title": "The Immortal Life of Henrietta Lacks",
+   "author": "Rebecca Skloot",
+   "genre": "nonfiction",
+   "key": "the immortal life of henrietta lacks|skloot",
+   "isbn": "9780804190107",
+   "year": 2017
+  },
+  {
+   "title": "Sapiens",
+   "author": "Yuval Noah Harari",
+   "genre": "nonfiction",
+   "key": "sapiens|harari",
+   "isbn": "9780063212237",
+   "year": 2021
+  },
+  {
+   "title": "Atomic Habits",
+   "author": "James Clear",
+   "genre": "nonfiction",
+   "key": "atomic habits|clear",
+   "isbn": "9780593189641",
+   "year": 2019
+  },
+  {
+   "title": "Killers of the Flower Moon",
+   "author": "David Grann",
+   "genre": "nonfiction",
+   "key": "killers of the flower moon|grann",
+   "isbn": "9780593377376",
+   "year": 2022
+  },
+  {
+   "title": "The Boys in the Boat",
+   "author": "Daniel James Brown",
+   "genre": "nonfiction",
+   "key": "the boys in the boat|brown",
+   "isbn": "9780143136965",
+   "year": 2021
+  },
+  {
+   "title": "Braiding Sweetgrass",
+   "author": "Robin Wall Kimmerer",
+   "genre": "nonfiction",
+   "key": "braiding sweetgrass|kimmerer",
+   "isbn": "9781571311771",
+   "year": 2020
+  },
+  {
+   "title": "Quiet",
+   "author": "Susan Cain",
+   "genre": "nonfiction",
+   "key": "quiet|cain",
+   "isbn": "9780307352156",
+   "year": 2013
+  },
+  {
+   "title": "Crying in H Mart",
+   "author": "Michelle Zauner",
+   "genre": "nonfiction",
+   "key": "crying in h mart|zauner",
+   "isbn": "9780593396599",
+   "year": 2021
+  },
+  {
+   "title": "Unbroken",
+   "author": "Laura Hillenbrand",
+   "genre": "nonfiction",
+   "key": "unbroken|hillenbrand",
+   "isbn": "9780812987119",
+   "year": 2014
+  },
+  {
+   "title": "Into Thin Air",
+   "author": "Jon Krakauer",
+   "genre": "nonfiction",
+   "key": "into thin air|krakauer",
+   "isbn": "9780307475251",
+   "year": 2009
+  },
+  {
+   "title": "Pride and Prejudice",
+   "author": "Jane Austen",
+   "genre": "classics",
+   "key": "pride and prejudice|austen",
+   "isbn": "9781093718157",
+   "year": 2019
+  },
+  {
+   "title": "Jane Eyre",
+   "author": "Charlotte Brontë",
+   "genre": "classics",
+   "key": "jane eyre|brontë",
+   "isbn": "9781462796670",
+   "year": 2021
+  },
+  {
+   "title": "Wuthering Heights",
+   "author": "Emily Brontë",
+   "genre": "classics",
+   "key": "wuthering heights|brontë",
+   "isbn": "9781420951288",
+   "year": 2018
+  },
+  {
+   "title": "The Great Gatsby",
+   "author": "F. Scott Fitzgerald",
+   "genre": "classics",
+   "key": "the great gatsby|fitzgerald",
+   "isbn": "9781716075735",
+   "year": 2021
+  },
+  {
+   "title": "To Kill a Mockingbird",
+   "author": "Harper Lee",
+   "genre": "classics",
+   "key": "to kill a mockingbird|lee",
+   "isbn": "9780062877796",
+   "year": 2019
+  },
+  {
+   "title": "Rebecca",
+   "author": "Daphne du Maurier",
+   "genre": "classics",
+   "key": "rebecca|maurier",
+   "isbn": "9780063084759",
+   "year": 2020
+  },
+  {
+   "title": "Frankenstein",
+   "author": "Mary Shelley",
+   "genre": "classics",
+   "key": "frankenstein|shelley",
+   "isbn": "9781542996655",
+   "year": 2017
+  },
+  {
+   "title": "1984",
+   "author": "George Orwell",
+   "genre": "classics",
+   "key": "1984|orwell",
+   "isbn": "9780582777316",
+   "year": 2003
+  },
+  {
+   "title": "Little Women",
+   "author": "Louisa May Alcott",
+   "genre": "classics",
+   "key": "little women|alcott",
+   "isbn": "9781405468169",
+   "year": 2006
+  },
+  {
+   "title": "Beloved",
+   "author": "Toni Morrison",
+   "genre": "classics",
+   "key": "beloved|morrison",
+   "isbn": "9781400033416",
+   "year": 2025
+  },
+  {
+   "title": "Their Eyes Were Watching God",
+   "author": "Zora Neale Hurston",
+   "genre": "classics",
+   "key": "their eyes were watching god|hurston",
+   "isbn": "9780063068537",
+   "year": 2021
+  },
+  {
+   "title": "East of Eden",
+   "author": "John Steinbeck",
+   "genre": "classics",
+   "key": "east of eden|steinbeck",
+   "isbn": "9780143129486",
+   "year": 2016
+  },
+  {
+   "title": "Of Mice and Men",
+   "author": "John Steinbeck",
+   "genre": "classics",
+   "key": "of mice and men|steinbeck",
+   "isbn": "9780142000670",
+   "year": 2002
+  },
+  {
+   "title": "Fahrenheit 451",
+   "author": "Ray Bradbury",
+   "genre": "classics",
+   "key": "fahrenheit 451|bradbury",
+   "isbn": "9781451673319",
+   "year": 2013
+  },
+  {
+   "title": "The Bluest Eye",
+   "author": "Toni Morrison",
+   "genre": "challenged",
+   "key": "the bluest eye|morrison",
+   "isbn": "9780307278449",
+   "year": 2007
+  },
+  {
+   "title": "Beloved",
+   "author": "Toni Morrison",
+   "genre": "challenged",
+   "key": "beloved|morrison",
+   "isbn": "9781400033416",
+   "year": 2025
+  },
+  {
+   "title": "The Handmaid’s Tale",
+   "author": "Margaret Atwood",
+   "genre": "challenged",
+   "key": "the handmaid's tale|atwood",
+   "isbn": "9781432838485",
+   "year": 2017
+  },
+  {
+   "title": "The Hate U Give",
+   "author": "Angie Thomas",
+   "genre": "challenged",
+   "key": "the hate u give|thomas",
+   "isbn": "9780062498540",
+   "year": 2022
+  },
+  {
+   "title": "The Perks of Being a Wallflower",
+   "author": "Stephen Chbosky",
+   "genre": "challenged",
+   "key": "the perks of being a wallflower|chbosky",
+   "isbn": "9781451696196",
+   "year": 2012
+  },
+  {
+   "title": "The Color Purple",
+   "author": "Alice Walker",
+   "genre": "challenged",
+   "key": "the color purple|walker",
+   "isbn": "9780143137047",
+   "year": 2022
+  },
+  {
+   "title": "Brave New World",
+   "author": "Aldous Huxley",
+   "genre": "challenged",
+   "key": "brave new world|huxley",
+   "isbn": "9781444474794",
+   "year": 2022
+  },
+  {
+   "title": "The Absolutely True Diary of a Part-Time Indian",
+   "author": "Sherman Alexie",
+   "genre": "challenged",
+   "key": "the absolutely true diary of a part-time indian|alexie",
+   "isbn": "9780545274531",
+   "year": 2007
+  },
+  {
+   "title": "Looking for Alaska",
+   "author": "John Green",
+   "genre": "challenged",
+   "key": "looking for alaska|green",
+   "isbn": "9780525555711",
+   "year": 2018
+  },
+  {
+   "title": "The Catcher in the Rye",
+   "author": "J.D. Salinger",
+   "genre": "challenged",
+   "key": "the catcher in the rye|salinger",
+   "isbn": "9780316540032",
+   "year": 2019
+  },
+  {
+   "title": "Gender Queer",
+   "author": "Maia Kobabe",
+   "genre": "challenged",
+   "key": "gender queer|kobabe",
+   "isbn": "9781637150726",
+   "year": 2022
+  },
+  {
+   "title": "All Boys Aren’t Blue",
+   "author": "George M. Johnson",
+   "genre": "challenged",
+   "key": "all boys aren't blue|johnson",
+   "isbn": "9780241515037",
+   "year": 2021
+  },
+  {
+   "title": "Lawn Boy",
+   "author": "Jonathan Evison",
+   "genre": "challenged",
+   "key": "lawn boy|evison",
+   "isbn": "9781616209230",
+   "year": 2019
+  },
+  {
+   "title": "Slaughterhouse-Five",
+   "author": "Kurt Vonnegut",
+   "genre": "challenged",
+   "key": "slaughterhouse-five|vonnegut",
+   "isbn": "9780385364133",
+   "year": 2012
+  },
+  {
+   "title": "Maus",
+   "author": "Art Spiegelman",
+   "genre": "challenged",
+   "key": "maus|spiegelman",
+   "isbn": "9780679406419",
+   "year": 1996
+  },
+  {
+   "title": "Speak",
+   "author": "Laurie Halse Anderson",
+   "genre": "challenged",
+   "key": "speak|anderson",
+   "isbn": "9781250895967",
+   "year": 2023
+  },
+  {
+   "title": "The Kite Runner",
+   "author": "Khaled Hosseini",
+   "genre": "challenged",
+   "key": "the kite runner|hosseini",
+   "isbn": "9781594632204",
+   "year": 2014
+  },
+  {
+   "title": "To Kill a Mockingbird",
+   "author": "Harper Lee",
+   "genre": "challenged",
+   "key": "to kill a mockingbird|lee",
+   "isbn": "9780062877796",
+   "year": 2019
+  },
+  {
+   "title": "Of Mice and Men",
+   "author": "John Steinbeck",
+   "genre": "challenged",
+   "key": "of mice and men|steinbeck",
+   "isbn": "9780142000670",
+   "year": 2002
+  },
+  {
+   "title": "1984",
+   "author": "George Orwell",
+   "genre": "challenged",
+   "key": "1984|orwell",
+   "isbn": "9780582777316",
+   "year": 2003
+  }
+ ],
+ "missing": [
+  {
+   "title": "Lessons in Chemistry",
+   "author": "Bonnie Garmus",
+   "genre": "fiction",
+   "key": "lessons in chemistry|garmus"
+  },
+  {
+   "title": "A Man Called Ove",
+   "author": "Fredrik Backman",
+   "genre": "fiction",
+   "key": "a man called ove|backman"
+  },
+  {
+   "title": "The Covenant of Water",
+   "author": "Abraham Verghese",
+   "genre": "fiction",
+   "key": "the covenant of water|verghese"
+  },
+  {
+   "title": "The Women",
+   "author": "Kristin Hannah",
+   "genre": "fiction",
+   "key": "the women|hannah"
+  },
+  {
+   "title": "The Girl with the Dragon Tattoo",
+   "author": "Stieg Larsson",
+   "genre": "mystery",
+   "key": "the girl with the dragon tattoo|larsson"
+  },
+  {
+   "title": "The Guest List",
+   "author": "Lucy Foley",
+   "genre": "mystery",
+   "key": "the guest list|foley"
+  },
+  {
+   "title": "The Wager",
+   "author": "David Grann",
+   "genre": "nonfiction",
+   "key": "the wager|grann"
+  },
+  {
+   "title": "The Picture of Dorian Gray",
+   "author": "Oscar Wilde",
+   "genre": "classics",
+   "key": "the picture of dorian gray|wilde"
+  }
+ ]
+}
