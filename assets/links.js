@@ -93,9 +93,10 @@
       url: (t) => `https://www.overdrive.com/search?q=${q(t)}`, aff: () => false } // OverDrive (Libby). WorldCat rate-limited visitors (2026-10-09)
   };
 
-  // UX rule: three visible choices labelled by task, the rest under "More".
-  const PRIMARY = [['goodreads', 'Read reviews on Goodreads'], ['bookshop', 'Buy at Bookshop.org'], ['librofm', 'Listen on Libro.fm']];
-  const MORE = [['amazon', 'Amazon'], ['audible', 'Audible'], ['library', 'Find at your library']];
+  // Visible choices labelled by task, the rest under "More". Book links show four (library added 2026-10-14:
+  // "every pick links to your library, indie bookstores, Kindle, and Audible"); Amazon and Audible stay last, under More.
+  const PRIMARY = [['goodreads', 'Read reviews on Goodreads'], ['bookshop', 'Buy at Bookshop.org'], ['library', 'Find at your library'], ['librofm', 'Listen on Libro.fm']];
+  const MORE = [['amazon', 'Amazon'], ['audible', 'Audible']];
 
   function link(storeId, title, author, text) {
     const s = STORES[storeId];
