@@ -175,3 +175,8 @@ Sources: [Bookshop.org — affiliate disclosure requirement](https://support.boo
 - **Fix:** Bookshop checking is now hard-disabled in the script (`allowed = false`), and the parser bug is fixed. Re-enabling requires a security review and a method Bookshop allows.
 - **Process lesson:** any automated request to a third-party site needs a test of its robots/permission check before it runs live, and edits to that check get re-reviewed.
 - **Status:** Bookshop affiliate links stay off. Coordinator to ask Bookshop (via Mark) for a supported way to link titles or search results.
+
+## 2026-10-14 — Re-check before Bookshop links go live
+- **Scope:** `assets/links.js` (ID set), book club page, affiliate disclosure, privacy policy.
+- **Checked:** affiliate links carry only our ID and the ISBN, nothing about the visitor; marked `rel="sponsored noopener"`; disclosure shows above the book list and in the result card; no third-party script (Bookshop widget not used); page makes no outside requests on load; privacy wording matches how ISBNs were actually found (public catalogs + Bookshop list upload); automated Bookshop checks remain disabled.
+- **Result:** pass, no findings. Mark tap-tested links on his phone.
