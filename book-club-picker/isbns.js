@@ -2,5 +2,16 @@
 // Key: "<title without subtitle>|<author last name>" in lowercase. Value: ISBN-13 confirmed to open a book page on Bookshop.org.
 // Last run 2026-10-13: robots ok; looked up 54, confirmed 0, missing 53; Bookshop checks 300 {"403":300}; sources Google 0, Open Library 51; errors {"Google HTTP 429":54}
 // Bookshop robots (*): d:/search d:/beta-search d:/mini d:/admin d:/checkout d:/checkout-v3 d:/cart d:/orders d:/user d:/account d:/password d:/wishlists d:/wished_products d:/affiliates a:/affiliates/profile/introduction
-window.BOOK_ISBNS = {};
+window.BOOK_ISBNS = {
+ "all the light we cannot see|doerr": "9781501173219",
+ "daisy jones the six|reid": "9781984892256",
+ "demon copperhead|kingsolver": "9780063251984",
+ "hello beautiful|napolitano": "9780593597262",
+ "pachinko|lee": "9781455563920",
+ "remarkably bright creatures|pelt": "9780063254480",
+ "the heaven earth grocery store|mcbride": "9780593422953",
+ "the midnight library|haig": "9780525559498",
+ "the nightingale|hannah": "9781509898411",
+ "the vanishing half|bennett": "9780525536963"
+};
 window.BOOK_ISBN_MISSES = {"a man called ove|backman":"2026-10-13","all the light we cannot see|doerr":"2026-10-13","and then there were none|christie":"2026-10-13","anxious people|backman":"2026-10-13","beach read|henry":"2026-10-13","big little lies|moriarty":"2026-10-13","book lovers|henry":"2026-10-13","circe|miller":"2026-10-13","daisy jones the six|reid":"2026-10-13","demon copperhead|kingsolver":"2026-10-13","funny story|henry":"2026-10-13","gone girl|flynn":"2026-10-13","hello beautiful|napolitano":"2026-10-13","homegoing|gyasi":"2026-10-13","in the woods|french":"2026-10-13","it ends with us|hoover":"2026-10-13","james|everett":"2026-10-13","lessons in chemistry|garmus":"2026-10-13","little fires everywhere|ng":"2026-10-13","magpie murders|horowitz":"2026-10-13","me before you|moyes":"2026-10-13","normal people|rooney":"2026-10-13","olive kitteridge|strout":"2026-10-13","outlander|gabaldon":"2026-10-13","pachinko|lee":"2026-10-13","people we meet on vacation|henry":"2026-10-13","project hail mary|weir":"2026-10-13","red white royal blue|mcquiston":"2026-10-13","remarkably bright creatures|pelt":"2026-10-13","small things like these|keegan":"2026-10-13","the book thief|zusak":"2026-10-13","the covenant of water|verghese":"2026-10-13","the flatshare|o'leary":"2026-10-13","the girl with the dragon tattoo|larsson":"2026-10-13","the guest list|foley":"2026-10-13","the hating game|thorne":"2026-10-13","the heaven earth grocery store|mcbride":"2026-10-13","the housemaid|mcfadden":"2026-10-13","the kite runner|hosseini":"2026-10-13","the last thing he told me|dave":"2026-10-13","the love hypothesis|hazelwood":"2026-10-13","the martian|weir":"2026-10-13","the midnight library|haig":"2026-10-13","the nightingale|hannah":"2026-10-13","the seven husbands of evelyn hugo|reid":"2026-10-13","the silent patient|michaelides":"2026-10-13","the song of achilles|miller":"2026-10-13","the thursday murder club|osman":"2026-10-13","the vanishing half|bennett":"2026-10-13","the women|hannah":"2026-10-13","tomorrow and tomorrow and tomorrow|zevin":"2026-10-13","verity|hoover":"2026-10-13","where the crawdads sing|owens":"2026-10-13"};

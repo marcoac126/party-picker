@@ -7,7 +7,12 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 
 const UA = 'ThePartyWheel/1.0 (+https://thepartywheel.com; hello@thepartywheel.com)';
 const OUTDIR = new URL('../docs/bookshop/', import.meta.url);
-const ROUND = Number(process.env.ROUND || 1); // round 2+ tries the next-best edition for books not yet confirmed
+const ROUND = Number(process.env.ROUND || 1); // batch number for file names
+// ISBNs Bookshop already rejected (from Mark's upload messages) are never offered again.
+let REJECTED = new Set();
+try { const r = JSON.parse(readFileSync(new URL('../docs/bookshop/results.json', import.meta.url), 'utf8')); Object.values(r).forEach((g) => (g.rejected || []).forEach((i) => REJECTED.add(i))); } catch {}
+// Publisher codes for UK/Canadian imprints, which Bookshop (US) usually doesn't carry.
+const NON_US = /^(978073[5-6]|97803856|97817|97818|97819[0-9]|9781526|9780571|9781035|9781509|9781472|9781409|9780241|9780099|9780091|9780008|9780007|9781471|9780349|9781529|9780552|9780755|9781408|9780747|9781398|9781447|9780330|9780571)/;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const cleanText = (s) => String(s || '').replace(/[‘’ʼ]/g, "'").replace(/[“”]/g, '"')
@@ -46,7 +51,8 @@ async function editionsFor(b) {
     .filter((x) => !x.languages || x.languages.some((l) => /eng/.test(l.key || '')))
     .filter((x) => /paperback|hardcover|hardback|trade/i.test(x.physical_format || ''))
     .flatMap((x) => (x.isbn_13 || []).filter((i) => /^97[89][01]\d{9}$/.test(i)).map((i) => ({ isbn: i, year: year(x.publish_date), paper: /paper|trade/i.test(x.physical_format) })))
-    .sort((a, b) => (b.year - a.year) || (b.paper - a.paper))
+    .filter((x) => !REJECTED.has(x.isbn))
+    .sort((a, b) => (NON_US.test(a.isbn) - NON_US.test(b.isbn)) || (b.year - a.year) || (b.paper - a.paper))
     .filter((x, i, arr) => arr.findIndex((y) => y.isbn === x.isbn) === i);
 }
 
@@ -55,7 +61,7 @@ for (const b of books) {
   if (confirmed[b.key]) continue;
   try {
     const eds = await editionsFor(b);
-    const choice = eds[ROUND - 1];
+    const choice = eds[0];
     if (choice) picks.push({ ...b, isbn: choice.isbn, year: choice.year }); else missing.push(b);
   } catch (e) { missing.push({ ...b, error: e.message }); }
   await sleep(500);
@@ -69,10 +75,10 @@ const files = [];
 for (const [g, list] of Object.entries(byGenre)) {
   for (let i = 0; i < list.length; i += 50) {
     const part = list.slice(i, i + 50);
-    const name = `round${ROUND}-${NAMES[g] || g}${list.length > 50 ? `-${i / 50 + 1}` : ''}.csv`;
+    const name = `batch${ROUND}-${NAMES[g] || g}${list.length > 50 ? `-${i / 50 + 1}` : ''}.csv`;
     writeFileSync(new URL(name, OUTDIR), part.map((p) => p.isbn).join('\n') + '\n');
     files.push(`${name} (${part.length})`);
   }
 }
-writeFileSync(new URL(`round${ROUND}-candidates.json`, OUTDIR), JSON.stringify({ round: ROUND, made: new Date().toISOString().slice(0, 10), files, picks, missing }, null, 1));
+writeFileSync(new URL(`batch${ROUND}-candidates.json`, OUTDIR), JSON.stringify({ round: ROUND, made: new Date().toISOString().slice(0, 10), files, picks, missing }, null, 1));
 console.log(`Round ${ROUND}: ${picks.length} candidates, ${missing.length} without a candidate. Files: ${files.join(', ')}`);
