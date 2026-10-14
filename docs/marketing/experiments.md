@@ -20,7 +20,7 @@
 - Post Thu 10/15, Book Club Ideas board. Measure 7-day outbound clicks and saves vs. the static book club pin. If it wins, make karaoke and Christmas movie versions.
 
 ## Book club "more than a spinner" pins (2026-10-14, marketing)
-- Positioning: "Books already loaded, new bestsellers every Monday. Every pick links to your library, indie bookstores, Kindle, and Audible." Never "best" or "no Amazon".
+- Positioning: "Books already loaded, new bestsellers every Monday. Every pick links to your library, indie bookstores, Amazon, and Audible." Never "best" or "no Amazon".
 - Video pin (10/15) gets the new title/description. 7-day test window 10/15–10/21 stays clean.
 - Static pins, Book Club Ideas board, section "Book Club Picker": A "What happens after you spin" (Thu 10/22), B "New bestsellers on the wheel every Monday" (Mon 10/26), C "Pick your next book. Borrow it free." (Thu 10/29). Text and site screenshots only: no book covers, no store logos.
 - Measure with Pinterest per-pin outbound clicks and saves (the site has no analytics script, so no UTM tags). Stop rule: a static pin style under 5 outbound clicks in 14 days gets no more pins; re-pin the best one ~2 weeks later instead of new art.
