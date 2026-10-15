@@ -20,7 +20,7 @@
 <link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#2B1342">
-<link rel="stylesheet" href="../assets/style.css?v=20261011a">
+<link rel="stylesheet" href="../assets/style.css?v=20261015a">
 </head>
 <body>
 <header class="site-header">
@@ -30,6 +30,8 @@
 <main class="wrap">
   <h1>Book club picker</h1>
   <p class="lede">Books already loaded, with new bestsellers every Monday. Every pick links to your library, indie bookstores, Amazon, and Audible.</p>
+
+  <aside class="month-pick" id="month-pick" aria-labelledby="month-pick-label" hidden></aside>
 
   <fieldset class="segmented">
     <legend class="sr-only">What are you picking?</legend>
@@ -135,6 +137,28 @@
 <script src="books.js?v=20261009e"></script>
 <script src="current-books.js?v=20261009e"></script>
 <script src="isbns.js?v=20261013a"></script>
+<script src="monthly-pick.js?v=20261015a"></script>
+<script>
+// "This month's pick": shows only during the pick's month. Text is set with textContent (no HTML from data).
+(function () {
+  const p = window.MONTHLY_PICK, box = document.getElementById('month-pick'), L = window.PartyLinks;
+  if (!p || !box || !L || typeof p.title !== 'string' || typeof p.author !== 'string') return;
+  const now = new Date();
+  const ym = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+  if (p.month !== ym) return;
+  const monthName = now.toLocaleString('en-US', { month: 'long' });
+  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text) e.textContent = text; return e; };
+  const label = el('p', 'month-pick-label', `${monthName} book club pick`); label.id = 'month-pick-label';
+  const title = el('p', 'month-pick-title', p.title);
+  const by = el('p', 'month-pick-by', `by ${p.author} · the wheel picked it from ${String(p.genreLabel || '').toLowerCase()}`);
+  const links = el('p', 'month-pick-links');
+  [['bookshop', 'Buy at Bookshop.org'], ['library', 'Find at your library'], ['librofm', 'Listen on Libro.fm']]
+    .forEach(([id, text]) => links.append(L.link(id, p.title, p.author, text)));
+  box.append(label, title, by, links);
+  if (L.isAffiliate()) box.append(el('p', 'month-pick-note', L.disclosure()));
+  box.hidden = false;
+})();
+</script>
 <script>
 (function () {
   const WHEEL_SIZE = 12;
