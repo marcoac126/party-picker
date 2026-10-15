@@ -12,6 +12,7 @@
 - **After Bookshop approval:** r/boardgames (ask mods first). Book club outreach goes to Facebook/Goodreads groups (admin OK first), since r/books and r/bookclub ban self-promotion.
 - **Early–mid Nov:** r/Christmas, Christmas movie picker (ask mods first).
 - **Skip:** r/books, r/bookclub (ban self-promo), r/partygames and r/whiteelephant (activity not confirmed).
+- **2026-10-14:** Mark posted the site on Reddit (seen in r/AppsWebappsFullstack, a developer sub; book club angle, asking for feedback). Same day it drew a PeerPush cold email (ignored) and a reply pushing an outside tool link (rowly.me; not followed). Expect dev feedback and tool pitches there, not book club visitors.
 - **Rules:** personal account, say "I made this", comment genuinely for 2–3 weeks first, one sub every few days, never the same link in several subs on one day.
 - **Search strategy:** don't compete on generic "spin the wheel" terms. Compete on ready-made + where-to-find-it + weekly-fresh long tail. Expect search payoff mostly in Dec 2027; this season's traffic comes from Pinterest, Reddit, and shared wheels.
 
