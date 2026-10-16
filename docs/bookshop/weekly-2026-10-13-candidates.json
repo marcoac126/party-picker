@@ -1,0 +1,299 @@
+{
+ "round": "weekly-2026-10-13",
+ "made": "2026-10-16",
+ "files": [
+  "weekly-2026-10-13.csv (6)"
+ ],
+ "picks": [
+  {
+   "title": "I'll Believe in Anything",
+   "author": "Jacob Tierney & Rachel Reid",
+   "genre": "weekly",
+   "key": "i'll believe in anything|tierney",
+   "isbn": "9780316613941",
+   "year": 2026
+  },
+  {
+   "title": "The Calamity Club",
+   "author": "Kathryn Stockett",
+   "genre": "weekly",
+   "key": "the calamity club|stockett",
+   "isbn": "9781954118812",
+   "year": 2026
+  },
+  {
+   "title": "The Game",
+   "author": "Peter King",
+   "genre": "weekly",
+   "key": "the game|king",
+   "isbn": "9780553386370",
+   "year": 2010
+  },
+  {
+   "title": "Secret Prey",
+   "author": "John Sandford",
+   "genre": "weekly",
+   "key": "secret prey|sandford",
+   "isbn": "9780743484206",
+   "year": 2004
+  },
+  {
+   "title": "A Court of Splintered Harmony",
+   "author": "Sarah J. Maas",
+   "genre": "weekly",
+   "key": "a court of splintered harmony|maas",
+   "isbn": "9781639739134",
+   "year": 2026
+  },
+  {
+   "title": "My Sister's Keeper",
+   "author": "Jodi Picoult",
+   "genre": "weekly",
+   "key": "my sister's keeper|picoult",
+   "isbn": "9781416575245",
+   "year": 2007
+  }
+ ],
+ "missing": [
+  {
+   "title": "In the Shadow of Eight",
+   "author": "Collin Gosselin",
+   "genre": "weekly",
+   "key": "in the shadow of eight|gosselin"
+  },
+  {
+   "title": "The French Illusion",
+   "author": "John Grisham",
+   "genre": "weekly",
+   "key": "the french illusion|grisham"
+  },
+  {
+   "title": "Peck & Peck",
+   "author": "Bonnie Garmus",
+   "genre": "weekly",
+   "key": "peck peck|garmus"
+  },
+  {
+   "title": "Contend",
+   "author": "Philip Anthony Mitchell",
+   "genre": "weekly",
+   "key": "contend|mitchell"
+  },
+  {
+   "title": "Out of the Shadows",
+   "author": "Jay Stratton",
+   "genre": "weekly",
+   "key": "out of the shadows|stratton"
+  },
+  {
+   "title": "The Ferryman's Rest Inn & Grogshop",
+   "author": "Seana Kelly",
+   "genre": "weekly",
+   "key": "the ferryman's rest inn grogshop|kelly"
+  },
+  {
+   "title": "The Thrice-Bound Fool",
+   "author": "Christopher Buehlman",
+   "genre": "weekly",
+   "key": "the thrice-bound fool|buehlman"
+  },
+  {
+   "title": "Bark Humbug",
+   "author": "David Rosenfelt",
+   "genre": "weekly",
+   "key": "bark humbug|rosenfelt"
+  },
+  {
+   "title": "Threshing Day",
+   "author": "Rebecca Yarros",
+   "genre": "weekly",
+   "key": "threshing day|yarros"
+  },
+  {
+   "title": "The Law Student",
+   "author": "John Grisham",
+   "genre": "weekly",
+   "key": "the law student|grisham"
+  },
+  {
+   "title": "D",
+   "author": "Neal Stephenson",
+   "genre": "weekly",
+   "key": "d|stephenson"
+  },
+  {
+   "title": "Partita",
+   "author": "Barbara Kingsolver",
+   "genre": "weekly",
+   "key": "partita|kingsolver"
+  },
+  {
+   "title": "One Helluva Ride",
+   "author": "Michael Douglas",
+   "genre": "weekly",
+   "key": "one helluva ride|douglas"
+  },
+  {
+   "title": "Mad Mabel",
+   "author": "Sally Hepworth",
+   "genre": "weekly",
+   "key": "mad mabel|hepworth"
+  },
+  {
+   "title": "Double Tap",
+   "author": "Vince Flynn & Don Bentley",
+   "genre": "weekly",
+   "key": "double tap|flynn"
+  },
+  {
+   "title": "Ice Covered Heart",
+   "author": "Cynthia Eden",
+   "genre": "weekly",
+   "key": "ice covered heart|eden"
+  },
+  {
+   "title": "A Date with Santa",
+   "author": "Debbie Macomber",
+   "genre": "weekly",
+   "key": "a date with santa|macomber"
+  },
+  {
+   "title": "Hollow Bones",
+   "author": "Jodi Picoult",
+   "genre": "weekly",
+   "key": "hollow bones|picoult"
+  },
+  {
+   "title": "The End of Everything",
+   "author": "M. John Harrison",
+   "genre": "weekly",
+   "key": "the end of everything|harrison"
+  },
+  {
+   "title": "Vibe",
+   "author": "Adam Grant",
+   "genre": "weekly",
+   "key": "vibe|grant"
+  },
+  {
+   "title": "Win Me Back",
+   "author": "Camilla Isley",
+   "genre": "weekly",
+   "key": "win me back|isley"
+  },
+  {
+   "title": "Theo of Golden",
+   "author": "Allen Levi",
+   "genre": "weekly",
+   "key": "theo of golden|levi"
+  },
+  {
+   "title": "As You Wake, Break the Shell",
+   "author": "Becky Chambers",
+   "genre": "weekly",
+   "key": "as you wake break the shell|chambers"
+  },
+  {
+   "title": "Malice",
+   "author": "LeAnn Ashers",
+   "genre": "weekly",
+   "key": "malice|ashers"
+  },
+  {
+   "title": "The Stones Cry Out",
+   "author": "Dinesh D'Souza",
+   "genre": "weekly",
+   "key": "the stones cry out|d'souza"
+  },
+  {
+   "title": "Weddings",
+   "author": "Danielle Steel",
+   "genre": "weekly",
+   "key": "weddings|steel"
+  },
+  {
+   "title": "Ransom",
+   "author": "Daniel Silva",
+   "genre": "weekly",
+   "key": "ransom|silva"
+  },
+  {
+   "title": "Ethel Kennedy",
+   "author": "Kerry Kennedy",
+   "genre": "weekly",
+   "key": "ethel kennedy|kennedy"
+  },
+  {
+   "title": "Blockers",
+   "author": "Michael Lewis",
+   "genre": "weekly",
+   "key": "blockers|lewis"
+  },
+  {
+   "title": "London Station",
+   "author": "David McCloskey",
+   "genre": "weekly",
+   "key": "london station|mccloskey"
+  },
+  {
+   "title": "Adam and Eve",
+   "author": "Jeffrey Archer",
+   "genre": "weekly",
+   "key": "adam and eve|archer"
+  },
+  {
+   "title": "Ruthless",
+   "author": "Danielle Steel",
+   "genre": "weekly",
+   "key": "ruthless|steel"
+  },
+  {
+   "title": "The Way You Always Hold Me",
+   "author": "Ava Miles",
+   "genre": "weekly",
+   "key": "the way you always hold me|miles"
+  },
+  {
+   "title": "Big Little Truths: Reese's Book Club",
+   "author": "Liane Moriarty",
+   "genre": "weekly",
+   "key": "big little truths|moriarty"
+  },
+  {
+   "title": "Music Against the Night",
+   "author": "Yiyun Li",
+   "genre": "weekly",
+   "key": "music against the night|li"
+  },
+  {
+   "title": "The Pirate Queen",
+   "author": "Ariel Lawhon",
+   "genre": "weekly",
+   "key": "the pirate queen|lawhon"
+  },
+  {
+   "title": "Whistler",
+   "author": "Ann Patchett",
+   "genre": "weekly",
+   "key": "whistler|patchett"
+  },
+  {
+   "title": "Why Am I Like This?",
+   "author": "Sabrina Zohar",
+   "genre": "weekly",
+   "key": "why am i like this|zohar"
+  },
+  {
+   "title": "Mystery Play",
+   "author": "Elizabeth Kostova",
+   "genre": "weekly",
+   "key": "mystery play|kostova"
+  },
+  {
+   "title": "Murder at the Grand Alpine Hotel",
+   "author": "Lucy Foley & Agatha Christie",
+   "genre": "weekly",
+   "key": "murder at the grand alpine hotel|foley"
+  }
+ ]
+}
