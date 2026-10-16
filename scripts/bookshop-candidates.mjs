@@ -8,6 +8,9 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 const UA = 'ThePartyWheel/1.0 (+https://thepartywheel.com; hello@thepartywheel.com)';
 const OUTDIR = new URL('../docs/bookshop/', import.meta.url);
 const ROUND = Number(process.env.ROUND || 1); // batch number for file names
+// SOURCE=bestsellers: this week's bestsellers (book-club-picker/current-books.js) that lack a confirmed ISBN.
+// Writes docs/bookshop/weekly-<date>.csv (+ -candidates.json) for Mark's weekly "This week's bestsellers" list upload.
+const BESTSELLERS = process.env.SOURCE === 'bestsellers';
 // ISBNs Bookshop already rejected (from Mark's upload messages) are never offered again.
 let REJECTED = new Set();
 try { const r = JSON.parse(readFileSync(new URL('../docs/bookshop/results.json', import.meta.url), 'utf8')); Object.values(r).forEach((g) => (g.rejected || []).forEach((i) => REJECTED.add(i))); } catch {}
@@ -26,7 +29,13 @@ const SKIP = /summary|study guide|workbook|analysis|sparknotes|cliffsnotes|color
 
 const window = {};
 new Function('window', readFileSync(new URL('../book-club-picker/books.js', import.meta.url), 'utf8'))(window);
-const books = (window.BOOK_CLUB_BOOKS || []).map(([t, a, g]) => ({ title: t, author: a, genre: g, key: bookKey(t, a) }));
+let books = (window.BOOK_CLUB_BOOKS || []).map(([t, a, g]) => ({ title: t, author: a, genre: g, key: bookKey(t, a) }));
+let WEEK = '';
+if (BESTSELLERS) {
+  const cur = JSON.parse(readFileSync(new URL('../book-club-picker/current-books.js', import.meta.url), 'utf8').match(/window\.CURRENT_BOOKS\s*=\s*(\{[\s\S]*\});/)[1]);
+  WEEK = /^\d{4}-\d{2}-\d{2}$/.test(cur.updated || '') ? cur.updated : new Date().toISOString().slice(0, 10);
+  books = (cur.books || []).filter((b) => Array.isArray(b) && b[0] && b[1]).map(([t, a]) => ({ title: String(t), author: String(a), genre: 'weekly', key: bookKey(t, a) }));
+}
 
 let confirmed = {};
 try { const m = readFileSync(new URL('../book-club-picker/isbns.js', import.meta.url), 'utf8').match(/window\.BOOK_ISBNS\s*=\s*(\{[\s\S]*?\});/); confirmed = m ? JSON.parse(m[1]) : {}; } catch {}
@@ -75,10 +84,10 @@ const files = [];
 for (const [g, list] of Object.entries(byGenre)) {
   for (let i = 0; i < list.length; i += 50) {
     const part = list.slice(i, i + 50);
-    const name = `batch${ROUND}-${NAMES[g] || g}${list.length > 50 ? `-${i / 50 + 1}` : ''}.csv`;
+    const name = BESTSELLERS ? `weekly-${WEEK}${list.length > 50 ? `-${i / 50 + 1}` : ''}.csv` : `batch${ROUND}-${NAMES[g] || g}${list.length > 50 ? `-${i / 50 + 1}` : ''}.csv`;
     writeFileSync(new URL(name, OUTDIR), part.map((p) => p.isbn).join('\n') + '\n');
     files.push(`${name} (${part.length})`);
   }
 }
-writeFileSync(new URL(`batch${ROUND}-candidates.json`, OUTDIR), JSON.stringify({ round: ROUND, made: new Date().toISOString().slice(0, 10), files, picks, missing }, null, 1));
-console.log(`Round ${ROUND}: ${picks.length} candidates, ${missing.length} without a candidate. Files: ${files.join(', ')}`);
+writeFileSync(new URL(BESTSELLERS ? `weekly-${WEEK}-candidates.json` : `batch${ROUND}-candidates.json`, OUTDIR), JSON.stringify({ round: BESTSELLERS ? `weekly-${WEEK}` : ROUND, made: new Date().toISOString().slice(0, 10), files, picks, missing }, null, 1));
+console.log(`${BESTSELLERS ? 'Weekly ' + WEEK : 'Round ' + ROUND}: ${picks.length} candidates, ${missing.length} without a candidate. Files: ${files.join(', ')}`);

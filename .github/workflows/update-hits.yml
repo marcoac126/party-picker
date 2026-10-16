@@ -21,9 +21,13 @@ jobs:
       - run: node scripts/update-books.mjs
       - run: node scripts/lookup-isbns.mjs
         continue-on-error: true   # a lookup problem should never block the weekly lists
+      - run: node scripts/bookshop-candidates.mjs   # candidate ISBNs for new bestsellers -> docs/bookshop/weekly-<date>.csv (Mark uploads to a Bookshop list)
+        env:
+          SOURCE: bestsellers
+        continue-on-error: true
       - name: Commit if a list changed
         run: |
-          FILES="karaoke-song-picker/hits.js book-club-picker/current-books.js book-club-picker/isbns.js"
+          FILES="karaoke-song-picker/hits.js book-club-picker/current-books.js book-club-picker/isbns.js docs/bookshop"
           touch book-club-picker/isbns.js
           if git diff --quiet -- $FILES && [ -z "$(git ls-files --others --exclude-standard -- $FILES)" ]; then
             echo "No change."

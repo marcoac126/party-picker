@@ -6,6 +6,9 @@ on:
       round:
         description: 'Round (1 = best edition, 2 = next best for books not confirmed yet)'
         default: '1'
+      source:
+        description: 'favorites (club favorites by genre) or bestsellers (this week, new ones only)'
+        default: 'favorites'
 
 permissions:
   contents: write
@@ -22,6 +25,7 @@ jobs:
       - run: node scripts/bookshop-candidates.mjs
         env:
           ROUND: ${{ github.event.inputs.round }}
+          SOURCE: ${{ github.event.inputs.source }}
       - name: Commit candidate files
         run: |
           git config user.name "list-updater"
