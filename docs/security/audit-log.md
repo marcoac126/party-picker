@@ -180,3 +180,8 @@ Sources: [Bookshop.org — affiliate disclosure requirement](https://support.boo
 - **Scope:** `assets/links.js` (ID set), book club page, affiliate disclosure, privacy policy.
 - **Checked:** affiliate links carry only our ID and the ISBN, nothing about the visitor; marked `rel="sponsored noopener"`; disclosure shows above the book list and in the result card; no third-party script (Bookshop widget not used); page makes no outside requests on load; privacy wording matches how ISBNs were actually found (public catalogs + Bookshop list upload); automated Bookshop checks remain disabled.
 - **Result:** pass, no findings. Mark tap-tested links on his phone.
+
+## 2026-10-18 — Test-only exception: Bookshop search widget
+- **What:** `tools/link-test/bookshop-widget/` (hidden: noindex, /tools/ disallowed in robots.txt, not linked) loads Bookshop's `widgets.js` search widget, only after a tap, so Mark can see whether widget searches carry our affiliate ID.
+- **Why allowed:** test page only, used by Mark; no visitor page loads the script. The no-third-party-scripts rule still applies to every public page.
+- **Exit:** remove the test page once the result is known. Any public use of the widget needs a full security review and a privacy policy update first.
