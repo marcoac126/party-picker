@@ -1,7 +1,15 @@
 // Generated weekly by scripts/update-hits.mjs from Apple Music's US top songs feed. Do not edit by hand.
 window.KARAOKE_HITS = {
- "updated": "2026-10-13",
+ "updated": "2026-10-19",
  "songs": [
+  [
+   "Lies (feat. Lana Del Rey)",
+   "Zach Bryan & Lana Del Rey"
+  ],
+  [
+   "Housewife",
+   "Tate McRae"
+  ],
   [
    "Choosin' Texas",
    "Ella Langley"
@@ -11,15 +19,59 @@ window.KARAOKE_HITS = {
    "KAROL G, Judeline & rusowsky"
   ],
   [
+   "Lodi When",
+   "Zach Bryan"
+  ],
+  [
+   "Nicole Kidman",
+   "ADÉLA"
+  ],
+  [
+   "Been By Now",
+   "Morgan Wallen"
+  ],
+  [
+   "Robot Killed The Working Man",
+   "Zach Bryan"
+  ],
+  [
    "Last Thing You Need",
    "Morgan Wallen"
+  ],
+  [
+   "stupid song",
+   "Olivia Rodrigo"
   ],
   [
    "Cold Shoulder",
    "Drake, Don Toliver & Yebba"
   ],
   [
-   "Been By Now",
+   "Plainsman (feat. Turnpike Troubadours)",
+   "Zach Bryan & Turnpike Troubadours"
+  ],
+  [
+   "expectations",
+   "Olivia Rodrigo & Chappell Roan"
+  ],
+  [
+   "Wicked Games",
+   "The Weeknd"
+  ],
+  [
+   "Backwards",
+   "Zach Bryan"
+  ],
+  [
+   "Best I Ever Had",
+   "Drake"
+  ],
+  [
+   "I Can't Love You Anymore",
+   "Ella Langley & Morgan Wallen"
+  ],
+  [
+   "I'm The Problem",
    "Morgan Wallen"
   ],
   [
@@ -27,64 +79,28 @@ window.KARAOKE_HITS = {
    "Taylor Swift"
   ],
   [
-   "stupid song",
-   "Olivia Rodrigo"
-  ],
-  [
-   "I Can't Love You Anymore",
-   "Ella Langley & Morgan Wallen"
+   "Broken Window Serenade",
+   "Whiskey Myers"
   ],
   [
    "Be Her",
    "Ella Langley"
   ],
   [
-   "I'm The Problem",
-   "Morgan Wallen"
-  ],
-  [
-   "Broken Window Serenade",
-   "Whiskey Myers"
-  ],
-  [
    "Don't We",
    "Morgan Wallen"
   ],
   [
-   "pop it",
-   "Gunna"
-  ],
-  [
-   "Great Expectation",
-   "SIENNA SPIRO"
+   "What I Want",
+   "Morgan Wallen & Tate McRae"
   ],
   [
    "Just In Case",
    "Morgan Wallen"
   ],
   [
-   "Man I Need",
-   "Olivia Dean"
-  ],
-  [
-   "Dope Girl",
-   "Rod Wave"
-  ],
-  [
-   "Thinkin’ Bout Me",
-   "Morgan Wallen"
-  ],
-  [
-   "Wasted On You",
-   "Morgan Wallen"
-  ],
-  [
-   "Boston",
-   "STELLA LEFTY"
-  ],
-  [
-   "Cowgirls (feat. ERNEST)",
-   "Morgan Wallen"
+   "Great Expectation",
+   "SIENNA SPIRO"
   ]
  ]
 };
