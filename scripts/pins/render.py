@@ -5,7 +5,7 @@ Reads pins/queue.json and renders any pin whose image file is missing
 (pass --all to re-render every pin). Needs Playwright + Chromium and the Inter font.
 Agents run this locally; the GitHub Action never renders images.
 """
-import html, json, pathlib, sys
+import html, json, pathlib, re, sys
 from playwright.sync_api import sync_playwright
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
@@ -51,9 +51,13 @@ window.done=true;});
 
 def render(page, pin, out):
     th = THEMES[pin.get('theme', 'holiday')]
+    accent = pin.get('accent', '#FFC93C')
+    if not re.fullmatch(r'#[0-9A-Fa-f]{6}', accent):
+        raise ValueError(f"{pin['id']}: accent must be #RRGGBB")
+    items = json.dumps(pin['wheel']).replace('<', '\\u003c')  # no </script> breakouts
     head = pin['headline']
-    doc = PAGE % dict(bg=th['bg'], ring=th['ring'], cols=json.dumps(th['wheel']), accent=pin.get('accent', '#FFC93C'),
-                      h=html.escape(head), s=html.escape(pin['subhead']), items=json.dumps(pin['wheel']),
+    doc = PAGE % dict(bg=th['bg'], ring=th['ring'], cols=json.dumps(th['wheel']), accent=accent,
+                      h=html.escape(head), s=html.escape(pin['subhead']), items=items,
                       hsize=112)
     page.set_content(doc)
     page.wait_for_function('window.done === true')
