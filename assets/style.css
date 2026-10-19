@@ -279,3 +279,13 @@ p.field-legend { margin: 0.5rem 0 0.5rem; }
 .share-row { text-align: center; margin: 0.5rem 0 0; }
 .share-status { display: block; color: var(--cream-dim); font-size: 0.95rem; min-height: 1.2em; }
 .shared-note { margin: 0.75rem 0 1.75rem; position: relative; z-index: 1; padding: 0.6rem 0.9rem; border-radius: 0.5rem; background: #12081D; border: 2px solid var(--teal); color: var(--cream); font-size: 0.95rem; }
+
+/* Book club: "This month's pick" box (under the intro line) */
+.month-pick { margin: 0 0 1.25rem; padding: 0.85rem 1rem; border-radius: 0.75rem; background: #12081D; border: 2px solid var(--yellow); }
+.month-pick p { margin: 0; }
+.month-pick-label { font-size: 0.8rem; font-weight: 750; letter-spacing: 0.06em; text-transform: uppercase; color: var(--yellow); }
+.month-pick-title { font-size: 1.25rem; font-weight: 800; margin-top: 0.15rem !important; text-wrap: balance; }
+.month-pick-by { color: var(--cream-dim); font-size: 0.95rem; }
+.month-pick-links { margin-top: 0.3rem !important; display: flex; flex-wrap: wrap; column-gap: 1.1rem; }
+.month-pick-links a { font-weight: 750; display: inline-block; min-height: 2.75rem; line-height: 2.75rem; }
+.month-pick-note { margin-top: 0.3rem !important; color: var(--cream-dim); font-size: 0.8rem; }

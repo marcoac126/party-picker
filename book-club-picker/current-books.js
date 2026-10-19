@@ -1,10 +1,50 @@
 // Generated weekly by scripts/update-books.mjs from Apple Books' US top-paid chart. Do not edit by hand.
 window.CURRENT_BOOKS = {
- "updated": "2026-10-10",
+ "updated": "2026-10-13",
  "books": [
+  [
+   "In the Shadow of Eight",
+   "Collin Gosselin",
+   "current"
+  ],
   [
    "The French Illusion",
    "John Grisham",
+   "current"
+  ],
+  [
+   "Peck & Peck",
+   "Bonnie Garmus",
+   "current"
+  ],
+  [
+   "Contend",
+   "Philip Anthony Mitchell",
+   "current"
+  ],
+  [
+   "Out of the Shadows",
+   "Jay Stratton",
+   "current"
+  ],
+  [
+   "I'll Believe in Anything",
+   "Jacob Tierney & Rachel Reid",
+   "current"
+  ],
+  [
+   "The Ferryman's Rest Inn & Grogshop",
+   "Seana Kelly",
+   "current"
+  ],
+  [
+   "The Thrice-Bound Fool",
+   "Christopher Buehlman",
+   "current"
+  ],
+  [
+   "Bark Humbug",
+   "David Rosenfelt",
    "current"
   ],
   [
@@ -23,13 +63,18 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "Partita",
-   "Barbara Kingsolver",
+   "The Calamity Club",
+   "Kathryn Stockett",
    "current"
   ],
   [
-   "The Calamity Club",
-   "Kathryn Stockett",
+   "D",
+   "Neal Stephenson",
+   "current"
+  ],
+  [
+   "Partita",
+   "Barbara Kingsolver",
    "current"
   ],
   [
@@ -38,18 +83,28 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
+   "Mad Mabel",
+   "Sally Hepworth",
+   "current"
+  ],
+  [
    "Double Tap",
    "Vince Flynn & Don Bentley",
    "current"
   ],
   [
-   "The Day of the Storm",
-   "Rosamunde Pilcher",
+   "Ice Covered Heart",
+   "Cynthia Eden",
    "current"
   ],
   [
-   "Ransom",
-   "Daniel Silva",
+   "A Date with Santa",
+   "Debbie Macomber",
+   "current"
+  ],
+  [
+   "The Game",
+   "Peter King",
    "current"
   ],
   [
@@ -58,8 +113,23 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "Other Worlds Than These",
-   "Stephen King & Peter Straub",
+   "The End of Everything",
+   "M. John Harrison",
+   "current"
+  ],
+  [
+   "Secret Prey",
+   "John Sandford",
+   "current"
+  ],
+  [
+   "Vibe",
+   "Adam Grant",
+   "current"
+  ],
+  [
+   "Win Me Back",
+   "Camilla Isley",
    "current"
   ],
   [
@@ -68,83 +138,28 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "Mad Mabel",
-   "Sally Hepworth",
+   "As You Wake, Break the Shell",
+   "Becky Chambers",
    "current"
   ],
   [
-   "Blockers",
-   "Michael Lewis",
+   "Malice",
+   "LeAnn Ashers",
    "current"
   ],
   [
-   "East of Eden",
-   "John Steinbeck",
+   "The Stones Cry Out",
+   "Dinesh D'Souza",
    "current"
   ],
   [
-   "Ruthless",
+   "Weddings",
    "Danielle Steel",
    "current"
   ],
   [
-   "When All Is Said",
-   "Anne Griffin",
-   "current"
-  ],
-  [
-   "Birth of the Witch",
-   "Nora Roberts",
-   "current"
-  ],
-  [
-   "Swamp Shoot",
-   "Jana DeLeon",
-   "current"
-  ],
-  [
-   "The Missing Half",
-   "Ashley Flowers & Alex Kiester",
-   "current"
-  ],
-  [
-   "Adam and Eve",
-   "Jeffrey Archer",
-   "current"
-  ],
-  [
-   "Whistler",
-   "Ann Patchett",
-   "current"
-  ],
-  [
-   "Murder at the Grand Alpine Hotel",
-   "Lucy Foley & Agatha Christie",
-   "current"
-  ],
-  [
-   "Fourth Wing",
-   "Rebecca Yarros",
-   "current"
-  ],
-  [
-   "The Southern Book Club's Guide to Slaying Vampires",
-   "Grady Hendrix",
-   "current"
-  ],
-  [
-   "A Trick of the Light",
-   "Louise Penny",
-   "current"
-  ],
-  [
-   "London Station",
-   "David McCloskey",
-   "current"
-  ],
-  [
-   "The Revelation of Dionne Daphne",
-   "Mara Brock Akil",
+   "Ransom",
+   "Daniel Silva",
    "current"
   ],
   [
@@ -153,33 +168,38 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "The Pirate Queen",
-   "Ariel Lawhon",
+   "Ethel Kennedy",
+   "Kerry Kennedy",
    "current"
   ],
   [
-   "Pretty Girls",
-   "Karin Slaughter",
+   "East of Eden",
+   "John Steinbeck",
    "current"
   ],
   [
-   "The Love Hypothesis",
-   "Ali Hazelwood",
+   "Blockers",
+   "Michael Lewis",
    "current"
   ],
   [
-   "Chasing Perfect",
-   "Susan Mallery",
+   "London Station",
+   "David McCloskey",
    "current"
   ],
   [
-   "The Munich Affair",
-   "James Patterson & David Ellis",
+   "Adam and Eve",
+   "Jeffrey Archer",
    "current"
   ],
   [
-   "American Hagwon",
-   "Min Jin Lee",
+   "Ruthless",
+   "Danielle Steel",
+   "current"
+  ],
+  [
+   "The Way You Always Hold Me",
+   "Ava Miles",
    "current"
   ],
   [
@@ -188,58 +208,38 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "Yesteryear: A GMA Book Club Pick",
-   "Caro Claire Burke",
+   "My Sister's Keeper",
+   "Jodi Picoult",
    "current"
   ],
   [
-   "The Last Letter from Your Lover",
-   "Jojo Moyes",
+   "Music Against the Night",
+   "Yiyun Li",
    "current"
   ],
   [
-   "An Inside Job",
-   "Daniel Silva",
+   "The Pirate Queen",
+   "Ariel Lawhon",
    "current"
   ],
   [
-   "The Fires of December",
-   "Brandon Sanderson",
+   "Whistler",
+   "Ann Patchett",
    "current"
   ],
   [
-   "East of Eden",
-   "John Steinbeck, David Wyatt & Susan Shillinglaw",
+   "Why Am I Like This?",
+   "Sabrina Zohar",
    "current"
   ],
   [
-   "Bound and Unbound",
-   "Ali Hazelwood",
+   "Mystery Play",
+   "Elizabeth Kostova",
    "current"
   ],
   [
-   "Big Bad Wolf",
-   "Laurie Gilmore",
-   "current"
-  ],
-  [
-   "The Thoroughbreds",
-   "Elin Hilderbrand & Shelby Cunningham",
-   "current"
-  ],
-  [
-   "The Kitchen House",
-   "Kathleen Grissom",
-   "current"
-  ],
-  [
-   "Malibu Rising: A Read with Jenna Pick",
-   "Taylor Jenkins Reid",
-   "current"
-  ],
-  [
-   "The Cold Moon",
-   "Jeffery Deaver",
+   "Murder at the Grand Alpine Hotel",
+   "Lucy Foley & Agatha Christie",
    "current"
   ]
  ]

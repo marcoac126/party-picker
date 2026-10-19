@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Book Club Picker Wheel – Bestsellers &amp; Club Favorites</title>
-<meta name="description" content="This week's bestsellers and book club favorites in one wheel. Spin, then read reviews, buy, borrow, or listen. Use your club's list or pick who hosts.">
+<title>Book Club Picker Wheel – This Week’s Bestsellers + Favorites</title>
+<meta name="description" content="Spin this week’s bestsellers and 110 club favorites. Every pick links to your library, indie bookstores, Amazon, and Audible. Free, no sign-up.">
 <link rel="canonical" href="https://thepartywheel.com/book-club-picker/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="The Party Wheel">
-<meta property="og:title" content="Book Club Picker Wheel – Bestsellers &amp; Club Favorites">
-<meta property="og:description" content="This week's bestsellers and book club favorites in one wheel. Spin, then read reviews, buy, borrow, or listen. Use your club's list or pick who hosts.">
+<meta property="og:title" content="Book Club Picker Wheel – This Week’s Bestsellers + Favorites">
+<meta property="og:description" content="Spin this week’s bestsellers and 110 club favorites. Every pick links to your library, indie bookstores, Amazon, and Audible. Free, no sign-up.">
 <meta property="og:url" content="https://thepartywheel.com/book-club-picker/">
 <meta property="og:image" content="https://thepartywheel.com/assets/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -20,7 +20,7 @@
 <link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#2B1342">
-<link rel="stylesheet" href="../assets/style.css?v=20261011a">
+<link rel="stylesheet" href="../assets/style.css?v=20261015a">
 </head>
 <body>
 <header class="site-header">
@@ -29,7 +29,9 @@
 
 <main class="wrap">
   <h1>Book club picker</h1>
-  <p class="lede">This week’s bestsellers and book club favorites in one wheel. Spin, then read reviews, buy, borrow, or listen.</p>
+  <p class="lede">Books already loaded, with new bestsellers every Monday. Every pick links to your library, indie bookstores, Amazon, and Audible.</p>
+
+  <aside class="month-pick" id="month-pick" aria-labelledby="month-pick-label" hidden></aside>
 
   <fieldset class="segmented">
     <legend class="sr-only">What are you picking?</legend>
@@ -75,6 +77,7 @@
         </div>
         <details class="own-list" id="book-list-details">
           <summary>See the books on the wheel</summary>
+          <p class="disclosure" id="list-disclosure" hidden></p>
           <ul class="book-list" id="book-list"></ul>
         </details>
       </div>
@@ -128,11 +131,34 @@
   </div>
 </footer>
 
-<script src="../assets/wheel.js?v=20261011a"></script>
+<script src="../assets/wheel.js?v=20261014a"></script>
 <script src="../assets/share.js?v=20261011c"></script>
-<script src="../assets/links.js?v=20261010a"></script>
+<script src="../assets/links.js?v=20261014b"></script>
 <script src="books.js?v=20261009e"></script>
 <script src="current-books.js?v=20261009e"></script>
+<script src="isbns.js?v=20261013a"></script>
+<script src="monthly-pick.js?v=20261015a"></script>
+<script>
+// "This month's pick": shows only during the pick's month. Text is set with textContent (no HTML from data).
+(function () {
+  const p = window.MONTHLY_PICK, box = document.getElementById('month-pick'), L = window.PartyLinks;
+  if (!p || !box || !L || typeof p.title !== 'string' || typeof p.author !== 'string') return;
+  const now = new Date();
+  const ym = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+  if (p.month !== ym) return;
+  const monthName = now.toLocaleString('en-US', { month: 'long' });
+  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text) e.textContent = text; return e; };
+  const label = el('p', 'month-pick-label', `${monthName} book club pick`); label.id = 'month-pick-label';
+  const title = el('p', 'month-pick-title', p.title);
+  const by = el('p', 'month-pick-by', `by ${p.author} · the wheel picked it from ${String(p.genreLabel || '').toLowerCase()}`);
+  const links = el('p', 'month-pick-links');
+  [['bookshop', 'Buy at Bookshop.org'], ['library', 'Find at your library'], ['librofm', 'Listen on Libro.fm']]
+    .forEach(([id, text]) => links.append(L.link(id, p.title, p.author, text)));
+  box.append(label, title, by, links);
+  if (L.isAffiliate()) box.append(el('p', 'month-pick-note', L.disclosure()));
+  box.hidden = false;
+})();
+</script>
 <script>
 (function () {
   const WHEEL_SIZE = 12;
@@ -196,7 +222,10 @@
       const main = document.createElement('p'); main.className = 'lyric'; main.textContent = title;
       result.append(label, main);
       if (author) { const a = document.createElement('p'); a.className = 'artist'; a.textContent = 'by ' + author; result.append(a); }
-      if (state.mode === 'book') result.append(L.bookLinks(title, author));
+      if (state.mode === 'book') {
+        result.append(L.bookLinks(title, author));
+        if (L.isAffiliate()) { const d = document.createElement('p'); d.className = 'disclosure'; d.textContent = L.disclosure(); result.append(d); }
+      }
       result.append(window.PartyShare.resultButton(wheel, (state.mode === 'host' ? 'hosts' : 'books'), 'Book club picks'));
       requestAnimationFrame(() => main.classList.add('sing'));
       const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -300,6 +329,7 @@
     const showDisc = !host && L.isAffiliate();
     $('disclosure').hidden = !showDisc;
     $('disclosure').textContent = showDisc ? L.disclosure() : '';
+    $('list-disclosure').hidden = !showDisc; $('list-disclosure').textContent = showDisc ? L.disclosure() : '';
     refresh();
   }
 

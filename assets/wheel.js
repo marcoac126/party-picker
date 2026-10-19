@@ -131,7 +131,9 @@
         this.onResult(this.items[winner], winner);
       };
 
-      if (reduceMotion) { finish(); return true; }
+      // Reduced motion: no animation, but still finish after the page's click handler runs
+      // (finishing synchronously let the handler overwrite the result with "Spinning…").
+      if (reduceMotion) { setTimeout(finish, 50); return true; }
 
       const start = this.angle;
       const duration = 4200;

@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Make Your Own Spin Wheel – Type Your Choices and Spin</title>
+<meta name="description" content="Type your own choices, one per line, and spin. Free, works on any phone, and your list stays on your device. Share the wheel with a link.">
+<link rel="canonical" href="https://thepartywheel.com/make-your-own-wheel/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Party Wheel">
+<meta property="og:title" content="Make Your Own Spin Wheel – Type Your Choices and Spin">
+<meta property="og:description" content="Type your own choices, one per line, and spin. Free, works on any phone, and your list stays on your device. Share the wheel with a link.">
+<meta property="og:url" content="https://thepartywheel.com/make-your-own-wheel/">
+<meta property="og:image" content="https://thepartywheel.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A colorful spinning wheel next to the words The Party Wheel: karaoke songs, book club picks, party games">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#2B1342">
+<link rel="stylesheet" href="../assets/style.css?v=20261015a">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap"><a href="../">The Party Wheel</a></div>
+</header>
+
+<main class="wrap">
+  <h1>Make your own wheel</h1>
+  <p class="lede">Type your choices, then spin.</p>
+
+  <div class="stage">
+    <div class="pointer" aria-hidden="true"></div>
+    <canvas id="wheel" role="img" aria-label="Spinning wheel of your choices"></canvas>
+  </div>
+  <button class="spin-btn" id="spin" type="button">Spin</button>
+  <p class="share-row"><button class="text-btn" id="share" type="button">Share this wheel</button><span class="share-status" id="share-status" aria-live="polite"></span></p>
+
+  <div class="result" id="result" aria-live="polite">
+    <p class="result-hint">Your pick shows up here.</p>
+  </div>
+
+  <section class="controls" aria-labelledby="list-heading">
+    <h2 id="list-heading">Your choices</h2>
+    <label for="own-entries" class="sr-only">Your choices</label>
+    <p class="help" id="own-help">One choice per line, up to 100.</p>
+    <textarea id="own-entries" aria-describedby="own-help" spellcheck="false"></textarea>
+    <div class="row">
+      <p class="status" id="status" aria-live="polite"></p>
+      <button class="text-btn" id="clear" type="button">Clear list</button>
+    </div>
+    <p class="check"><input type="checkbox" id="remove"><label for="remove">Remove each choice after it’s picked</label></p>
+  </section>
+
+  <p class="related">Need ideas? <a href="../book-club-picker/">Books</a> · <a href="../karaoke-song-picker/">Songs</a> · <a href="../party-game-picker/">Games</a> · <a href="../christmas-movie-picker/">Christmas movies</a></p>
+
+  <article class="guide">
+    <h2>How it works</h2>
+    <p>Type each choice on its own line. The wheel updates as you type. Tap Spin, and the wheel picks one at random.</p>
+
+    <h3>Ways to use it</h3>
+    <ul>
+      <li><strong>Where to eat:</strong> list a few places and let the wheel settle it.</li>
+      <li><strong>Who goes first:</strong> put everyone’s name on the wheel.</li>
+      <li><strong>Taking turns:</strong> turn on “Remove each choice” so no one gets picked twice.</li>
+    </ul>
+
+    <h3>Is the wheel random?</h3>
+    <p>Yes. Each spin uses your browser’s built-in random number generator, so every choice has the same chance. Your list stays on your device and isn’t sent anywhere.</p>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">The Party Wheel · Your lists stay on your device.
+    <nav class="footer-links" aria-label="Site information"><a href="../about/">About</a><a href="../privacy/">Privacy policy</a><a href="../affiliate-disclosure/">Affiliate disclosure</a></nav>
+  </div>
+</footer>
+
+<script src="../assets/wheel.js?v=20261014a"></script>
+<script src="../assets/share.js?v=20261011c"></script>
+<script>
+(function () {
+  const STORE_KEY = 'pp-own-wheel-v1';
+  const MAX = 100;
+  const SAMPLE = 'Pizza\nTacos\nSushi\nBurgers';
+  const $ = (id) => document.getElementById(id);
+  const spinBtn = $('spin'), result = $('result'), status = $('status'), ta = $('own-entries');
+  const lines = (t) => t.split('\n').map((s) => s.trim()).filter(Boolean).slice(0, MAX);
+  const save = () => { try { localStorage.setItem(STORE_KEY, ta.value); } catch (e) {} };
+  const load = () => { try { return localStorage.getItem(STORE_KEY); } catch (e) { return null; } };
+
+  const wheel = new Wheel($('wheel'), {
+    onResult(name, index) {
+      result.innerHTML = '';
+      const label = document.createElement('p'); label.className = 'result-label'; label.textContent = 'The wheel picked';
+      const main = document.createElement('p'); main.className = 'lyric'; main.textContent = name;
+      result.append(label, main, window.PartyShare.resultButton(wheel, 'own', 'Our wheel'));
+      requestAnimationFrame(() => main.classList.add('sing'));
+      const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      result.scrollIntoView({ behavior: still ? 'auto' : 'smooth', block: 'nearest' });
+      if ($('remove').checked) { const l = lines(ta.value); l.splice(index, 1); ta.value = l.join('\n'); save(); refresh(); }
+      spinBtn.disabled = wheel.items.length < 2;
+      spinBtn.textContent = 'Spin again';
+    }
+  });
+
+  function refresh() {
+    const n = lines(ta.value);
+    wheel.setItems(n);
+    spinBtn.disabled = n.length < 2;
+    status.textContent = n.length < 2 ? 'Add at least two choices to spin.' : `${n.length} choices on the wheel.`;
+    $('clear').hidden = !ta.value.trim();
+  }
+
+  ta.addEventListener('input', () => { save(); refresh(); });
+  $('clear').addEventListener('click', () => {
+    ta.value = ''; save(); refresh();
+    result.innerHTML = '<p class="result-hint">Your pick shows up here.</p>'; spinBtn.textContent = 'Spin'; ta.focus();
+  });
+  $('share').addEventListener('click', () => window.PartyShare.share(lines(ta.value), 'own', 'Our wheel', $('share-status')));
+  spinBtn.addEventListener('click', () => {
+    if (wheel.spin()) { spinBtn.disabled = true; spinBtn.textContent = 'Spinning…'; result.innerHTML = '<p class="result-hint">Spinning…</p>'; }
+  });
+
+  const saved = load();
+  ta.value = saved !== null ? saved : SAMPLE;
+  const shared = window.PartyShare.read();
+  if (shared) {
+    ta.value = shared.items.join('\n');
+    document.querySelector('.stage').insertAdjacentHTML('beforebegin', '<p class="shared-note">' + window.PartyShare.note(shared) + '</p>');
+  }
+  refresh();
+  if (shared && shared.result !== null && wheel.items.length === shared.items.length) wheel.land(shared.result);
+})();
+</script>
+</body>
+</html>

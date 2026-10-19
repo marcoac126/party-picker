@@ -1,18 +1,21 @@
 // Shared "where to get it" links for books (and later, other products).
-// Every link is a plain store search today. When an affiliate program approves the
-// site, fill in its ID below. Nothing else needs to change.
+// Links are plain store searches unless an affiliate program is switched on below.
+// Bookshop: /a/<id>/<isbn> (documented by Bookshop) when an ISBN is known, else a plain search.
+// Libro.fm: Awin deep link (documented by Awin). Amazon: standard "tag".
 // Rules (security + finance agents):
 //  - Only fill in an ID after Mark approves and the program is listed in docs/security/third-parties.md.
-//  - Confirm each program's exact link format when approved; the parameter names below are placeholders
-//    except Amazon's "tag", which is standard.
+//  - Use only link formats the program documents.
 //  - Links with an ID get rel="sponsored", and pages show the disclosure automatically.
 //  - Plain links only: no store widgets or tracking scripts.
 (function () {
+  // Preview switch for the hidden /tools/link-test/ page only: shows affiliate links before they go live.
+  const PREVIEW = window.PARTY_AFF_PREVIEW || {};
   const IDS = {
-    bookshop: '', // Bookshop.org affiliate ID (10% on books)
+    bookshop: '129730', // Bookshop.org affiliate ID (10% on books). Live 2026-10-14 after tap test + security re-check
     librofm: '',  // Set to 'awin' once Libro.fm approves us on Awin (10% audiobooks, 30% new memberships)
     amazon: ''    // Amazon Associates tag, e.g. 'thepartywheel-20' (4.5% books; also used for Audible)
   };
+  Object.keys(IDS).forEach((k) => { if (typeof PREVIEW[k] === 'string' && !IDS[k]) IDS[k] = PREVIEW[k]; });
 
   const q = (s) => encodeURIComponent(s.trim());
 
@@ -51,6 +54,13 @@
     const words = firstAuthor(a).split(' ').filter((w) => !/^(jr\.?|sr\.?|ii|iii|iv)$/i.test(w));
     return words.length ? words[words.length - 1] : '';
   }
+  // Key for the ISBN list (book-club-picker/isbns.js). Must match scripts/lookup-isbns.mjs.
+  function bookKey(title, author) { return `${cleanTitle(title)}|${lastName(author)}`.toLowerCase(); }
+  function isbnFor(title, author) {
+    const v = (window.BOOK_ISBNS || {})[bookKey(title, author)];
+    return /^97[89]\d{10}$/.test(v || '') ? v : '';
+  }
+
   function searchTerms(storeId, title, author) {
     const t = cleanTitle(title);
     switch (SEARCH_STYLE[storeId]) {
@@ -65,7 +75,10 @@
     goodreads: { action: 'Read reviews', name: 'Goodreads',
       url: (t) => `https://www.goodreads.com/search?q=${q(t)}`, aff: () => false },
     bookshop: { action: 'Buy', name: 'Bookshop.org',
-      url: (t) => `https://bookshop.org/search?keywords=${q(t)}` + (IDS.bookshop ? `&affiliate=${q(IDS.bookshop)}` : ''),
+      // With an affiliate ID and a known ISBN: Bookshop's documented format /a/<id>/<isbn> (opens the book).
+      // Otherwise a plain search (no credit).
+      url: (t, isbn) => (IDS.bookshop && isbn) ? `https://bookshop.org/a/${encodeURIComponent(IDS.bookshop)}/${isbn}` : `https://bookshop.org/search?keywords=${q(t)}`,
+      sponsored: (isbn) => !!(IDS.bookshop && isbn),
       aff: () => !!IDS.bookshop },
     librofm: { action: 'Listen', name: 'Libro.fm',
       url: (t) => { const dest = `https://libro.fm/search?q=${q(t)}`; return IDS.librofm === 'awin' ? awin(AWIN.librofm, dest) : dest; },
@@ -80,17 +93,20 @@
       url: (t) => `https://www.overdrive.com/search?q=${q(t)}`, aff: () => false } // OverDrive (Libby). WorldCat rate-limited visitors (2026-10-09)
   };
 
-  // UX rule: three visible choices labelled by task, the rest under "More".
-  const PRIMARY = [['goodreads', 'Read reviews on Goodreads'], ['bookshop', 'Buy at Bookshop.org'], ['librofm', 'Listen on Libro.fm']];
-  const MORE = [['amazon', 'Amazon'], ['audible', 'Audible'], ['library', 'Find at your library']];
+  // Visible choices labelled by task, the rest under "More". Book links show four (library added 2026-10-14:
+  // "every pick links to your library, indie bookstores, Kindle, and Audible"); Amazon and Audible stay last, under More.
+  const PRIMARY = [['goodreads', 'Read reviews on Goodreads'], ['bookshop', 'Buy at Bookshop.org'], ['library', 'Find at your library'], ['librofm', 'Listen on Libro.fm']];
+  const MORE = [['amazon', 'Amazon'], ['audible', 'Audible']];
 
   function link(storeId, title, author, text) {
     const s = STORES[storeId];
     const a = document.createElement('a');
-    a.href = s.url(searchTerms(storeId, title, author));
+    const isbn = storeId === 'bookshop' ? isbnFor(title, author) : '';
+    a.href = s.url(searchTerms(storeId, title, author), isbn);
     a.textContent = text || `${s.action} on ${s.name}`;
     a.target = '_blank';
-    a.rel = s.aff() ? 'sponsored noopener' : 'noopener';
+    const sponsored = s.sponsored ? s.sponsored(isbn) : s.aff();
+    a.rel = sponsored ? 'sponsored noopener' : 'noopener';
     return a;
   }
 
@@ -175,10 +191,10 @@
   function disclosure() {
     const parts = [];
     if (IDS.amazon) parts.push('As an Amazon Associate I earn from qualifying purchases.');
-    const others = ['bookshop', 'librofm'].filter((id) => STORES[id].aff()).map((id) => STORES[id].name);
-    if (others.length) parts.push(`We may earn a commission when you buy through ${others.join(' or ')} links, at no extra cost to you.`);
+    if (STORES.bookshop.aff()) parts.push('If you buy a book through a Bookshop.org link, we may earn a commission from Bookshop.org, whose fees support independent bookstores.');
+    if (STORES.librofm.aff()) parts.push('We may also earn a commission from Libro.fm links, at no extra cost to you.');
     return parts.join(' ');
   }
 
-  window.PartyLinks = { bookLinks, gameLinks, movieLinks, giftLinks, link, isAffiliate, disclosure, searchTerms, STORE_IDS: Object.keys(STORES) };
+  window.PartyLinks = { isbnFor, bookKey, bookLinks, gameLinks, movieLinks, giftLinks, link, isAffiliate, disclosure, searchTerms, STORE_IDS: Object.keys(STORES) };
 })();

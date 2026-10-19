@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bookshop widget test – The Party Wheel</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="../../../assets/style.css?v=20261015a">
+<style>
+  .test { margin: 1.25rem 0; padding: 1rem; border: 2px solid var(--teal); border-radius: 0.75rem; }
+  .test h2 { margin-top: 0; font-size: 1.1rem; }
+  .test p { margin: 0.4rem 0; }
+  .widget-box { background: #fff; color: #222; padding: 0.75rem; border-radius: 0.5rem; margin-top: 0.75rem; }
+  code { word-break: break-all; }
+</style>
+</head>
+<body>
+<header class="site-header"><div class="wrap"><a href="../../../">The Party Wheel</a></div></header>
+<main class="wrap">
+  <h1>Bookshop link test</h1>
+  <p class="lede">Hidden test page for Mark. Tap each one, then look at the address on Bookshop. Test book: <strong>Lessons in Chemistry</strong>.</p>
+
+  <section class="test">
+    <h2>A. Our credited title link (known good)</h2>
+    <p><a href="https://bookshop.org/a/129730/9780385547345" target="_blank" rel="sponsored noopener">Open Lessons in Chemistry</a></p>
+    <p>Expect: lands on the book. Address should start with bookshop.org/a/129730/ or change to the book page right after.</p>
+  </section>
+
+  <section class="test">
+    <h2>B. Plain search (what bestsellers use today)</h2>
+    <p><a href="https://bookshop.org/search?keywords=Lessons%20in%20Chemistry%20Garmus" target="_blank" rel="noopener">Search Bookshop</a></p>
+    <p>Expect: search results, no 129730 anywhere. Bookshop says this isn't credited.</p>
+  </section>
+
+  <section class="test">
+    <h2>C. Our shop page</h2>
+    <p><a href="https://bookshop.org/shop/thepartywheel" target="_blank" rel="noopener">Open our Bookshop shop</a></p>
+    <p>Then search for the book from there. Note whether 129730 or "thepartywheel" shows in the address after the search.</p>
+  </section>
+
+  <section class="test">
+    <h2>D. Bookshop's search widget</h2>
+    <p>This is Bookshop's own script. It only loads on this hidden page, and only after you tap the button.</p>
+    <p><button class="text-btn" id="load" type="button">Load the search widget</button></p>
+    <div class="widget-box" id="widget" hidden></div>
+    <p>Search "Lessons in Chemistry" in the box. Note the full address it opens, especially any 129730 or "aid" in it.</p>
+  </section>
+
+  <p>Send a screenshot of the address bar for C and D.</p>
+</main>
+<script>
+document.getElementById('load').addEventListener('click', function () {
+  var box = document.getElementById('widget');
+  if (box.dataset.loaded) return;
+  box.dataset.loaded = '1'; box.hidden = false;
+  var s = document.createElement('script');
+  s.src = 'https://bookshop.org/widgets.js';
+  s.setAttribute('data-type', 'search');
+  s.setAttribute('data-include-branding', 'false');
+  s.setAttribute('data-affiliate-id', '129730');
+  box.appendChild(s);
+  this.textContent = 'Widget loading below…';
+});
+</script>
+</body>
+</html>

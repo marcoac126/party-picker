@@ -1,6 +1,6 @@
 // Generated weekly by scripts/update-hits.mjs from Apple Music's US top songs feed. Do not edit by hand.
 window.KARAOKE_HITS = {
- "updated": "2026-10-10",
+ "updated": "2026-10-13",
  "songs": [
   [
    "Choosin' Texas",
@@ -11,28 +11,28 @@ window.KARAOKE_HITS = {
    "KAROL G, Judeline & rusowsky"
   ],
   [
-   "Cold Shoulder",
-   "Drake, Don Toliver & Yebba"
-  ],
-  [
-   "Patient Zero",
-   "Taylor Swift"
-  ],
-  [
    "Last Thing You Need",
    "Morgan Wallen"
+  ],
+  [
+   "Cold Shoulder",
+   "Drake, Don Toliver & Yebba"
   ],
   [
    "Been By Now",
    "Morgan Wallen"
   ],
   [
-   "I Can't Love You Anymore",
-   "Ella Langley & Morgan Wallen"
+   "Patient Zero",
+   "Taylor Swift"
   ],
   [
    "stupid song",
    "Olivia Rodrigo"
+  ],
+  [
+   "I Can't Love You Anymore",
+   "Ella Langley & Morgan Wallen"
   ],
   [
    "Be Her",
@@ -43,6 +43,10 @@ window.KARAOKE_HITS = {
    "Morgan Wallen"
   ],
   [
+   "Broken Window Serenade",
+   "Whiskey Myers"
+  ],
+  [
    "Don't We",
    "Morgan Wallen"
   ],
@@ -51,12 +55,8 @@ window.KARAOKE_HITS = {
    "Gunna"
   ],
   [
-   "Broken Window Serenade",
-   "Whiskey Myers"
-  ],
-  [
-   "Babylon",
-   "Taylor Swift"
+   "Great Expectation",
+   "SIENNA SPIRO"
   ],
   [
    "Just In Case",
@@ -67,16 +67,8 @@ window.KARAOKE_HITS = {
    "Olivia Dean"
   ],
   [
-   "Boston",
-   "STELLA LEFTY"
-  ],
-  [
-   "Classic PT2",
-   "Drake"
-  ],
-  [
-   "Great Expectation",
-   "SIENNA SPIRO"
+   "Dope Girl",
+   "Rod Wave"
   ],
   [
    "Thinkin’ Bout Me",
@@ -87,8 +79,8 @@ window.KARAOKE_HITS = {
    "Morgan Wallen"
   ],
   [
-   "What I Want",
-   "Morgan Wallen & Tate McRae"
+   "Boston",
+   "STELLA LEFTY"
   ],
   [
    "Cowgirls (feat. ERNEST)",
