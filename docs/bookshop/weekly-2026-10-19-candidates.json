@@ -1,0 +1,315 @@
+{
+ "round": "weekly-2026-10-19",
+ "made": "2026-10-19",
+ "files": [
+  "weekly-2026-10-19.csv (14)"
+ ],
+ "picks": [
+  {
+   "title": "The Secret of Secrets",
+   "author": "Dan Brown",
+   "genre": "weekly",
+   "key": "the secret of secrets|brown",
+   "isbn": "9780385546898",
+   "year": 2025
+  },
+  {
+   "title": "A Calamity of Souls",
+   "author": "David Baldacci",
+   "genre": "weekly",
+   "key": "a calamity of souls|baldacci",
+   "isbn": "9781035035601",
+   "year": 2024
+  },
+  {
+   "title": "The Calamity Club",
+   "author": "Kathryn Stockett",
+   "genre": "weekly",
+   "key": "the calamity club|stockett",
+   "isbn": "9781954118812",
+   "year": 2026
+  },
+  {
+   "title": "The Book of Lost Friends",
+   "author": "Lisa Wingate",
+   "genre": "weekly",
+   "key": "the book of lost friends|wingate",
+   "isbn": "9780593286418",
+   "year": 2020
+  },
+  {
+   "title": "A Court of Splintered Harmony",
+   "author": "Sarah J. Maas",
+   "genre": "weekly",
+   "key": "a court of splintered harmony|maas",
+   "isbn": "9781639739134",
+   "year": 2026
+  },
+  {
+   "title": "Red Rising",
+   "author": "Pierce Brown",
+   "genre": "weekly",
+   "key": "red rising|brown",
+   "isbn": "9780593871522",
+   "year": 2025
+  },
+  {
+   "title": "Nora Goes Off Script",
+   "author": "Annabel Monaghan",
+   "genre": "weekly",
+   "key": "nora goes off script|monaghan",
+   "isbn": "9780593420058",
+   "year": 2023
+  },
+  {
+   "title": "Assassin's Apprentice",
+   "author": "Robin Hobb",
+   "genre": "weekly",
+   "key": "assassin's apprentice|hobb",
+   "isbn": "9780006480099",
+   "year": 1996
+  },
+  {
+   "title": "The Believers (1)",
+   "author": "Witness Lee",
+   "genre": "weekly",
+   "key": "the believers|lee",
+   "isbn": "9780736322638",
+   "year": 2003
+  },
+  {
+   "title": "Under Currents",
+   "author": "Nora Roberts",
+   "genre": "weekly",
+   "key": "under currents|roberts",
+   "isbn": "9781250213266",
+   "year": 2020
+  },
+  {
+   "title": "Yesteryear: A GMA Book Club Pick",
+   "author": "Caro Claire Burke",
+   "genre": "weekly",
+   "key": "yesteryear|burke",
+   "isbn": "9780593804216",
+   "year": 2026
+  },
+  {
+   "title": "Damascus Station",
+   "author": "David McCloskey",
+   "genre": "weekly",
+   "key": "damascus station|mccloskey",
+   "isbn": "9780393881042",
+   "year": 2021
+  },
+  {
+   "title": "Iron Flame",
+   "author": "Rebecca Yarros",
+   "genre": "weekly",
+   "key": "iron flame|yarros",
+   "isbn": "9781649375858",
+   "year": 2023
+  },
+  {
+   "title": "The Shadow of the Gods",
+   "author": "John Gwynne",
+   "genre": "weekly",
+   "key": "the shadow of the gods|gwynne",
+   "isbn": "9780356528571",
+   "year": 2025
+  }
+ ],
+ "missing": [
+  {
+   "title": "The Family Cross",
+   "author": "James Patterson",
+   "genre": "weekly",
+   "key": "the family cross|patterson"
+  },
+  {
+   "title": "The French Illusion",
+   "author": "John Grisham",
+   "genre": "weekly",
+   "key": "the french illusion|grisham"
+  },
+  {
+   "title": "In the Shadow of Eight",
+   "author": "Collin Gosselin",
+   "genre": "weekly",
+   "key": "in the shadow of eight|gosselin"
+  },
+  {
+   "title": "Threshing Day",
+   "author": "Rebecca Yarros",
+   "genre": "weekly",
+   "key": "threshing day|yarros"
+  },
+  {
+   "title": "Peck & Peck",
+   "author": "Bonnie Garmus",
+   "genre": "weekly",
+   "key": "peck peck|garmus"
+  },
+  {
+   "title": "Partita",
+   "author": "Barbara Kingsolver",
+   "genre": "weekly",
+   "key": "partita|kingsolver"
+  },
+  {
+   "title": "Double Tap",
+   "author": "Vince Flynn & Don Bentley",
+   "genre": "weekly",
+   "key": "double tap|flynn"
+  },
+  {
+   "title": "Mad Mabel",
+   "author": "Sally Hepworth",
+   "genre": "weekly",
+   "key": "mad mabel|hepworth"
+  },
+  {
+   "title": "The Law Student",
+   "author": "John Grisham",
+   "genre": "weekly",
+   "key": "the law student|grisham"
+  },
+  {
+   "title": "Theo of Golden",
+   "author": "Allen Levi",
+   "genre": "weekly",
+   "key": "theo of golden|levi"
+  },
+  {
+   "title": "When You Loved Me",
+   "author": "Beatriz Williams",
+   "genre": "weekly",
+   "key": "when you loved me|williams"
+  },
+  {
+   "title": "One Helluva Ride",
+   "author": "Michael Douglas",
+   "genre": "weekly",
+   "key": "one helluva ride|douglas"
+  },
+  {
+   "title": "Hollow Bones",
+   "author": "Jodi Picoult",
+   "genre": "weekly",
+   "key": "hollow bones|picoult"
+  },
+  {
+   "title": "Ares",
+   "author": "Sybil Bartel",
+   "genre": "weekly",
+   "key": "ares|bartel"
+  },
+  {
+   "title": "Between Twilight",
+   "author": "Donna Grant",
+   "genre": "weekly",
+   "key": "between twilight|grant"
+  },
+  {
+   "title": "Out of the Shadows",
+   "author": "Jay Stratton",
+   "genre": "weekly",
+   "key": "out of the shadows|stratton"
+  },
+  {
+   "title": "Whistler",
+   "author": "Ann Patchett",
+   "genre": "weekly",
+   "key": "whistler|patchett"
+  },
+  {
+   "title": "Big Little Truths: Reese's Book Club",
+   "author": "Liane Moriarty",
+   "genre": "weekly",
+   "key": "big little truths|moriarty"
+  },
+  {
+   "title": "Ransom",
+   "author": "Daniel Silva",
+   "genre": "weekly",
+   "key": "ransom|silva"
+  },
+  {
+   "title": "London Station",
+   "author": "David McCloskey",
+   "genre": "weekly",
+   "key": "london station|mccloskey"
+  },
+  {
+   "title": "The Munich Affair",
+   "author": "James Patterson & David Ellis",
+   "genre": "weekly",
+   "key": "the munich affair|patterson"
+  },
+  {
+   "title": "The Mosquito Bowl",
+   "author": "Buzz Bissinger",
+   "genre": "weekly",
+   "key": "the mosquito bowl|bissinger"
+  },
+  {
+   "title": "Contend",
+   "author": "Philip Anthony Mitchell",
+   "genre": "weekly",
+   "key": "contend|mitchell"
+  },
+  {
+   "title": "The Pirate Queen",
+   "author": "Ariel Lawhon",
+   "genre": "weekly",
+   "key": "the pirate queen|lawhon"
+  },
+  {
+   "title": "Murder at the Grand Alpine Hotel",
+   "author": "Lucy Foley & Agatha Christie",
+   "genre": "weekly",
+   "key": "murder at the grand alpine hotel|foley"
+  },
+  {
+   "title": "America's Golden Age",
+   "author": "Newt Gingrich",
+   "genre": "weekly",
+   "key": "america's golden age|gingrich"
+  },
+  {
+   "title": "How to Read a Book",
+   "author": "Monica Wood",
+   "genre": "weekly",
+   "key": "how to read a book|wood"
+  },
+  {
+   "title": "Artur: Dark Mafia Romance",
+   "author": "Alessa Steel",
+   "genre": "weekly",
+   "key": "artur|steel"
+  },
+  {
+   "title": "American Hagwon",
+   "author": "Min Jin Lee",
+   "genre": "weekly",
+   "key": "american hagwon|lee"
+  },
+  {
+   "title": "Miss Wolcott's Ghost",
+   "author": "Louise Penny",
+   "genre": "weekly",
+   "key": "miss wolcott's ghost|penny"
+  },
+  {
+   "title": "Other Worlds Than These",
+   "author": "Stephen King & Peter Straub",
+   "genre": "weekly",
+   "key": "other worlds than these|king"
+  },
+  {
+   "title": "The Trespasser",
+   "author": "Tana French",
+   "genre": "weekly",
+   "key": "the trespasser|french"
+  }
+ ]
+}

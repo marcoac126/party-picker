@@ -1,10 +1,10 @@
 // Generated weekly by scripts/update-books.mjs from Apple Books' US top-paid chart. Do not edit by hand.
 window.CURRENT_BOOKS = {
- "updated": "2026-10-13",
+ "updated": "2026-10-19",
  "books": [
   [
-   "In the Shadow of Eight",
-   "Collin Gosselin",
+   "The Family Cross",
+   "James Patterson",
    "current"
   ],
   [
@@ -13,43 +13,18 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "Peck & Peck",
-   "Bonnie Garmus",
+   "In the Shadow of Eight",
+   "Collin Gosselin",
    "current"
   ],
   [
-   "Contend",
-   "Philip Anthony Mitchell",
+   "The Secret of Secrets",
+   "Dan Brown",
    "current"
   ],
   [
-   "Out of the Shadows",
-   "Jay Stratton",
-   "current"
-  ],
-  [
-   "I'll Believe in Anything",
-   "Jacob Tierney & Rachel Reid",
-   "current"
-  ],
-  [
-   "The Ferryman's Rest Inn & Grogshop",
-   "Seana Kelly",
-   "current"
-  ],
-  [
-   "The Thrice-Bound Fool",
-   "Christopher Buehlman",
-   "current"
-  ],
-  [
-   "Bark Humbug",
-   "David Rosenfelt",
-   "current"
-  ],
-  [
-   "Verity",
-   "Colleen Hoover",
+   "A Calamity of Souls",
+   "David Baldacci",
    "current"
   ],
   [
@@ -58,18 +33,8 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "The Law Student",
-   "John Grisham",
-   "current"
-  ],
-  [
-   "The Calamity Club",
-   "Kathryn Stockett",
-   "current"
-  ],
-  [
-   "D",
-   "Neal Stephenson",
+   "Peck & Peck",
+   "Bonnie Garmus",
    "current"
   ],
   [
@@ -78,13 +43,8 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "One Helluva Ride",
-   "Michael Douglas",
-   "current"
-  ],
-  [
-   "Mad Mabel",
-   "Sally Hepworth",
+   "The Calamity Club",
+   "Kathryn Stockett",
    "current"
   ],
   [
@@ -93,43 +53,23 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "Ice Covered Heart",
-   "Cynthia Eden",
+   "Mad Mabel",
+   "Sally Hepworth",
    "current"
   ],
   [
-   "A Date with Santa",
-   "Debbie Macomber",
+   "The Law Student",
+   "John Grisham",
    "current"
   ],
   [
-   "The Game",
-   "Peter King",
+   "Verity",
+   "Colleen Hoover",
    "current"
   ],
   [
-   "Hollow Bones",
-   "Jodi Picoult",
-   "current"
-  ],
-  [
-   "The End of Everything",
-   "M. John Harrison",
-   "current"
-  ],
-  [
-   "Secret Prey",
-   "John Sandford",
-   "current"
-  ],
-  [
-   "Vibe",
-   "Adam Grant",
-   "current"
-  ],
-  [
-   "Win Me Back",
-   "Camilla Isley",
+   "The Book of Lost Friends",
+   "Lisa Wingate",
    "current"
   ],
   [
@@ -138,88 +78,43 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "As You Wake, Break the Shell",
-   "Becky Chambers",
-   "current"
-  ],
-  [
-   "Malice",
-   "LeAnn Ashers",
-   "current"
-  ],
-  [
-   "The Stones Cry Out",
-   "Dinesh D'Souza",
-   "current"
-  ],
-  [
-   "Weddings",
-   "Danielle Steel",
-   "current"
-  ],
-  [
-   "Ransom",
-   "Daniel Silva",
-   "current"
-  ],
-  [
    "A Court of Splintered Harmony",
    "Sarah J. Maas",
    "current"
   ],
   [
-   "Ethel Kennedy",
-   "Kerry Kennedy",
+   "Red Rising",
+   "Pierce Brown",
    "current"
   ],
   [
-   "East of Eden",
-   "John Steinbeck",
+   "When You Loved Me",
+   "Beatriz Williams",
    "current"
   ],
   [
-   "Blockers",
-   "Michael Lewis",
+   "One Helluva Ride",
+   "Michael Douglas",
    "current"
   ],
   [
-   "London Station",
-   "David McCloskey",
-   "current"
-  ],
-  [
-   "Adam and Eve",
-   "Jeffrey Archer",
-   "current"
-  ],
-  [
-   "Ruthless",
-   "Danielle Steel",
-   "current"
-  ],
-  [
-   "The Way You Always Hold Me",
-   "Ava Miles",
-   "current"
-  ],
-  [
-   "Big Little Truths: Reese's Book Club",
-   "Liane Moriarty",
-   "current"
-  ],
-  [
-   "My Sister's Keeper",
+   "Hollow Bones",
    "Jodi Picoult",
    "current"
   ],
   [
-   "Music Against the Night",
-   "Yiyun Li",
+   "Ares",
+   "Sybil Bartel",
    "current"
   ],
   [
-   "The Pirate Queen",
-   "Ariel Lawhon",
+   "Between Twilight",
+   "Donna Grant",
+   "current"
+  ],
+  [
+   "Out of the Shadows",
+   "Jay Stratton",
    "current"
   ],
   [
@@ -228,18 +123,133 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "Why Am I Like This?",
-   "Sabrina Zohar",
+   "Big Little Truths: Reese's Book Club",
+   "Liane Moriarty",
    "current"
   ],
   [
-   "Mystery Play",
-   "Elizabeth Kostova",
+   "Nora Goes Off Script",
+   "Annabel Monaghan",
+   "current"
+  ],
+  [
+   "Ransom",
+   "Daniel Silva",
+   "current"
+  ],
+  [
+   "Fourth Wing",
+   "Rebecca Yarros",
+   "current"
+  ],
+  [
+   "London Station",
+   "David McCloskey",
+   "current"
+  ],
+  [
+   "Assassin's Apprentice",
+   "Robin Hobb",
+   "current"
+  ],
+  [
+   "East of Eden",
+   "John Steinbeck",
+   "current"
+  ],
+  [
+   "The Believers (1)",
+   "Witness Lee",
+   "current"
+  ],
+  [
+   "Under Currents",
+   "Nora Roberts",
+   "current"
+  ],
+  [
+   "Yesteryear: A GMA Book Club Pick",
+   "Caro Claire Burke",
+   "current"
+  ],
+  [
+   "Damascus Station",
+   "David McCloskey",
+   "current"
+  ],
+  [
+   "The Munich Affair",
+   "James Patterson & David Ellis",
+   "current"
+  ],
+  [
+   "Iron Flame",
+   "Rebecca Yarros",
+   "current"
+  ],
+  [
+   "The Mosquito Bowl",
+   "Buzz Bissinger",
+   "current"
+  ],
+  [
+   "Contend",
+   "Philip Anthony Mitchell",
+   "current"
+  ],
+  [
+   "The Pirate Queen",
+   "Ariel Lawhon",
+   "current"
+  ],
+  [
+   "Lessons in Chemistry",
+   "Bonnie Garmus",
    "current"
   ],
   [
    "Murder at the Grand Alpine Hotel",
    "Lucy Foley & Agatha Christie",
+   "current"
+  ],
+  [
+   "America's Golden Age",
+   "Newt Gingrich",
+   "current"
+  ],
+  [
+   "How to Read a Book",
+   "Monica Wood",
+   "current"
+  ],
+  [
+   "Artur: Dark Mafia Romance",
+   "Alessa Steel",
+   "current"
+  ],
+  [
+   "The Shadow of the Gods",
+   "John Gwynne",
+   "current"
+  ],
+  [
+   "American Hagwon",
+   "Min Jin Lee",
+   "current"
+  ],
+  [
+   "Miss Wolcott's Ghost",
+   "Louise Penny",
+   "current"
+  ],
+  [
+   "Other Worlds Than These",
+   "Stephen King & Peter Straub",
+   "current"
+  ],
+  [
+   "The Trespasser",
+   "Tana French",
    "current"
   ]
  ]
