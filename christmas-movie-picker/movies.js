@@ -7,6 +7,7 @@ window.XMAS_MOVIES = [
   ['Miracle on 34th Street', 1947, 'classic', 'A department-store Santa says he’s the real one, and ends up proving it in court.', 'Miracle on 34th'],
   ['White Christmas', 1954, 'classic', 'Bing Crosby and Danny Kaye put on a show to save their old general’s Vermont inn.'],
   ['Holiday Inn', 1942, 'classic', 'An inn that only opens on holidays, and the movie that introduced the song “White Christmas.”'],
+  ['The Bells of St. Mary’s', 1945, 'classic', 'Bing Crosby’s easygoing priest and Ingrid Bergman’s determined nun try to save their struggling school.', 'St. Mary’s'],
   ['Scrooge', 1951, 'classic', 'Alastair Sim’s Scrooge, still a favorite version of A Christmas Carol.'],
   ['The Bishop’s Wife', 1947, 'classic', 'Cary Grant plays an angel sent to help a busy bishop at Christmas.', 'Bishop’s Wife'],
   ['The Shop Around the Corner', 1940, 'classic', 'Two feuding coworkers don’t know they’re secret pen pals.', 'Shop Around'],
