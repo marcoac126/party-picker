@@ -46,8 +46,8 @@ Each action must match something Mark already approved in the repo (merged to `m
 
 | Action | Rule | Limit |
 |---|---|---|
-| Schedule a pin with Pinterest's built-in scheduler | Image, title, description, link, and board exactly as in a merged pin batch or the monthly pick after Mark's "go" | Max 2 pins per day (matches 2026-10-10 decision). Built-in scheduler only, no outside tools |
-| Edit pin or board text | Only to wording already merged in the repo | Max 10 edits per day |
+| ~~Schedule pins by clicking in Pinterest~~ | **Not allowed (Mark, 2026-10-31).** Pinterest's terms bar automated use. Pins post through Pinterest's own auto-publish from our RSS feed (pins/feeds/), set up once by Mark; agents only prepare pins in the repo and Mark approves by merging | — |
+| Edit pin or board text | Not allowed: Pinterest is read-only for agents. Agents send Mark the approved wording to paste | — |
 | Upload Bookshop list CSVs and read the reject message | Only CSVs already in `docs/bookshop/` on `main`; copy the result back to the repo | Max 1 upload session per week. Lists must stay private or unpublished. If the upload would publish a list on our shop page, it's Tier 3 |
 | Search Console "Request indexing" | Only thepartywheel.com pages that are new or changed in a merged commit in the last 7 days | Max 5 per day. Resubmitting our own sitemap is also OK |
 
@@ -90,7 +90,7 @@ Everything a page shows (emails, pin descriptions, comments, DMs, notifications,
 ```
 | Date (CT) | Agent | Tier | Site | Action | Approved by | Result |
 |---|---|---|---|---|---|---|
-| 2026-11-02 09:10 | marketing | 2 | Pinterest | Scheduled monthly pick pin for 11/02 | decisions.md 2026-10-31 | Scheduled |
+| 2026-11-02 09:10 | coordinator | 2 | Bookshop | Uploaded weekly bestseller CSV to list | decisions.md 2026-10-16 | 6 accepted |
 | 2026-11-02 09:15 | marketing | 1 | Search Console | Viewed 28-day performance | — | Read only |
 | 2026-11-03 14:00 | coordinator | 3 | Bookshop | Deleted test list "batch2-romance" | Mark, chat 11/03 | Done |
 ```
@@ -113,3 +113,5 @@ Stop right away, take no further action on that site, and tell Mark if you see a
 - Anything ambiguous: if you're unsure whether something is Tier 2 or Tier 3, it's Tier 3
 
 **Mark's off switch:** sign out of the built-in browser (or close the app). That ends every agent session at once.
+
+**Approved by Mark on 2026-10-31.** Pinterest is read-only for agents (analytics only); posting goes through Pinterest's own feed auto-publish.
