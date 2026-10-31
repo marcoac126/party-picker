@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Privacy Policy – The Party Wheel</title>
-<meta name="description" content="How The Party Wheel handles your information: no accounts, no tracking cookies, and your lists stay on your device.">
+<meta name="description" content="How The Party Wheel handles your information: no accounts, no cookies, cookie-free visit counts, and your lists stay on your device.">
 <link rel="canonical" href="https://thepartywheel.com/privacy/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="The Party Wheel">
 <meta property="og:title" content="Privacy Policy – The Party Wheel">
-<meta property="og:description" content="How The Party Wheel handles your information: no accounts, no tracking cookies, and your lists stay on your device.">
+<meta property="og:description" content="How The Party Wheel handles your information: no accounts, no cookies, cookie-free visit counts, and your lists stay on your device.">
 <meta property="og:url" content="https://thepartywheel.com/privacy/">
 <meta property="og:image" content="https://thepartywheel.com/assets/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -29,12 +29,16 @@
 
 <main class="wrap prose">
   <h1>Privacy policy</h1>
-  <p class="updated">Last updated October 14, 2026</p>
+  <p class="updated">Last updated October 31, 2026</p>
 
   <p>The Party Wheel is a free set of spinning-wheel pickers. We built it to collect as little about you as possible. Here’s exactly what happens when you use it.</p>
 
   <h2>What we collect</h2>
-  <p><strong>Nothing that identifies you.</strong> There are no accounts, sign-ups, or contact forms, and the site doesn’t use tracking cookies or analytics scripts.</p>
+  <p><strong>Nothing that identifies you.</strong> There are no accounts, sign-ups, or contact forms, and the site doesn’t use cookies.</p>
+
+  <h2>Visit counts</h2>
+  <p>We use GoatCounter, a privacy-friendly counter, to see how many people visit each page and which store or service links get clicked (for example, “Bookshop.org from the book club page”). It uses no cookies, doesn’t store your IP address, and only keeps totals, so no one, including us, can identify you. Data is stored in the EU (Finland and Germany). Your wheel lists and share links are never sent. See <a href="https://www.goatcounter.com/privacy">GoatCounter’s privacy policy</a>.</p>
+  <p><button class="text-btn" id="count-toggle" type="button">Turn off counting on this browser</button> <span id="count-status" aria-live="polite"></span></p>
 
   <h2>Your lists stay on your device</h2>
   <p>Songs, books, games, movies, and names you type in, plus your settings, are saved in your browser’s local storage so they’re there next time. They are never sent to us or anyone else. To erase them, clear this site’s data in your browser settings.</p>
@@ -56,7 +60,7 @@
   <p>The site isn’t directed at children under 13, and we don’t knowingly collect information from anyone.</p>
 
   <h2>Changes</h2>
-  <p>If we ever add advertising, analytics, or anything else that collects information, we’ll update this page first and change the date at the top.</p>
+  <p>If we ever add advertising or anything else that collects more information, we’ll update this page first and change the date at the top.</p>
 
   <h2>Contact</h2>
   <p>Questions? Email <a href="mailto:hello@thepartywheel.com">hello@thepartywheel.com</a>.</p>
@@ -67,5 +71,14 @@
     <nav class="footer-links" aria-label="Site information"><a href="../about/">About</a><a href="../privacy/">Privacy policy</a><a href="../affiliate-disclosure/">Affiliate disclosure</a></nav>
   </div>
 </footer>
+<script src="../assets/count.js?v=20261031a" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var b = document.getElementById('count-toggle'), st = document.getElementById('count-status');
+  function show() { var off = window.PartyCount && window.PartyCount.isOff(); b.textContent = off ? 'Turn counting back on' : 'Turn off counting on this browser'; st.textContent = off ? 'Counting is off on this browser.' : ''; }
+  b.addEventListener('click', function () { window.PartyCount.setOff(!window.PartyCount.isOff()); show(); });
+  show();
+});
+</script>
 </body>
 </html>
