@@ -1,8 +1,62 @@
 # Keywords & Page Priorities
 
-Last updated: 2026-10-09 (first research round)
+Last updated: 2026-10-31 (first Search Console data)
 
-Demand figures are not verified yet. Free volume tools need a Google Ads account (Keyword Planner) or a live site (Search Console). Scores below are based on competition only.
+The table below is the original 10/09 research, scored on competition only. Where we now have real data, the "2026-10-31 first data" section overrides it.
+
+## 2026-10-31 first data
+
+Source: Search Console, last 28 days (Oct 8 – Oct 29). Totals: **29 clicks, 259 impressions, ~11% CTR**. Mobile 21 clicks / 147 impressions (pos 4.1); desktop 8 / 111 (pos 10.8). Numbers are small. Treat them as direction, not proof.
+
+### Per page
+| Page | Clicks | Impr. | CTR | Avg pos. | Read |
+|---|---|---|---|---|---|
+| /book-club-picker/ | 27 | 222 | 12.2% | 4.9 | **Working.** 93% of all clicks. Position improving (daily avg ~2–3 since 10/22) |
+| /karaoke-song-picker/ | 1 | 27 | 3.7% | 21.0 | **Not working yet.** Page 2–3; "random karaoke song generator" at pos ~52 |
+| / (home) | 1 | 7 | 14.3% | 5.1 | Too little data |
+| /party-game-picker/ | 0 | 9 | 0% | 13.4 | Too little data |
+| /white-elephant-gift-ideas/ | 0 | 5 | 0% | 6.2 | Too little data; season hasn't started |
+| /about/ | 0 | 5 | 0% | 4.0 | n/a |
+| /christmas-movie-picker/ | — | — | — | — | No impressions. Likely not indexed (see Indexing) |
+
+### Top queries (all go to book club unless noted)
+| Query | Clicks | Impr. | Pos. | Note |
+|---|---|---|---|---|
+| random book generator | 0 | 39 | 3.9 | **Biggest single query, 0 clicks.** Title doesn't say "random book generator" |
+| random books generator | 0 | 5 | 3.8 | Same intent |
+| random book picker | 1 | 4 | 5.0 | |
+| book randomizer | 0 | 4 | 2.3 | |
+| book club book picker | 0 | 4 | 6.5 | Our original target phrase. Low volume so far |
+| book picker wheel / wheel of books / random book selector / book club book generator | 0 | 1–2 each | 1–6 | Same intent family |
+| book club generator | 0 | 2 | 41 | |
+| karaoke random song generator | 0 | 5 | 20.2 | Karaoke page |
+| random karaoke song generator | 0 | 4 | 51.8 | Karaoke page |
+| karaoke wheel | 1 | 1 | 5.0 | Karaoke page |
+| sorteio de livros para ler (PT) | 1 | 4 | 5.3 | Spanish/Portuguese, see below |
+| libro al azar / libro aleatorio / ruleta de libros / rueda de libros (ES) | 1 | 6 | 1–4 | |
+
+Query rows add up to only 5 of 29 clicks. Google hides low-volume queries, so most book club clicks come from queries we can't see.
+
+**What changed vs. the 10/09 guesses:** the real demand is "random book generator / picker" (readers wanting any random book), not "book club book picker wheel". Book club stays the page; the title should name both.
+
+### Where the clicks come from
+- US 9 clicks / 129 impr. Non-US 20 clicks (Brazil 5, Spain 4, Italy 4, UK 2, others 1 each).
+- **About 70% of clicks are outside the US.** This matters for money: Bookshop.org affiliate is US/UK only, and display-ad pay per visitor is much lower outside the US. Clicks are real but worth less than the count suggests.
+- Spanish/Portuguese queries (~11 impressions, 2 clicks): **note only.** Too small to justify a translated page now. Revisit if they pass ~100 impressions/month.
+
+### Indexing (Search Console, as of 10/22)
+- 6 indexed, 11 not. Indexed count has been flat at 6 since 10/09.
+- **Page with redirect (3)** and **Alternate page with proper canonical (3):** normal. These are URL variants (http/www/no-slash or ?params) pointing to the real page. No action.
+- **Discovered – currently not indexed (5):** sitemap has 11 URLs, and the 6 with impressions are home, karaoke, book club, party game, about, white elephant. So the 5 are most likely privacy, affiliate-disclosure, **christmas-movie-picker**, **holiday-wheels**, **make-your-own-wheel** (inferred, not confirmed in the export; check in URL Inspection). Privacy/disclosure don't matter. **Christmas movie picker does:** its season peaks late Nov–Dec.
+- Action: URL Inspection → Request indexing for /christmas-movie-picker/ (then /holiday-wheels/, /make-your-own-wheel/). Add a visible link to the Christmas movie picker from the book club page, since that's the page Google crawls most.
+
+### Score changes
+| Page | Old score | New score | Why |
+|---|---|---|---|
+| Book club picker | Build now | **Optimize now** | Only page earning clicks; title/meta change to capture "random book generator" |
+| Karaoke song picker | Build now | **Hold** | Page 2–3 after 3 weeks. Don't add more karaoke pages until it reaches page 1 for one phrase |
+| Christmas movie picker | Build now | **Get indexed now** | Built but invisible to Google; seasonal deadline mid-Nov |
+| Spanish/Portuguese book picker | — | **Skip (note only)** | ~11 impressions |
 
 | Page | Target phrases | Who ranks now | Money path | Score |
 |---|---|---|---|---|
