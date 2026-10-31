@@ -185,3 +185,9 @@ Sources: [Bookshop.org — affiliate disclosure requirement](https://support.boo
 - **What:** `tools/link-test/bookshop-widget/` (hidden: noindex, /tools/ disallowed in robots.txt, not linked) loads Bookshop's `widgets.js` search widget, only after a tap, so Mark can see whether widget searches carry our affiliate ID.
 - **Why allowed:** test page only, used by Mark; no visitor page loads the script. The no-third-party-scripts rule still applies to every public page.
 - **Exit:** remove the test page once the result is known. Any public use of the widget needs a full security review and a privacy policy update first.
+
+## 2026-10-31 — Review: GoatCounter visit counts
+- **Chosen over:** Google Analytics (2-year cookies, consent banner needed for EU/UK visitors), Cloudflare Web Analytics (can't count link clicks), Plausible (no free plan). Umami Cloud Hobby is the backup.
+- **Conditions met:** our own script, no outside code loaded; no cookies; screen size not sent; outbound clicks record only the destination domain and page; URL hash (share links, lists) never read; opt-out button on the privacy page; privacy page updated before going live (dated Oct 31).
+- **Account:** Mark's personal email; dashboard private. GoatCounter offers no two-factor login, so a strong unique password is used. Low risk: the account holds only totals.
+- **Legal note:** GoatCounter relies on legitimate interest; EU guidance increasingly covers cookieless tracking, so we disclose it and offer an opt-out. Low risk.
