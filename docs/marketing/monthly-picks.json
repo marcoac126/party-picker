@@ -1,1 +1,12 @@
-[]
+[
+ {
+  "month": "2026-11",
+  "genre": "fiction",
+  "genreLabel": "Contemporary fiction",
+  "title": "Tomorrow, and Tomorrow, and Tomorrow",
+  "author": "Gabrielle Zevin",
+  "isbn": "9780593321201",
+  "poolSize": 26,
+  "pickedOn": "2026-10-28"
+ }
+]
