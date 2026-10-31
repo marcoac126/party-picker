@@ -217,3 +217,8 @@ Sources: [Bookshop.org — affiliate disclosure requirement](https://support.boo
 - Off switch: signing out of the built-in browser ends all agent access.
 
 Sources: [Pinterest Business Terms of Service](https://business.pinterest.com/business-terms-of-service/); [Anthropic — Use Claude in Chrome safely](https://support.claude.com/en/articles/12902428-use-claude-in-chrome-safely); [Google — Search Console owners, users, and permissions](https://support.google.com/webmasters/answer/7687615?hl=en).
+
+## 2026-10-31 — Closed: Pinterest two-step login
+- Mark confirmed two-step login is on with "Require code at login" checked. Pinterest only sends codes by text message; its help page lists no authenticator app option, so the "authenticator app" condition from 2026-10-10 can't be met. Accepted as the best available.
+- **Low (Mark):** save the Pinterest backup code in your password manager, and add a port-out / account PIN with your phone carrier so nobody can move your number to their SIM (the main weakness of text codes).
+- Source: [Pinterest Help: Two-factor authentication](https://help.pinterest.com/en/article/two-factor-authentication).
