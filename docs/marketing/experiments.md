@@ -28,3 +28,8 @@
 - Video pin (10/15) gets the new title/description. 7-day test window 10/15–10/21 stays clean.
 - Static pins, Book Club Ideas board, section "Book Club Picker": A "What happens after you spin" (Thu 10/22), B "New bestsellers on the wheel every Monday" (Mon 10/26), C "Pick your next book. Borrow it free." (Thu 10/29). Text and site screenshots only: no book covers, no store logos.
 - Measure with Pinterest per-pin outbound clicks and saves (the site has no analytics script, so no UTM tags). Stop rule: a static pin style under 5 outbound clicks in 14 days gets no more pins; re-pin the best one ~2 weeks later instead of new art.
+
+## Party game video pin (2026-10-31)
+- 14s, 9:16, silent: teaser spin → set group size (8–12) → spin → result with quick rules and "Watch how to play" → end card. Rendered frame by frame from the live page.
+- Why: Party Games is the board Pinterest shows most (212 of ~450 October impressions). Mark: people may keep the page handy in a pinch.
+- Measure: Pinterest saves/outbound clicks plus GoatCounter visits referred by pinterest.com to /party-game-picker/, judged at the Nov 30 Pinterest checkpoint.
