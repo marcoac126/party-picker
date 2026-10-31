@@ -108,7 +108,7 @@
 
 <script src="../assets/wheel.js?v=20261014a"></script>
 <script src="../assets/share.js?v=20261011c"></script>
-<script src="../assets/links.js?v=20261014b"></script>
+<script src="../assets/links.js?v=20261031a"></script>
 <script src="movies.js?v=20261010c"></script>
 <script>
 (function () {
@@ -149,7 +149,7 @@
         result.append(meta, how);
       }
       result.append(L.movieLinks(name, m ? m[1] : ''));
-      if (L.isAffiliate()) { const d = document.createElement('p'); d.className = 'disclosure'; d.textContent = L.disclosure(); result.append(d); }
+      if (L.isAffiliate('shop')) { const d = document.createElement('p'); d.className = 'disclosure'; d.textContent = L.disclosure('shop'); result.append(d); }
       result.append(window.PartyShare.resultButton(wheel, 'movies', 'Christmas movies'));
       requestAnimationFrame(() => main.classList.add('sing'));
       const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -214,8 +214,8 @@
     $('own-panel').hidden = state.source !== 'own';
     result.innerHTML = '<p class="result-hint">Your movie shows up here.</p>';
     spinBtn.textContent = 'Spin';
-    const showDisc = L.isAffiliate();
-    $('disclosure').hidden = !showDisc; $('disclosure').textContent = showDisc ? L.disclosure() : '';
+    const showDisc = L.isAffiliate('shop');
+    $('disclosure').hidden = !showDisc; $('disclosure').textContent = showDisc ? L.disclosure('shop') : '';
     refresh();
   }
 

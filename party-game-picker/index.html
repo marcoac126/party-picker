@@ -127,7 +127,7 @@
 
 <script src="../assets/wheel.js?v=20261014a"></script>
 <script src="../assets/share.js?v=20261011c"></script>
-<script src="../assets/links.js?v=20261014b"></script>
+<script src="../assets/links.js?v=20261031a"></script>
 <script src="games.js?v=20261009e"></script>
 <script>
 (function () {
@@ -235,8 +235,8 @@
     $('own-panel').hidden = state.source !== 'own';
     result.innerHTML = '<p class="result-hint">Your game shows up here.</p>';
     spinBtn.textContent = 'Spin';
-    const showDisc = L.isAffiliate();
-    $('disclosure').hidden = !showDisc; $('disclosure').textContent = showDisc ? L.disclosure() : '';
+    const showDisc = L.isAffiliate('shop');
+    $('disclosure').hidden = !showDisc; $('disclosure').textContent = showDisc ? L.disclosure('shop') : '';
     refresh();
   }
 

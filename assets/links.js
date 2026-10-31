@@ -186,11 +186,13 @@
     ]);
   }
 
-  function isAffiliate() { return Object.values(STORES).some((s) => s.aff()); }
+  // scope 'books' (default): book links (Bookshop, Libro.fm, Amazon/Audible). scope 'shop': games, movies, gifts (Amazon only).
+  function isAffiliate(scope) { return scope === 'shop' ? !!IDS.amazon : Object.values(STORES).some((s) => s.aff()); }
 
-  function disclosure() {
+  function disclosure(scope) {
     const parts = [];
     if (IDS.amazon) parts.push('As an Amazon Associate I earn from qualifying purchases.');
+    if (scope === 'shop') return parts.join(' ');
     if (STORES.bookshop.aff()) parts.push('If you buy a book through a Bookshop.org link, we may earn a commission from Bookshop.org, whose fees support independent bookstores.');
     if (STORES.librofm.aff()) parts.push('We may also earn a commission from Libro.fm links, at no extra cost to you.');
     return parts.join(' ');
