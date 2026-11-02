@@ -20,7 +20,7 @@
 <link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#2B1342">
-<link rel="stylesheet" href="../assets/style.css?v=20261102a">
+<link rel="stylesheet" href="../assets/style.css?v=20261102c">
 </head>
 <body>
 <header class="site-header">
@@ -30,8 +30,6 @@
 <main class="wrap">
   <h1>Book club picker &amp; random book generator</h1>
   <p class="lede">Books already loaded, with new bestsellers every Monday. Every pick links to your library, indie bookstores, Amazon, and Audible.</p>
-
-  <aside class="month-pick" id="month-pick" aria-labelledby="month-pick-label" hidden></aside>
 
   <fieldset class="segmented">
     <legend class="sr-only">What are you picking?</legend>
@@ -51,6 +49,8 @@
   <div class="result" id="result" aria-live="polite">
     <p class="result-hint">Your pick shows up here.</p>
   </div>
+
+  <aside class="month-pick" id="month-pick" aria-labelledby="month-pick-label" hidden></aside>
 
   <section class="controls" aria-labelledby="list-heading">
     <h2 id="list-heading">Books on the wheel</h2>
@@ -79,6 +79,7 @@
           <summary>See the books on the wheel</summary>
           <p class="disclosure" id="list-disclosure" hidden></p>
           <ul class="book-list" id="book-list"></ul>
+          <p class="disclosure" id="list-disclosure-end" hidden></p>
         </details>
       </div>
 
@@ -98,10 +99,15 @@
     </div>
 
     <p class="check"><input type="checkbox" id="remove"><label for="remove">Remove each pick after it’s chosen</label></p>
-    <p class="disclosure" id="disclosure" hidden></p>
   </section>
 
-  <p class="related">More for book clubs: <a href="../book-club-questions/">Discussion questions wheel</a> · <a href="../start-a-book-club/">Start a book club</a></p>
+  <nav class="more-links" aria-labelledby="more-heading">
+    <h2 id="more-heading">More for book clubs</h2>
+    <ul>
+      <li><a href="../book-club-questions/">Discussion questions wheel</a></li>
+      <li><a href="../start-a-book-club/">Start a book club</a></li>
+    </ul>
+  </nav>
 
   <article class="guide">
     <h2>How to pick a book club book with the wheel</h2>
@@ -133,7 +139,7 @@
   </div>
 </footer>
 
-<script src="../assets/wheel.js?v=20261014a"></script>
+<script src="../assets/wheel.js?v=20261102a"></script>
 <script src="../assets/share.js?v=20261011c"></script>
 <script src="../assets/links.js?v=20261031a"></script>
 <script src="books.js?v=20261009e"></script>
@@ -329,9 +335,8 @@
     result.innerHTML = `<p class="result-hint">${host ? 'The next host shows up here.' : 'Your pick shows up here.'}</p>`;
     spinBtn.textContent = 'Spin';
     const showDisc = !host && L.isAffiliate();
-    $('disclosure').hidden = !showDisc;
-    $('disclosure').textContent = showDisc ? L.disclosure() : '';
     $('list-disclosure').hidden = !showDisc; $('list-disclosure').textContent = showDisc ? L.disclosure() : '';
+    $('list-disclosure-end').hidden = !showDisc; $('list-disclosure-end').textContent = showDisc ? L.disclosure() : '';
     refresh();
   }
 
