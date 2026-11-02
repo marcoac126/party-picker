@@ -288,7 +288,7 @@ p.field-legend { margin: 0.5rem 0 0.5rem; }
 .month-pick-by { color: var(--cream-dim); font-size: 0.95rem; }
 .month-pick-links { margin-top: 0.3rem !important; display: flex; flex-wrap: wrap; column-gap: 1.1rem; }
 .month-pick-links a { font-weight: 750; display: inline-block; min-height: 2.75rem; line-height: 2.75rem; }
-.month-pick-note { margin-top: 0.3rem !important; color: var(--cream-dim); font-size: 0.8rem; }
+.month-pick-note { margin-top: 0.3rem !important; color: var(--cream-dim); font-size: 0.9rem; }
 
 /* ---------- Book club questions wheel ---------- */
 .question-text { margin: 0.35rem 0 0.25rem; font-size: clamp(1.3rem, 5.2vw, 1.7rem); font-weight: 800; line-height: 1.3; color: var(--cream); text-wrap: balance; }

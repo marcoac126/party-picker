@@ -20,7 +20,7 @@
 <link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#2B1342">
-<link rel="stylesheet" href="../assets/style.css?v=20261102b">
+<link rel="stylesheet" href="../assets/style.css?v=20261102c">
 </head>
 <body>
 <header class="site-header">
@@ -79,6 +79,7 @@
           <summary>See the books on the wheel</summary>
           <p class="disclosure" id="list-disclosure" hidden></p>
           <ul class="book-list" id="book-list"></ul>
+          <p class="disclosure" id="list-disclosure-end" hidden></p>
         </details>
       </div>
 
@@ -335,6 +336,7 @@
     spinBtn.textContent = 'Spin';
     const showDisc = !host && L.isAffiliate();
     $('list-disclosure').hidden = !showDisc; $('list-disclosure').textContent = showDisc ? L.disclosure() : '';
+    $('list-disclosure-end').hidden = !showDisc; $('list-disclosure-end').textContent = showDisc ? L.disclosure() : '';
     refresh();
   }
 

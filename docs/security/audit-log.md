@@ -222,3 +222,29 @@ Sources: [Pinterest Business Terms of Service](https://business.pinterest.com/bu
 - Mark confirmed two-step login is on with "Require code at login" checked. Pinterest only sends codes by text message; its help page lists no authenticator app option, so the "authenticator app" condition from 2026-10-10 can't be met. Accepted as the best available.
 - **Low (Mark):** save the Pinterest backup code in your password manager, and add a port-out / account PIN with your phone carrier so nobody can move your number to their SIM (the main weakness of text codes).
 - Source: [Pinterest Help: Two-factor authentication](https://help.pinterest.com/en/article/two-factor-authentication).
+
+## 2026-11-02 — Review: visual refresh preview (branch `ux/visual-refresh-preview`, not merged)
+Scope: `index.html`, `book-club-picker/index.html`, `assets/style.css`, `assets/wheel.js`, and version bumps on all pages. I read the code only and ran nothing. I had no shell, so I read the branch's files directly instead of running `git diff`. A grep confirms nothing on the book club page still refers to the removed `#disclosure`.
+
+**Verdict: pass with conditions.** No High or Medium findings. Before merging, Mark approves the change and the coordinator logs it in `docs/decisions.md`. Merging publishes it to the live site.
+
+**Disclosure check (book club page).** Bookshop affiliate links can show up in three places. Each one has its own disclosure next to the links:
+- **Result card:** in "Next book" mode, the store links and the disclosure line are added together (script line 233–234). This covers both "Suggested picks" and "Our club's list", and shared result links too, since `land()` uses the same code. In "Who hosts" mode no store links or disclosure appear, which is correct.
+- **Monthly pick box:** the disclosure is added inside the box, right under the links (line 165). When the month doesn't match, the box stays hidden and has no links or disclosure, which is correct. The November pick has a known ISBN, so its Buy link really is an affiliate link.
+- **Book list:** `#list-disclosure` sits at the top of the expanded list. It's hidden in "Who hosts" mode, and in "Our club's list" mode, where the whole list is hidden anyway.
+- The wording names Bookshop.org only, which matches the live programs (Amazon and Libro.fm IDs are blank). That meets the 2026-10-31 rule that disclosures must match the links on the page.
+- The bottom `#disclosure` was a third copy, sitting under the controls and away from every link. Removing it doesn't leave any links without a disclosure.
+
+**Low**
+- **The book list disclosure can scroll off screen.** On a phone, opening "Options" for one of the last books puts its Bookshop link about 12 rows below the only disclosure in the list. The FTC wants a reader to be able to see the disclosure and the link at the same time. The removed bottom line used to sit just below the list. *Fix (pick one):* add `<p class="disclosure" id="list-disclosure-end" hidden></p>` after `#book-list` and fill it in `render()` the same way as `#list-disclosure`, or add the disclosure line inside each Options panel in `renderBookList()` when `L.isAffiliate()` is true.
+- **The monthly pick disclosure is small.** `.month-pick-note` is 0.8rem in dim text, while other disclosures are 0.9rem. The FTC says a disclosure should be "difficult to miss." *Fix:* raise `.month-pick-note` to `font-size: 0.9rem`.
+- **Process:** `docs/decisions.md` has no entry for this refresh yet. *Fix:* the coordinator logs it once Mark approves.
+
+**Passed**
+- No new outside requests. The home page wheel icons are inline SVG: no image files, no outside links, `aria-hidden`. The new CSS adds no `url()` or `@import`. The new links are relative links to our own pages (`/book-club-questions/`, `/start-a-book-club/`), and both pages exist.
+- No new scripts, and no new data leaves the browser. GoatCounter and links.js are unchanged.
+- No new injection risk. `wheel.js` only changes canvas font sizing, and labels still go through `fillText` (drawn as pixels, never read as HTML). The shrink math can't go wrong on empty labels, because it only runs when the text is wider than the space. The book club page's existing `innerHTML` uses are unchanged: `.textContent` handles the monthly pick text and result text, and the hint strings are fixed.
+- No secrets in the changed files.
+- The CSS and wheel.js version bumps are consistent on every page that loads them.
+
+Sources: [Bookshop.org: affiliate disclosure](https://support.bookshop.org/support/solutions/articles/65000168990-if-i-m-an-affiliate-do-i-have-to-disclose-that-on-my-website-newsletter-or-social-media-posts-); [Manatt: FTC Endorsement Guides 2023 update ("clear and conspicuous," unavoidable, near the links)](https://www.manatt.com/insights/newsletters/advertising-law/an-in-depth-look-at-the-ftcs-updates-2).
