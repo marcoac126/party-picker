@@ -289,3 +289,51 @@ p.field-legend { margin: 0.5rem 0 0.5rem; }
 .month-pick-links { margin-top: 0.3rem !important; display: flex; flex-wrap: wrap; column-gap: 1.1rem; }
 .month-pick-links a { font-weight: 750; display: inline-block; min-height: 2.75rem; line-height: 2.75rem; }
 .month-pick-note { margin-top: 0.3rem !important; color: var(--cream-dim); font-size: 0.8rem; }
+
+/* ---------- Book club questions wheel ---------- */
+.question-text { margin: 0.35rem 0 0.25rem; font-size: clamp(1.3rem, 5.2vw, 1.7rem); font-weight: 800; line-height: 1.3; color: var(--cream); text-wrap: balance; }
+.result .result-label { color: var(--teal); font-weight: 750; }
+.q-list { padding-left: 1.25rem; }
+.q-list li { margin: 0.35rem 0; }
+.related { margin-top: 2rem; color: var(--cream-dim); }
+.related a { display: inline-block; min-height: 2.75rem; line-height: 2.75rem; }
+
+/* ---------- Start a book club ---------- */
+.steps-nav ol { margin: 0 0 0.5rem; padding-left: 1.4rem; }
+.steps-nav a { display: inline-block; min-height: 2.75rem; line-height: 2.75rem; font-weight: 700; }
+.guide.steps { margin-top: 1rem; padding-bottom: 0; }
+.tool-box { margin: 1.25rem 0 0.5rem; padding: 1rem 1.1rem 1.25rem; border-radius: 0.75rem; background: #12081D; border: 2px solid var(--plum-2); }
+.tool-box h3 { margin-top: 0.25rem; }
+.tool-box textarea { min-height: 9rem; margin-bottom: 1rem; background: var(--plum); }
+.tool-box textarea.short { min-height: 6rem; }
+.tool-box select { background-color: var(--plum); }
+.text-input {
+  width: 100%; min-height: 3rem; padding: 0.6rem 0.75rem;
+  border: 2px solid var(--plum-2); border-radius: 0.5rem;
+  background: var(--plum); color: var(--cream); font: 650 1rem var(--font);
+  color-scheme: dark;
+}
+.name-list { list-style: none; padding: 0; margin: 1rem 0 0.25rem; display: grid; gap: 0.4rem; }
+.name-list li { padding: 0.55rem 0.8rem; border-radius: 0.5rem; background: var(--plum-2); font-weight: 750; font-size: 1.1rem; }
+.tool-box .filters { margin-bottom: 0.5rem; }
+.tool-box .spin-btn { margin-top: 1rem; }
+.tool-box .status { margin-top: 0.75rem; text-align: center; }
+.plan-title { font-size: 1.2rem; margin: 1.5rem 0 0.5rem; }
+.plan-list { list-style: none; padding: 0; margin: 0; }
+.plan-list li { padding: 0.7rem 0; border-top: 1px solid var(--plum-2); }
+.plan-list p { margin: 0; }
+.plan-when { color: var(--teal); font-weight: 750; font-size: 0.95rem; }
+.plan-book { font-weight: 800; font-size: 1.1rem; }
+.plan-host { color: var(--cream-dim); }
+.plan-actions { justify-content: center; }
+
+@media print {
+  body { background: #fff; color: #000; }
+  .site-header, .site-footer, .lede, .steps-nav, .guide, .related, .tool-box:not([aria-labelledby="planner-heading"]),
+  .tool-box > :not(#plan-output), .plan-actions, #plan-share-status, #plan-output > .help { display: none !important; }
+  .tool-box { border: 0; background: none; padding: 0; }
+  h1 { display: none; }
+  .plan-title { font-size: 1.6rem; color: #000; }
+  .plan-list li { border-color: #999; }
+  .plan-when, .plan-host { color: #333; }
+}

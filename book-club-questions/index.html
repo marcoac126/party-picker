@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Book Club Questions for Any Book – Spin a Discussion Question</title>
+<meta name="description" content="65 book club discussion questions that work for any book, fiction or nonfiction. Spin the wheel for the next question, skip what you've asked, or read the full list.">
+<link rel="canonical" href="https://thepartywheel.com/book-club-questions/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Party Wheel">
+<meta property="og:title" content="Book Club Questions for Any Book – Spin a Discussion Question">
+<meta property="og:description" content="65 book club discussion questions that work for any book, fiction or nonfiction. Spin the wheel for the next question, skip what you've asked, or read the full list.">
+<meta property="og:url" content="https://thepartywheel.com/book-club-questions/">
+<meta property="og:image" content="https://thepartywheel.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A colorful spinning wheel next to the words The Party Wheel: karaoke songs, book club picks, party games">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#2B1342">
+<link rel="stylesheet" href="../assets/style.css?v=20261102a">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap"><a href="../">The Party Wheel</a></div>
+</header>
+
+<main class="wrap">
+  <h1>Book club questions wheel</h1>
+  <p class="lede">Spin for the next discussion question. Works for any book, with no spoilers built in.</p>
+
+  <div class="stage">
+    <div class="pointer" aria-hidden="true"></div>
+    <canvas id="wheel" role="img" aria-label="Spinning wheel of book club questions"></canvas>
+  </div>
+  <button class="spin-btn" id="spin" type="button">Spin</button>
+
+  <div class="result" id="result" aria-live="polite">
+    <p class="result-hint">Your question shows up here, big enough to read out loud.</p>
+  </div>
+
+  <section class="controls" aria-labelledby="settings-heading">
+    <h2 id="settings-heading">Which questions</h2>
+    <fieldset class="chip-group">
+      <legend class="field-legend">Question types <span class="legend-note">Tap to turn a type on or off.</span></legend>
+      <ul class="chips" id="chips"></ul>
+    </fieldset>
+    <div class="row">
+      <p class="status" id="status" aria-live="polite"></p>
+      <button class="text-btn" id="deal" type="button">Deal new questions</button>
+    </div>
+    <p class="check"><input type="checkbox" id="remove" checked><label for="remove">Remove each question after it’s asked</label></p>
+    <div class="row"><button class="text-btn" id="reset" type="button" hidden>Bring back asked questions</button></div>
+  </section>
+
+  <p class="related">More for book clubs: <a href="../book-club-picker/">Pick the next book</a> · <a href="../start-a-book-club/">Start a book club</a> · <a href="../make-your-own-wheel/">Use your own questions</a></p>
+
+  <article class="guide">
+    <h2>How to use the questions wheel</h2>
+    <p>Open this page on one phone and pass it around. Whoever holds it spins and reads the question out loud, then the group talks it through. When the talk winds down, the next person spins.</p>
+    <ul>
+      <li><strong>Start easy:</strong> turn on only “Warm-up” for the first few spins, then add the rest.</li>
+      <li><strong>Reading nonfiction?</strong> Turn on “Nonfiction” and turn off “Characters” and “Story &amp; setting”.</li>
+      <li><strong>No repeats:</strong> “Remove each question after it’s asked” is on, so the wheel deals fresh questions as you go.</li>
+      <li><strong>Question doesn’t fit?</strong> Just spin again. Not every question works for every book.</li>
+    </ul>
+
+    <h3>What makes a good discussion question?</h3>
+    <p>The best questions don’t have a right answer. Two people who both finished the book should be able to answer differently and both make sense. That’s why most questions here ask what you think or what you’d do, not what happened.</p>
+
+    <h2>All 65 book club questions</h2>
+    <p>Prefer a list? Here’s every question on the wheel, grouped by type.</p>
+    <h3 id="q-warmup">Warm-up questions</h3>
+    <ul class="q-list" data-group="warmup" data-label="Warm-up">
+      <li data-short="First impression">What was your first impression after the opening chapter, and did it hold up?</li>
+      <li data-short="Hooked when?">At what point were you hooked, or did it never quite happen?</li>
+      <li data-short="Your rating">If you had to rate this book out of five, what would you give it, and what would bump it up a point?</li>
+      <li data-short="Where you read">Where and how did you read this one? Did that change how it felt?</li>
+      <li data-short="One word">Describe the book in one word. Then explain your word.</li>
+      <li data-short="Expectations">What did you expect from the cover and title, and how close was it?</li>
+      <li data-short="Page-turner?">Was this a book you couldn’t put down or one you had to push through? Why?</li>
+      <li data-short="Read again?">Would you read it again someday? What would you notice the second time?</li>
+      <li data-short="Who to gift">Who in your life would you hand this book to, and who would you warn away?</li>
+      <li data-short="Snack pairing">If this book were a snack or a drink, what would it be?</li>
+    </ul>
+    <h3 id="q-characters">Characters questions</h3>
+    <ul class="q-list" data-group="characters" data-label="Characters">
+      <li data-short="Trust least">Which character would you trust least with a secret, and why?</li>
+      <li data-short="Dinner guest">Which character would you most want at a dinner party? Who would you seat them next to?</li>
+      <li data-short="Changed most">Who changed the most from beginning to end, and what changed them?</li>
+      <li data-short="Hard choice">Which choice a character made would you have made differently?</li>
+      <li data-short="Misunderstood">Is there a character you think the others misjudged? What did they miss?</li>
+      <li data-short="See yourself">Did you see yourself in any character, even a little? Which one?</li>
+      <li data-short="Root against">Was there a character you wanted to root for but couldn’t? What stopped you?</li>
+      <li data-short="Their side">Pick a side character. How would the story look told from their point of view?</li>
+      <li data-short="Ask a character">If you could ask one character a single question, what would you ask?</li>
+      <li data-short="Believable?">Did the characters feel like real people? Who felt most and least real?</li>
+      <li data-short="Five years later">Where do you picture the main character five years after the last page?</li>
+      <li data-short="Best relationship">Which relationship in the book felt the most honest, and which felt the most fragile?</li>
+    </ul>
+    <h3 id="q-story">Story &amp; setting questions</h3>
+    <ul class="q-list" data-group="story" data-label="Story &amp; setting">
+      <li data-short="The ending">Did the ending work for you? Would you change it?</li>
+      <li data-short="Biggest surprise">What surprised you most? Did you see it coming in hindsight?</li>
+      <li data-short="Turning point">Which scene felt like the turning point of the whole book?</li>
+      <li data-short="The setting">How much did the setting matter? Could this story happen somewhere else?</li>
+      <li data-short="Pacing">Were there parts that dragged or parts that flew by too fast?</li>
+      <li data-short="Cut a chapter">If you were the editor, what would you cut or add?</li>
+      <li data-short="Unanswered">What question did the book leave unanswered, and do you mind?</li>
+      <li data-short="Visit the world">Would you want to live in this book’s world for a week? Why or why not?</li>
+      <li data-short="Movie cast">If this became a movie, who would you cast as the leads?</li>
+      <li data-short="The title">Why do you think the author chose this title? What would you have called it?</li>
+      <li data-short="Scene to rewatch">Which scene would you most want to see on screen?</li>
+    </ul>
+    <h3 id="q-ideas">Big ideas questions</h3>
+    <ul class="q-list" data-group="ideas" data-label="Big ideas">
+      <li data-short="The point">What do you think the author most wanted readers to take away?</li>
+      <li data-short="Changed your mind">Did this book change how you think about anything, even something small?</li>
+      <li data-short="Agree to disagree">What’s one thing in this book you think our group will disagree about?</li>
+      <li data-short="Right or wrong?">Was there a moment where right and wrong weren’t clear? How did you decide?</li>
+      <li data-short="Real life">Did anything in the book remind you of something happening in the world right now?</li>
+      <li data-short="Book’s question">If the book were asking readers one question, what would it be?</li>
+      <li data-short="Uncomfortable">Which part made you uncomfortable, and was that the point?</li>
+      <li data-short="Fair to everyone?">Did the book treat all sides fairly, or did it lean one way?</li>
+      <li data-short="Would you?">Put yourself in the main character’s situation. What would you honestly have done?</li>
+      <li data-short="Lesson or not">Is there a lesson here, or is the book just showing life as it is?</li>
+    </ul>
+    <h3 id="q-writing">The writing questions</h3>
+    <ul class="q-list" data-group="writing" data-label="The writing">
+      <li data-short="Favorite line">Share a line or passage that stuck with you. Why that one?</li>
+      <li data-short="Writing style">How would you describe the author’s writing style to a friend?</li>
+      <li data-short="Who tells it">How did the narrator, or the point of view, shape the story?</li>
+      <li data-short="Read more?">Would you read another book by this author? What would you hope for?</li>
+      <li data-short="The opening">Go back to the first page. Does it hit differently now that you’ve finished?</li>
+      <li data-short="Structure">Did the way the book was built, like timelines, chapters, or narrators, help or get in the way?</li>
+      <li data-short="Dialogue">Did the conversations between characters sound real?</li>
+      <li data-short="Mood">What mood did the book leave you in, and how did the writing create it?</li>
+    </ul>
+    <h3 id="q-nonfiction">Nonfiction questions</h3>
+    <ul class="q-list" data-group="nonfiction" data-label="Nonfiction">
+      <li data-short="New to you">What’s one thing you learned that you didn’t know before?</li>
+      <li data-short="Convinced?">Did the author convince you? What evidence worked best, and what felt thin?</li>
+      <li data-short="Told a friend">Which fact or story from the book did you end up telling someone else?</li>
+      <li data-short="Questions left">What would you ask the author if you had five minutes with them?</li>
+      <li data-short="Missing voice">Whose perspective was missing from this book?</li>
+      <li data-short="Do differently">Is there anything you’ll do differently after reading this?</li>
+      <li data-short="Still true?">Does anything in the book already feel out of date, or will it hold up?</li>
+      <li data-short="Story vs facts">Did the personal stories or the facts and research stick with you more?</li>
+    </ul>
+    <h3 id="q-wrapup">Wrap-up questions</h3>
+    <ul class="q-list" data-group="wrapup" data-label="Wrap-up">
+      <li data-short="Next book">What should we read next if we want something like this, or nothing like it?</li>
+      <li data-short="Changed view">Has tonight’s discussion changed your opinion of the book at all?</li>
+      <li data-short="Best for book club?">Was this a good book club book, even if it wasn’t your favorite? Why?</li>
+      <li data-short="Sum it up">Sum up the book in a single sentence for someone who hasn’t read it.</li>
+      <li data-short="Star of the night">Which character or moment came up the most tonight? Why do you think that is?</li>
+      <li data-short="Stays with you">What do you think you’ll still remember about this book a year from now?</li>
+    </ul>
+
+    <h3>Is the wheel random?</h3>
+    <p>Yes. Each spin uses your browser’s built-in random number generator, so every question on the wheel has the same chance. Nothing you do here is sent anywhere.</p>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">The Party Wheel · Free spinning wheels for game nights, karaoke, and book clubs.
+    <nav class="footer-links" aria-label="Site information"><a href="../about/">About</a><a href="../privacy/">Privacy policy</a><a href="../affiliate-disclosure/">Affiliate disclosure</a></nav>
+  </div>
+</footer>
+
+<script src="../assets/wheel.js?v=20261014a"></script>
+<script>
+(function () {
+  const STORE_KEY = 'pp-questions-v1';
+  const PER_WHEEL = 12;
+  const DEFAULT_OFF = ['nonfiction'];
+  const $ = (id) => document.getElementById(id);
+  const spinBtn = $('spin'), result = $('result'), status = $('status');
+
+  // The full list in the guide is the single source of questions.
+  const groups = Array.from(document.querySelectorAll('.q-list')).map((ul) => ({
+    key: ul.dataset.group,
+    label: ul.dataset.label,
+    items: Array.from(ul.querySelectorAll('li')).map((li, i) => ({ id: ul.dataset.group + i, s: li.dataset.short, q: li.textContent.trim(), g: ul.dataset.label })),
+  }));
+
+  const load = () => { try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; } catch (e) { return {}; } };
+  const saved = load();
+  const on = new Set(Array.isArray(saved.on) ? saved.on.filter((k) => groups.some((g) => g.key === k)) : groups.map((g) => g.key).filter((k) => !DEFAULT_OFF.includes(k)));
+  const asked = new Set(); // this visit only
+  const save = () => { try { localStorage.setItem(STORE_KEY, JSON.stringify({ on: Array.from(on) })); } catch (e) {} };
+
+  function shuffle(a) {
+    const r = new Uint32Array(a.length); crypto.getRandomValues(r);
+    for (let i = a.length - 1; i > 0; i--) { const j = r[i] % (i + 1); [a[i], a[j]] = [a[j], a[i]]; }
+    return a;
+  }
+  const pool = () => groups.filter((g) => on.has(g.key)).flatMap((g) => g.items).filter((it) => !asked.has(it.id));
+
+  const wheel = new Wheel($('wheel'), {
+    labelFn: (it) => it.s,
+    onResult(it, index) {
+      result.innerHTML = '';
+      const label = document.createElement('p'); label.className = 'result-label'; label.textContent = it.g + ' question';
+      const main = document.createElement('p'); main.className = 'question-text'; main.textContent = it.q;
+      result.append(label, main);
+      const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      result.scrollIntoView({ behavior: still ? 'auto' : 'smooth', block: 'nearest' });
+      if ($('remove').checked) {
+        asked.add(it.id);
+        const left = wheel.items.slice(); left.splice(index, 1);
+        // Top the wheel back up with a fresh question so it stays full.
+        const fresh = shuffle(pool().filter((p) => !left.includes(p)));
+        while (left.length < PER_WHEEL && fresh.length) left.push(fresh.pop());
+        wheel.items = left; // keep the landed angle; redraw without the asked question
+        wheel.draw();
+      }
+      spinBtn.textContent = 'Spin again';
+      updateStatus();
+    }
+  });
+
+  function deal() {
+    wheel.setItems(shuffle(pool()).slice(0, PER_WHEEL));
+    updateStatus();
+  }
+
+  function updateStatus() {
+    const n = wheel.items.length;
+    const total = pool().length;
+    spinBtn.disabled = n < 2;
+    $('reset').hidden = asked.size === 0;
+    $('deal').hidden = total <= n;
+    if (!on.size) status.textContent = 'Turn on at least one question type.';
+    else if (n < 2) status.textContent = 'You’ve asked every question in these types. Turn on another type or bring back asked questions.';
+    else status.textContent = `${n} of ${total} questions on the wheel` + (asked.size ? `, ${asked.size} asked so far.` : '.');
+  }
+
+  const chips = $('chips');
+  groups.forEach((g) => {
+    const li = document.createElement('li');
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip'; b.textContent = g.label;
+    b.setAttribute('aria-pressed', on.has(g.key) ? 'true' : 'false');
+    b.addEventListener('click', () => {
+      if (on.has(g.key)) on.delete(g.key); else on.add(g.key);
+      b.setAttribute('aria-pressed', on.has(g.key) ? 'true' : 'false');
+      save(); deal();
+    });
+    li.append(b); chips.append(li);
+  });
+
+  $('deal').addEventListener('click', deal);
+  $('reset').addEventListener('click', () => { asked.clear(); deal(); });
+  spinBtn.addEventListener('click', () => {
+    if (wheel.spin()) { spinBtn.disabled = true; spinBtn.textContent = 'Spinning…'; result.innerHTML = '<p class="result-hint">Spinning…</p>'; }
+  });
+
+  deal();
+})();
+</script>
+<script src="../assets/count.js?v=20261031a" defer></script>
+</body>
+</html>
