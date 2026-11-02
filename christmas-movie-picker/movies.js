@@ -1,4 +1,6 @@
-// Christmas movie library. Each entry: [title, year, mood, oneLiner]
+// Christmas movie library. Each entry: [title, year, mood, oneLiner, shortLabel|null, releaseDate?]
+// shortLabel: shorter wheel label, or null/omitted to use the title.
+// releaseDate: optional 'YYYY-MM-DD'. The film stays hidden until that date (visitor's local time).
 // Moods: classic, family (kid-friendly, no PG-13/R), comedy, romance, animated, offbeat (action + "is it a Christmas movie?").
 // Keep every mood at 12+ so a filtered wheel is full.
 window.XMAS_MOVIES = [
@@ -59,6 +61,9 @@ window.XMAS_MOVIES = [
   ['Let It Snow', 2019, 'romance', 'A snowstorm on Christmas Eve tangles up a small town’s love lives.'],
   ['Love Hard', 2021, 'romance', 'A dating columnist flies across the country to surprise her online match.'],
   ['Falling for Christmas', 2022, 'romance', 'A spoiled heiress loses her memory at a ski lodge.', 'Falling for Xmas'],
+  ['Guarding Stars', 2026, 'romance', 'A bodyguard poses as an action star’s girlfriend for his family Christmas.', null, '2026-11-18'],
+  ['Clashing Through the Snow', 2026, 'romance', 'Rival editors get stuck sharing a rental car home to New York.', 'Clashing Thru Snow', '2026-11-23'],
+  ['In a Holidaze', 2026, 'romance', 'A woman keeps reliving the same Christmas at her family’s cabin.', null, '2026-12-02'],
 
   // Animated
   ['Rudolph the Red-Nosed Reindeer', 1964, 'animated', 'The stop-motion special with Rudolph, Hermey, and the Island of Misfit Toys.', 'Rudolph'],
