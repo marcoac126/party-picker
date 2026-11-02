@@ -337,3 +337,24 @@ p.field-legend { margin: 0.5rem 0 0.5rem; }
   .plan-list li { border-color: #999; }
   .plan-when, .plan-host { color: #333; }
 }
+
+/* ---------- Visual refresh (2026-11 preview) ---------- */
+/* Home: wheel icon beside each picker, title above its description */
+.picker-list a:has(.mini-wheel) { justify-content: flex-start; align-items: center; gap: 0.9rem; }
+.mini-wheel { flex: none; width: 2.6rem; height: 2.6rem; border-radius: 50%; box-shadow: 0 0 0 3px var(--plum-2); }
+.picker-list a:has(.mini-wheel) span { display: flex; flex-direction: column; gap: 0.1rem; }
+.picker-list a:has(.mini-wheel) small { text-align: left; }
+.picker-list a:hover .mini-wheel { box-shadow: 0 0 0 3px var(--yellow); }
+.sub-links { margin: -0.4rem 0 0.9rem 3.5rem; color: var(--cream-dim); font-size: 0.95rem; }
+.sub-links a { display: inline-block; min-height: 2.75rem; line-height: 2.75rem; }
+
+/* Result box stays short until there's a pick */
+.result:has(> .result-hint:only-child) { min-height: 0; padding: 0.4rem 1rem; }
+.result:has(> .result-hint:only-child) .result-hint { margin: 0.6rem 0; }
+
+/* Stacked related links */
+.more-links h2 { font-size: 1.15rem; margin: 2rem 0 0.25rem; }
+.more-links ul { list-style: none; padding: 0; margin: 0; }
+.more-links a { display: inline-block; min-height: 2.75rem; line-height: 2.75rem; font-weight: 700; }
+.picker-list .sub-links a { display: inline-block; padding: 0; color: var(--yellow); text-decoration: underline; font-weight: 700; }
+.picker-list .sub-links a:hover { color: var(--cream); }

@@ -69,15 +69,19 @@
         ctx.textAlign = 'right';
         ctx.textBaseline = 'middle';
         ctx.fillStyle = '#2B1342';
-        ctx.font = `600 ${fontSize}px system-ui, -apple-system, "Segoe UI", Roboto, sans-serif`;
-        const maxW = r * 0.7;
+        const font = (px) => `600 ${px}px system-ui, -apple-system, "Segoe UI", Roboto, sans-serif`;
+        ctx.font = font(fontSize);
+        const maxW = r * 0.74;
         const full = this.labelFn(item);
+        // Long labels: shrink the text a little (never below 11px) before cutting it off.
+        const w = ctx.measureText(full).width;
+        if (w > maxW) ctx.font = font(Math.max(11, Math.min(fontSize, fontSize * Math.max(0.8, maxW / w))));
         let label = full;
         while (ctx.measureText(label).width > maxW && label.length > 4) {
           label = label.slice(0, -2);
         }
         if (label !== full) label = label.trimEnd() + '…';
-        ctx.fillText(label, r - 16, 0);
+        ctx.fillText(label, r - 12, 0);
         ctx.restore();
       });
       // hub
