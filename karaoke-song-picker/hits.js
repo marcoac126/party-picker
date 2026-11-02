@@ -7,22 +7,6 @@ window.KARAOKE_HITS = {
    "Michael Jackson"
   ],
   [
-   "This Is Halloween",
-   "The Citizens of Halloween"
-  ],
-  [
-   "Monster Mash",
-   "Bobby \"Boris\" Pickett"
-  ],
-  [
-   "Ghostbusters",
-   "Ray Parker Jr."
-  ],
-  [
-   "BbY WOW",
-   "KAROL G, Judeline & rusowsky"
-  ],
-  [
    "Housewife",
    "Tate McRae"
   ],
@@ -31,8 +15,20 @@ window.KARAOKE_HITS = {
    "Ella Langley"
   ],
   [
-   "Spooky, Scary Skeletons (Undead Tombstone Remix)",
-   "Andrew Gold"
+   "BbY WOW",
+   "KAROL G, Judeline & rusowsky"
+  ],
+  [
+   "This Is Halloween",
+   "The Citizens of Halloween"
+  ],
+  [
+   "Ghostbusters",
+   "Ray Parker Jr."
+  ],
+  [
+   "Monster Mash",
+   "Bobby \"Boris\" Pickett"
   ],
   [
    "Been By Now",
@@ -43,28 +39,16 @@ window.KARAOKE_HITS = {
    "Zach Bryan & Lana Del Rey"
   ],
   [
-   "Best I Ever Had",
-   "Drake"
-  ],
-  [
-   "Somebody's Watching Me",
-   "Rockwell"
-  ],
-  [
-   "Superstition",
-   "Stevie Wonder"
+   "Spooky, Scary Skeletons (Undead Tombstone Remix)",
+   "Andrew Gold"
   ],
   [
    "All I Want for Christmas Is You",
    "Mariah Carey"
   ],
   [
-   "Disturbia",
-   "Rihanna"
-  ],
-  [
-   "stupid song",
-   "Olivia Rodrigo"
+   "Best I Ever Had",
+   "Drake"
   ],
   [
    "Last Thing You Need",
@@ -75,6 +59,10 @@ window.KARAOKE_HITS = {
    "Ella Langley"
   ],
   [
+   "stupid song",
+   "Olivia Rodrigo"
+  ],
+  [
    "I'm The Problem",
    "Morgan Wallen"
   ],
@@ -83,12 +71,28 @@ window.KARAOKE_HITS = {
    "Ella Langley & Morgan Wallen"
   ],
   [
-   "Psycho Killer",
-   "Talking Heads"
+   "Don't We",
+   "Morgan Wallen"
   ],
   [
    "Broken Window Serenade",
    "Whiskey Myers"
+  ],
+  [
+   "Superstition",
+   "Stevie Wonder"
+  ],
+  [
+   "Man I Need",
+   "Olivia Dean"
+  ],
+  [
+   "Somebody's Watching Me",
+   "Rockwell"
+  ],
+  [
+   "Just In Case",
+   "Morgan Wallen"
   ]
  ]
 };

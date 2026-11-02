@@ -1,0 +1,307 @@
+{
+ "round": "weekly-2026-11-02",
+ "made": "2026-11-02",
+ "files": [
+  "weekly-2026-11-02.csv (16)"
+ ],
+ "picks": [
+  {
+   "title": "A Court of Splintered Harmony",
+   "author": "Sarah J. Maas",
+   "genre": "weekly",
+   "key": "a court of splintered harmony|maas",
+   "isbn": "9781639739134",
+   "year": 2026
+  },
+  {
+   "title": "The Believers (1)",
+   "author": "Witness Lee",
+   "genre": "weekly",
+   "key": "the believers|lee",
+   "isbn": "9780736322638",
+   "year": 2003
+  },
+  {
+   "title": "The Calamity Club",
+   "author": "Kathryn Stockett",
+   "genre": "weekly",
+   "key": "the calamity club|stockett",
+   "isbn": "9781954118812",
+   "year": 2026
+  },
+  {
+   "title": "Three Fates",
+   "author": "Nora Roberts",
+   "genre": "weekly",
+   "key": "three fates|roberts",
+   "isbn": "9780593438602",
+   "year": 2021
+  },
+  {
+   "title": "Making It So",
+   "author": "Patrick Stewart",
+   "genre": "weekly",
+   "key": "making it so|stewart",
+   "isbn": "9781982167738",
+   "year": 2023
+  },
+  {
+   "title": "People of Darkness",
+   "author": "Tony Hillerman",
+   "genre": "weekly",
+   "key": "people of darkness|hillerman",
+   "isbn": "9780062821768",
+   "year": 2018
+  },
+  {
+   "title": "Dark Rivers of the Heart",
+   "author": "Dean Koontz",
+   "genre": "weekly",
+   "key": "dark rivers of the heart|koontz",
+   "isbn": "9780553582895",
+   "year": 2000
+  },
+  {
+   "title": "'Salem's Lot",
+   "author": "Stephen King & Joe Hill",
+   "genre": "weekly",
+   "key": "'salem's lot|king",
+   "isbn": "9780525616306",
+   "year": 2019
+  },
+  {
+   "title": "Red Rising",
+   "author": "Pierce Brown",
+   "genre": "weekly",
+   "key": "red rising|brown",
+   "isbn": "9780593871522",
+   "year": 2025
+  },
+  {
+   "title": "The Hitchhiker's Guide to the Galaxy: The Illustrated Edition",
+   "author": "Douglas Adams",
+   "genre": "weekly",
+   "key": "the hitchhiker's guide to the galaxy|adams",
+   "isbn": "9780593359440",
+   "year": 2021
+  },
+  {
+   "title": "Ready for Romance",
+   "author": "Debbie Macomber",
+   "genre": "weekly",
+   "key": "ready for romance|macomber",
+   "isbn": "9780263140903",
+   "year": 1994
+  },
+  {
+   "title": "A Court of Mist and Fury",
+   "author": "Sarah J. Maas",
+   "genre": "weekly",
+   "key": "a court of mist and fury|maas",
+   "isbn": "9781635575583",
+   "year": 2020
+  },
+  {
+   "title": "Timeline",
+   "author": "Michael Crichton",
+   "genre": "weekly",
+   "key": "timeline|crichton",
+   "isbn": "9780345517814",
+   "year": 2009
+  },
+  {
+   "title": "I Know Why the Caged Bird Sings",
+   "author": "Maya Angelou",
+   "genre": "weekly",
+   "key": "i know why the caged bird sings|angelou",
+   "isbn": "9780812980028",
+   "year": 2015
+  },
+  {
+   "title": "House of Earth and Blood",
+   "author": "Sarah J. Maas",
+   "genre": "weekly",
+   "key": "house of earth and blood|maas",
+   "isbn": "9781639733286",
+   "year": 2023
+  },
+  {
+   "title": "Friends, Lovers, and the Big Terrible Thing",
+   "author": "Matthew Perry",
+   "genre": "weekly",
+   "key": "friends lovers and the big terrible thing|perry",
+   "isbn": "9781250866455",
+   "year": 2023
+  }
+ ],
+ "missing": [
+  {
+   "title": "The Hollow",
+   "author": "Michael Connelly",
+   "genre": "weekly",
+   "key": "the hollow|connelly"
+  },
+  {
+   "title": "Chain Reaction",
+   "author": "Lee Child & Andrew Child",
+   "genre": "weekly",
+   "key": "chain reaction|child"
+  },
+  {
+   "title": "The French Illusion",
+   "author": "John Grisham",
+   "genre": "weekly",
+   "key": "the french illusion|grisham"
+  },
+  {
+   "title": "Miss Wolcott's Ghost",
+   "author": "Louise Penny",
+   "genre": "weekly",
+   "key": "miss wolcott's ghost|penny"
+  },
+  {
+   "title": "The Family Cross",
+   "author": "James Patterson",
+   "genre": "weekly",
+   "key": "the family cross|patterson"
+  },
+  {
+   "title": "Partita",
+   "author": "Barbara Kingsolver",
+   "genre": "weekly",
+   "key": "partita|kingsolver"
+  },
+  {
+   "title": "The Girl in the Lake",
+   "author": "James Patterson & Brian Sitts",
+   "genre": "weekly",
+   "key": "the girl in the lake|patterson"
+  },
+  {
+   "title": "Peck & Peck",
+   "author": "Bonnie Garmus",
+   "genre": "weekly",
+   "key": "peck peck|garmus"
+  },
+  {
+   "title": "Mad Mabel",
+   "author": "Sally Hepworth",
+   "genre": "weekly",
+   "key": "mad mabel|hepworth"
+  },
+  {
+   "title": "In the Shadow of Eight",
+   "author": "Collin Gosselin",
+   "genre": "weekly",
+   "key": "in the shadow of eight|gosselin"
+  },
+  {
+   "title": "Match Me if You Can",
+   "author": "Elise Faber",
+   "genre": "weekly",
+   "key": "match me if you can|faber"
+  },
+  {
+   "title": "Threshing Day",
+   "author": "Rebecca Yarros",
+   "genre": "weekly",
+   "key": "threshing day|yarros"
+  },
+  {
+   "title": "A Court of Forgotten Melody",
+   "author": "Sarah J. Maas",
+   "genre": "weekly",
+   "key": "a court of forgotten melody|maas"
+  },
+  {
+   "title": "Steve Jobs in Exile",
+   "author": "Geoffrey Cain & Ed Catmull",
+   "genre": "weekly",
+   "key": "steve jobs in exile|cain"
+  },
+  {
+   "title": "Theo of Golden",
+   "author": "Allen Levi",
+   "genre": "weekly",
+   "key": "theo of golden|levi"
+  },
+  {
+   "title": "Hollow Bones",
+   "author": "Jodi Picoult",
+   "genre": "weekly",
+   "key": "hollow bones|picoult"
+  },
+  {
+   "title": "Love You More",
+   "author": "Emily Giffin",
+   "genre": "weekly",
+   "key": "love you more|giffin"
+  },
+  {
+   "title": "The Pirate Queen",
+   "author": "Ariel Lawhon",
+   "genre": "weekly",
+   "key": "the pirate queen|lawhon"
+  },
+  {
+   "title": "Double Tap",
+   "author": "Vince Flynn & Don Bentley",
+   "genre": "weekly",
+   "key": "double tap|flynn"
+  },
+  {
+   "title": "Remember Me Always, Cowboy",
+   "author": "C.J. Carmichael",
+   "genre": "weekly",
+   "key": "remember me always cowboy|carmichael"
+  },
+  {
+   "title": "Whistler",
+   "author": "Ann Patchett",
+   "genre": "weekly",
+   "key": "whistler|patchett"
+  },
+  {
+   "title": "The Law Student",
+   "author": "John Grisham",
+   "genre": "weekly",
+   "key": "the law student|grisham"
+  },
+  {
+   "title": "Ransom",
+   "author": "Daniel Silva",
+   "genre": "weekly",
+   "key": "ransom|silva"
+  },
+  {
+   "title": "A Married Little Christmas",
+   "author": "Abby Jimenez",
+   "genre": "weekly",
+   "key": "a married little christmas|jimenez"
+  },
+  {
+   "title": "Little Wonder: Oprah's Book Club",
+   "author": "Sophie Chen Keller",
+   "genre": "weekly",
+   "key": "little wonder|keller"
+  },
+  {
+   "title": "Knocking Up His Best Friend",
+   "author": "Kat Baxter",
+   "genre": "weekly",
+   "key": "knocking up his best friend|baxter"
+  },
+  {
+   "title": "Contend",
+   "author": "Philip Anthony Mitchell",
+   "genre": "weekly",
+   "key": "contend|mitchell"
+  },
+  {
+   "title": "The Distance Between Us",
+   "author": "Maggie O'Farrell",
+   "genre": "weekly",
+   "key": "the distance between us|o'farrell"
+  }
+ ]
+}
