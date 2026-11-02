@@ -116,7 +116,9 @@
   const STORE_KEY = 'pp-movies-v1';
   const $ = (id) => document.getElementById(id);
   const spinBtn = $('spin'), result = $('result'), status = $('status'), ownTA = $('own-entries');
-  const MOVIES = window.XMAS_MOVIES || [];
+  // Hide films until their release date (6th field, 'YYYY-MM-DD', visitor's local date).
+  const TODAY = (() => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; })();
+  const MOVIES = (window.XMAS_MOVIES || []).filter((m) => !m[5] || m[5] <= TODAY);
   const L = window.PartyLinks;
   const MOODS = [['classic', 'Classics'], ['family', 'Family'], ['comedy', 'Comedies'], ['romance', 'Rom-coms'], ['animated', 'Animated'], ['offbeat', 'Action & offbeat']];
   const moodLabel = Object.fromEntries(MOODS);
