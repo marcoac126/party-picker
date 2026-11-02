@@ -1,7 +1,27 @@
 // Generated weekly by scripts/update-hits.mjs from Apple Music's US top songs feed. Do not edit by hand.
 window.KARAOKE_HITS = {
- "updated": "2026-10-26",
+ "updated": "2026-11-02",
  "songs": [
+  [
+   "Thriller",
+   "Michael Jackson"
+  ],
+  [
+   "This Is Halloween",
+   "The Citizens of Halloween"
+  ],
+  [
+   "Monster Mash",
+   "Bobby \"Boris\" Pickett"
+  ],
+  [
+   "Ghostbusters",
+   "Ray Parker Jr."
+  ],
+  [
+   "BbY WOW",
+   "KAROL G, Judeline & rusowsky"
+  ],
   [
    "Housewife",
    "Tate McRae"
@@ -11,44 +31,48 @@ window.KARAOKE_HITS = {
    "Ella Langley"
   ],
   [
-   "BbY WOW",
-   "KAROL G, Judeline & rusowsky"
-  ],
-  [
-   "Lies (feat. Lana Del Rey)",
-   "Zach Bryan & Lana Del Rey"
-  ],
-  [
-   "Nicole Kidman",
-   "ADÉLA"
+   "Spooky, Scary Skeletons (Undead Tombstone Remix)",
+   "Andrew Gold"
   ],
   [
    "Been By Now",
    "Morgan Wallen"
   ],
   [
-   "Last Thing You Need",
-   "Morgan Wallen"
-  ],
-  [
-   "Thriller 7\" (Special Edit)",
-   "Michael Jackson"
-  ],
-  [
-   "stupid song",
-   "Olivia Rodrigo"
-  ],
-  [
-   "Wicked Games",
-   "The Weeknd"
+   "Lies (feat. Lana Del Rey)",
+   "Zach Bryan & Lana Del Rey"
   ],
   [
    "Best I Ever Had",
    "Drake"
   ],
   [
-   "Cold Shoulder",
-   "Drake, Don Toliver & Yebba"
+   "Somebody's Watching Me",
+   "Rockwell"
+  ],
+  [
+   "Superstition",
+   "Stevie Wonder"
+  ],
+  [
+   "All I Want for Christmas Is You",
+   "Mariah Carey"
+  ],
+  [
+   "Disturbia",
+   "Rihanna"
+  ],
+  [
+   "stupid song",
+   "Olivia Rodrigo"
+  ],
+  [
+   "Last Thing You Need",
+   "Morgan Wallen"
+  ],
+  [
+   "Be Her",
+   "Ella Langley"
   ],
   [
    "I'm The Problem",
@@ -59,44 +83,12 @@ window.KARAOKE_HITS = {
    "Ella Langley & Morgan Wallen"
   ],
   [
-   "Be Her",
-   "Ella Langley"
+   "Psycho Killer",
+   "Talking Heads"
   ],
   [
    "Broken Window Serenade",
    "Whiskey Myers"
-  ],
-  [
-   "Don't We",
-   "Morgan Wallen"
-  ],
-  [
-   "Last Night",
-   "Morgan Wallen"
-  ],
-  [
-   "Lodi When",
-   "Zach Bryan"
-  ],
-  [
-   "Man I Need",
-   "Olivia Dean"
-  ],
-  [
-   "What I Want",
-   "Morgan Wallen & Tate McRae"
-  ],
-  [
-   "Just In Case",
-   "Morgan Wallen"
-  ],
-  [
-   "Patient Zero",
-   "Taylor Swift"
-  ],
-  [
-   "Thinkin’ Bout Me",
-   "Morgan Wallen"
   ]
  ]
 };
