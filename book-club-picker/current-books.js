@@ -23,11 +23,6 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "The Believers (1)",
-   "Witness Lee",
-   "current"
-  ],
-  [
    "Miss Wolcott's Ghost",
    "Louise Penny",
    "current"
@@ -173,7 +168,7 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "The Hitchhiker's Guide to the Galaxy: The Illustrated Edition",
+   "The Hitchhiker's Guide to the Galaxy",
    "Douglas Adams",
    "current"
   ],
@@ -198,7 +193,7 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "Little Wonder: Oprah's Book Club",
+   "Little Wonder",
    "Sophie Chen Keller",
    "current"
   ],
@@ -225,16 +220,6 @@ window.CURRENT_BOOKS = {
   [
    "Friends, Lovers, and the Big Terrible Thing",
    "Matthew Perry",
-   "current"
-  ],
-  [
-   "Knocking Up His Best Friend",
-   "Kat Baxter",
-   "current"
-  ],
-  [
-   "Contend",
-   "Philip Anthony Mitchell",
    "current"
   ],
   [
