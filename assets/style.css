@@ -7,6 +7,7 @@
   --cream: #FFF4E2;
   --cream-dim: #E6D6C4;
   --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
