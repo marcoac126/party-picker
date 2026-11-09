@@ -1,0 +1,289 @@
+{
+ "round": "weekly-2026-11-09",
+ "made": "2026-11-09",
+ "files": [
+  "weekly-2026-11-09.csv (13)"
+ ],
+ "picks": [
+  {
+   "title": "A Court of Splintered Harmony",
+   "author": "Sarah J. Maas",
+   "genre": "weekly",
+   "key": "a court of splintered harmony|maas",
+   "isbn": "9781037200083",
+   "year": 2026
+  },
+  {
+   "title": "The Calamity Club",
+   "author": "Kathryn Stockett",
+   "genre": "weekly",
+   "key": "the calamity club|stockett",
+   "isbn": "9781954118812",
+   "year": 2026
+  },
+  {
+   "title": "Don't Let Go",
+   "author": "Harlan Coben",
+   "genre": "weekly",
+   "key": "don't let go|coben",
+   "isbn": "9781524742362",
+   "year": 2017
+  },
+  {
+   "title": "The Grapes of Wrath",
+   "author": "John Steinbeck & Robert DeMott",
+   "genre": "weekly",
+   "key": "the grapes of wrath|steinbeck",
+   "isbn": "9780670016907",
+   "year": 2014
+  },
+  {
+   "title": "Red Rising",
+   "author": "Pierce Brown",
+   "genre": "weekly",
+   "key": "red rising|brown",
+   "isbn": "9780593871522",
+   "year": 2025
+  },
+  {
+   "title": "The Pirate Queen",
+   "author": "Ariel Lawhon",
+   "genre": "weekly",
+   "key": "the pirate queen|lawhon",
+   "isbn": "9780385550345",
+   "year": 2026
+  },
+  {
+   "title": "A Knight of the Seven Kingdoms",
+   "author": "George R.R. Martin & Gary Gianni",
+   "genre": "weekly",
+   "key": "a knight of the seven kingdoms|martin",
+   "isbn": "9781101965887",
+   "year": 2020
+  },
+  {
+   "title": "The Family",
+   "author": "Mario Puzo & Carol Gino",
+   "genre": "weekly",
+   "key": "the family|puzo",
+   "isbn": "9780062089151",
+   "year": 2011
+  },
+  {
+   "title": "A Court of Mist and Fury",
+   "author": "Sarah J. Maas",
+   "genre": "weekly",
+   "key": "a court of mist and fury|maas",
+   "isbn": "9781635575583",
+   "year": 2020
+  },
+  {
+   "title": "The Antidote",
+   "author": "Karen Russell",
+   "genre": "weekly",
+   "key": "the antidote|russell",
+   "isbn": "9781784745639",
+   "year": 2025
+  },
+  {
+   "title": "Cutting for Stone",
+   "author": "Abraham Verghese",
+   "genre": "weekly",
+   "key": "cutting for stone|verghese",
+   "isbn": "9781594134982",
+   "year": 2011
+  },
+  {
+   "title": "Yesteryear: A GMA Book Club Pick",
+   "author": "Caro Claire Burke",
+   "genre": "weekly",
+   "key": "yesteryear|burke",
+   "isbn": "9780593804216",
+   "year": 2026
+  },
+  {
+   "title": "The Paris Apartment",
+   "author": "Kelly Bowen",
+   "genre": "weekly",
+   "key": "the paris apartment|bowen",
+   "isbn": "9781538718155",
+   "year": 2021
+  }
+ ],
+ "missing": [
+  {
+   "title": "The Hollow",
+   "author": "Michael Connelly",
+   "genre": "weekly",
+   "key": "the hollow|connelly"
+  },
+  {
+   "title": "Chain Reaction",
+   "author": "Lee Child & Andrew Child",
+   "genre": "weekly",
+   "key": "chain reaction|child"
+  },
+  {
+   "title": "The French Illusion",
+   "author": "John Grisham",
+   "genre": "weekly",
+   "key": "the french illusion|grisham"
+  },
+  {
+   "title": "The Silver Bell",
+   "author": "Rachel Hanna",
+   "genre": "weekly",
+   "key": "the silver bell|hanna"
+  },
+  {
+   "title": "State of Terror",
+   "author": "Louise Penny & Hillary Clinton",
+   "genre": "weekly",
+   "key": "state of terror|penny"
+  },
+  {
+   "title": "Mad Mabel",
+   "author": "Sally Hepworth",
+   "genre": "weekly",
+   "key": "mad mabel|hepworth"
+  },
+  {
+   "title": "The Family Cross",
+   "author": "James Patterson",
+   "genre": "weekly",
+   "key": "the family cross|patterson"
+  },
+  {
+   "title": "Partita",
+   "author": "Barbara Kingsolver",
+   "genre": "weekly",
+   "key": "partita|kingsolver"
+  },
+  {
+   "title": "Miss Wolcott's Ghost",
+   "author": "Louise Penny",
+   "genre": "weekly",
+   "key": "miss wolcott's ghost|penny"
+  },
+  {
+   "title": "Peck & Peck",
+   "author": "Bonnie Garmus",
+   "genre": "weekly",
+   "key": "peck peck|garmus"
+  },
+  {
+   "title": "Theo of Golden",
+   "author": "Allen Levi",
+   "genre": "weekly",
+   "key": "theo of golden|levi"
+  },
+  {
+   "title": "Hollow Bones",
+   "author": "Jodi Picoult",
+   "genre": "weekly",
+   "key": "hollow bones|picoult"
+  },
+  {
+   "title": "The Wife He Kept Off the Record",
+   "author": "Lena Marsh",
+   "genre": "weekly",
+   "key": "the wife he kept off the record|marsh"
+  },
+  {
+   "title": "1Q84",
+   "author": "Haruki Murakami",
+   "genre": "weekly",
+   "key": "1q84|murakami"
+  },
+  {
+   "title": "The Borrowed Life of Frederick Fife",
+   "author": "Anna Johnston",
+   "genre": "weekly",
+   "key": "the borrowed life of frederick fife|johnston"
+  },
+  {
+   "title": "Threshing Day",
+   "author": "Rebecca Yarros",
+   "genre": "weekly",
+   "key": "threshing day|yarros"
+  },
+  {
+   "title": "In the Shadow of Eight",
+   "author": "Collin Gosselin",
+   "genre": "weekly",
+   "key": "in the shadow of eight|gosselin"
+  },
+  {
+   "title": "The Heights",
+   "author": "Ian Rankin",
+   "genre": "weekly",
+   "key": "the heights|rankin"
+  },
+  {
+   "title": "The Fury",
+   "author": "Alex Michaelides",
+   "genre": "weekly",
+   "key": "the fury|michaelides"
+  },
+  {
+   "title": "American Hagwon",
+   "author": "Min Jin Lee",
+   "genre": "weekly",
+   "key": "american hagwon|lee"
+  },
+  {
+   "title": "Whistler",
+   "author": "Ann Patchett",
+   "genre": "weekly",
+   "key": "whistler|patchett"
+  },
+  {
+   "title": "A Court of Forgotten Melody",
+   "author": "Sarah J. Maas",
+   "genre": "weekly",
+   "key": "a court of forgotten melody|maas"
+  },
+  {
+   "title": "The Law Student",
+   "author": "John Grisham",
+   "genre": "weekly",
+   "key": "the law student|grisham"
+  },
+  {
+   "title": "Have Courage",
+   "author": "Craig Johnson",
+   "genre": "weekly",
+   "key": "have courage|johnson"
+  },
+  {
+   "title": "Monsters of Ohio",
+   "author": "John Scalzi",
+   "genre": "weekly",
+   "key": "monsters of ohio|scalzi"
+  },
+  {
+   "title": "Geitha's Tears",
+   "author": "Keri Arthur",
+   "genre": "weekly",
+   "key": "geitha's tears|arthur"
+  },
+  {
+   "title": "The French Christmas Market",
+   "author": "Gillian Harvey",
+   "genre": "weekly",
+   "key": "the french christmas market|harvey"
+  },
+  {
+   "title": "The Girl in the Lake",
+   "author": "James Patterson & Brian Sitts",
+   "genre": "weekly",
+   "key": "the girl in the lake|patterson"
+  },
+  {
+   "title": "Fast Lane",
+   "author": "C S Quill",
+   "genre": "weekly",
+   "key": "fast lane|quill"
+  }
+ ]
+}

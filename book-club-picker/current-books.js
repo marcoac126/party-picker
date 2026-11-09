@@ -1,12 +1,7 @@
 // Generated weekly by scripts/update-books.mjs from Apple Books' US top-paid chart. Do not edit by hand.
 window.CURRENT_BOOKS = {
- "updated": "2026-11-02",
+ "updated": "2026-11-09",
  "books": [
-  [
-   "A Court of Splintered Harmony",
-   "Sarah J. Maas",
-   "current"
-  ],
   [
    "The Hollow",
    "Michael Connelly",
@@ -18,13 +13,23 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
+   "A Court of Splintered Harmony",
+   "Sarah J. Maas",
+   "current"
+  ],
+  [
    "The French Illusion",
    "John Grisham",
    "current"
   ],
   [
-   "Miss Wolcott's Ghost",
-   "Louise Penny",
+   "The Silver Bell",
+   "Rachel Hanna",
+   "current"
+  ],
+  [
+   "State of Terror",
+   "Louise Penny & Hillary Clinton",
    "current"
   ],
   [
@@ -33,8 +38,8 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "Three Fates",
-   "Nora Roberts",
+   "Mad Mabel",
+   "Sally Hepworth",
    "current"
   ],
   [
@@ -48,8 +53,8 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "The Girl in the Lake",
-   "James Patterson & Brian Sitts",
+   "Miss Wolcott's Ghost",
+   "Louise Penny",
    "current"
   ],
   [
@@ -58,13 +63,13 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "Mad Mabel",
-   "Sally Hepworth",
+   "Theo of Golden",
+   "Allen Levi",
    "current"
   ],
   [
-   "Making It So",
-   "Patrick Stewart",
+   "Don't Let Go",
+   "Harlan Coben",
    "current"
   ],
   [
@@ -73,93 +78,33 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "In the Shadow of Eight",
-   "Collin Gosselin",
-   "current"
-  ],
-  [
-   "Match Me if You Can",
-   "Elise Faber",
-   "current"
-  ],
-  [
-   "Threshing Day",
-   "Rebecca Yarros",
-   "current"
-  ],
-  [
-   "A Court of Forgotten Melody",
-   "Sarah J. Maas",
-   "current"
-  ],
-  [
-   "People of Darkness",
-   "Tony Hillerman",
-   "current"
-  ],
-  [
-   "Steve Jobs in Exile",
-   "Geoffrey Cain & Ed Catmull",
-   "current"
-  ],
-  [
-   "Theo of Golden",
-   "Allen Levi",
-   "current"
-  ],
-  [
    "Hollow Bones",
    "Jodi Picoult",
    "current"
   ],
   [
-   "The Martian",
-   "Andy Weir",
+   "The Wife He Kept Off the Record",
+   "Lena Marsh",
    "current"
   ],
   [
-   "Verity",
-   "Colleen Hoover",
+   "Olive Kitteridge",
+   "Elizabeth Strout",
    "current"
   ],
   [
-   "Love You More",
-   "Emily Giffin",
+   "1Q84",
+   "Haruki Murakami",
    "current"
   ],
   [
-   "Dark Rivers of the Heart",
-   "Dean Koontz",
+   "The Borrowed Life of Frederick Fife",
+   "Anna Johnston",
    "current"
   ],
   [
-   "The Pirate Queen",
-   "Ariel Lawhon",
-   "current"
-  ],
-  [
-   "Double Tap",
-   "Vince Flynn & Don Bentley",
-   "current"
-  ],
-  [
-   "Remember Me Always, Cowboy",
-   "C.J. Carmichael",
-   "current"
-  ],
-  [
-   "'Salem's Lot",
-   "Stephen King & Joe Hill",
-   "current"
-  ],
-  [
-   "Whistler",
-   "Ann Patchett",
-   "current"
-  ],
-  [
-   "The Law Student",
-   "John Grisham",
+   "The Grapes of Wrath",
+   "John Steinbeck & Robert DeMott",
    "current"
   ],
   [
@@ -168,33 +113,8 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "The Hitchhiker's Guide to the Galaxy",
-   "Douglas Adams",
-   "current"
-  ],
-  [
-   "Ransom",
-   "Daniel Silva",
-   "current"
-  ],
-  [
-   "Ready for Romance",
-   "Debbie Macomber",
-   "current"
-  ],
-  [
-   "A Married Little Christmas",
-   "Abby Jimenez",
-   "current"
-  ],
-  [
-   "A Court of Mist and Fury",
-   "Sarah J. Maas",
-   "current"
-  ],
-  [
-   "Little Wonder",
-   "Sophie Chen Keller",
+   "Threshing Day",
+   "Rebecca Yarros",
    "current"
   ],
   [
@@ -203,28 +123,113 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "Timeline",
-   "Michael Crichton",
+   "In the Shadow of Eight",
+   "Collin Gosselin",
    "current"
   ],
   [
-   "I Know Why the Caged Bird Sings",
-   "Maya Angelou",
+   "The Heights",
+   "Ian Rankin",
    "current"
   ],
   [
-   "House of Earth and Blood",
+   "The Pirate Queen",
+   "Ariel Lawhon",
+   "current"
+  ],
+  [
+   "Verity",
+   "Colleen Hoover",
+   "current"
+  ],
+  [
+   "The Fury",
+   "Alex Michaelides",
+   "current"
+  ],
+  [
+   "American Hagwon",
+   "Min Jin Lee",
+   "current"
+  ],
+  [
+   "A Knight of the Seven Kingdoms",
+   "George R.R. Martin & Gary Gianni",
+   "current"
+  ],
+  [
+   "Whistler",
+   "Ann Patchett",
+   "current"
+  ],
+  [
+   "A Court of Forgotten Melody",
    "Sarah J. Maas",
    "current"
   ],
   [
-   "Friends, Lovers, and the Big Terrible Thing",
-   "Matthew Perry",
+   "The Family",
+   "Mario Puzo & Carol Gino",
    "current"
   ],
   [
-   "The Distance Between Us",
-   "Maggie O'Farrell",
+   "The Law Student",
+   "John Grisham",
+   "current"
+  ],
+  [
+   "A Court of Mist and Fury",
+   "Sarah J. Maas",
+   "current"
+  ],
+  [
+   "Have Courage",
+   "Craig Johnson",
+   "current"
+  ],
+  [
+   "Monsters of Ohio",
+   "John Scalzi",
+   "current"
+  ],
+  [
+   "The Antidote",
+   "Karen Russell",
+   "current"
+  ],
+  [
+   "Geitha's Tears",
+   "Keri Arthur",
+   "current"
+  ],
+  [
+   "Cutting for Stone",
+   "Abraham Verghese",
+   "current"
+  ],
+  [
+   "Yesteryear: A GMA Book Club Pick",
+   "Caro Claire Burke",
+   "current"
+  ],
+  [
+   "The French Christmas Market",
+   "Gillian Harvey",
+   "current"
+  ],
+  [
+   "The Paris Apartment",
+   "Kelly Bowen",
+   "current"
+  ],
+  [
+   "The Girl in the Lake",
+   "James Patterson & Brian Sitts",
+   "current"
+  ],
+  [
+   "Fast Lane",
+   "C S Quill",
    "current"
   ]
  ]
