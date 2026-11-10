@@ -29,6 +29,7 @@ window.BOOK_CLUB_BOOKS = [
   ['Olive Kitteridge', 'Elizabeth Strout', 'fiction'],
   ['The Heaven & Earth Grocery Store', 'James McBride', 'fiction'],
   ['Hello Beautiful', 'Ann Napolitano', 'fiction'],
+  ['The End of Everything', 'M. John Harrison', 'fiction'], // Booker Prize 2026 winner
 
   // Mystery & thriller
   ['Gone Girl', 'Gillian Flynn', 'mystery'],
