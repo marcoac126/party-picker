@@ -248,3 +248,20 @@ Scope: `index.html`, `book-club-picker/index.html`, `assets/style.css`, `assets/
 - The CSS and wheel.js version bumps are consistent on every page that loads them.
 
 Sources: [Bookshop.org: affiliate disclosure](https://support.bookshop.org/support/solutions/articles/65000168990-if-i-m-an-affiliate-do-i-have-to-disclose-that-on-my-website-newsletter-or-social-media-posts-); [Manatt: FTC Endorsement Guides 2023 update ("clear and conspicuous," unavoidable, near the links)](https://www.manatt.com/insights/newsletters/advertising-law/an-in-depth-look-at-the-ftcs-updates-2).
+
+## 2026-11-13 — Post-build check: book club search (branch `club-list-search`, commit 4e205d1, not pushed)
+Checked against the security rules set earlier today. I had no shell, so I read the branch's checked-out files instead of running `git diff main...club-list-search`.
+
+**Verdict: pass.** No High, Medium, or Low findings. Pushing publishes it, so Mark approves first and the coordinator logs it in `docs/decisions.md`.
+
+**Passed**
+- Request: the exact approved URL, `limit=5`, `credentials: 'omit'`, `referrerPolicy: 'no-referrer'`. Only the typed words are sent.
+- Volume: runs only on typing in the search box. Needs 3+ characters, waits for a 400 ms pause, cancels the earlier request, sends at most 1 per second and 30 per page load, and times out after 8 seconds. Shared lists never trigger a search.
+- Answers: shape-checked, written with `textContent` only, and stripped of control and direction-override characters. Titles are capped at 200 characters, authors at 100, and the year shows only if it's 3–4 digits. No URLs from the answers are used. The cache is in memory only.
+- Privacy page wording matches the rule word for word, and the "Last updated" date is November 13, 2026. The page also has a credit link to Open Library.
+- Share links: the list stays after the `#`, uses the same "Title – Author" format, and links over 2,000 characters are refused.
+- Kindle links use a plain Amazon search with `rel="noopener noreferrer"` and no tag, so they need no disclosure.
+- No new outside scripts. The only script changes are version bumps on our own `share.js` and `links.js`.
+- Open Library has been added to `third-parties.md` with these limits.
+
+Sources: [Open Library API](https://openlibrary.org/developers/api); [Open Library licensing](https://openlibrary.org/developers/licensing).

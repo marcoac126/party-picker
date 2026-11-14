@@ -1,4 +1,4 @@
-// "Share this wheel": packs the wheel's list into the link itself (after the #),
+// "Share this wheel" / "Share a copy": packs the wheel's list into the link itself (after the #),
 // so nothing is stored on a server. Opening the link loads the list on the
 // recipient's wheel. Security: shared text is treated as plain text, capped in
 // count and length, and the # part is removed from the address bar after loading.
@@ -111,9 +111,12 @@
     return new Uint8Array(out);
   }
 
+  // Today's date as YYYY-MM-DD (local), stored in the link so the receiver sees when it was shared.
+  const today = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
+
   // Builds the share link. Compressed (#z=) when the browser supports it, plain (#w=) otherwise.
   async function makeUrl(items, kind, result) {
-    const data = { v: 1, k: kind || '', i: items.slice(0, MAX_ITEMS).map((s) => String(s).slice(0, MAX_LEN)) };
+    const data = { v: 1, k: kind || '', i: items.slice(0, MAX_ITEMS).map((s) => String(s).slice(0, MAX_LEN)), d: today() };
     if (Number.isInteger(result) && result >= 0 && result < data.i.length) data.r = result;
     const raw = new TextEncoder().encode(JSON.stringify(data));
     const z = await deflate(raw);
@@ -122,7 +125,7 @@
     return z && z.length < raw.length && raw.length <= MAX_OUT ? `${base}#z=${b64url(z)}` : `${base}#w=${b64url(raw)}`;
   }
 
-  // Returns { items, kind, result } if the page was opened from a shared link, else null.
+  // Returns { items, kind, result, date } if the page was opened from a shared link, else null.
   // Reads both compressed (#z=) and older plain (#w=) links.
   function read() {
     const m = location.hash.match(/^#([wz])=([A-Za-z0-9_-]+)$/);
@@ -137,41 +140,76 @@
       if (!items.length) return null;
       // A shared result only counts if it points at an item and no items were dropped while cleaning.
       const result = (Number.isInteger(data.r) && data.r >= 0 && data.r < items.length && items.length === data.i.length) ? data.r : null;
-      return { items, kind: typeof data.k === 'string' ? data.k : '', result };
+      const date = (typeof data.d === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(data.d)) ? data.d : null;
+      return { items, kind: typeof data.k === 'string' ? data.k : '', result, date };
     } catch (e) { return null; }
     finally { history.replaceState(null, '', location.pathname + location.search); }
   }
 
   // Native share sheet on phones; copy to clipboard elsewhere. Reports via statusEl.
-  async function share(items, kind, title, statusEl, result, text) {
-    if (items.length < 2) { statusEl.textContent = 'Add at least two items first.'; return; }
+  // Optional opts (book club): { noun: { one, many }, tooFew, maxUrl, onShared }.
+  //  - noun: status says the link is a copy of "these 5 books as they are now".
+  //  - maxUrl: refuse links longer than this many characters.
+  //  - onShared(): called after the link was copied or the share sheet completed.
+  // Without opts, the wording is unchanged for the other pickers.
+  async function share(items, kind, title, statusEl, result, text, opts) {
+    opts = opts || {};
+    if (items.length < 2) { statusEl.textContent = opts.tooFew || 'Add at least two items first.'; return; }
     const url = await makeUrl(items, kind, result);
+    if (opts.maxUrl && url.length > opts.maxUrl) { statusEl.textContent = 'This list is too long to share in a link. Remove a few and try again.'; return; }
+    const n = Math.min(items.length, MAX_ITEMS);
+    const these = opts.noun ? `these ${n} ${n === 1 ? opts.noun.one : opts.noun.many} as they are now. Share again after you add more.` : '';
     try {
-      if (navigator.share) { await navigator.share({ title, text: text || `Spin our wheel: ${title}`, url }); statusEl.textContent = ''; return; }
+      if (navigator.share) {
+        await navigator.share({ title, text: text || `Spin our wheel: ${title}`, url });
+        statusEl.textContent = these ? `Shared. The link shows ${these}` : '';
+        if (opts.onShared) opts.onShared();
+        return;
+      }
       await navigator.clipboard.writeText(url);
-      statusEl.textContent = 'Link copied. Paste it anywhere to share.';
+      statusEl.textContent = these ? `Link copied. It shows ${these}` : 'Link copied. Paste it anywhere to share.';
+      if (opts.onShared) opts.onShared();
     } catch (e) {
       if (e && e.name === 'AbortError') return; // user closed the share sheet
       window.prompt('Copy this link to share your wheel:', url);
+      if (opts.onShared) opts.onShared();
     }
   }
 
   // "Share this result" button for the result card. Shares the list as it was at the spin,
   // plus which item won, so everyone who opens the link sees the same wheel land on the same pick.
-  function resultButton(wheel, kind, title) {
+  function resultButton(wheel, kind, title, opts) {
     const spin = wheel.lastSpin;
     const wrap = document.createElement('p'); wrap.className = 'share-row';
     if (!spin || spin.items.length < 2) return wrap;
     const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'text-btn'; btn.textContent = 'Share this result';
     const st = document.createElement('span'); st.className = 'share-status'; st.setAttribute('aria-live', 'polite');
-    btn.addEventListener('click', () => share(spin.items, kind, title, st, spin.index, `The wheel landed on: ${spin.items[spin.index]}`));
+    btn.addEventListener('click', () => share(spin.items, kind, title, st, spin.index, `The wheel landed on: ${spin.items[spin.index]}`, opts));
     wrap.append(btn, st);
     return wrap;
   }
 
-  const SHARED_NOTE = 'Someone shared this wheel with you. The list was made by whoever sent the link, not The Party Wheel. Spin away, or change it below.';
-  const RESULT_NOTE = 'Someone shared their spin with you. Here’s where the wheel landed. The list was made by whoever sent the link, not The Party Wheel.';
-  function note(shared) { return shared && shared.result !== null ? RESULT_NOTE : SHARED_NOTE; }
+  // "Nov 13", or "Nov 13, 2025" when not this year. Returns '' for a missing or bad date.
+  function shortDate(iso) {
+    if (!iso || !/^\d{4}-\d{2}-\d{2}$/.test(iso)) return '';
+    const d = new Date(iso + 'T12:00:00');
+    if (isNaN(d)) return '';
+    const o = { month: 'short', day: 'numeric' };
+    if (d.getFullYear() !== new Date().getFullYear()) o.year = 'numeric';
+    return d.toLocaleDateString(undefined, o).replace(/[<>&"]/g, '');
+  }
 
-  window.PartyShare = { makeUrl, read, share, resultButton, note, _inflate: inflate };
+  // Note for the person who opened a shared link. Plain text built only from a count and a checked date
+  // (no shared text), so pages may insert it as text. nouns: { one: 'book', many: 'books' }; default "choices".
+  const SOURCE = 'The list was made by whoever sent the link, not The Party Wheel.';
+  function note(shared, nouns) {
+    if (!shared) return '';
+    const n = shared.items.length;
+    const what = `${n} ${nouns ? (n === 1 ? nouns.one : nouns.many) : (n === 1 ? 'choice' : 'choices')}`;
+    const when = shortDate(shared.date);
+    if (shared.result !== null) return `Someone shared their spin. Here’s where the wheel landed on their copy of ${what}${when ? ` from ${when}` : ''}. ${SOURCE}`;
+    return `This is a copy of ${what} ${when ? `shared on ${when}` : 'someone shared'}. Changes you make won’t update anyone else’s wheel. ${SOURCE}`;
+  }
+
+  window.PartyShare = { makeUrl, read, share, resultButton, note, shortDate, _inflate: inflate };
 })();
