@@ -93,7 +93,7 @@ h3 { font-size: 1.15rem; font-weight: 750; margin: 1.5rem 0 0.25rem; }
   min-height: 3.5rem;
 }
 .spin-btn:hover { background: #ff6d9b; }
-.spin-btn:disabled { opacity: 0.55; cursor: wait; }
+.spin-btn:disabled { opacity: 0.55; cursor: not-allowed; }
 
 /* ---------- Lyric-screen result ---------- */
 .result {
@@ -151,7 +151,7 @@ textarea {
   width: 100%;
   min-height: 12rem;
   padding: 0.75rem;
-  border: 2px solid var(--plum-2);
+  border: 2px solid var(--cream-dim);
   border-radius: 0.5rem;
   background: #12081D;
   color: var(--cream);
@@ -202,7 +202,7 @@ select {
   width: 100%;
   min-height: 3rem;
   padding: 0.6rem 2.25rem 0.6rem 0.75rem;
-  border: 2px solid var(--plum-2);
+  border: 2px solid var(--cream-dim);
   border-radius: 0.5rem;
   background: #12081D url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23FFC93C' stroke-width='2' fill='none'/%3E%3C/svg%3E") no-repeat right 0.85rem center;
   color: var(--cream);
@@ -263,7 +263,7 @@ p.field-legend { margin: 0.5rem 0 0.5rem; }
 .store-main a { display: inline-block; padding: 0.45rem 0; min-height: 2.75rem; line-height: 1.9rem; font-weight: 750; }
 .store-more { margin: 0.25rem 0 0; color: var(--cream-dim); font-size: 0.95rem; display: flex; flex-wrap: wrap; gap: 0 1rem; align-items: baseline; }
 .result .store-more { justify-content: center; }
-.store-more a { display: inline-block; padding: 0.55rem 0; }
+.store-more a { display: inline-block; min-height: 2.75rem; line-height: 2.75rem; padding: 0; }
 .book-list .store-main li { border: 0; padding: 0; }
 .disclosure { color: var(--cream-dim); font-size: 0.9rem; margin-top: 1rem; }
 
@@ -310,7 +310,7 @@ p.field-legend { margin: 0.5rem 0 0.5rem; }
 .tool-box select { background-color: var(--plum); }
 .text-input {
   width: 100%; min-height: 3rem; padding: 0.6rem 0.75rem;
-  border: 2px solid var(--plum-2); border-radius: 0.5rem;
+  border: 2px solid var(--cream-dim); border-radius: 0.5rem;
   background: var(--plum); color: var(--cream); font: 650 1rem var(--font);
   color-scheme: dark;
 }
@@ -359,3 +359,27 @@ p.field-legend { margin: 0.5rem 0 0.5rem; }
 .more-links a { display: inline-block; min-height: 2.75rem; line-height: 2.75rem; font-weight: 700; }
 .picker-list .sub-links a { display: inline-block; padding: 0; color: var(--yellow); text-decoration: underline; font-weight: 700; }
 .picker-list .sub-links a:hover { color: var(--cream); }
+
+/* ---------- Book club: club list entry, book search, share-a-copy (2026-11-13) ---------- */
+.share-row.two { display: flex; flex-wrap: wrap; justify-content: center; column-gap: 1.25rem; }
+.share-row.two .share-status { flex-basis: 100%; }
+.share-changed { text-align: center; color: var(--cream); font-size: 0.95rem; margin: 0.25rem auto 0; max-width: 30rem; }
+#book-panel, #host-panel { scroll-margin-top: 1rem; }
+.club-search { display: flex; flex-direction: column; }
+.club-search .text-input { background: #12081D; }
+.search-pop { display: flex; flex-direction: column; margin-top: 0.35rem; border: 2px solid var(--cream-dim); border-radius: 0.5rem; background: #12081D; overflow: hidden; }
+.search-pop[hidden] { display: none; }
+.search-msg { order: -1; margin: 0; padding: 0.6rem 0.75rem; color: var(--cream-dim); font-size: 0.95rem; }
+.search-msg:empty { display: none; }
+.search-results { list-style: none; margin: 0; padding: 0; }
+.search-results [role="option"] { min-height: 3.5rem; padding: 0.45rem 0.75rem; display: flex; flex-direction: column; justify-content: center; cursor: pointer; border-top: 1px solid var(--plum-2); }
+.search-results [role="option"]:first-child { border-top: 0; }
+.search-results [role="option"][aria-selected="true"] { background: var(--yellow); color: var(--plum); }
+.search-results [role="option"][aria-selected="true"] .opt-meta { color: var(--plum); }
+.opt-title { font-weight: 750; line-height: 1.25; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.opt-meta { color: var(--cream-dim); font-size: 0.92rem; line-height: 1.3; }
+.search-credit { margin: 0.35rem 0 0; font-size: 0.85rem; color: var(--cream-dim); }
+.search-credit a { display: inline-block; min-height: 2.75rem; line-height: 2.75rem; }
+.club-count { margin: 0.75rem 0 0.25rem; font-weight: 700; }
+.club-empty { color: var(--cream-dim); margin: 0.25rem 0 0; }
+.book-list .remove-btn { flex: none; }

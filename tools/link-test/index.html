@@ -10,7 +10,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#2B1342">
 <meta name="color-scheme" content="dark">
-<link rel="stylesheet" href="../../assets/style.css?v=20261103a">
+<link rel="stylesheet" href="../../assets/style.css?v=20261113a">
 <style>
   .t { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
   .t th, .t td { text-align: left; padding: 0.5rem 0.35rem; border-bottom: 1px solid var(--plum-2); vertical-align: top; }
@@ -30,7 +30,7 @@
 <script src="../../book-club-picker/isbns.js"></script>
 <script src="../../book-club-picker/books.js"></script>
 <script src="../../book-club-picker/current-books.js"></script>
-<script src="../../assets/links.js?v=20261031a"></script>
+<script src="../../assets/links.js?v=20261113a"></script>
 <script>
 (function () {
   const L = window.PartyLinks;
@@ -44,7 +44,7 @@
     ['Educated', 'Tara Westover'],                    // common word
     ['Fourth Wing', 'Rebecca Yarros']                 // popular series
   ];
-  const NAMES = { goodreads: 'Goodreads', bookshop: 'Bookshop', librofm: 'Libro.fm', amazon: 'Amazon', audible: 'Audible', library: 'OverDrive' };
+  const NAMES = { goodreads: 'Goodreads', bookshop: 'Bookshop', librofm: 'Libro.fm', amazon: 'Amazon', kindle: 'Kindle', audible: 'Audible', library: 'OverDrive' };
   const out = document.getElementById('out');
   // Bookshop check: every book with an ISBN, numbered. Tap a sample; report any that open the wrong book or "not found".
   const bs = document.createElement('section');

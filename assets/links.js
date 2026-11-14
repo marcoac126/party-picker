@@ -33,6 +33,7 @@
     bookshop:  'title+last',
     librofm:   'title',        // audiobook titles match on their own; author wording varies by narrator listing
     amazon:    'title+author', // Amazon's search is forgiving
+    kindle:    'title+author',
     audible:   'title+last',
     library:   'title+last'
   };
@@ -86,6 +87,10 @@
     amazon: { action: 'Buy', name: 'Amazon',
       url: (t) => `https://www.amazon.com/s?k=${q(t)}&i=stripbooks` + (IDS.amazon ? `&tag=${q(IDS.amazon)}` : ''),
       aff: () => !!IDS.amazon },
+    // Kindle ebooks: plain Amazon search, never tagged (security rule 7, 2026-11-13). No referrer sent.
+    kindle: { action: 'Read', name: 'Kindle',
+      url: (t) => `https://www.amazon.com/s?k=${q(t)}&i=digital-text`,
+      rel: 'noopener noreferrer', aff: () => false },
     audible: { action: 'Listen', name: 'Audible',
       url: (t) => `https://www.audible.com/search?keywords=${q(t)}` + (IDS.amazon ? `&tag=${q(IDS.amazon)}` : ''),
       aff: () => !!IDS.amazon },
@@ -96,7 +101,8 @@
   // Visible choices labelled by task, the rest under "More". Book links show four (library added 2026-10-14:
   // "every pick links to your library, indie bookstores, Kindle, and Audible"); Amazon and Audible stay last, under More.
   const PRIMARY = [['goodreads', 'Read reviews on Goodreads'], ['bookshop', 'Buy at Bookshop.org'], ['library', 'Find at your library'], ['librofm', 'Listen on Libro.fm']];
-  const MORE = [['amazon', 'Amazon'], ['audible', 'Audible']];
+  // Labelled by task, then place (print, ebook, audio).
+  const MORE = [['amazon', 'Buy on Amazon'], ['kindle', 'Read on Kindle'], ['audible', 'Listen on Audible']];
 
   function link(storeId, title, author, text) {
     const s = STORES[storeId];
@@ -106,7 +112,7 @@
     a.textContent = text || `${s.action} on ${s.name}`;
     a.target = '_blank';
     const sponsored = s.sponsored ? s.sponsored(isbn) : s.aff();
-    a.rel = sponsored ? 'sponsored noopener' : 'noopener';
+    a.rel = s.rel || (sponsored ? 'sponsored noopener' : 'noopener');
     return a;
   }
 

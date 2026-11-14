@@ -21,7 +21,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#2B1342">
 <meta name="color-scheme" content="dark">
-<link rel="stylesheet" href="../assets/style.css?v=20261103a">
+<link rel="stylesheet" href="../assets/style.css?v=20261113a">
 </head>
 <body>
 <header class="site-header">
@@ -45,7 +45,8 @@
     <canvas id="wheel" role="img" aria-label="Spinning wheel of book club choices"></canvas>
   </div>
   <button class="spin-btn" id="spin" type="button">Spin</button>
-  <p class="share-row"><button class="text-btn" id="share" type="button">Share this wheel</button><span class="share-status" id="share-status" aria-live="polite"></span></p>
+  <p class="share-row two"><button class="text-btn" id="club-entry" type="button">Use our club’s list</button><button class="text-btn" id="share" type="button">Share a copy</button><span class="share-status" id="share-status" aria-live="polite"></span></p>
+  <p class="share-changed" id="share-changed" hidden></p>
 
   <div class="result" id="result" aria-live="polite">
     <p class="result-hint">Your pick shows up here.</p>
@@ -85,10 +86,26 @@
       </div>
 
       <div id="club-panel" hidden>
-        <label for="club-entries">Your club’s suggestions</label>
-        <p class="help" id="club-help">One book per line. Add the author after a dash, like “Educated – Tara Westover”.</p>
-        <textarea id="club-entries" aria-describedby="club-help" spellcheck="false" placeholder="Educated – Tara Westover&#10;Circe – Madeline Miller&#10;The Martian – Andy Weir"></textarea>
-        <div class="row"><button class="text-btn" id="club-shuffle" type="button">Shuffle list</button></div>
+        <div class="club-search">
+          <label for="book-search">Add a book</label>
+          <input type="text" class="text-input" id="book-search" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="book-results" aria-describedby="book-search-help" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" placeholder="Title or author" maxlength="120">
+          <div class="search-pop" id="book-pop" hidden>
+            <ul class="search-results" id="book-results" role="listbox" aria-label="Matching books"></ul>
+            <p class="search-msg" id="book-search-msg"></p>
+          </div>
+          <p class="help" id="book-search-help">Searches go to Open Library, a free book catalog. Your list stays on your device.</p>
+          <p class="search-credit"><a href="https://openlibrary.org/" rel="noopener noreferrer" target="_blank">Book search by Open Library</a></p>
+        </div>
+        <p class="club-count" id="club-count"></p>
+        <ul class="book-list" id="club-list"></ul>
+        <p class="club-empty" id="club-empty" hidden>No books yet. Search above, or paste a list under “Edit as text”.</p>
+        <details class="own-list" id="club-text">
+          <summary>Edit as text</summary>
+          <label for="club-entries">Your club’s list, one book per line</label>
+          <p class="help" id="club-help">Add the author after a dash, like “Educated – Tara Westover”.</p>
+          <textarea id="club-entries" aria-describedby="club-help" spellcheck="false" placeholder="Educated – Tara Westover&#10;Circe – Madeline Miller&#10;The Martian – Andy Weir"></textarea>
+          <div class="row"><button class="text-btn" id="club-shuffle" type="button">Shuffle list</button></div>
+        </details>
       </div>
     </div>
 
@@ -100,6 +117,7 @@
     </div>
 
     <p class="check"><input type="checkbox" id="remove"><label for="remove">Remove each pick after it’s chosen</label></p>
+    <p class="sr-only" id="club-live" aria-live="polite"></p>
   </section>
 
   <nav class="more-links" aria-labelledby="more-heading">
@@ -112,7 +130,7 @@
 
   <article class="guide">
     <h2>How to pick a book club book with the wheel</h2>
-    <p>Before the meeting ends, ask each member to suggest one or two books. Choose “Our club’s list”, type them in, and spin. That’s next month’s read. Everyone had a say, and nobody has to argue for their pick.</p>
+    <p>Before the meeting ends, ask each member to suggest one or two books. Tap “Use our club’s list”, search for each book, and spin. That’s next month’s read. Everyone had a say, and nobody has to argue for their pick.</p>
 
     <h3>Ways to use it</h3>
     <ul>
@@ -130,7 +148,7 @@
     <p>Most are long-time book club favorites. “New &amp; popular” comes from Apple Books’ US bestseller chart each week, leaving out kids’ books, comics, and box sets.</p>
 
     <h3>Is the wheel random?</h3>
-    <p>Yes. Each spin uses your browser’s built-in random number generator, so every book on the wheel has the same chance. Your lists stay on your device and aren’t sent anywhere.</p>
+    <p>Yes. Each spin uses your browser’s built-in random number generator, so every book on the wheel has the same chance. Your list stays on your device. When you search for a book, only what you type is sent to Open Library, a free public book catalog.</p>
   </article>
 </main>
 
@@ -141,8 +159,8 @@
 </footer>
 
 <script src="../assets/wheel.js?v=20261102a"></script>
-<script src="../assets/share.js?v=20261011c"></script>
-<script src="../assets/links.js?v=20261031a"></script>
+<script src="../assets/share.js?v=20261113a"></script>
+<script src="../assets/links.js?v=20261113a"></script>
 <script src="books.js?v=20261110a"></script>
 <script src="current-books.js?v=20261009e"></script>
 <script src="isbns.js?v=20261013a"></script>
@@ -172,6 +190,8 @@
 (function () {
   const WHEEL_SIZE = 12;
   const STORE_KEY = 'pp-bookclub-v2';
+  const SHARE_KEY = 'pp-bookclub-lastshare'; // { sig, count, date } of the club list last shared from this browser
+  const MAX_BOOKS = 60;                       // share.js limit
   const $ = (id) => document.getElementById(id);
   const spinBtn = $('spin'), result = $('result'), status = $('status');
   const clubTA = $('club-entries'), hostTA = $('host-entries');
@@ -208,10 +228,52 @@
     get() { try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; } catch (e) { return {}; } },
     set(v) { try { localStorage.setItem(STORE_KEY, JSON.stringify(v)); } catch (e) {} }
   };
-  const save = () => store.set({ mode: state.mode, source: state.source, genres: state.genres, club: state.club, hosts: state.hosts });
+  // A list opened from a share link is shown but not saved until the visitor edits it,
+  // so their own saved list isn't overwritten. sharedView is 'club' or 'hosts' while that's true.
+  let sharedView = null, fromShare = false, sharedThisVisit = false;
+  const save = () => {
+    const old = sharedView ? store.get() : {};
+    store.set({ mode: state.mode, source: state.source, genres: state.genres,
+      club: sharedView === 'club' ? (old.club || '') : state.club,
+      hosts: sharedView === 'hosts' ? (old.hosts || '') : state.hosts });
+  };
+  const edited = (kind) => { if (sharedView === kind) sharedView = null; };
 
   const split = (line) => { const [t, ...a] = line.split(/\s+[–-]\s+/); return [t.trim(), a.join(' – ').trim()]; };
   const lines = (text) => text.split('\n').map((s) => s.trim()).filter(Boolean);
+  const join = ([t, a]) => (a ? `${t} – ${a}` : t);
+  const isClub = () => state.mode === 'book' && state.source === 'club';
+  const nouns = () => (state.mode === 'host' ? { one: 'name', many: 'names' } : { one: 'book', many: 'books' });
+  const bookCount = (n) => (n === 1 ? '1 book on the wheel.' : `${n} books on the wheel.`);
+
+  // "Changed since the last share" (club list only). Stores a short fingerprint, not the list.
+  function sig(items) {
+    let h = 0x811c9dc5;
+    const str = items.map((x) => join(split(x))).join('\n').toLowerCase();
+    for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); }
+    return (h >>> 0).toString(16);
+  }
+  const lastShare = () => { try { const v = JSON.parse(localStorage.getItem(SHARE_KEY)); return v && typeof v.sig === 'string' ? v : null; } catch (e) { return null; } };
+  function markShared(items) {
+    const d = new Date();
+    const date = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    try { localStorage.setItem(SHARE_KEY, JSON.stringify({ sig: sig(items), count: items.length, date })); } catch (e) {}
+    sharedThisVisit = true;
+    updateChrome();
+  }
+  function changedSinceShare() {
+    if (!isClub() || (fromShare && !sharedThisVisit)) return null;
+    const last = lastShare();
+    if (!last) return null;
+    return sig(lines(clubTA.value)) !== last.sig ? last : null;
+  }
+  // Share options: book/name wording, 2,000-character link cap, and (club list) remember the share.
+  function shareOpts(itemsAtShare) {
+    const club = isClub();
+    return { noun: nouns(), maxUrl: 2000,
+      tooFew: club ? 'Add at least 2 books before you share.' : undefined,
+      onShared: club ? () => markShared(itemsAtShare) : null };
+  }
 
   // What's on the wheel right now, as [title, author] pairs.
   function currentItems() {
@@ -235,7 +297,7 @@
         result.append(L.bookLinks(title, author));
         if (L.isAffiliate()) { const d = document.createElement('p'); d.className = 'disclosure'; d.textContent = L.disclosure(); result.append(d); }
       }
-      result.append(window.PartyShare.resultButton(wheel, (state.mode === 'host' ? 'hosts' : 'books'), 'Book club picks'));
+      result.append(window.PartyShare.resultButton(wheel, (state.mode === 'host' ? 'hosts' : 'books'), 'Book club picks', shareOpts(wheel.lastSpin ? wheel.lastSpin.items.slice() : [])));
       requestAnimationFrame(() => main.classList.add('sing'));
       const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       result.scrollIntoView({ behavior: still ? 'auto' : 'smooth', block: 'nearest' });
@@ -247,17 +309,249 @@
   });
 
   function removeAt(i) {
-    if (state.mode === 'host') { const l = lines(hostTA.value); l.splice(i, 1); hostTA.value = l.join('\n'); state.hosts = hostTA.value; }
-    else if (state.source === 'club') { const l = lines(clubTA.value); l.splice(i, 1); clubTA.value = l.join('\n'); state.club = clubTA.value; }
+    if (state.mode === 'host') { const l = lines(hostTA.value); l.splice(i, 1); hostTA.value = l.join('\n'); state.hosts = hostTA.value; edited('hosts'); }
+    else if (state.source === 'club') { const l = lines(clubTA.value); l.splice(i, 1); clubTA.value = l.join('\n'); state.club = clubTA.value; edited('club'); }
     else { state.dealt.splice(i, 1); renderBookList(); status.textContent = `${state.dealt.length} books left on the wheel.`; }
     refresh(); save();
   }
 
   function refresh() {
     const items = currentItems();
-    wheel.setItems(items.map(([t, a]) => (a ? `${t} – ${a}` : t)));
+    wheel.setItems(items.map(join));
     spinBtn.disabled = items.length < 2;
+    renderClub();
+    updateChrome();
   }
+
+  // The first button under Spin, and the "changed since you shared" line.
+  function updateChrome() {
+    const btn = $('club-entry');
+    if (state.mode === 'host') btn.textContent = 'Edit members';
+    else if (state.source !== 'club') btn.textContent = 'Use our club’s list';
+    else {
+      const n = lines(clubTA.value).length;
+      btn.textContent = n < 2 ? 'Add books to our list' : `Edit our list (${n} books)`;
+    }
+    const last = changedSinceShare(), line = $('share-changed');
+    line.hidden = !last;
+    line.textContent = last ? `You’ve changed the list since you shared it on ${window.PartyShare.shortDate(last.date)}. Share again so everyone gets the new list.` : '';
+  }
+
+  // ---------- Club list: rows with Remove, kept in sync with the textarea ----------
+  const searchInput = $('book-search'), live = $('club-live');
+  function announce(text) { live.textContent = ''; setTimeout(() => { live.textContent = text; }, 60); }
+  const shareAgain = () => (changedSinceShare() ? ' Share again to send the new list.' : '');
+
+  function renderClub() {
+    const items = lines(clubTA.value), ul = $('club-list'), n = items.length;
+    $('club-count').textContent = n === 0 ? 'No books on the wheel yet. Add at least 2 to spin.'
+      : n === 1 ? '1 book on the wheel. Add 1 more to spin.' : bookCount(n);
+    $('club-empty').hidden = n > 0;
+    ul.hidden = n === 0;
+    ul.textContent = '';
+    items.forEach((line, i) => {
+      const [t, a] = split(line);
+      const li = document.createElement('li');
+      const row = document.createElement('div'); row.className = 'book-row';
+      const name = document.createElement('span'); name.textContent = join([t, a]);
+      const btn = document.createElement('button');
+      btn.type = 'button'; btn.className = 'text-btn remove-btn'; btn.textContent = 'Remove';
+      btn.setAttribute('aria-label', `Remove ${t}`);
+      btn.addEventListener('click', () => removeClub(i));
+      row.append(name, btn); li.append(row); ul.append(li);
+    });
+  }
+  function setClub(items) {
+    clubTA.value = items.join('\n'); state.club = clubTA.value;
+    edited('club'); save(); refresh();
+  }
+  function removeClub(i) {
+    const items = lines(clubTA.value);
+    if (i < 0 || i >= items.length) return;
+    const [t] = split(items[i]);
+    items.splice(i, 1);
+    setClub(items);
+    const btns = $('club-list').querySelectorAll('.remove-btn');
+    if (btns[i]) btns[i].focus(); else if (btns[i - 1]) btns[i - 1].focus(); else searchInput.focus();
+    announce(`Removed ${t}. ${bookCount(items.length)}${shareAgain()}`);
+  }
+  const bookKey = (line) => split(line).join('|').toLowerCase();
+  // Returns true if added.
+  function addBook(title, author) {
+    const items = lines(clubTA.value);
+    const entry = join([title, author]);
+    if (items.some((x) => bookKey(x) === bookKey(entry))) { announce(`${title} is already on the list.`); return false; }
+    if (items.length >= MAX_BOOKS) { showMsg('The wheel holds up to 60 books.'); announce('The wheel holds up to 60 books.'); return false; }
+    items.push(entry);
+    setClub(items);
+    announce(`Added ${title}${author ? ` by ${author}` : ''}. ${bookCount(items.length)}${shareAgain()}`);
+    return true;
+  }
+
+  // ---------- Book search (Open Library), WAI-ARIA combobox with a listbox popup ----------
+  // Security rules 2026-11-13: only on typing here, 3+ characters, 400 ms pause, one request at a time
+  // (earlier one aborted), at most 1 per second and 30 per page load, answers cached in memory only.
+  // Answers are untrusted: shape-checked, cleaned, capped, and shown with textContent. No URLs from them are used.
+  const pop = $('book-pop'), lb = $('book-results'), msgEl = $('book-search-msg');
+  const MIN_CHARS = 3, DEBOUNCE_MS = 400, MAX_REQUESTS = 30, MIN_GAP_MS = 1000, TIMEOUT_MS = 8000, SLOW_MS = 600;
+  const BAD_CHARS = /[\u0000-\u001f\u007f\u202a-\u202e\u2066-\u2069]/g;
+  const MSG = {
+    none: 'No matches.',
+    error: 'Can’t search right now. Check your connection, or add it as typed.',
+    cap: 'Search limit reached for this visit. Add it as typed.'
+  };
+  const cache = new Map();
+  let requests = 0, lastRequestAt = 0, ctrl = null, seq = 0, debounce = null, slow = null;
+  let view = { q: '', kind: 'idle', results: [] }, options = [], active = -1, escArmed = false;
+
+  const clean = (v, max) => (typeof v === 'string' ? v.replace(BAD_CHARS, '').replace(/\s+[–-]\s+/g, ': ').replace(/\s+/g, ' ').trim().slice(0, max) : '');
+  function parse(data) {
+    if (!data || typeof data !== 'object' || !Array.isArray(data.docs)) return [];
+    const out = [], seen = new Set();
+    for (const doc of data.docs) {
+      if (!doc || typeof doc !== 'object') continue;
+      const title = clean(doc.title, 200);
+      if (!title) continue;
+      const author = Array.isArray(doc.author_name) ? clean(doc.author_name[0], 100) : '';
+      const y = doc.first_publish_year;
+      const year = ((typeof y === 'number' || typeof y === 'string') && /^\d{3,4}$/.test(String(y))) ? String(y) : '';
+      const k = `${title}|${author}`.toLowerCase();
+      if (seen.has(k)) continue;
+      seen.add(k); out.push({ title, author, year });
+      if (out.length >= 5) break;
+    }
+    return out;
+  }
+  // Fit "Title – Author" into the 120-character share limit by shortening the title.
+  function fit(title, author) {
+    const room = 120 - (author ? author.length + 3 : 0);
+    return [title.length > room ? title.slice(0, Math.max(1, room - 1)).trimEnd() + '…' : title, author];
+  }
+
+  const isOpen = () => !pop.hidden;
+  function close() {
+    pop.hidden = true; searchInput.setAttribute('aria-expanded', 'false');
+    searchInput.removeAttribute('aria-activedescendant'); active = -1;
+  }
+  function showMsg(text) { msgEl.textContent = text; }
+  function setActive(i) {
+    active = i;
+    options.forEach((o, j) => o.el.setAttribute('aria-selected', String(j === i)));
+    if (i >= 0) { searchInput.setAttribute('aria-activedescendant', options[i].el.id); options[i].el.scrollIntoView({ block: 'nearest' }); }
+    else searchInput.removeAttribute('aria-activedescendant');
+  }
+  function renderPop() {
+    const q = searchInput.value.trim();
+    if (!q) { close(); return; }
+    const onList = new Set(lines(clubTA.value).map(bookKey));
+    lb.textContent = ''; options = [];
+    const addOption = (o) => {
+      const li = document.createElement('li');
+      li.setAttribute('role', 'option'); li.id = `book-opt-${options.length}`; li.setAttribute('aria-selected', 'false');
+      const t = document.createElement('span'); t.className = 'opt-title'; t.setAttribute('aria-hidden', 'true'); t.textContent = o.line1;
+      li.append(t);
+      if (o.line2) { const m = document.createElement('span'); m.className = 'opt-meta'; m.setAttribute('aria-hidden', 'true'); m.textContent = o.line2; li.append(m); }
+      const sr = document.createElement('span'); sr.className = 'sr-only'; sr.textContent = o.name; li.append(sr);
+      if (o.dup) li.setAttribute('aria-disabled', 'true');
+      o.el = li; options.push(o); lb.append(li);
+    };
+    if (view.q === q && view.kind === 'results') {
+      view.results.forEach((r) => {
+        const [title, author] = fit(r.title, r.author);
+        const dup = onList.has(bookKey(join([title, author])));
+        const tail = dup ? 'Already on the list' : r.year;
+        addOption({ title, author, dup, line1: title,
+          line2: [author, tail].filter(Boolean).join(' · '),
+          name: [title, author && `by ${author}`, dup ? 'already on the list' : r.year].filter(Boolean).join(', ') });
+      });
+    }
+    const typed = q.replace(BAD_CHARS, '').replace(/\s+/g, ' ').trim().slice(0, 120), [tt, ta] = split(typed);
+    addOption({ title: tt, author: ta, typed: true, dup: onList.has(bookKey(typed)), line1: `Add “${typed}” as typed`, line2: '', name: `Add “${typed}” as typed` });
+    showMsg(view.q === q ? (MSG[view.kind] || '') : '');
+    pop.hidden = false; searchInput.setAttribute('aria-expanded', 'true');
+    setActive(-1);
+  }
+  function choose(i) {
+    const o = options[i];
+    if (!o) return;
+    if (o.dup) { announce(`${o.title} is already on the list.`); return; }
+    if (addBook(o.title, o.author)) { abort(); searchInput.value = ''; view = { q: '', kind: 'idle', results: [] }; close(); searchInput.focus(); }
+  }
+  function abort() {
+    seq++; clearTimeout(slow);
+    if (ctrl) { ctrl.abort(); ctrl = null; }
+  }
+  function show(q, kind, results, say) {
+    view = { q, kind, results: results || [] };
+    if (searchInput.value.trim() !== q) return;
+    renderPop();
+    if (say) announce(say);
+  }
+  function search(q) {
+    if (searchInput.value.trim() !== q) return;
+    const key = q.toLowerCase();
+    if (cache.has(key)) { const r = cache.get(key); show(q, r.length ? 'results' : 'none', r, r.length ? `${r.length} book${r.length === 1 ? '' : 's'} found.` : 'No matches.'); return; }
+    if (navigator.onLine === false) { show(q, 'error', [], 'Can’t search right now.'); return; }
+    if (requests >= MAX_REQUESTS) { show(q, 'cap', [], 'Search limit reached.'); return; }
+    const wait = lastRequestAt + MIN_GAP_MS - Date.now();
+    if (wait > 0) { debounce = setTimeout(() => search(q), wait); return; }
+    abort();
+    requests++; lastRequestAt = Date.now();
+    const mine = seq, c = new AbortController(); ctrl = c;
+    let timedOut = false;
+    const timer = setTimeout(() => { timedOut = true; c.abort(); }, TIMEOUT_MS);
+    slow = setTimeout(() => { if (mine === seq && searchInput.value.trim() === q && isOpen()) showMsg('Searching…'); }, SLOW_MS);
+    const url = `https://openlibrary.org/search.json?q=${encodeURIComponent(q)}&fields=title,author_name,first_publish_year&limit=5`;
+    fetch(url, { credentials: 'omit', referrerPolicy: 'no-referrer', signal: c.signal })
+      .then((r) => { if (!r.ok) throw new Error('status'); return r.json(); })
+      .then((data) => {
+        const results = parse(data);
+        cache.set(key, results);
+        if (mine !== seq) return;
+        show(q, results.length ? 'results' : 'none', results, results.length ? `${results.length} book${results.length === 1 ? '' : 's'} found.` : 'No matches.');
+      })
+      .catch((e) => {
+        if (mine !== seq || (e && e.name === 'AbortError' && !timedOut)) return;
+        show(q, 'error', [], 'Can’t search right now.');
+      })
+      .finally(() => { clearTimeout(timer); clearTimeout(slow); if (ctrl === c) ctrl = null; });
+  }
+
+  searchInput.addEventListener('input', () => {
+    escArmed = false;
+    clearTimeout(debounce); abort();
+    const q = searchInput.value.trim();
+    if (!q) { view = { q: '', kind: 'idle', results: [] }; close(); return; }
+    const cached = cache.get(q.toLowerCase());
+    if (q.length >= MIN_CHARS && cached) { search(q); return; }
+    view = { q, kind: 'idle', results: [] };
+    renderPop();
+    if (q.length >= MIN_CHARS) debounce = setTimeout(() => search(q), DEBOUNCE_MS);
+  });
+  searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (!isOpen()) { if (searchInput.value.trim()) renderPop(); if (e.key === 'ArrowUp') return; }
+      if (!options.length) return;
+      const n = options.length;
+      setActive(e.key === 'ArrowDown' ? (active + 1) % n : (active <= 0 ? n - 1 : active - 1));
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (isOpen() && active >= 0) choose(active);
+      else if (searchInput.value.trim()) { if (!isOpen()) renderPop(); choose(options.length - 1); }
+    } else if (e.key === 'Escape') {
+      if (isOpen()) { e.preventDefault(); close(); escArmed = true; }
+      else if (searchInput.value) { e.preventDefault(); clearTimeout(debounce); abort(); searchInput.value = ''; escArmed = false; }
+    } else if (e.key === 'Tab') close();
+  });
+  // Rows keep focus in the input when tapped. Don't close on blur (screen readers can blur while swiping).
+  ['pointerdown', 'mousedown'].forEach((ev) => lb.addEventListener(ev, (e) => e.preventDefault()));
+  lb.addEventListener('click', (e) => {
+    const li = e.target.closest('[role="option"]');
+    if (li) choose(options.findIndex((o) => o.el === li));
+  });
+  document.addEventListener('pointerdown', (e) => { if (isOpen() && e.target !== searchInput && !pop.contains(e.target)) close(); });
+  document.addEventListener('focusin', (e) => { if (isOpen() && e.target !== searchInput && !pop.contains(e.target)) close(); });
 
   function renderBookList() {
     const ul = $('book-list'); ul.innerHTML = '';
@@ -344,12 +638,26 @@
   document.querySelectorAll('input[name="mode"]').forEach((r) => r.addEventListener('change', () => { state.mode = r.value; save(); render(); }));
   document.querySelectorAll('input[name="source"]').forEach((r) => r.addEventListener('change', () => { state.source = r.value; save(); render(); }));
   $('deal').addEventListener('click', deal);
-  clubTA.addEventListener('input', () => { state.club = clubTA.value; save(); refresh(); });
-  hostTA.addEventListener('input', () => { state.hosts = hostTA.value; save(); refresh(); });
-  $('club-shuffle').addEventListener('click', () => { clubTA.value = sample(lines(clubTA.value), Infinity).join('\n'); state.club = clubTA.value; save(); refresh(); });
+  clubTA.addEventListener('input', () => { state.club = clubTA.value; edited('club'); save(); refresh(); });
+  hostTA.addEventListener('input', () => { state.hosts = hostTA.value; edited('hosts'); save(); refresh(); });
+  $('club-shuffle').addEventListener('click', () => { clubTA.value = sample(lines(clubTA.value), Infinity).join('\n'); state.club = clubTA.value; edited('club'); save(); refresh(); });
+
+  // "Use our club's list" / "Add books" / "Edit our list" / "Edit members": jump straight to the box (no smooth scroll).
+  $('club-entry').addEventListener('click', () => {
+    const host = state.mode === 'host';
+    if (!host && state.source !== 'club') { state.source = 'club'; $('src-club').checked = true; save(); }
+    render();
+    const box = host ? hostTA : searchInput, panel = host ? $('host-panel') : $('book-panel');
+    box.focus({ preventScroll: true });
+    panel.scrollIntoView({ block: 'start', behavior: 'auto' });
+    requestAnimationFrame(() => { if (document.activeElement !== box) box.focus({ preventScroll: true }); });
+  });
 
 
-  $('share').addEventListener('click', () => window.PartyShare.share(currentItems().map(([t, a]) => (a ? `${t} – ${a}` : t)), state.mode === 'host' ? 'hosts' : 'books', 'Book club picks', $('share-status')));
+  $('share').addEventListener('click', () => {
+    const items = currentItems().map(join);
+    window.PartyShare.share(items, state.mode === 'host' ? 'hosts' : 'books', 'Book club picks', $('share-status'), undefined, undefined, shareOpts(items));
+  });
   spinBtn.addEventListener('click', () => {
     if (wheel.spin()) {
       spinBtn.disabled = true;
@@ -383,10 +691,14 @@
   const shared = window.PartyShare.read();
   if (shared) {
     const text = shared.items.join('\n');
-    if (shared.kind === 'hosts') { state.mode = 'host'; state.hosts = text; hostTA.value = text; }
-    else { state.mode = 'book'; state.source = 'club'; state.club = text; clubTA.value = text; }
+    // Show the shared copy without saving it over this visitor's own list (saved only if they edit it).
+    fromShare = true;
+    if (shared.kind === 'hosts') { state.mode = 'host'; state.hosts = text; hostTA.value = text; sharedView = 'hosts'; }
+    else { state.mode = 'book'; state.source = 'club'; state.club = text; clubTA.value = text; sharedView = 'club'; }
     $('mode-' + state.mode).checked = true; $('src-' + state.source).checked = true;
-    document.querySelector('.segmented').insertAdjacentHTML('afterend', '<p class="shared-note">' + window.PartyShare.note(shared) + '</p>');
+    const noteEl = document.createElement('p'); noteEl.className = 'shared-note';
+    noteEl.textContent = window.PartyShare.note(shared, shared.kind === 'hosts' ? { one: 'name', many: 'names' } : { one: 'book', many: 'books' });
+    document.querySelector('.segmented').after(noteEl);
   }
   syncChips();
   deal();
