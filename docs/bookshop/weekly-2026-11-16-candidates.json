@@ -1,0 +1,307 @@
+{
+ "round": "weekly-2026-11-16",
+ "made": "2026-11-16",
+ "files": [
+  "weekly-2026-11-16.csv (13)"
+ ],
+ "picks": [
+  {
+   "title": "A Court of Splintered Harmony",
+   "author": "Sarah J. Maas",
+   "genre": "weekly",
+   "key": "a court of splintered harmony|maas",
+   "isbn": "9781037200083",
+   "year": 2026
+  },
+  {
+   "title": "The Calamity Club",
+   "author": "Kathryn Stockett",
+   "genre": "weekly",
+   "key": "the calamity club|stockett",
+   "isbn": "9781954118812",
+   "year": 2026
+  },
+  {
+   "title": "Red Rising",
+   "author": "Pierce Brown",
+   "genre": "weekly",
+   "key": "red rising|brown",
+   "isbn": "9780593871522",
+   "year": 2025
+  },
+  {
+   "title": "The Things We Do for Love",
+   "author": "Kristin Hannah",
+   "genre": "weekly",
+   "key": "the things we do for love|hannah",
+   "isbn": "9780345520807",
+   "year": 2010
+  },
+  {
+   "title": "Iberia",
+   "author": "James A. Michener, Steve Berry & Robert Vavra",
+   "genre": "weekly",
+   "key": "iberia|michener",
+   "isbn": "9780436279539",
+   "year": 1968
+  },
+  {
+   "title": "Ten Big Ones",
+   "author": "Janet Evanovich",
+   "genre": "weekly",
+   "key": "ten big ones|evanovich",
+   "isbn": "9780312936228",
+   "year": 2005
+  },
+  {
+   "title": "Shelter in Place",
+   "author": "Nora Roberts",
+   "genre": "weekly",
+   "key": "shelter in place|roberts",
+   "isbn": "9781250247094",
+   "year": 2020
+  },
+  {
+   "title": "Yesteryear: A GMA Book Club Pick",
+   "author": "Caro Claire Burke",
+   "genre": "weekly",
+   "key": "yesteryear|burke",
+   "isbn": "9780593804216",
+   "year": 2026
+  },
+  {
+   "title": "Artemis",
+   "author": "Andy Weir",
+   "genre": "weekly",
+   "key": "artemis|weir",
+   "isbn": "9780525572671",
+   "year": 2019
+  },
+  {
+   "title": "The Pirate Queen",
+   "author": "Ariel Lawhon",
+   "genre": "weekly",
+   "key": "the pirate queen|lawhon",
+   "isbn": "9780385550345",
+   "year": 2026
+  },
+  {
+   "title": "Empire of the Summer Moon",
+   "author": "S. C. Gwynne",
+   "genre": "weekly",
+   "key": "empire of the summer moon|gwynne",
+   "isbn": "9781416591061",
+   "year": 2010
+  },
+  {
+   "title": "The Names: A Read with Jenna Pick",
+   "author": "Florence Knapp",
+   "genre": "weekly",
+   "key": "the names|knapp",
+   "isbn": "9780593833902",
+   "year": 2025
+  },
+  {
+   "title": "Operation Bounce House",
+   "author": "Matt Dinniman",
+   "genre": "weekly",
+   "key": "operation bounce house|dinniman",
+   "isbn": "9780593820308",
+   "year": 2026
+  }
+ ],
+ "missing": [
+  {
+   "title": "All In",
+   "author": "David Baldacci",
+   "genre": "weekly",
+   "key": "all in|baldacci"
+  },
+  {
+   "title": "The Hollow",
+   "author": "Michael Connelly",
+   "genre": "weekly",
+   "key": "the hollow|connelly"
+  },
+  {
+   "title": "Split Second: Thirty-Two Switcheroo",
+   "author": "Janet Evanovich",
+   "genre": "weekly",
+   "key": "split second|evanovich"
+  },
+  {
+   "title": "Daddy Issues",
+   "author": "Sofia Franklyn",
+   "genre": "weekly",
+   "key": "daddy issues|franklyn"
+  },
+  {
+   "title": "Chain Reaction",
+   "author": "Lee Child & Andrew Child",
+   "genre": "weekly",
+   "key": "chain reaction|child"
+  },
+  {
+   "title": "The French Illusion",
+   "author": "John Grisham",
+   "genre": "weekly",
+   "key": "the french illusion|grisham"
+  },
+  {
+   "title": "Mad Mabel",
+   "author": "Sally Hepworth",
+   "genre": "weekly",
+   "key": "mad mabel|hepworth"
+  },
+  {
+   "title": "Solace in Winter",
+   "author": "Mary Lawson",
+   "genre": "weekly",
+   "key": "solace in winter|lawson"
+  },
+  {
+   "title": "Theo of Golden",
+   "author": "Allen Levi",
+   "genre": "weekly",
+   "key": "theo of golden|levi"
+  },
+  {
+   "title": "Fox",
+   "author": "Joyce Carol Oates",
+   "genre": "weekly",
+   "key": "fox|oates"
+  },
+  {
+   "title": "Clive Cussler Obsidian Sky",
+   "author": "Dirk Cussler",
+   "genre": "weekly",
+   "key": "clive cussler obsidian sky|cussler"
+  },
+  {
+   "title": "Partita",
+   "author": "Barbara Kingsolver",
+   "genre": "weekly",
+   "key": "partita|kingsolver"
+  },
+  {
+   "title": "Whale Harbor",
+   "author": "Mary Beth Keane",
+   "genre": "weekly",
+   "key": "whale harbor|keane"
+  },
+  {
+   "title": "It's a Long Story",
+   "author": "Willie Nelson & David Ritz",
+   "genre": "weekly",
+   "key": "it's a long story|nelson"
+  },
+  {
+   "title": "The Wife He Kept Off the Record",
+   "author": "Lena Marsh",
+   "genre": "weekly",
+   "key": "the wife he kept off the record|marsh"
+  },
+  {
+   "title": "The Family Cross",
+   "author": "James Patterson",
+   "genre": "weekly",
+   "key": "the family cross|patterson"
+  },
+  {
+   "title": "American Hagwon",
+   "author": "Min Jin Lee",
+   "genre": "weekly",
+   "key": "american hagwon|lee"
+  },
+  {
+   "title": "Hollow Bones",
+   "author": "Jodi Picoult",
+   "genre": "weekly",
+   "key": "hollow bones|picoult"
+  },
+  {
+   "title": "The Night Island",
+   "author": "Jayne Ann Krentz",
+   "genre": "weekly",
+   "key": "the night island|krentz"
+  },
+  {
+   "title": "The London Man",
+   "author": "Louise Bay",
+   "genre": "weekly",
+   "key": "the london man|bay"
+  },
+  {
+   "title": "The End of Everything",
+   "author": "M. John Harrison",
+   "genre": "weekly",
+   "key": "the end of everything|harrison"
+  },
+  {
+   "title": "The Wife He Filed Under Business",
+   "author": "Lena Marsh",
+   "genre": "weekly",
+   "key": "the wife he filed under business|marsh"
+  },
+  {
+   "title": "Miss Wolcott's Ghost",
+   "author": "Louise Penny",
+   "genre": "weekly",
+   "key": "miss wolcott's ghost|penny"
+  },
+  {
+   "title": "The Taken Ones",
+   "author": "J. A. Jance",
+   "genre": "weekly",
+   "key": "the taken ones|jance"
+  },
+  {
+   "title": "The Paris Seamstress",
+   "author": "Catherine Law",
+   "genre": "weekly",
+   "key": "the paris seamstress|law"
+  },
+  {
+   "title": "The Borrowed Life of Frederick Fife",
+   "author": "Anna Johnston",
+   "genre": "weekly",
+   "key": "the borrowed life of frederick fife|johnston"
+  },
+  {
+   "title": "Whistler",
+   "author": "Ann Patchett",
+   "genre": "weekly",
+   "key": "whistler|patchett"
+  },
+  {
+   "title": "Department of Fate",
+   "author": "Rachel Maddow",
+   "genre": "weekly",
+   "key": "department of fate|maddow"
+  },
+  {
+   "title": "Peck & Peck",
+   "author": "Bonnie Garmus",
+   "genre": "weekly",
+   "key": "peck peck|garmus"
+  },
+  {
+   "title": "In the Shadow of Eight",
+   "author": "Collin Gosselin",
+   "genre": "weekly",
+   "key": "in the shadow of eight|gosselin"
+  },
+  {
+   "title": "Before I Disappear",
+   "author": "Cate Quinn",
+   "genre": "weekly",
+   "key": "before i disappear|quinn"
+  },
+  {
+   "title": "A Court of Forgotten Melody",
+   "author": "Sarah J. Maas",
+   "genre": "weekly",
+   "key": "a court of forgotten melody|maas"
+  }
+ ]
+}
