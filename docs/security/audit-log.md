@@ -265,3 +265,7 @@ Checked against the security rules set earlier today. I had no shell, so I read 
 - Open Library has been added to `third-parties.md` with these limits.
 
 Sources: [Open Library API](https://openlibrary.org/developers/api); [Open Library licensing](https://openlibrary.org/developers/licensing).
+
+## 2026-11-17 — Review: Thanksgiving games (branch `party-games-thanksgiving`, d7d3f6c) and December pins (branch `pins-december-2026`, ec35425)
+- **Thanksgiving games: PASS.** No new outside scripts or links; all text still set with `textContent`. Occasion filter matches exact words only. Saved occasion/player settings are now checked against the dropdown options (stronger than before). Low: the Thanksgiving wording in the meta description goes stale after November; refresh it then.
+- **December pins: PASS.** Held unmerged until Mark's 11/30 Pinterest decision. Links use only each page's own preset parameters; no # links or shorteners; ids are new and not in holiday.xml; build script adds nothing before its date, max one per day. Text matches the pages ($50 tier 15 ideas, cozy 8, small-group games 8, comedies 12; three comedies are rated R). The Medium condition (image metadata) was cleared by the coordinator: the 4 JPGs carry no EXIF, only a color profile, same as the posted pins.
