@@ -210,6 +210,98 @@
         "Drink smoker",
         "Hot sauce kit"
       ]
+    },
+    {
+      "id": "white-elephant-50-limit",
+      "feed": "holiday",
+      "publish": "2026-12-01",
+      "title": "White Elephant Gifts for a $50 Limit: Spin for One",
+      "description": "Friend group going big this year? Spin for white elephant ideas that usually cost $25 to $50: a heated throw blanket, an electric wine opener, a portable Bluetooth speaker, a rechargeable hand warmer, Big Mouth Billy Bass, a charcuterie board set, and party games like Wavelength. Prices vary, so check before you buy. Each idea links to shop it. Free, no sign-up.",
+      "link": "https://thepartywheel.com/white-elephant-gift-ideas/?price=u50",
+      "image": "/pins/img/white-elephant-50-limit.jpg",
+      "alt": "A spinning wheel of white elephant gift ideas from $25 to $50 with the headline White Elephant Gifts for a $50 Limit",
+      "headline": "White Elephant Gifts, $50 Limit",
+      "subhead": "Bigger budget, bigger steals.",
+      "accent": "#FFC93C",
+      "wheel": [
+        "Heated blanket",
+        "Wine opener",
+        "Speaker",
+        "USB hand warmer",
+        "Billy Bass",
+        "Charcuterie set",
+        "Wavelength",
+        "Telestrations"
+      ]
+    },
+    {
+      "id": "holiday-games-small-group",
+      "feed": "holiday",
+      "publish": "2026-12-02",
+      "title": "Holiday Games for a Small Group of 3 to 4: Spin for One",
+      "description": "Just a few of you this Christmas? Spin a free wheel of 8 card and board games for a small group of 3 to 4: Codenames, Ticket to Ride, Wavelength, Just One, Telestrations, Herd Mentality, Monikers, and Jenga. Each spin shows the player count, a quick summary, and a how-to-play video. They make easy gifts too. Free, no sign-up.",
+      "link": "https://thepartywheel.com/party-game-picker/?occasion=holiday&players=3-4&types=card,board",
+      "image": "/pins/img/holiday-games-small-group.jpg",
+      "alt": "A spinning wheel of card and board games for a small holiday group with the headline Holiday Games for 3 to 4",
+      "headline": "Holiday Games for 3–4",
+      "subhead": "8 card and board games. Spin and play.",
+      "accent": "#22B8A7",
+      "wheel": [
+        "Codenames",
+        "Ticket to Ride",
+        "Wavelength",
+        "Just One",
+        "Telestrations",
+        "Herd Mentality",
+        "Monikers",
+        "Jenga"
+      ]
+    },
+    {
+      "id": "cozy-white-elephant",
+      "feed": "holiday",
+      "publish": "2026-12-03",
+      "title": "Cozy White Elephant Gift Ideas: Spin for One",
+      "description": "Cozy gifts are the ones people steal. Spin a free wheel of 8 cozy white elephant ideas from under $10 to $50: fuzzy socks, a sherpa throw blanket, a cocoa mug gift set, a large scented candle, a plush robe, a heated throw blanket, and more. Prices vary, so check before you buy. Each idea links to shop it. Free, no sign-up.",
+      "link": "https://thepartywheel.com/white-elephant-gift-ideas/?vibes=cozy",
+      "image": "/pins/img/cozy-white-elephant.jpg",
+      "alt": "A spinning wheel of cozy white elephant gift ideas with the headline Cozy White Elephant Gifts",
+      "headline": "Cozy White Elephant Gifts",
+      "subhead": "Soft, warm, and always stolen.",
+      "accent": "#FF4F86",
+      "wheel": [
+        "Fuzzy socks",
+        "Mini candle",
+        "Sherpa blanket",
+        "Big candle",
+        "Cocoa mug set",
+        "Heated blanket",
+        "Plush robe",
+        "Candle warmer"
+      ]
+    },
+    {
+      "id": "christmas-comedy-movies",
+      "feed": "holiday",
+      "publish": "2026-12-04",
+      "title": "Funny Christmas Movies: Spin to Pick a Comedy",
+      "description": "Want a Christmas movie that actually makes you laugh? Spin a free wheel of 12 Christmas comedies, from National Lampoon’s Christmas Vacation and Scrooged to Four Christmases, Deck the Halls, The Family Stone, and Spirited. A few are rated R, so check before the kids join. Each pick shows a one-line summary plus where to stream, rent, or buy it. Free, no sign-up.",
+      "link": "https://thepartywheel.com/christmas-movie-picker/?moods=comedy",
+      "image": "/pins/img/christmas-comedy-movies.jpg",
+      "alt": "A spinning wheel of Christmas comedy movies with the headline Christmas Comedy Movie Night",
+      "headline": "Christmas Comedy Movie Night",
+      "subhead": "12 funny favorites. Spin, then press play.",
+      "accent": "#FFC93C",
+      "wheel": [
+        "Xmas Vacation",
+        "Scrooged",
+        "Four Christmases",
+        "The Kranks",
+        "Deck the Halls",
+        "The Family Stone",
+        "Spirited",
+        "Bad Moms Xmas"
+      ]
     }
   ]
 }
