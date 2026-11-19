@@ -30,6 +30,7 @@ window.BOOK_CLUB_BOOKS = [
   ['The Heaven & Earth Grocery Store', 'James McBride', 'fiction'],
   ['Hello Beautiful', 'Ann Napolitano', 'fiction'],
   ['The End of Everything', 'M. John Harrison', 'fiction'], // Booker Prize 2026 winner
+  ['Paradiso 17', 'Hannah Lillith Assadi', 'fiction'], // National Book Award 2026, Fiction
 
   // Mystery & thriller
   ['Gone Girl', 'Gillian Flynn', 'mystery'],
@@ -88,6 +89,7 @@ window.BOOK_CLUB_BOOKS = [
   ['Crying in H Mart', 'Michelle Zauner', 'nonfiction'],
   ['Unbroken', 'Laura Hillenbrand', 'nonfiction'],
   ['Into Thin Air', 'Jon Krakauer', 'nonfiction'],
+  ['Huna', 'Abdelrahman ElGendy', 'nonfiction'], // National Book Award 2026, Nonfiction
 
   // Classics
   ['Pride and Prejudice', 'Jane Austen', 'classics'],
