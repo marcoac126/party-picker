@@ -1,4 +1,249 @@
-# Book club picker: simplify the page, browse by theme and mood, clearer result
+# Book club picker: simplify the page, filter books, clearer result
+
+## v2: dropdown filters (Mark 11/21)
+
+Mark's direction: "a more intelligent, concise book choosing workflow. Perhaps a few dropdown menus to filter books, beyond a simple book search/selector. The mobile view is the one I'm most concerned about."
+
+v2 replaces v1's single "What kind of books?" dropdown and mood chips (v1 section 5) with three filters, and moves them **above the wheel** in a collapsed row. The rest of v1 still applies (clutter audit, 3-way switch, summary line, result card, guide wording, accessibility), with the changes listed in V11.
+
+**For the prototype:** the developer can build this now with placeholder tags on 20 to 30 books. Label the prototype "sample tags" until Marketing's data lands. No screenshots in this session (no shell, so no Playwright). Pixel heights below are estimates from `assets/style.css`. Take shots at 390×664 (iPhone 14 Safari with toolbars), 375×548 (iPhone SE Safari) and 412×915 and save them to `/home/claude/work/ux-shots/`.
+
+### V1. Where the filters go: a collapsed "Filters" row above the wheel
+
+Mark asked about three placements. About 80% of visitors are on phones, so the test is an iPhone at 390×664 (the area you can see with Safari's toolbars showing).
+
+| Option | Added above Spin | Where Spin ends up (390×664) | Verdict |
+|---|---|---|---|
+| A. Compact card, always open, above the wheel | about 230px (3 selects + count) | about 880px. The wheel starts about 500px down, so the first screen is mostly settings | **No.** It breaks "the wheel comes first" for everyone, including the many visitors who just want to spin. |
+| B. Collapsed row "Filters (2) ▾ · 18 books match", opens in place | about 60px | about 645px, **on the first screen** (with the wheel sized to fit, see V2) | **Yes.** |
+| C. Below the wheel (v1) | 0 | about 590px | **No.** The filters start around 760px, so phone users never see them. When you change a filter, the wheel isn't on screen, so you can't see what changed. Mark wants filtering to be part of choosing a book. |
+
+Why B:
+- It's one row, so the first screen still shows the wheel and Spin. The match count is in the same row, so people see "112 books" before they open anything.
+- One tap opens the three selects in place, directly above the wheel. While you pick filters, the top of the wheel stays in view and redraws.
+- Phones start collapsed. Screens 48rem wide or more start open, since there's room.
+- This is a deliberate exception to "settings below the wheel": it's the one setting Mark wants most visitors to use, and it costs one row.
+
+### V2. First screen at 390px (Suggested, 2 filters on, before a spin)
+
+```
+ y≈  ┌──────────────────────────────────┐
+   0 │ The Party Wheel                  │ site header, 58
+  58 │ Book club picker & random        │ H1, same words, 1.75rem on phones
+     │ book generator                   │ 2 lines, ~80
+ 138 │ Books are already on the wheel.  │ lede, 2 lines, ~73
+     │ Filter by occasion, mood, or     │
+     │ genre, then spin.                │
+ 211 │┌────────────────────────────────┐│
+     ││ Filters (2) ▾    18 books match││ filter row, 52 (card, collapsed)
+     │└────────────────────────────────┘│
+ 271 │                ▼                 │
+     │            ( WHEEL )             │ ~296 on this phone (fits viewport)
+     │          12 books max            │
+ 567 │ [             Spin             ] │ 20 + 56, bottom ≈ 643: on screen
+ 643 │ 12 of 18 on the wheel.   Shuffle │ summary line, just below the fold
+     │   (result card appears here)     │
+     │ What’s on the wheel              │ H2 + 3-way switch (v1 section 2)
+     │ [Suggested | Our list |Who hosts]│
+     │ …                                │
+```
+
+Same screen with **Filters open** (about 290px tall):
+```
+     │┌────────────────────────────────┐│
+     ││ Filters (2) ▴    18 books match││ toggle, 48
+     ││ Occasion  [Christmas & holi… ▾]││ label left, select right, 48 each
+     ││ Mood      [Scary             ▾]││ 8px gaps
+     ││ Genre     [Any genre         ▾]││
+     ││ Clear filters             Done ││ text buttons, 44
+     │└────────────────────────────────┘│
+     │                ▼                 │ top of wheel still visible
+     │            ( WHEEL )             │
+```
+
+Sizing (developer):
+- Filter card: `background:#12081D; border:2px solid var(--plum-2); border-radius:0.75rem; padding:0.25rem 0.75rem; margin:0 0 0.75rem`.
+- Each filter is a row: `display:grid; grid-template-columns:5.25rem 1fr; align-items:center; gap:0.5rem`. Under 22rem of width, or with large text, it stacks (label above): `@media (max-width:22rem){grid-template-columns:1fr}`. Use the existing `select` style (3rem tall, cream-dim border).
+- At 48rem and wider: the card starts open and the three filters sit in one row (`grid-template-columns:repeat(3,1fr)`, labels above).
+- Wheel fits the phone's screen: `.stage { width: min(100%, 26rem, max(16rem, 100vh - 23rem)); width: min(100%, 26rem, max(16rem, 100svh - 23rem)); }` (vh first as the fallback). Spin's width matches. Results: 390×664 → about 296px, Spin on screen. 412×915 Android → 380px, everything through the summary line on screen. 375×548 (iPhone SE) → 256px, Spin about 55px below the fold. Check in the prototype that slice labels are still readable at 296px. If they're under about 12px, shorten titles on the slices (the result card shows the full title).
+- H1 on this page only: `font-size: clamp(1.75rem, 7vw, 3rem)`. It stays 2 lines at 390px.
+- Our list and Who hosts: the filter row is `hidden`, and the wheel moves up.
+
+### V3. The filters
+
+Three native `<select>`s with visible `<label for>`. No optgroups (some screen readers skip their labels, and these lists are short).
+
+| Label | Default | Options in order | URL ids |
+|---|---|---|---|
+| Occasion | Any time | Popular this week · Award winners · then seasonal: Christmas & holidays, Winter, Valentine’s, Summer, Spooky season (in-season ones first) | `popular`, `awards`, `christmas`, `winter`, `valentines`, `summer`, `spooky` |
+| Mood | Any mood | Cozy · Romantic · Funny · Mystery & suspense · Scary · Thought-provoking · Uplifting | `cozy`, `romantic`, `funny`, `suspense`, `scary`, `thoughtful`, `uplifting` |
+| Genre | Any genre | Fiction · Mystery & thriller · Romance · Sci-fi & fantasy · Nonfiction · Classics | `fiction`, `mystery`, `romance`, `scifi`, `nonfiction`, `classics` |
+
+- **Occasion shows an option only if it has at least 8 books in the whole library** (`MIN_OCCASION_BOOKS = 8`). This is a fixed list, not filtered by the other selects. Today that's probably Christmas & holidays, plus Popular this week when there are 8 or more bestsellers. "In season" means the occasion's months include this month or next month (Christmas 11–12, Winter 12–2, Valentine’s 1–2, Summer 6–8, Spooky 9–10). In-season occasions go right after Award winners. No badge.
+- Mood and Genre always show every option.
+- Each book has one genre and any number of moods and occasions. Filters combine with AND. A book with no mood matches only "Any mood".
+
+**Decision: bestsellers and award winners go into the Occasion list** (as "Popular this week" and "Award winners"), not into a 4th "Books from" control.
+- That keeps it to 3 filters (plus the toggle), and on a phone a 4th select costs 56px.
+- A "Books from" control would overlap with the filters ("Bestsellers" + "Scary" means what?). In one list, the AND rule and the counts handle it with no special cases. Bestsellers come from Apple's chart with no mood tags, so after you choose Popular this week, the mood options show "(0)", which is accurate.
+- Downside: "Award winners" isn't really an occasion. I accept that. The labels make sense on their own, and people read them as "what to read now". If Marketing finds this confusing, rename the label to **Occasion or list** (no layout change).
+- Ask Marketing: could the weekly script map Apple's genre to our genres, so Genre filtering works on bestsellers?
+- Lost in this change: "Frequently challenged" and "Contemporary fiction" aren't in the new genre list. Contemporary maps to Fiction. Frequently challenged has nowhere to go. **Flag to Marketing:** add a "Banned Books Week" occasion (months 9–10) so v1's banned-books guide text still applies, or remove that guide paragraph.
+
+**Decision: show counts on options and keep every option selectable.** Don't disable zero-count options.
+- Every option except "Any …" and the one already selected shows how many books it would give with the other two filters as they are: `Scary (4)`, `Romance (0)`. Recalculate the option text after each change.
+- The selected option shows its name only (`Scary`), so the closed select fits the phone width. "Christmas & holidays (12)" would be cut off at 390px. The count line already shows the total.
+- Why not disable? Disabled options look different on each platform. iOS dims them. Android's select dialog greys them out with no reason. NVDA says "unavailable" in some browsers and skips them in others. In every case the person can't tell *why*, and to get "Scary" they'd first need to undo some other filter they can't see. A count explains it, and if someone picks a "(0)" option anyway, the zero state (V5) lets them fix it in one tap.
+
+### V4. Count, wheel, Shuffle
+
+- **Count** (visible, in the filter row, right side; not a live region): `112 books` (no filters on) · `18 books match` · `1 book matches` · `No matches`. It updates right away.
+- **Wheel:** up to 12 random matches. With 12 or fewer matches, all of them are on the wheel.
+- **Summary line under Spin** (replaces v1 section 3's Suggested row):
+  - More than 12: `12 of 18 on the wheel.` + **Shuffle** (text button)
+  - 2 to 12: `All 7 are on the wheel.` (no Shuffle)
+  - Fewer than 2: `No books on the wheel.` + **Change filters** (opens the card and focuses Occasion)
+  - With no filters on, it still reads `12 of 112 on the wheel.`
+- **Shuffle** deals 12 matches that haven't been on the wheel yet. When it runs out, it fills from the start again, so every match comes up. Focus stays on Shuffle. It's 44px tall with at least 8px of space from Spin.
+- **Changing a filter** always deals new books (picked at random from the matches).
+
+### V5. Zero matches (and one match)
+
+Spin needs at least 2 books. With 0 or 1 match:
+- The card opens if it was closed. That only happens when someone arrives from a link, because otherwise the person just changed a filter in the open card. Focus doesn't move.
+- A message box appears inside the card, above the footer:
+  - 0: `No books match these filters: Christmas & holidays, Scary, Romance.`
+  - 1: `Only 1 book matches these filters: Christmas & holidays, Scary, Romance.`
+  - Buttons: **Remove Romance (14 books)** · **Clear filters**
+- **Remove [filter] (N books)**: offer the one filter whose removal gives the most matches. On a tie, remove the filter that was changed earliest, so the person's latest choice is kept. Show this button only if that removal gives 2 or more matches. Otherwise show only Clear filters.
+- The wheel draws as an empty plum disc. Canvas `aria-label="Empty wheel. No books match these filters."`. Spin uses real `disabled` (the reason is shown on screen, which fits v1's rule about disabling only when there are fewer than 2 items).
+- In the zero state, the footer's Clear filters is hidden, so it doesn't appear twice.
+
+### V6. Deep links
+
+- `?occasion=christmas&mood=scary&genre=romance`. Leave out a parameter when it's at its default. Only known ids are accepted.
+- After each change, `history.replaceState` (no new history entry). Mix of everything, Our list, and Who hosts clear these parameters (`?mode=host` stays for Who hosts).
+- When the page loads with filters: Suggested is selected, the filters are set, and the card is **collapsed** with "Filters (2)" (it opens only for the zero state). Anyone who opens a shared link sees the wheel and Spin right away.
+- An unknown id, or an occasion under 8 books: that filter falls back to its default, and the card shows one line: `Some filters in this link aren’t available, so they were reset.` The line clears after the next change.
+- Priority (same as v1): shared list link (`#z=` / `#w=`) > URL parameters > saved settings. Save `occasion`, `mood`, and `genre` in `pp-bookclub-v2`.
+- Old links: `?genres=classics` → `genre=classics`. `contemporary` → `fiction`. `mystery`, `romance`, `scifi`, `nonfiction` map to the same id. `new` (New & popular) → `occasion=popular`. `challenged`, or several values → Any genre, with no message.
+- Search pages: same as v1 5.7. Filter links use the main page as canonical. For "scary christmas books" Marketing needs real landing pages that preset the filters.
+
+### V7. Data shape (proposal; Marketing's file wins if it differs)
+
+```js
+// books.js, 3rd field becomes an object (old entries without it still work)
+['The Haunting of Hill House', 'Shirley Jackson',
+  { g: 'classics', m: ['scary', 'suspense'], o: ['spooky'], why: 'A family gathering in a house that won’t let anyone leave.' }]
+```
+- `g`: one genre id. `m`, `o`: arrays (can be empty). `why`: optional, at most 90 characters, written by us.
+- Bestsellers get `o: ['popular']` automatically. Award winners use `o: ['awards']`.
+- Constants: `MIN_OCCASION_BOOKS = 8`, `WHEEL_MAX = 12`, `MIN_SPIN = 2`.
+
+### V8. Result card
+
+Same as v1 4.2, but the primary slot stays generic until Mark picks the store:
+```
+┌──────────────────────────────────┐
+│            Next read             │ teal label
+│   The Haunting of Hill House     │ karaoke reveal (the one animation)
+│        by Shirley Jackson        │ teal
+│ Classics · Scary · Spooky season │ tag line, cream-dim, 0.95rem
+│ A family gathering in a house    │ why line, cream, max 90 chars
+│ that won’t let anyone leave.     │
+│ ┌──────────────────────────────┐ │
+│ │       [Primary action]       │ │ yellow fill, plum text, 48px
+│ └──────────────────────────────┘ │
+│      ▸ More ways to get it       │ <details>, links one per line
+│        Share this result         │ text button
+│ If you buy through a link here…  │ disclosure, only if an affiliate link shows
+└──────────────────────────────────┘
+```
+- **Tag line:** genre · mood · occasion. For mood and occasion, show the value that matched the active filter. Otherwise show the book's first one. Leave out a part that's missing. Leave the whole line out if there's nothing. The ` · ` separators go inside `aria-hidden="true"` spans, each preceded by a `.sr-only` comma, so screen readers read "Classics, Scary, Spooky season".
+- **Why line:** only when there's data. No placeholder.
+- **[Primary action]:** one filled button. Its label follows the rule "task + place" ("Buy at …" or "Borrow free from …"). This is a money placement, so it goes to finance and security, then Mark. v1's quiet library link is removed. If the primary button isn't the library, put **Borrow free from your library** first inside More.
+- **More ways to get it:** the rest of v1's links, one per line, each 44px tall.
+- **Showing the card:** after the wheel stops, if the card's title line isn't on screen, scroll instantly (`behavior:'auto'`, no smooth scrolling) so the card's top sits near the top of the screen. Otherwise, on phones, the karaoke reveal plays below the fold and nobody sees it. Focus stays on Spin (v1 section 7).
+- **Screen reader sentence** (`#result-live`, polite): `Next read: The Haunting of Hill House, by Shirley Jackson. Classics, Scary, Spooky season.`
+
+### V9. Exact strings
+
+| Where | Text |
+|---|---|
+| Lede | Books are already on the wheel. Filter by occasion, mood, or genre, then spin. (Marketing + Mark approve) |
+| Filter toggle | `Filters` · `Filters (1)` · `Filters (2)` · `Filters (3)`, plus `.sr-only` text after it: `: Christmas & holidays, Scary` |
+| Count | `112 books` · `18 books match` · `1 book matches` · `No matches` |
+| Labels | Occasion · Mood · Genre |
+| Defaults | Any time · Any mood · Any genre |
+| Option counts | `Scary (4)`, not shown on the selected option or on "Any …" |
+| Card footer | Clear filters · Done |
+| Zero / one | `No books match these filters: {list}.` · `Only 1 book matches these filters: {list}.` |
+| Relax button | `Remove {filter label} ({n} books)` |
+| Link reset | `Some filters in this link aren’t available, so they were reset.` |
+| Summary line | `12 of 18 on the wheel.` + Shuffle · `All 7 are on the wheel.` · `No books on the wheel.` + Change filters |
+| Empty wheel label | `Empty wheel. No books match these filters.` |
+| Result | Next read · [Primary action] · More ways to get it · Share this result |
+
+`{list}` is the labels of the active filters joined with ", " in the order Occasion, Mood, Genre.
+
+### V10. Focus order and accessibility (WCAG 2.2 AA)
+
+**Focus and reading order (Suggested):** site header link → H1 → lede → **Filters toggle** → count text (read in browse mode, not a tab stop) → *[if open: Occasion → Mood → Genre → zero-state message and buttons → Clear filters → Done]* → wheel image → **Spin** → summary sentence → **Shuffle** / Change filters → result card (after a spin) → H2 What’s on the wheel → 3-way switch → …
+
+**Toggle (disclosure pattern):** `<button aria-expanded="false" aria-controls="filter-panel">`. The panel uses `hidden` when collapsed. The visible text comes first in the accessible name (2.5.3 Label in Name). The chevron is CSS or `aria-hidden`.
+
+**Where focus goes after an action (so it's never lost):**
+- Done: the card collapses, and focus moves to the toggle.
+- Clear filters: focus moves to the Occasion select (the button disappears).
+- Remove {filter}: focus moves to that filter's select.
+- Change filters (under Spin): the card opens, scrolls into view instantly, and focus moves to Occasion. Do the focus in `requestAnimationFrame` after `scrollIntoView` (the iOS VoiceOver fix from 11/13).
+- Changing a select never moves focus or scrolls (3.2.2 On Input). The wheel redraws in place.
+
+**Announcing changes (4.1.3):** one `.sr-only` region `#match-live` with `role="status"` (polite, atomic). The visible count is *not* live, to avoid hearing it twice.
+- Filter changes are **debounced 600 ms** after the last change. On Windows, arrowing through a closed select fires `change` on every key press. iOS fires `change` as the picker scrolls. Android's select dialog returns focus and TalkBack reads the select first. If the new sentence is the same as the last one, don't announce it.
+  - More than 12: `18 books match. 12 are on the wheel.`
+  - 2 to 12: `7 books match. All 7 are on the wheel.`
+  - 1: `Only 1 book matches. Not enough to spin.`
+  - 0: `No books match these filters.`
+- Announced right away (no debounce): Shuffle → `12 new books on the wheel.` · Clear filters → `Filters cleared. 112 books. 12 are on the wheel.` · Remove → `Removed Romance. 14 books match. 12 are on the wheel.`
+- Result: v1's `#result-live` sentence (V8).
+
+**Contrast and size:** count text cream-dim on plum is about 11:1. Select borders are cream-dim (passes 1.4.11). The yellow focus ring on the #12081D card is about 11:1. The toggle, selects, Done, Clear, Remove, and Shuffle are all at least 44px tall. Reflow at 320px: the filter rows stack, and there's no horizontal scroll. Native select lists follow `color-scheme: dark`.
+
+**Motion:** the card opens and closes with no transition. The wheel redraws instantly. Scrolling to the card is instant. The karaoke reveal is still the only animation.
+
+**Test script (NVDA + Chrome/Firefox, TalkBack + Chrome, iOS VoiceOver + Safari):**
+1. From the top: H1, lede, "Filters, collapsed, button", "112 books", wheel, Spin. Nothing else in between.
+2. Open Filters. On Occasion, NVDA reads "Occasion, combo box, Any time". Arrow through Christmas & holidays and Popular this week. The count text changes, and `#match-live` speaks **once**, about 0.6 s after the last arrow press.
+3. iOS: choose Scary in the picker and tap Done. VoiceOver reads the select, then "18 books match. 12 are on the wheel." TalkBack: same after the dialog closes. Check that it isn't cut off. If TalkBack drops it, raise the debounce to 900 ms.
+4. Pick a "(0)" genre. The zero message appears, "Remove … (n books)" is reachable next, and activating it puts focus on that select.
+5. Done: focus is on the toggle, which reads "Filters (2): Christmas & holidays, Scary, expanded" (then "collapsed").
+6. Spin. Focus stays on Spin, "Next read: …" is read once, and the card is scrolled into view.
+7. Open `?occasion=christmas&mood=scary&genre=romance` cold: the toggle reads Filters (3), and the selects match. Open `?mood=nope`: you see the reset line, and Mood is Any mood.
+8. Our list and Who hosts: there's no filter row, and the address bar has no filter parameters.
+
+### V11. What changes in v1
+
+- **Clutter audit (section 1):** rows 13 and 14 now mean "replaced by the filter row above the wheel (v2)". "Spin these books" is dropped, because the filters sit right above the wheel. The control count before a spin goes from about 12 to about 9 (toggle, Spin, Shuffle, the 3-way switch, list details, and so on). With the card open, it's 14.
+- **Lede (row 3):** new wording, V9.
+- **Section 3:** the Suggested row is replaced by V4. "Change books" is removed for Suggested, and the 3-way switch is the next thing after the result card. The Our list and Who hosts rows are unchanged.
+- **Section 4.2:** the primary button is generic (V8), and the library text link is moved into More.
+- **Section 5:** replaced by V3 to V7. Section 5.7's `?theme=` is replaced by V6.
+- **Section 8 "After" wireframe:** replaced by V2.
+
+### V12. Review checklist (v2)
+1. At 390×664: H1, lede, filter row with count, the whole wheel, and Spin are on the first screen.
+2. Choosing Christmas & holidays + Scary, then Spin, takes 5 taps: toggle, select, select, Done, Spin. Spin is on screen after Done, with no scrolling.
+3. Option counts are correct after each change, and the selected option has no count.
+4. The zero state always offers a way out, and focus is never lost.
+5. Each change is announced once, after a pause, on NVDA, TalkBack, and VoiceOver.
+6. Deep links, old `?genres=` links, and saved settings restore correctly.
+
+**Approvals:** lede → Marketing + Mark. The [Primary action] store → finance + security, then Mark. Occasion list, tags, the "Award winners" label, and Banned Books Week → Marketing.
+
+---
+
+# v1 (morning of 11/21; still applies except where V11 says otherwise)
 
 UX spec, 2026-11-21. Page: `book-club-picker/index.html`. Shared: `assets/style.css`, `assets/links.js`, `assets/share.js`.
 Builds on `docs/ux/club-list-search-spec.md` (shipped 11/13).
@@ -131,6 +376,8 @@ Code notes for the developer:
 ---
 
 ## 5. Browse by theme, then mood
+
+> **Replaced by v2 (V3 to V7).** Kept for the record.
 
 ### 5.1 One control or two? One.
 Genres and themes are both answers to "what kind of books?". Two dropdowns would make people wonder whether they combine. So there's one native `<select>`, and moods are a second step that appears only when the choice has moods. That's the girlfriend's flow: Holiday, then Scary, then Spin.
@@ -338,7 +585,7 @@ After a spin the card adds: Next read, title, author,
 4 links + "More:" 3 links, disclosure, Share this result.
 ```
 
-**After** (Suggested, Holiday + Scary chosen, before a spin)
+**After** (Suggested, Holiday + Scary chosen, before a spin). *Replaced by v2 V2.*
 ```
 ┌──────────────────────────────────┐
 │ The Party Wheel                  │
