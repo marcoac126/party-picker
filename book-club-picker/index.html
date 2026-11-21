@@ -22,6 +22,54 @@
 <meta name="theme-color" content="#2B1342">
 <meta name="color-scheme" content="dark">
 <link rel="stylesheet" href="../assets/style.css?v=20261113a">
+<link rel="preload" href="library.json?v=20261121a" as="fetch" crossorigin>
+<style>
+/* Book club page only (v2: filters above the wheel). */
+h1 { font-size: clamp(1.75rem, 7vw, 3rem); }
+.lede { margin-bottom: 0.75rem; }
+.shared-note { margin: 0 0 0.75rem; }
+.filter-card { position: relative; z-index: 1; background: #12081D; border: 2px solid var(--plum-2); border-radius: 0.75rem; padding: 0.25rem 0.75rem; margin: 0 0 0.75rem; }
+.filter-card[hidden] { display: none; }
+.ft-row { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; }
+.ft-btn { flex: 1 1 auto; display: flex; align-items: center; gap: 0.5rem; min-height: 3rem; padding: 0; border: 0; background: none; color: var(--yellow); font: 750 1.05rem var(--font); text-align: left; cursor: pointer; }
+.ft-btn .chev { width: 0.55rem; height: 0.55rem; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: translateY(-2px) rotate(45deg); }
+.ft-btn[aria-expanded="true"] .chev { transform: translateY(2px) rotate(-135deg); }
+.match-count { color: var(--cream-dim); font-size: 0.95rem; white-space: nowrap; }
+.link-reset { margin: 0 0 0.5rem; color: var(--cream); font-size: 0.95rem; }
+.frow { display: grid; grid-template-columns: 5.25rem 1fr; align-items: center; gap: 0.5rem; margin: 0 0 0.5rem; }
+.frow label { margin: 0; }
+.zero-box { margin: 0.25rem 0 0.5rem; padding: 0.5rem 0.75rem; border: 2px solid var(--yellow); border-radius: 0.5rem; }
+.zero-box p { margin: 0; }
+.zero-box .row { margin-top: 0.25rem; gap: 0 1.25rem; }
+.ff-foot { display: flex; justify-content: space-between; gap: 1rem; }
+#filters-done { margin-left: auto; }
+@media (max-width: 22rem) { .frow { grid-template-columns: 1fr; gap: 0.25rem; } }
+@media (min-width: 48rem) {
+  .fgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+  .frow { grid-template-columns: 1fr; gap: 0.25rem; }
+}
+/* Wheel fits the phone screen so Spin stays on the first screen (vh first as the fallback). */
+.stage, .spin-btn { width: min(100%, 26rem, max(16rem, 100vh - 23rem)); width: min(100%, 26rem, max(16rem, 100svh - 23rem)); }
+.spin-btn[aria-disabled="true"] { opacity: 0.55; cursor: progress; }
+.summary { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0 0.75rem; margin: 0.5rem 0 0; color: var(--cream-dim); text-align: center; }
+.summary .text-btn[hidden] { display: none; }
+/* Result card: shown only after a spin */
+.result[hidden] { display: none; }
+.tag-line { margin: 0.35rem 0 0; color: var(--cream-dim); font-size: 0.95rem; }
+.why-line { margin: 0.35rem auto 0; max-width: 26rem; }
+.get-btn { display: flex; align-items: center; justify-content: center; width: min(100%, 22rem); min-height: 3rem; margin: 1rem auto 0.25rem; padding: 0.5rem 1rem; border-radius: 999px; background: var(--yellow); color: var(--plum); font: 800 1.1rem var(--font); text-decoration: none; }
+.get-btn:hover { background: var(--cream); color: var(--plum); }
+.more-ways { margin: 0.25rem auto 0; width: min(100%, 22rem); text-align: left; }
+.more-ways summary { min-height: 2.75rem; display: flex; align-items: center; justify-content: center; cursor: pointer; font-weight: 700; color: var(--yellow); }
+.more-ways ul { list-style: none; margin: 0; padding: 0; }
+.more-ways a { display: flex; align-items: center; min-height: 2.75rem; font-weight: 750; }
+/* What's on the wheel: one 3-way switch */
+.segmented.three { grid-template-columns: repeat(3, 1fr); width: 100%; margin: 0 0 1rem; border-radius: 1.6rem; }
+.segmented.three label { display: flex; align-items: center; justify-content: center; padding: 0.55rem 0.3rem; line-height: 1.2; }
+.bestseller-note { margin: 0.5rem 0 0; }
+#book-list .book-row { min-height: 2.75rem; }
+.month-pick { margin: 2rem 0 0; }
+</style>
 </head>
 <body>
 <header class="site-header">
@@ -30,95 +78,96 @@
 
 <main class="wrap">
   <h1>Book club picker &amp; random book generator</h1>
-  <p class="lede">Books already loaded, with new bestsellers every Monday. Every pick links to your library, indie bookstores, Amazon, and Audible.</p>
+  <p class="lede" id="lede">Books are already on the wheel. Filter by occasion, mood, or genre, then spin.</p>
 
-  <fieldset class="segmented">
-    <legend class="sr-only">What are you picking?</legend>
-    <input type="radio" name="mode" id="mode-book" value="book" checked>
-    <label for="mode-book">Next book</label>
-    <input type="radio" name="mode" id="mode-host" value="host">
-    <label for="mode-host">Who hosts</label>
-  </fieldset>
+  <div class="filter-card" id="filter-card">
+    <div class="ft-row">
+      <button class="ft-btn" id="filter-toggle" type="button" aria-expanded="false" aria-controls="filter-panel"><span id="ft-text">Filters</span><span class="sr-only" id="ft-sr"></span><span class="chev" aria-hidden="true"></span></button>
+      <span class="match-count" id="match-count"></span>
+    </div>
+    <p class="link-reset" id="link-reset" hidden>Some filters in this link aren’t available, so they were reset.</p>
+    <div id="filter-panel" hidden>
+      <div class="fgrid">
+        <div class="frow"><label for="f-occasion">Occasion</label><select id="f-occasion"></select></div>
+        <div class="frow"><label for="f-mood">Mood</label><select id="f-mood"></select></div>
+        <div class="frow"><label for="f-genre">Genre</label><select id="f-genre"></select></div>
+      </div>
+      <div class="zero-box" id="zero-box" hidden>
+        <p id="zero-msg"></p>
+        <div class="row"><button class="text-btn" id="relax" type="button" hidden></button><button class="text-btn" id="zero-clear" type="button">Clear filters</button></div>
+      </div>
+      <div class="ff-foot"><button class="text-btn" id="clear-filters" type="button">Clear filters</button><button class="text-btn" id="filters-done" type="button">Done</button></div>
+    </div>
+  </div>
+  <p class="sr-only" id="match-live" role="status" aria-atomic="true"></p>
 
   <div class="stage">
     <div class="pointer" aria-hidden="true"></div>
     <canvas id="wheel" role="img" aria-label="Spinning wheel of book club choices"></canvas>
   </div>
-  <button class="spin-btn" id="spin" type="button">Spin</button>
-  <p class="share-row two"><button class="text-btn" id="club-entry" type="button">Use our club’s list</button><button class="text-btn" id="share" type="button">Share a copy</button><span class="share-status" id="share-status" aria-live="polite"></span></p>
-  <p class="share-changed" id="share-changed" hidden></p>
+  <button class="spin-btn" id="spin" type="button" disabled>Spin</button>
+  <p class="summary" id="summary"><span id="summary-text"></span><button class="text-btn" id="summary-btn" type="button" hidden></button></p>
 
-  <div class="result" id="result" aria-live="polite">
-    <p class="result-hint">Your pick shows up here.</p>
-  </div>
-
-  <aside class="month-pick" id="month-pick" aria-labelledby="month-pick-label" hidden></aside>
+  <div class="result" id="result" hidden></div>
+  <p class="sr-only" id="result-live" aria-live="polite"></p>
 
   <section class="controls" aria-labelledby="list-heading">
-    <h2 id="list-heading">Books on the wheel</h2>
+    <h2 id="list-heading">What’s on the wheel</h2>
+    <fieldset class="segmented three" aria-labelledby="list-heading">
+      <input type="radio" name="view" id="view-suggested" value="suggested" checked>
+      <label for="view-suggested">Suggested</label>
+      <input type="radio" name="view" id="view-club" value="club">
+      <label for="view-club">Our list</label>
+      <input type="radio" name="view" id="view-host" value="host">
+      <label for="view-host">Who hosts</label>
+    </fieldset>
 
-    <!-- Next book: choose the source -->
-    <div id="book-panel">
-      <p class="field-legend" id="src-legend" aria-hidden="true">Where should the books come from?</p>
-      <fieldset class="segmented small">
-        <legend class="sr-only">Where should the books come from?</legend>
-        <input type="radio" name="source" id="src-suggested" value="suggested" checked>
-        <label for="src-suggested">Suggested picks</label>
-        <input type="radio" name="source" id="src-club" value="club">
-        <label for="src-club">Our club’s list</label>
-      </fieldset>
-
-      <div id="suggested-panel">
-        <fieldset class="chip-group">
-          <legend class="field-legend">Genres <span class="legend-note">Tap to include or leave out</span></legend>
-          <ul class="chips" id="genres"></ul>
-        </fieldset>
-        <div class="row">
-          <p class="status" id="status" aria-live="polite"></p>
-          <button class="text-btn" id="deal" type="button">Deal new books</button>
-        </div>
-        <details class="own-list" id="book-list-details">
-          <summary>See the books on the wheel</summary>
-          <p class="disclosure" id="list-disclosure" hidden></p>
-          <ul class="book-list" id="book-list"></ul>
-          <p class="disclosure" id="list-disclosure-end" hidden></p>
-        </details>
-      </div>
-
-      <div id="club-panel" hidden>
-        <div class="club-search">
-          <label for="book-search">Add a book</label>
-          <input type="text" class="text-input" id="book-search" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="book-results" aria-describedby="book-search-help" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" placeholder="Title or author" maxlength="120">
-          <div class="search-pop" id="book-pop" hidden>
-            <ul class="search-results" id="book-results" role="listbox" aria-label="Matching books"></ul>
-            <p class="search-msg" id="book-search-msg"></p>
-          </div>
-          <p class="help" id="book-search-help">Searches go to Open Library, a free book catalog. Your list stays on your device.</p>
-          <p class="search-credit"><a href="https://openlibrary.org/" rel="noopener noreferrer" target="_blank">Book search by Open Library</a></p>
-        </div>
-        <p class="club-count" id="club-count"></p>
-        <ul class="book-list" id="club-list"></ul>
-        <p class="club-empty" id="club-empty" hidden>No books yet. Search above, or paste a list under “Edit as text”.</p>
-        <details class="own-list" id="club-text">
-          <summary>Edit as text</summary>
-          <label for="club-entries">Your club’s list, one book per line</label>
-          <p class="help" id="club-help">Add the author after a dash, like “Educated – Tara Westover”.</p>
-          <textarea id="club-entries" aria-describedby="club-help" spellcheck="false" placeholder="Educated – Tara Westover&#10;Circe – Madeline Miller&#10;The Martian – Andy Weir"></textarea>
-          <div class="row"><button class="text-btn" id="club-shuffle" type="button">Shuffle list</button></div>
-        </details>
-      </div>
+    <div id="suggested-panel">
+      <details class="own-list" id="book-list-details">
+        <summary>See the books on the wheel</summary>
+        <ul class="book-list" id="book-list"></ul>
+      </details>
+      <p class="help bestseller-note" id="bestseller-note" hidden></p>
     </div>
 
-    <!-- Who hosts -->
+    <div id="club-panel" hidden>
+      <div class="club-search">
+        <label for="book-search">Add a book</label>
+        <input type="text" class="text-input" id="book-search" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="book-results" aria-describedby="book-search-help" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" placeholder="Title or author" maxlength="120">
+        <div class="search-pop" id="book-pop" hidden>
+          <ul class="search-results" id="book-results" role="listbox" aria-label="Matching books"></ul>
+          <p class="search-msg" id="book-search-msg"></p>
+        </div>
+        <p class="help" id="book-search-help">Searches go to Open Library, a free book catalog. Your list stays on your device.</p>
+        <p class="search-credit"><a href="https://openlibrary.org/" rel="noopener noreferrer" target="_blank">Book search by Open Library</a></p>
+      </div>
+      <p class="club-count" id="club-count"></p>
+      <ul class="book-list" id="club-list"></ul>
+      <p class="club-empty" id="club-empty" hidden>No books yet. Search above, or paste a list under “Edit as text”.</p>
+      <details class="own-list" id="club-text">
+        <summary>Edit as text</summary>
+        <label for="club-entries">Your club’s list, one book per line</label>
+        <p class="help" id="club-help">Add the author after a dash, like “Educated – Tara Westover”.</p>
+        <textarea id="club-entries" aria-describedby="club-help" spellcheck="false" placeholder="Educated – Tara Westover&#10;Circe – Madeline Miller&#10;The Martian – Andy Weir"></textarea>
+        <div class="row"><button class="text-btn" id="club-shuffle" type="button">Shuffle list</button></div>
+      </details>
+    </div>
+
     <div id="host-panel" hidden>
       <label for="host-entries">Members</label>
       <p class="help" id="host-help">One name per line. Turn on “Remove each pick” so everyone hosts once before anyone repeats.</p>
       <textarea id="host-entries" aria-describedby="host-help" spellcheck="false" placeholder="Alex&#10;Jordan&#10;Sam"></textarea>
     </div>
 
-    <p class="check"><input type="checkbox" id="remove"><label for="remove">Remove each pick after it’s chosen</label></p>
+    <div id="list-tools" hidden>
+      <p class="check"><input type="checkbox" id="remove"><label for="remove">Remove each pick after it’s chosen</label></p>
+      <p class="share-row two"><button class="text-btn" id="share" type="button">Share a copy</button><span class="share-status" id="share-status" aria-live="polite"></span></p>
+      <p class="share-changed" id="share-changed" hidden></p>
+    </div>
     <p class="sr-only" id="club-live" aria-live="polite"></p>
   </section>
+
+  <aside class="month-pick" id="month-pick" aria-labelledby="month-pick-label" hidden></aside>
 
   <nav class="more-links" aria-labelledby="more-heading">
     <h2 id="more-heading">More for book clubs</h2>
@@ -130,22 +179,21 @@
 
   <article class="guide">
     <h2>How to pick a book club book with the wheel</h2>
-    <p>Before the meeting ends, ask each member to suggest one or two books. Tap “Use our club’s list”, search for each book, and spin. That’s next month’s read. Everyone had a say, and nobody has to argue for their pick.</p>
+    <p>Before the meeting ends, ask each member to suggest one or two books. Under “What’s on the wheel”, choose “Our list”, search for each book, and spin. That’s next month’s read. Everyone had a say, and nobody has to argue for their pick.</p>
 
     <h3>Ways to use it</h3>
     <ul>
       <li><strong>One suggestion each:</strong> keeps the wheel fair and short enough to read every title.</li>
-      <li><strong>Theme months:</strong> switch to “Suggested picks” and turn on just one or two genres.</li>
-      <li><strong>Stay current:</strong> “New &amp; popular” is this week’s bestseller chart, refreshed every Monday.</li>
-      <li><strong>Banned books month:</strong> turn on only “Frequently challenged” for titles from the American Library Association’s most-challenged lists. These spark big discussions; some include mature themes.</li>
-      <li><strong>Pick the host too:</strong> switch to “Who hosts”, add members’ names, and turn on “Remove each pick” so everyone takes a turn.</li>
+      <li><strong>Theme months:</strong> open “Filters” above the wheel and pick an occasion, a mood, or a genre, like Christmas &amp; holidays and Cozy.</li>
+      <li><strong>Stay current:</strong> “Popular this week” under Occasion is this week’s bestseller chart, refreshed every Monday.</li>
+      <li><strong>Pick the host too:</strong> choose “Who hosts”, add members’ names, and turn on “Remove each pick” so everyone takes a turn.</li>
     </ul>
 
     <h3>What makes a good book club book?</h3>
     <p>The best picks give people something to disagree about: a character who makes a hard choice, an ending that splits the room, or a true story that raises questions. Keep length in mind, since a 300-page novel is finished by more members than a 700-page epic. Check that it’s easy to get at the library or as an ebook, too.</p>
 
     <h3>Where do the suggested picks come from?</h3>
-    <p>Most are long-time book club favorites. “New &amp; popular” comes from Apple Books’ US bestseller chart each week, leaving out kids’ books, comics, and box sets.</p>
+    <p>Most are long-time book club favorites. “Popular this week” comes from Apple Books’ US bestseller chart each week, leaving out kids’ books, comics, and box sets.</p>
 
     <h3>Is the wheel random?</h3>
     <p>Yes. Each spin uses your browser’s built-in random number generator, so every book on the wheel has the same chance. Your list stays on your device. When you search for a book, only what you type is sent to Open Library, a free public book catalog.</p>
@@ -161,12 +209,11 @@
 <script src="../assets/wheel.js?v=20261102a"></script>
 <script src="../assets/share.js?v=20261113a"></script>
 <script src="../assets/links.js?v=20261113a"></script>
-<script src="books.js?v=20261110a"></script>
 <script src="current-books.js?v=20261009e"></script>
 <script src="isbns.js?v=20261013a"></script>
 <script src="monthly-pick.js?v=20261015a"></script>
 <script>
-// "This month's pick": shows only during the pick's month. Text is set with textContent (no HTML from data).
+// "This month's pick": shows only during the pick's month, low on the page with two links. Text is set with textContent.
 (function () {
   const p = window.MONTHLY_PICK, box = document.getElementById('month-pick'), L = window.PartyLinks;
   if (!p || !box || !L || typeof p.title !== 'string' || typeof p.author !== 'string') return;
@@ -179,7 +226,7 @@
   const title = el('p', 'month-pick-title', p.title);
   const by = el('p', 'month-pick-by', `by ${p.author} · the wheel picked it from ${String(p.genreLabel || '').toLowerCase()}`);
   const links = el('p', 'month-pick-links');
-  [['bookshop', 'Buy at Bookshop.org'], ['library', 'Find at your library'], ['librofm', 'Listen on Libro.fm']]
+  [['bookshop', 'Buy at Bookshop.org'], ['library', 'Borrow free from your library']]
     .forEach(([id, text]) => links.append(L.link(id, p.title, p.author, text)));
   box.append(label, title, by, links);
   if (L.isAffiliate()) box.append(el('p', 'month-pick-note', L.disclosure()));
@@ -188,41 +235,45 @@
 </script>
 <script>
 (function () {
-  const WHEEL_SIZE = 12;
+  const WHEEL_MAX = 12, MIN_SPIN = 2, MIN_OCCASION_BOOKS = 8, ANNOUNCE_MS = 600;
   const STORE_KEY = 'pp-bookclub-v2';
   const SHARE_KEY = 'pp-bookclub-lastshare'; // { sig, count, date } of the club list last shared from this browser
   const MAX_BOOKS = 60;                       // share.js limit
+  const LIBRARY_URL = 'library.json?v=20261121a';
   const $ = (id) => document.getElementById(id);
-  const spinBtn = $('spin'), result = $('result'), status = $('status');
+  const spinBtn = $('spin'), result = $('result'), resultLive = $('result-live');
   const clubTA = $('club-entries'), hostTA = $('host-entries');
-  function listDates(iso) {
-    // "Oct 10" for the list date, "Mon, Oct 12" for the next scheduled Monday refresh after it.
-    const d = new Date(iso + 'T12:00:00');
-    const fmt = (x, o) => x.toLocaleDateString(undefined, o);
-    const next = new Date(d); next.setDate(d.getDate() + (((8 - d.getDay()) % 7) || 7));
-    return { from: fmt(d, { month: 'short', day: 'numeric' }), next: fmt(next, { weekday: 'short', month: 'short', day: 'numeric' }) };
-  }
-  const CURRENT = window.CURRENT_BOOKS || { updated: null, books: [] };
-  const LIBRARY = (window.BOOK_CLUB_BOOKS || []).concat(CURRENT.books || []);
   const L = window.PartyLinks;
+  const CURRENT = window.CURRENT_BOOKS || { updated: null, books: [] };
 
-  const GENRES = [
-    ['current', 'New & popular'],
-    ['fiction', 'Contemporary fiction'],
-    ['mystery', 'Mystery & thriller'],
-    ['romance', 'Romance'],
-    ['scifi', 'Sci-fi & fantasy'],
-    ['nonfiction', 'Nonfiction'],
-    ['classics', 'Classics'],
-    ['challenged', 'Frequently challenged']
-  ].filter(([id]) => id !== 'current' || (CURRENT.books || []).length >= 2);
+  // ---------- Filter vocabulary (ids go in URLs) ----------
+  const GENRES = [['fiction', 'Fiction'], ['mystery', 'Mystery & thriller'], ['romance', 'Romance'], ['scifi', 'Sci-fi & fantasy'], ['nonfiction', 'Nonfiction'], ['classics', 'Classics']];
+  const MOODS = [['cozy', 'Cozy'], ['romantic', 'Romantic'], ['funny', 'Funny'], ['suspense', 'Mystery & suspense'], ['scary', 'Scary'], ['thoughtful', 'Thought-provoking'], ['uplifting', 'Uplifting']];
+  const OCCASIONS = [
+    { id: 'popular', label: 'Popular this week' },
+    { id: 'awards', label: 'Award winners' },
+    { id: 'christmas', label: 'Christmas & holidays', months: [11, 12] },
+    { id: 'winter', label: 'Winter', months: [12, 1, 2] },
+    { id: 'valentines', label: 'Valentine’s', months: [1, 2] },
+    { id: 'summer', label: 'Summer', months: [6, 7, 8] },
+    { id: 'spooky', label: 'Spooky season', months: [9, 10] }
+  ];
+  const FILTERS = [
+    { key: 'occasion', any: 'Any time', sel: $('f-occasion') },
+    { key: 'mood', any: 'Any mood', sel: $('f-mood') },
+    { key: 'genre', any: 'Any genre', sel: $('f-genre') }
+  ];
+  const LABELS = { occasion: new Map(OCCASIONS.map((o) => [o.id, o.label])), mood: new Map(MOODS), genre: new Map(GENRES) };
+  let occasionIds = [];   // occasions shown (8+ books), in display order
 
   const state = {
-    mode: 'book', source: 'suggested',
-    genres: GENRES.map(([id]) => id),
-    dealt: [],      // [[title, author], ...] for suggested picks
+    view: 'suggested',                       // suggested | club | host
+    f: { occasion: '', mood: '', genre: '' },
+    order: [],                               // filter keys in the order they were last set (for "Remove …" ties)
+    pool: [], dealt: [], seen: new Set(),
     club: '', hosts: ''
   };
+  let BOOKS = [], ready = false, landing = false;
 
   const store = {
     get() { try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; } catch (e) { return {}; } },
@@ -232,8 +283,10 @@
   // so their own saved list isn't overwritten. sharedView is 'club' or 'hosts' while that's true.
   let sharedView = null, fromShare = false, sharedThisVisit = false;
   const save = () => {
+    if (!ready) return;
     const old = sharedView ? store.get() : {};
-    store.set({ mode: state.mode, source: state.source, genres: state.genres,
+    store.set({ view: state.view, mode: state.view === 'host' ? 'host' : 'book', source: state.view === 'club' ? 'club' : 'suggested',
+      occasion: state.f.occasion, mood: state.f.mood, genre: state.f.genre,
       club: sharedView === 'club' ? (old.club || '') : state.club,
       hosts: sharedView === 'hosts' ? (old.hosts || '') : state.hosts });
   };
@@ -242,9 +295,11 @@
   const split = (line) => { const [t, ...a] = line.split(/\s+[–-]\s+/); return [t.trim(), a.join(' – ').trim()]; };
   const lines = (text) => text.split('\n').map((s) => s.trim()).filter(Boolean);
   const join = ([t, a]) => (a ? `${t} – ${a}` : t);
-  const isClub = () => state.mode === 'book' && state.source === 'club';
-  const nouns = () => (state.mode === 'host' ? { one: 'name', many: 'names' } : { one: 'book', many: 'books' });
+  const isClub = () => state.view === 'club';
+  const isHost = () => state.view === 'host';
+  const nouns = () => (isHost() ? { one: 'name', many: 'names' } : { one: 'book', many: 'books' });
   const bookCount = (n) => (n === 1 ? '1 book on the wheel.' : `${n} books on the wheel.`);
+  const plural = (n) => `${n} book${n === 1 ? '' : 's'}`;
 
   // "Changed since the last share" (club list only). Stores a short fingerprint, not the list.
   function sig(items) {
@@ -267,7 +322,6 @@
     if (!last) return null;
     return sig(lines(clubTA.value)) !== last.sig ? last : null;
   }
-  // Share options: book/name wording, 2,000-character link cap, and (club list) remember the share.
   function shareOpts(itemsAtShare) {
     const club = isClub();
     return { noun: nouns(), maxUrl: 2000,
@@ -275,67 +329,342 @@
       onShared: club ? () => markShared(itemsAtShare) : null };
   }
 
-  // What's on the wheel right now, as [title, author] pairs.
+  // What's on the wheel right now, as [title, author] pairs. Suggested with under 2 matches: empty wheel.
   function currentItems() {
-    if (state.mode === 'host') return lines(hostTA.value).map((n) => [n, '']);
-    if (state.source === 'club') return lines(clubTA.value).map(split);
-    return state.dealt;
+    if (isHost()) return lines(hostTA.value).map((n) => [n, '']);
+    if (isClub()) return lines(clubTA.value).map(split);
+    return state.dealt.length >= MIN_SPIN ? state.dealt.map((b) => [b.t, b.a]) : [];
   }
 
+  // ---------- Library ----------
+  const keyOf = (t, a) => `${t}|${a}`.toLowerCase();
+  const byKey = new Map();
+  function buildBooks(lib) {
+    const bad = /[\u0000-\u001f\u007f‪-‮⁦-⁩]/g;
+    const str = (v, max) => (typeof v === 'string' ? v.replace(bad, '').replace(/\s+/g, ' ').trim().slice(0, max) : '');
+    const ids = (v, known) => (Array.isArray(v) ? v.filter((x, i) => known.has(x) && v.indexOf(x) === i) : []);
+    const G = new Set(GENRES.map(([id]) => id)), M = new Set(MOODS.map(([id]) => id)), O = new Set(OCCASIONS.map((o) => o.id));
+    const out = [];
+    (Array.isArray(lib) ? lib : []).forEach((b) => {
+      if (!b || typeof b !== 'object') return;
+      const t = str(b.t, 120), a = str(b.a, 100);
+      if (!t || byKey.has(keyOf(t, a))) return;
+      const book = { t, a, g: G.has(b.g) ? b.g : '', m: ids(b.m, M), o: ids(b.o, O).filter((x) => x !== 'popular'), r: str(b.r, 140) };
+      byKey.set(keyOf(t, a), book); out.push(book);
+    });
+    // Weekly bestsellers (current-books.js) become the "Popular this week" occasion.
+    (Array.isArray(CURRENT.books) ? CURRENT.books : []).forEach((row) => {
+      if (!Array.isArray(row)) return;
+      const t = str(row[0], 120), a = str(row[1], 100);
+      if (!t) return;
+      const have = byKey.get(keyOf(t, a));
+      if (have) { if (!have.o.includes('popular')) have.o.unshift('popular'); return; }
+      const book = { t, a, g: '', m: [], o: ['popular'], r: '' };
+      byKey.set(keyOf(t, a), book); out.push(book);
+    });
+    return out;
+  }
+  const fits = (b, f) => (!f.occasion || b.o.includes(f.occasion)) && (!f.mood || b.m.includes(f.mood)) && (!f.genre || b.g === f.genre);
+  const countWith = (f) => BOOKS.reduce((n, b) => n + (fits(b, f) ? 1 : 0), 0);
+  const activeKeys = () => FILTERS.map((F) => F.key).filter((k) => state.f[k]);
+  const activeLabels = () => activeKeys().map((k) => LABELS[k].get(state.f[k]));
+
+  function buildSelects() {
+    const month = new Date().getMonth() + 1, next = (month % 12) + 1;
+    const counts = new Map(OCCASIONS.map((o) => [o.id, BOOKS.filter((b) => b.o.includes(o.id)).length]));
+    const ok = OCCASIONS.filter((o) => counts.get(o.id) >= MIN_OCCASION_BOOKS);
+    const lists = ok.filter((o) => !o.months);
+    const seasonal = ok.filter((o) => o.months);
+    const inSeason = seasonal.filter((o) => o.months.includes(month) || o.months.includes(next));
+    occasionIds = lists.concat(inSeason, seasonal.filter((o) => !inSeason.includes(o))).map((o) => o.id);
+    const opts = { occasion: occasionIds.map((id) => [id, LABELS.occasion.get(id)]), mood: MOODS, genre: GENRES };
+    FILTERS.forEach((F) => {
+      F.sel.textContent = '';
+      [['', F.any]].concat(opts[F.key]).forEach(([id, label]) => {
+        const o = document.createElement('option'); o.value = id; o.dataset.label = label; o.textContent = label;
+        F.sel.append(o);
+      });
+    });
+  }
+  const validId = (key, id) => (key === 'occasion' ? occasionIds.includes(id) : LABELS[key].has(id));
+
+  // Option text: "Scary (4)" = books with this option and the other two filters as they are.
+  function updateOptions() {
+    FILTERS.forEach((F) => {
+      Array.from(F.sel.options).forEach((opt) => {
+        const base = opt.dataset.label;
+        if (!opt.value || opt.value === state.f[F.key]) { opt.textContent = base; return; }
+        opt.textContent = `${base} (${countWith(Object.assign({}, state.f, { [F.key]: opt.value }))})`;
+      });
+      F.sel.value = state.f[F.key];
+    });
+  }
+
+  // ---------- Dealing ----------
+  function randomInt(n) { const r = new Uint32Array(1); crypto.getRandomValues(r); return r[0] % n; }
+  function sample(arr, n) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) { const j = randomInt(i + 1); [a[i], a[j]] = [a[j], a[i]]; }
+    return a.slice(0, n);
+  }
+  function deal() {
+    state.pool = BOOKS.filter((b) => fits(b, state.f));
+    state.seen = new Set();
+    dealMore();
+  }
+  // Shuffle deals matches that haven't been on the wheel yet; when they run out, it starts over.
+  function dealMore() {
+    const pool = state.pool, k = (b) => keyOf(b.t, b.a);
+    let pick;
+    if (pool.length <= WHEEL_MAX) pick = sample(pool, WHEEL_MAX);
+    else {
+      const unseen = pool.filter((b) => !state.seen.has(k(b)));
+      if (unseen.length >= WHEEL_MAX) pick = sample(unseen, WHEEL_MAX);
+      else {
+        const fill = sample(pool.filter((b) => state.seen.has(k(b))), WHEEL_MAX - unseen.length);
+        pick = sample(unseen.concat(fill), WHEEL_MAX);
+        state.seen = new Set();
+      }
+      pick.forEach((b) => state.seen.add(k(b)));
+    }
+    state.dealt = pick;
+    renderBookList();
+  }
+
+  // ---------- Wheel and result ----------
   const wheel = new Wheel($('wheel'), {
     colors: ['#FF4F86', '#FFC93C', '#22B8A7', '#FFF4E2'],
     labelFn: (item) => split(item)[0],
-    onResult(item, index) {
-      const [title, author] = split(item);
-      result.innerHTML = '';
-      const label = document.createElement('p'); label.className = 'result-label';
-      label.textContent = state.mode === 'host' ? 'Hosting next' : 'Next read';
-      const main = document.createElement('p'); main.className = 'lyric'; main.textContent = title;
-      result.append(label, main);
-      if (author) { const a = document.createElement('p'); a.className = 'artist'; a.textContent = 'by ' + author; result.append(a); }
-      if (state.mode === 'book') {
-        result.append(L.bookLinks(title, author));
-        if (L.isAffiliate()) { const d = document.createElement('p'); d.className = 'disclosure'; d.textContent = L.disclosure(); result.append(d); }
-      }
-      result.append(window.PartyShare.resultButton(wheel, (state.mode === 'host' ? 'hosts' : 'books'), 'Book club picks', shareOpts(wheel.lastSpin ? wheel.lastSpin.items.slice() : [])));
-      requestAnimationFrame(() => main.classList.add('sing'));
-      const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      result.scrollIntoView({ behavior: still ? 'auto' : 'smooth', block: 'nearest' });
-
-      if ($('remove').checked) removeAt(index);
-      spinBtn.disabled = currentItems().length < 2;
-      spinBtn.textContent = 'Spin again';
-    }
+    onResult(item, index) { showResult(item, index); }
   });
 
+  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text) e.textContent = text; return e; };
+  const newTab = (a) => { a.append(el('span', 'sr-only', ' (opens in a new tab)')); return a; };
+
+  // Tag line parts: genre · mood · occasion. Prefer the value that matched the active filter.
+  function tagParts(book) {
+    if (!book) return [];
+    const useF = state.view === 'suggested';
+    const pickOf = (key, list) => (useF && state.f[key] && list.includes(state.f[key]) ? state.f[key] : list[0]);
+    const mood = pickOf('mood', book.m), occ = pickOf('occasion', book.o);
+    return [book.g && LABELS.genre.get(book.g), mood && LABELS.mood.get(mood), occ && LABELS.occasion.get(occ)].filter(Boolean);
+  }
+
+  function showResult(item, index) {
+    const [title, author] = split(item);
+    const host = isHost();
+    result.textContent = '';
+    const label = el('p', 'result-label', host ? 'Hosting next' : 'Next read');
+    const main = el('p', 'lyric', title);
+    result.append(label, main);
+    if (author) result.append(el('p', 'artist', 'by ' + author));
+    let sentence = `${host ? 'Hosting next' : 'Next read'}: ${title}${author ? `, by ${author}` : ''}.`;
+    if (!host) {
+      const book = byKey.get(keyOf(title, author));
+      const parts = tagParts(book);
+      if (parts.length) {
+        const tag = el('p', 'tag-line');
+        parts.forEach((p, i) => {
+          if (i) { tag.append(el('span', 'sr-only', ',')); const dot = el('span', '', ' · '); dot.setAttribute('aria-hidden', 'true'); tag.append(dot); }
+          tag.append(document.createTextNode(p));
+        });
+        result.append(tag);
+        sentence += ` ${parts.join(', ')}.`;
+      }
+      if (book && book.r) result.append(el('p', 'why-line', book.r));
+      const primary = L.link('library', title, author, 'Borrow free from your library');
+      primary.classList.add('get-btn');
+      result.append(newTab(primary));
+      const more = el('details', 'more-ways');
+      more.append(el('summary', '', 'More ways to get it'));
+      const ul = el('ul');
+      [['bookshop', 'Buy at Bookshop.org'], ['goodreads', 'Read reviews on Goodreads'], ['amazon', 'Buy on Amazon'],
+        ['kindle', 'Read on Kindle'], ['audible', 'Listen on Audible'], ['librofm', 'Listen on Libro.fm']]
+        .forEach(([id, text]) => { const li = el('li'); li.append(newTab(L.link(id, title, author, text))); ul.append(li); });
+      more.append(ul);
+      result.append(more);
+    }
+    result.append(window.PartyShare.resultButton(wheel, host ? 'hosts' : 'books', 'Book club picks', shareOpts(wheel.lastSpin ? wheel.lastSpin.items.slice() : [])));
+    if (!host && L.isAffiliate()) result.append(el('p', 'disclosure', L.disclosure()));
+    result.hidden = false;
+    requestAnimationFrame(() => main.classList.add('sing'));
+    resultLive.textContent = '';
+    setTimeout(() => { resultLive.textContent = sentence; }, 60);
+    // On phones the card is below the fold: jump (no smooth scroll) so the reveal is seen. Focus stays on Spin.
+    if (!landing) {
+      const r = main.getBoundingClientRect();
+      if (r.top < 0 || r.bottom > window.innerHeight) result.scrollIntoView({ block: 'start', behavior: 'auto' });
+    }
+    if ($('remove').checked && !landing && state.view !== 'suggested') removeAt(index);
+    spinBtn.removeAttribute('aria-disabled');
+    spinBtn.disabled = currentItems().length < MIN_SPIN;
+    spinBtn.textContent = 'Spin again';
+  }
+
   function removeAt(i) {
-    if (state.mode === 'host') { const l = lines(hostTA.value); l.splice(i, 1); hostTA.value = l.join('\n'); state.hosts = hostTA.value; edited('hosts'); }
-    else if (state.source === 'club') { const l = lines(clubTA.value); l.splice(i, 1); clubTA.value = l.join('\n'); state.club = clubTA.value; edited('club'); }
-    else { state.dealt.splice(i, 1); renderBookList(); status.textContent = `${state.dealt.length} books left on the wheel.`; }
+    if (isHost()) { const l = lines(hostTA.value); l.splice(i, 1); hostTA.value = l.join('\n'); state.hosts = hostTA.value; edited('hosts'); }
+    else if (isClub()) { const l = lines(clubTA.value); l.splice(i, 1); clubTA.value = l.join('\n'); state.club = clubTA.value; edited('club'); }
     refresh(); save();
   }
 
   function refresh() {
     const items = currentItems();
     wheel.setItems(items.map(join));
-    spinBtn.disabled = items.length < 2;
+    spinBtn.disabled = !ready || items.length < MIN_SPIN;
+    const canvas = $('wheel');
+    if (isHost()) canvas.setAttribute('aria-label', 'Spinning wheel of club members');
+    else if (state.view === 'suggested' && ready && items.length < MIN_SPIN) canvas.setAttribute('aria-label', 'Empty wheel. No books match these filters.');
+    else canvas.setAttribute('aria-label', 'Spinning wheel of book club choices');
     renderClub();
     updateChrome();
   }
 
-  // The first button under Spin, and the "changed since you shared" line.
-  function updateChrome() {
-    const btn = $('club-entry');
-    if (state.mode === 'host') btn.textContent = 'Edit members';
-    else if (state.source !== 'club') btn.textContent = 'Use our club’s list';
-    else {
-      const n = lines(clubTA.value).length;
-      btn.textContent = n < 2 ? 'Add books to our list' : `Edit our list (${n} books)`;
+  // ---------- Filter card ----------
+  const card = $('filter-card'), toggle = $('filter-toggle'), panel = $('filter-panel');
+  const setOpen = (open) => { toggle.setAttribute('aria-expanded', String(open)); panel.hidden = !open; };
+  const isCardOpen = () => toggle.getAttribute('aria-expanded') === 'true';
+
+  function countText(n) {
+    if (!activeKeys().length) return plural(n);
+    return n === 0 ? 'No matches' : n === 1 ? '1 book matches' : `${n} books match`;
+  }
+  function onWheel(n) { return n > WHEEL_MAX ? `${WHEEL_MAX} are on the wheel.` : `All ${n} are on the wheel.`; }
+  function matchSentence() {
+    const n = state.pool.length;
+    if (n === 0) return 'No books match these filters.';
+    if (n === 1) return 'Only 1 book matches. Not enough to spin.';
+    return `${activeKeys().length ? `${n} books match.` : `${plural(n)}.`} ${onWheel(n)}`;
+  }
+  // Best single filter to drop: most matches; ties drop the one set earliest (keeps the latest choice).
+  function relaxOption() {
+    let best = null;
+    state.order.filter((k) => state.f[k]).forEach((k) => {
+      const n = countWith(Object.assign({}, state.f, { [k]: '' }));
+      if (!best || n > best.n) best = { key: k, n };
+    });
+    return best && best.n >= MIN_SPIN ? best : null;
+  }
+
+  function updateFilterUI() {
+    const keys = activeKeys(), n = state.pool.length, labels = activeLabels();
+    $('ft-text').textContent = keys.length ? `Filters (${keys.length})` : 'Filters';
+    $('ft-sr').textContent = keys.length ? `: ${labels.join(', ')}` : '';
+    $('match-count').textContent = ready ? countText(n) : '';
+    updateOptions();
+    const zero = ready && n < MIN_SPIN;
+    $('zero-box').hidden = !zero;
+    $('clear-filters').hidden = zero || !keys.length;
+    if (zero) {
+      $('zero-msg').textContent = n === 0 ? `No books match these filters: ${labels.join(', ')}.` : `Only 1 book matches these filters: ${labels.join(', ')}.`;
+      const r = relaxOption(), btn = $('relax');
+      btn.hidden = !r;
+      if (r) { btn.textContent = `Remove ${LABELS[r.key].get(state.f[r.key])} (${plural(r.n)})`; btn.dataset.key = r.key; }
+      if (!isCardOpen()) setOpen(true);
     }
+    const note = $('bestseller-note');
+    const showDates = CURRENT.updated && state.dealt.some((b) => b.o.includes('popular'));
+    note.hidden = !showDates;
+    if (showDates) { const dt = listDates(CURRENT.updated); note.textContent = `Bestseller list from ${dt.from}. Next update ${dt.next}.`; }
+  }
+  function listDates(iso) {
+    const d = new Date(iso + 'T12:00:00');
+    const fmt = (x, o) => x.toLocaleDateString(undefined, o);
+    const next = new Date(d); next.setDate(d.getDate() + (((8 - d.getDay()) % 7) || 7));
+    return { from: fmt(d, { month: 'short', day: 'numeric' }), next: fmt(next, { weekday: 'short', month: 'short', day: 'numeric' }) };
+  }
+
+  // Polite status, spoken once after a pause (selects fire change on every arrow key on Windows).
+  const matchLive = $('match-live');
+  let lastSaid = '', sayTimer = null;
+  function say(text, now) {
+    clearTimeout(sayTimer);
+    const go = () => { if (!now && text === lastSaid) return; lastSaid = text; matchLive.textContent = ''; setTimeout(() => { matchLive.textContent = text; }, 40); };
+    if (now) go(); else sayTimer = setTimeout(go, ANNOUNCE_MS);
+  }
+
+  function updateURL() {
+    const qp = new URLSearchParams(location.search);
+    ['occasion', 'mood', 'genre', 'genres', 'mode'].forEach((k) => qp.delete(k));
+    if (state.view === 'suggested') FILTERS.forEach((F) => { if (state.f[F.key]) qp.set(F.key, state.f[F.key]); });
+    if (isHost()) qp.set('mode', 'host');
+    const qs = qp.toString();
+    try { history.replaceState(null, '', location.pathname + (qs ? `?${qs}` : '')); } catch (e) {}
+  }
+
+  function setFilter(key, value) {
+    state.f[key] = value;
+    state.order = state.order.filter((k) => k !== key);
+    if (value) state.order.push(key);
+  }
+  function afterFilterChange() {
+    $('link-reset').hidden = true;
+    deal(); refresh(); updateFilterUI(); updateURL(); save();
+  }
+
+  FILTERS.forEach((F) => F.sel.addEventListener('change', () => {
+    const v = F.sel.value;
+    if (v && !validId(F.key, v)) return;
+    setFilter(F.key, v);
+    afterFilterChange();
+    say(matchSentence());
+  }));
+  toggle.addEventListener('click', () => setOpen(!isCardOpen()));
+  $('filters-done').addEventListener('click', () => { setOpen(false); toggle.focus(); });
+  function clearFilters() {
+    FILTERS.forEach((F) => setFilter(F.key, ''));
+    afterFilterChange();
+    FILTERS[0].sel.focus();
+    say(`Filters cleared. ${matchSentence()}`, true);
+  }
+  $('clear-filters').addEventListener('click', clearFilters);
+  $('zero-clear').addEventListener('click', clearFilters);
+  $('relax').addEventListener('click', () => {
+    const key = $('relax').dataset.key;
+    if (!key || !state.f[key]) return;
+    const name = LABELS[key].get(state.f[key]);
+    setFilter(key, '');
+    afterFilterChange();
+    FILTERS.find((F) => F.key === key).sel.focus();
+    say(`Removed ${name}. ${matchSentence()}`, true);
+  });
+
+  // ---------- Summary line under Spin ----------
+  let summaryAction = null;
+  function updateChrome() {
+    const text = $('summary-text'), btn = $('summary-btn');
+    let s = '', b = '', act = null;
+    if (isHost()) {
+      const n = lines(hostTA.value).length;
+      s = n ? `${n} member${n === 1 ? '' : 's'} on the wheel.` : 'No members on the wheel yet.'; b = 'Edit members'; act = 'host';
+    } else if (isClub()) {
+      const n = lines(clubTA.value).length;
+      s = n === 0 ? 'No books on your club’s list yet.' : n === 1 ? '1 book on your club’s list. Add 1 more to spin.' : `${n} books from your club’s list.`;
+      b = n < 2 ? 'Add books' : 'Edit our list'; act = 'club';
+    } else if (ready) {
+      const n = state.pool.length;
+      if (n < MIN_SPIN) { s = 'No books on the wheel.'; b = 'Change filters'; act = 'filters'; }
+      else if (n > WHEEL_MAX) { s = `${WHEEL_MAX} of ${n} on the wheel.`; b = 'Shuffle'; act = 'shuffle'; }
+      else s = `All ${n} are on the wheel.`;
+    } else s = 'Loading books…';
+    text.textContent = s;
+    btn.textContent = b; btn.hidden = !act; summaryAction = act;
     const last = changedSinceShare(), line = $('share-changed');
     line.hidden = !last;
     line.textContent = last ? `You’ve changed the list since you shared it on ${window.PartyShare.shortDate(last.date)}. Share again so everyone gets the new list.` : '';
   }
+  function jumpTo(target, focusEl) {
+    target.scrollIntoView({ block: 'start', behavior: 'auto' });
+    focusEl.focus({ preventScroll: true });
+    requestAnimationFrame(() => { if (document.activeElement !== focusEl) focusEl.focus({ preventScroll: true }); });
+  }
+  $('summary-btn').addEventListener('click', () => {
+    if (summaryAction === 'shuffle') {
+      dealMore(); refresh(); updateFilterUI();
+      say(`${Math.min(WHEEL_MAX, state.pool.length)} new books on the wheel.`, true);
+    } else if (summaryAction === 'filters') { setOpen(true); jumpTo(card, FILTERS[0].sel); }
+    else if (summaryAction === 'club') jumpTo($('club-panel'), searchInput);
+    else if (summaryAction === 'host') jumpTo($('host-panel'), hostTA);
+  });
 
   // ---------- Club list: rows with Remove, kept in sync with the textarea ----------
   const searchInput = $('book-search'), live = $('club-live');
@@ -553,158 +882,123 @@
   document.addEventListener('pointerdown', (e) => { if (isOpen() && e.target !== searchInput && !pop.contains(e.target)) close(); });
   document.addEventListener('focusin', (e) => { if (isOpen() && e.target !== searchInput && !pop.contains(e.target)) close(); });
 
+  // Suggested: titles only (store links live on the result card).
   function renderBookList() {
-    const ul = $('book-list'); ul.innerHTML = '';
-    state.dealt.forEach(([t, a], i) => {
+    const ul = $('book-list'); ul.textContent = '';
+    state.dealt.forEach((b) => {
       const li = document.createElement('li');
       const row = document.createElement('div'); row.className = 'book-row';
-      const name = document.createElement('span'); name.textContent = a ? `${t} – ${a}` : t;
-      const btn = document.createElement('button');
-      btn.type = 'button'; btn.className = 'text-btn options-btn'; btn.textContent = 'Options';
-      btn.setAttribute('aria-expanded', 'false');
-      btn.setAttribute('aria-label', `Options for ${t}`);
-      const panelId = `book-opts-${i}`; btn.setAttribute('aria-controls', panelId);
-      const panel = L.bookLinks(t, a); panel.id = panelId; panel.hidden = true;
-      btn.addEventListener('click', () => {
-        const open = btn.getAttribute('aria-expanded') === 'true';
-        btn.setAttribute('aria-expanded', String(!open)); panel.hidden = open;
-      });
-      row.append(name, btn); li.append(row, panel); ul.append(li);
+      row.textContent = b.a ? `${b.t} – ${b.a}` : b.t;
+      li.append(row); ul.append(li);
     });
-  }
-
-  function randomInt(n) { const r = new Uint32Array(1); crypto.getRandomValues(r); return r[0] % n; }
-  function sample(arr, n) {
-    const a = arr.slice();
-    for (let i = a.length - 1; i > 0; i--) { const j = randomInt(i + 1); [a[i], a[j]] = [a[j], a[i]]; }
-    return a.slice(0, n);
-  }
-
-  function deal() {
-    const on = new Set(state.genres);
-    const seen = new Set();
-    const pool = LIBRARY.filter(([t, a, g]) => {
-      if (!on.has(g)) return false;
-      const k = `${t}|${a}`.toLowerCase();
-      if (seen.has(k)) return false;
-      seen.add(k); return true;
-    });
-    state.dealt = sample(pool, WHEEL_SIZE).map(([t, a]) => [t, a]);
-    renderBookList();
-    if (!on.size) status.textContent = 'Turn on at least one genre.';
-    else if (pool.length < 2) status.textContent = 'Not enough books in those genres. Add another.';
-    else if (pool.length <= WHEEL_SIZE) status.textContent = `All ${pool.length} books from your genres are on the wheel.`;
-    else status.textContent = `12 random books from ${pool.length} in ${on.size} genre${on.size > 1 ? 's' : ''}.`;
-    if (on.has('current') && CURRENT.updated) {
-      const dt = listDates(CURRENT.updated);
-      status.textContent += ` Bestseller list from ${dt.from}. Next update ${dt.next}.`;
-    }
-    $('deal').hidden = pool.length <= WHEEL_SIZE;
-    refresh(); save();
-  }
-
-  // Genre chips
-  GENRES.forEach(([id, name]) => {
-    const li = document.createElement('li');
-    const b = document.createElement('button');
-    b.type = 'button'; b.className = 'chip'; b.dataset.genre = id; b.textContent = name;
-    b.addEventListener('click', () => {
-      const i = state.genres.indexOf(id);
-      if (i >= 0) state.genres.splice(i, 1); else state.genres.push(id);
-      syncChips(); deal();
-    });
-    li.append(b); $('genres').append(li);
-  });
-  function syncChips() {
-    $('genres').querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(state.genres.includes(b.dataset.genre))));
   }
 
   function render() {
-    const host = state.mode === 'host';
-    $('book-panel').hidden = host;
-    $('host-panel').hidden = !host;
-    $('suggested-panel').hidden = state.source !== 'suggested';
-    $('club-panel').hidden = state.source !== 'club';
-    $('list-heading').textContent = host ? 'Members on the wheel' : 'Books on the wheel';
-    $('wheel').setAttribute('aria-label', host ? 'Spinning wheel of club members' : 'Spinning wheel of book club choices');
-    result.innerHTML = `<p class="result-hint">${host ? 'The next host shows up here.' : 'Your pick shows up here.'}</p>`;
+    const sug = state.view === 'suggested';
+    card.hidden = !sug;
+    $('suggested-panel').hidden = !sug;
+    $('club-panel').hidden = !isClub();
+    $('host-panel').hidden = !isHost();
+    $('list-tools').hidden = sug;
+    $('share-status').textContent = '';
+    result.hidden = true; result.textContent = '';
+    spinBtn.removeAttribute('aria-disabled');
     spinBtn.textContent = 'Spin';
-    const showDisc = !host && L.isAffiliate();
-    $('list-disclosure').hidden = !showDisc; $('list-disclosure').textContent = showDisc ? L.disclosure() : '';
-    $('list-disclosure-end').hidden = !showDisc; $('list-disclosure-end').textContent = showDisc ? L.disclosure() : '';
     refresh();
+    updateFilterUI();
+    updateURL();
   }
 
-  document.querySelectorAll('input[name="mode"]').forEach((r) => r.addEventListener('change', () => { state.mode = r.value; save(); render(); }));
-  document.querySelectorAll('input[name="source"]').forEach((r) => r.addEventListener('change', () => { state.source = r.value; save(); render(); }));
-  $('deal').addEventListener('click', deal);
+  document.querySelectorAll('input[name="view"]').forEach((r) => r.addEventListener('change', () => { state.view = r.value; save(); render(); }));
   clubTA.addEventListener('input', () => { state.club = clubTA.value; edited('club'); save(); refresh(); });
   hostTA.addEventListener('input', () => { state.hosts = hostTA.value; edited('hosts'); save(); refresh(); });
   $('club-shuffle').addEventListener('click', () => { clubTA.value = sample(lines(clubTA.value), Infinity).join('\n'); state.club = clubTA.value; edited('club'); save(); refresh(); });
 
-  // "Use our club's list" / "Add books" / "Edit our list" / "Edit members": jump straight to the box (no smooth scroll).
-  $('club-entry').addEventListener('click', () => {
-    const host = state.mode === 'host';
-    if (!host && state.source !== 'club') { state.source = 'club'; $('src-club').checked = true; save(); }
-    render();
-    const box = host ? hostTA : searchInput, panel = host ? $('host-panel') : $('book-panel');
-    box.focus({ preventScroll: true });
-    panel.scrollIntoView({ block: 'start', behavior: 'auto' });
-    requestAnimationFrame(() => { if (document.activeElement !== box) box.focus({ preventScroll: true }); });
-  });
-
-
   $('share').addEventListener('click', () => {
     const items = currentItems().map(join);
-    window.PartyShare.share(items, state.mode === 'host' ? 'hosts' : 'books', 'Book club picks', $('share-status'), undefined, undefined, shareOpts(items));
+    window.PartyShare.share(items, isHost() ? 'hosts' : 'books', 'Book club picks', $('share-status'), undefined, undefined, shareOpts(items));
   });
+  // While spinning, Spin stays focusable (aria-disabled) so keyboard and screen reader focus isn't dropped.
   spinBtn.addEventListener('click', () => {
+    if (spinBtn.getAttribute('aria-disabled') === 'true') return;
     if (wheel.spin()) {
-      spinBtn.disabled = true;
+      spinBtn.setAttribute('aria-disabled', 'true');
       spinBtn.textContent = 'Spinning…';
-      result.innerHTML = '<p class="result-hint">Spinning…</p>';
     }
   });
 
-  // Restore settings; suggested picks are re-dealt fresh each visit.
+  // ---------- Start-up ----------
+  // Priority: shared list link (#z= / #w=) > URL parameters > saved settings.
+  const shared = window.PartyShare.read();   // read first: it clears the # from the address bar
   const saved = store.get();
-  if (saved.mode === 'host') state.mode = 'host';
-  if (saved.source === 'club') state.source = 'club';
-  if (Array.isArray(saved.genres)) {
-    const valid = new Set(GENRES.map(([id]) => id));
-    state.genres = saved.genres.filter((g) => valid.has(g));
-  }
-  state.club = saved.club || '';
-  state.hosts = saved.hosts || '';
-  // Preset links: ?genres=challenged,classics or ?mode=host. Only known values are accepted.
   const qp = new URLSearchParams(location.search);
-  if (qp.get('genres')) {
-    const valid = new Set(GENRES.map(([id]) => id));
-    const g = qp.get('genres').split(',').filter((x) => valid.has(x));
-    if (g.length) { state.genres = g; state.mode = 'book'; state.source = 'suggested'; }
+  updateChrome();
+
+  function init(lib) {
+    BOOKS = buildBooks(lib);
+    buildSelects();
+    // Saved settings (unknown ids fall back silently).
+    if (saved.view === 'club' || saved.view === 'host') state.view = saved.view;
+    else if (!saved.view) { if (saved.mode === 'host') state.view = 'host'; else if (saved.source === 'club') state.view = 'club'; }
+    FILTERS.forEach((F) => { const v = saved[F.key]; if (typeof v === 'string' && validId(F.key, v)) setFilter(F.key, v); });
+    if (!saved.view && Array.isArray(saved.genres) && saved.genres.length === 1) {
+      const m = oldGenre(saved.genres[0]);
+      if (m) setFilter(m[0], m[1]);
+    }
+    state.club = typeof saved.club === 'string' ? saved.club : '';
+    state.hosts = typeof saved.hosts === 'string' ? saved.hosts : '';
+    // Link presets: ?occasion=&mood=&genre=, old ?genres=, ?mode=host.
+    let reset = false;
+    const linkF = FILTERS.filter((F) => qp.has(F.key));
+    if (linkF.length) {
+      FILTERS.forEach((F) => setFilter(F.key, ''));
+      linkF.forEach((F) => { const v = qp.get(F.key); if (validId(F.key, v)) setFilter(F.key, v); else reset = true; });
+      state.view = 'suggested';
+    } else if (qp.get('genres')) {
+      FILTERS.forEach((F) => setFilter(F.key, ''));
+      const g = qp.get('genres').split(',');
+      const m = g.length === 1 ? oldGenre(g[0]) : null;
+      if (m && validId(m[0], m[1])) setFilter(m[0], m[1]);
+      state.view = 'suggested';
+    }
+    if (qp.get('mode') === 'host') state.view = 'host';
+    if (qp.get('mode') === 'book' && state.view === 'host') state.view = 'suggested';
+    clubTA.value = state.club; hostTA.value = state.hosts;
+    if (shared) {
+      const text = shared.items.join('\n');
+      // Show the shared copy without saving it over this visitor's own list (saved only if they edit it).
+      fromShare = true;
+      if (shared.kind === 'hosts') { state.view = 'host'; state.hosts = text; hostTA.value = text; sharedView = 'hosts'; }
+      else { state.view = 'club'; state.club = text; clubTA.value = text; sharedView = 'club'; }
+      const noteEl = el('p', 'shared-note', window.PartyShare.note(shared, shared.kind === 'hosts' ? { one: 'name', many: 'names' } : { one: 'book', many: 'books' }));
+      $('lede').after(noteEl);
+    }
+    $('view-' + state.view).checked = true;
+    $('link-reset').hidden = !reset;
+    setOpen(window.matchMedia('(min-width: 48rem)').matches);
+    ready = true;
+    deal();
+    render();
+    save();
+    // Shared result link: land on the same pick the sender got.
+    if (shared && shared.result !== null && wheel.items.length === shared.items.length) { landing = true; wheel.land(shared.result); landing = false; }
   }
-  if (qp.get('mode') === 'host') state.mode = 'host';
-  if (qp.get('mode') === 'book') state.mode = 'book';
-  clubTA.value = state.club; hostTA.value = state.hosts;
-  $('mode-' + state.mode).checked = true;
-  $('src-' + state.source).checked = true;
-  const shared = window.PartyShare.read();
-  if (shared) {
-    const text = shared.items.join('\n');
-    // Show the shared copy without saving it over this visitor's own list (saved only if they edit it).
-    fromShare = true;
-    if (shared.kind === 'hosts') { state.mode = 'host'; state.hosts = text; hostTA.value = text; sharedView = 'hosts'; }
-    else { state.mode = 'book'; state.source = 'club'; state.club = text; clubTA.value = text; sharedView = 'club'; }
-    $('mode-' + state.mode).checked = true; $('src-' + state.source).checked = true;
-    const noteEl = document.createElement('p'); noteEl.className = 'shared-note';
-    noteEl.textContent = window.PartyShare.note(shared, shared.kind === 'hosts' ? { one: 'name', many: 'names' } : { one: 'book', many: 'books' });
-    document.querySelector('.segmented').after(noteEl);
+  // Old ?genres= ids → new filters. "challenged" or unknown → Any genre.
+  function oldGenre(id) {
+    if (id === 'contemporary' || id === 'fiction') return ['genre', 'fiction'];
+    if (['mystery', 'romance', 'scifi', 'nonfiction', 'classics'].includes(id)) return ['genre', id];
+    if (id === 'new' || id === 'current') return ['occasion', 'popular'];
+    return null;
   }
-  syncChips();
-  deal();
-  render();
-  // Shared result link: land on the same pick the sender got.
-  if (shared && shared.result !== null && wheel.items.length === shared.items.length) wheel.land(shared.result);
+
+  const inline = document.getElementById('library-data');
+  if (inline) { let lib = []; try { lib = JSON.parse(inline.textContent); } catch (e) {} init(lib); }
+  else {
+    fetch(LIBRARY_URL, { credentials: 'same-origin' })
+      .then((r) => { if (!r.ok) throw new Error('status'); return r.json(); })
+      .catch(() => [])   // bestsellers still load if the library file can't
+      .then(init);
+  }
 })();
 </script>
 <script src="../assets/count.js?v=20261031a" defer></script>
