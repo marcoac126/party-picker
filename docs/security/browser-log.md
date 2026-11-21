@@ -4,6 +4,7 @@ Rules: `docs/security/browser-access.md`. Newest first. One line per Tier 2/3 ac
 
 | Date (CT) | Agent | Tier | Site | Action | Approved by | Result |
 |---|---|---|---|---|---|---|
+| 2026-11-21 12:40 | coordinator | 1 | Search Console, GoatCounter, Pinterest Analytics | Read 28-day performance, pages, queries, countries; 4-week visits and link taps; 30-day Pinterest overview (Mark asked for an analytics review) | — | Read only |
 | 2026-11-16 20:30 | coordinator | 1 | GoatCounter, Search Console | Viewed visits, referrers, outbound taps; performance by page/query; page indexing report | — | Read only, nothing saved or submitted |
 | 2026-10-31 18:05 | coordinator | 3 | Search Console | Request indexing: /make-your-own-wheel/ (was "Discovered, not indexed"; no referring page) | Mark, chat 10/31 | Indexing requested |
 | 2026-10-31 18:00 | coordinator | 3 | Search Console | Request indexing: /holiday-wheels/ (was "Discovered, not indexed") | Mark, chat 10/31 | Indexing requested |
