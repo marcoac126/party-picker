@@ -477,6 +477,7 @@ h1 { font-size: clamp(1.75rem, 7vw, 3rem); }
       result.append(newTab(primary));
       const more = el('details', 'more-ways');
       more.append(el('summary', '', 'More ways to get it'));
+      if (L.isAffiliate()) more.append(el('p', 'disclosure', L.disclosure()));
       const ul = el('ul');
       [['bookshop', 'Buy at Bookshop.org'], ['goodreads', 'Read reviews on Goodreads'], ['amazon', 'Buy on Amazon'],
         ['kindle', 'Read on Kindle'], ['audible', 'Listen on Audible'], ['librofm', 'Listen on Libro.fm']]
@@ -485,7 +486,6 @@ h1 { font-size: clamp(1.75rem, 7vw, 3rem); }
       result.append(more);
     }
     result.append(window.PartyShare.resultButton(wheel, host ? 'hosts' : 'books', 'Book club picks', shareOpts(wheel.lastSpin ? wheel.lastSpin.items.slice() : [])));
-    if (!host && L.isAffiliate()) result.append(el('p', 'disclosure', L.disclosure()));
     result.hidden = false;
     requestAnimationFrame(() => main.classList.add('sing'));
     resultLive.textContent = '';
