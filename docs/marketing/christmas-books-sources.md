@@ -94,3 +94,12 @@ Existing books already in books.js (Small Things Like These, Little Women) got a
 ## Not done yet
 - ISBNs for Bookshop links (needed before these books can earn).
 - JSON parse check: no shell available in this session; run `node -e "JSON.parse(require('fs').readFileSync('book-club-picker/library.json'))"`.
+
+## Not found (ISBN check, 2026-11-21)
+Couldn't find an in-print US print edition, so there's no ISBN in `docs/bookshop/christmas-2026.csv`. These books keep the plain Bookshop search link.
+- Twas the Nightshift Before Christmas, Adam Kay: UK (Picador) editions only.
+- The Shepherd, the Angel, and Walter the Christmas Miracle Dog, Dave Barry: the PRH page lists only ebook and audio.
+- A Christmas Journey, Anne Perry: the PRH page lists only an ebook. Bookshop has UK (Headline) editions only.
+- Mistletoe, Alison Littlewood: UK (Jo Fletcher/Quercus) editions only.
+- The Christmas Mystery, Jostein Gaarder: UK (Orion 2025) editions only. The US FSG hardcover (1996) is out of print.
+- Silent Night, Stanley Weintraub: S&S lists only an ebook and PRH only audio. The Plume paperback seems to be out of print.
