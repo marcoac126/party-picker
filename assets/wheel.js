@@ -11,6 +11,8 @@
       this.textColors = opts.textColors || ['#2B1342'];
       this.onResult = opts.onResult || function () {};
       this.labelFn = opts.labelFn || ((item) => item);
+      // Spin counting: a fixed label (mode/filter ids only, never list contents). Defaults to "spin".
+      this.countLabel = opts.countLabel || (() => 'spin');
       this.items = [];
       this.angle = 0; // radians
       this.spinning = false;
@@ -111,9 +113,20 @@
       return true;
     }
 
+    // Fire-and-forget spin count (assets/count.js). Runs after the spin starts; never blocks or throws.
+    countSpin() {
+      const label = this.countLabel;
+      setTimeout(() => {
+        try {
+          if (window.PartyCount && window.PartyCount.event) window.PartyCount.event('spin: ' + location.pathname, String(label() || 'spin'));
+        } catch (e) {}
+      }, 0);
+    }
+
     spin() {
       if (this.spinning || this.items.length < 2) return false;
       this.spinning = true;
+      this.countSpin();
       // Pick the winner fairly first, then animate to it.
       const rand = new Uint32Array(1);
       crypto.getRandomValues(rand);

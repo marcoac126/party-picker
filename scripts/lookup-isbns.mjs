@@ -7,7 +7,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 
 const OUT = new URL('../book-club-picker/isbns.js', import.meta.url);
-const SOURCES = ['../book-club-picker/books.js', '../book-club-picker/current-books.js'];
+const SOURCES = ['../book-club-picker/library.json', '../book-club-picker/books.js', '../book-club-picker/current-books.js'];
 const API = 'https://www.googleapis.com/books/v1/volumes';
 const MAX_LOOKUPS = 250;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -31,7 +31,8 @@ function loadBooks() {
       const txt = readFileSync(new URL(rel, import.meta.url), 'utf8');
       let list = [];
       const cur = txt.match(/window\.CURRENT_BOOKS\s*=\s*(\{[\s\S]*\});/);
-      if (cur) list = JSON.parse(cur[1]).books || [];          // generated file: parse as data, never run it
+      if (rel.endsWith('.json')) list = JSON.parse(txt).map((b) => [b && b.t, b && b.a]); // tagged library (data only)
+      else if (cur) list = JSON.parse(cur[1]).books || [];          // generated file: parse as data, never run it
       else { const window = {}; new Function('window', txt)(window); list = window.BOOK_CLUB_BOOKS || []; } // our hand-written list
       list.forEach((b) => { if (Array.isArray(b) && b[0] && b[1]) books.push([String(b[0]), String(b[1])]); });
     } catch (e) { console.log(`Could not read ${rel}: ${e.message}`); }
