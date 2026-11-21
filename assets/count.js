@@ -1,6 +1,7 @@
 // Visit and link-click counter for The Party Wheel, sending to GoatCounter (goatcounter.com).
 // Our own small script (no outside code). No cookies, no screen size, no IDs.
-// Sends only: page path, page title, referring page, and for link clicks the store's domain plus the page it was clicked on.
+// Sends only: page path, page title, referring page, for link clicks the store's domain plus the page it was clicked on,
+// and for wheel spins "spin: /page/" plus a fixed label (mode and filter, e.g. "suggested · christmas"), max 30 per page load.
 // Never sends wheel lists or share links (the #... part of a URL is never read).
 // Opt-out: PartyCount.setOff(true) stores "skipgc" in this browser (also honored by GoatCounter's own tools).
 (function () {
@@ -8,9 +9,19 @@
   var enc = encodeURIComponent;
   function isOff() { try { return localStorage.getItem('skipgc') === 't'; } catch (e) { return false; } }
   function setOff(off) { try { if (off) localStorage.setItem('skipgc', 't'); else localStorage.removeItem('skipgc'); } catch (e) {} }
-  window.PartyCount = { isOff: isOff, setOff: setOff };
+  var MAX_EVENTS = 30, events = 0, live = false;
+  // Count an event (e.g. a wheel spin). Fire-and-forget: never throws, capped per page load, honors the opt-out.
+  function event(name, title) {
+    try {
+      if (!live || events >= MAX_EVENTS) return;
+      events++;
+      send(String(name), String(title || ''), '', true);
+    } catch (e) {}
+  }
+  window.PartyCount = { isOff: isOff, setOff: setOff, event: event };
 
   if (location.hostname !== 'thepartywheel.com' || navigator.webdriver || isOff()) return;
+  live = true;
 
   function send(path, title, referrer, event) {
     if (isOff()) return;
