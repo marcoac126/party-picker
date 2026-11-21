@@ -1,6 +1,20 @@
 # Keywords & Page Priorities
 
-Last updated: 2026-10-31 (first Search Console data)
+Last updated: 2026-11-21 (course check + themed book pages)
+
+## 2026-11-21 update (full analysis: docs/marketing/course-check-2026-11-21.md)
+
+Search Console 10/23–11/19: 56 clicks / 635 impr; book club page 53 / 523 (10.1% CTR, keep title). Top queries: "sorteio de livros para ler" 3/19, "book club book generator" 3/4, "random book generator" 0/14, "karaoke random song generator" 0/17.
+
+| Page | Target phrases | Who ranks | Money path | Score |
+|---|---|---|---|---|
+| /christmas-books-for-book-club/ (moods: Cozy, Romantic, Funny, Mystery, Scary, Classic) | christmas books for book club, holiday book club books, christmas romance books, cozy christmas mysteries, christmas horror books; long tail: christmas book generator / holiday book picker | **Strong** for list phrases (Book Riot, PRH, bookclubs.com, bookclubchat yearly). **Open** for tool phrases (no tool found) | Bookshop title links (ISBNs) + gift intent; ads later | **Build now** |
+| /winter-books-for-book-club/ (Cozy, Snowed-in mystery, Chilling, Big long-night read) | winter books for book club, cozy winter books | Okay (bookclubs.com, Early Bird, Book Riot, Stylist) | Bookshop | **Build now** (live 1/2) |
+| /valentines-books-for-book-club/ | valentine's book club books, books for valentine's day | Okay–strong (publishers, PureWow, B&N) | Bookshop | **Later** (build by 12/31 if holiday test passes its stop rule) |
+| /summer-beach-reads-for-book-club/ | summer beach reads for book club | Strong (publishers, media) | Bookshop | **Later** (build by 3/31) |
+| /spooky-books-for-book-club/ | spooky books for october book club | Okay (bookclubs.com, libraries, BookBub) | Bookshop | **Later** (build by 7/15) |
+| Portuguese/Spanish random book page | sorteio de livros, libro al azar | n/a | ~$0 today (Bookshop US/UK only) | **Skip until** ~100 query-level impr/month in one language |
+| Holiday tools (movie, white elephant, holiday games) | — | — | — | **Keep live, no new work**; judge Oct 2027 |
 
 The table below is the original 10/09 research, scored on competition only. Where we now have real data, the "2026-10-31 first data" section overrides it.
 

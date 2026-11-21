@@ -1,10 +1,25 @@
 // Generated weekly by scripts/update-books.mjs from Apple Books' US top-paid chart. Do not edit by hand.
 window.CURRENT_BOOKS = {
- "updated": "2026-11-09",
+ "updated": "2026-11-16",
  "books": [
+  [
+   "All In",
+   "David Baldacci",
+   "current"
+  ],
   [
    "The Hollow",
    "Michael Connelly",
+   "current"
+  ],
+  [
+   "Split Second: Thirty-Two Switcheroo",
+   "Janet Evanovich",
+   "current"
+  ],
+  [
+   "Daddy Issues",
+   "Sofia Franklyn",
    "current"
   ],
   [
@@ -23,88 +38,8 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "The Silver Bell",
-   "Rachel Hanna",
-   "current"
-  ],
-  [
-   "State of Terror",
-   "Louise Penny & Hillary Clinton",
-   "current"
-  ],
-  [
    "The Calamity Club",
    "Kathryn Stockett",
-   "current"
-  ],
-  [
-   "Mad Mabel",
-   "Sally Hepworth",
-   "current"
-  ],
-  [
-   "The Family Cross",
-   "James Patterson",
-   "current"
-  ],
-  [
-   "Partita",
-   "Barbara Kingsolver",
-   "current"
-  ],
-  [
-   "Miss Wolcott's Ghost",
-   "Louise Penny",
-   "current"
-  ],
-  [
-   "Peck & Peck",
-   "Bonnie Garmus",
-   "current"
-  ],
-  [
-   "Theo of Golden",
-   "Allen Levi",
-   "current"
-  ],
-  [
-   "Don't Let Go",
-   "Harlan Coben",
-   "current"
-  ],
-  [
-   "A Court of Thorns and Roses",
-   "Sarah J. Maas",
-   "current"
-  ],
-  [
-   "Hollow Bones",
-   "Jodi Picoult",
-   "current"
-  ],
-  [
-   "The Wife He Kept Off the Record",
-   "Lena Marsh",
-   "current"
-  ],
-  [
-   "Olive Kitteridge",
-   "Elizabeth Strout",
-   "current"
-  ],
-  [
-   "1Q84",
-   "Haruki Murakami",
-   "current"
-  ],
-  [
-   "The Borrowed Life of Frederick Fife",
-   "Anna Johnston",
-   "current"
-  ],
-  [
-   "The Grapes of Wrath",
-   "John Steinbeck & Robert DeMott",
    "current"
   ],
   [
@@ -113,38 +48,68 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "Threshing Day",
-   "Rebecca Yarros",
+   "The Things We Do for Love",
+   "Kristin Hannah",
    "current"
   ],
   [
-   "Fourth Wing",
-   "Rebecca Yarros",
+   "Mad Mabel",
+   "Sally Hepworth",
    "current"
   ],
   [
-   "In the Shadow of Eight",
-   "Collin Gosselin",
+   "Solace in Winter",
+   "Mary Lawson",
    "current"
   ],
   [
-   "The Heights",
-   "Ian Rankin",
+   "Theo of Golden",
+   "Allen Levi",
    "current"
   ],
   [
-   "The Pirate Queen",
-   "Ariel Lawhon",
+   "Fox",
+   "Joyce Carol Oates",
    "current"
   ],
   [
-   "Verity",
-   "Colleen Hoover",
+   "Clive Cussler Obsidian Sky",
+   "Dirk Cussler",
    "current"
   ],
   [
-   "The Fury",
-   "Alex Michaelides",
+   "Iberia",
+   "James A. Michener, Steve Berry & Robert Vavra",
+   "current"
+  ],
+  [
+   "Partita",
+   "Barbara Kingsolver",
+   "current"
+  ],
+  [
+   "Whale Harbor",
+   "Mary Beth Keane",
+   "current"
+  ],
+  [
+   "Ten Big Ones",
+   "Janet Evanovich",
+   "current"
+  ],
+  [
+   "It's a Long Story",
+   "Willie Nelson & David Ritz",
+   "current"
+  ],
+  [
+   "The Wife He Kept Off the Record",
+   "Lena Marsh",
+   "current"
+  ],
+  [
+   "The Family Cross",
+   "James Patterson",
    "current"
   ],
   [
@@ -153,8 +118,53 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "A Knight of the Seven Kingdoms",
-   "George R.R. Martin & Gary Gianni",
+   "Hollow Bones",
+   "Jodi Picoult",
+   "current"
+  ],
+  [
+   "Shelter in Place",
+   "Nora Roberts",
+   "current"
+  ],
+  [
+   "The Night Island",
+   "Jayne Ann Krentz",
+   "current"
+  ],
+  [
+   "The London Man",
+   "Louise Bay",
+   "current"
+  ],
+  [
+   "The End of Everything",
+   "M. John Harrison",
+   "current"
+  ],
+  [
+   "The Wife He Filed Under Business",
+   "Lena Marsh",
+   "current"
+  ],
+  [
+   "Miss Wolcott's Ghost",
+   "Louise Penny",
+   "current"
+  ],
+  [
+   "The Taken Ones",
+   "J. A. Jance",
+   "current"
+  ],
+  [
+   "The Paris Seamstress",
+   "Catherine Law",
+   "current"
+  ],
+  [
+   "The Borrowed Life of Frederick Fife",
+   "Anna Johnston",
    "current"
   ],
   [
@@ -163,48 +173,8 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "A Court of Forgotten Melody",
+   "A Court of Thorns and Roses",
    "Sarah J. Maas",
-   "current"
-  ],
-  [
-   "The Family",
-   "Mario Puzo & Carol Gino",
-   "current"
-  ],
-  [
-   "The Law Student",
-   "John Grisham",
-   "current"
-  ],
-  [
-   "A Court of Mist and Fury",
-   "Sarah J. Maas",
-   "current"
-  ],
-  [
-   "Have Courage",
-   "Craig Johnson",
-   "current"
-  ],
-  [
-   "Monsters of Ohio",
-   "John Scalzi",
-   "current"
-  ],
-  [
-   "The Antidote",
-   "Karen Russell",
-   "current"
-  ],
-  [
-   "Geitha's Tears",
-   "Keri Arthur",
-   "current"
-  ],
-  [
-   "Cutting for Stone",
-   "Abraham Verghese",
    "current"
   ],
   [
@@ -213,23 +183,53 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "The French Christmas Market",
-   "Gillian Harvey",
+   "Department of Fate",
+   "Rachel Maddow",
    "current"
   ],
   [
-   "The Paris Apartment",
-   "Kelly Bowen",
+   "Artemis",
+   "Andy Weir",
    "current"
   ],
   [
-   "The Girl in the Lake",
-   "James Patterson & Brian Sitts",
+   "Peck & Peck",
+   "Bonnie Garmus",
    "current"
   ],
   [
-   "Fast Lane",
-   "C S Quill",
+   "In the Shadow of Eight",
+   "Collin Gosselin",
+   "current"
+  ],
+  [
+   "Before I Disappear",
+   "Cate Quinn",
+   "current"
+  ],
+  [
+   "The Pirate Queen",
+   "Ariel Lawhon",
+   "current"
+  ],
+  [
+   "Empire of the Summer Moon",
+   "S. C. Gwynne",
+   "current"
+  ],
+  [
+   "The Names: A Read with Jenna Pick",
+   "Florence Knapp",
+   "current"
+  ],
+  [
+   "Operation Bounce House",
+   "Matt Dinniman",
+   "current"
+  ],
+  [
+   "A Court of Forgotten Melody",
+   "Sarah J. Maas",
    "current"
   ]
  ]
