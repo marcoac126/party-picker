@@ -1,40 +1,25 @@
 // Generated weekly by scripts/update-books.mjs from Apple Books' US top-paid chart. Do not edit by hand.
 window.CURRENT_BOOKS = {
- "updated": "2026-11-16",
+ "updated": "2026-11-23",
  "books": [
+  [
+   "The Murder Trial",
+   "James Patterson & Nancy Allen",
+   "current"
+  ],
   [
    "All In",
    "David Baldacci",
    "current"
   ],
   [
+   "Birth of the Witch",
+   "Nora Roberts",
+   "current"
+  ],
+  [
    "The Hollow",
    "Michael Connelly",
-   "current"
-  ],
-  [
-   "Split Second: Thirty-Two Switcheroo",
-   "Janet Evanovich",
-   "current"
-  ],
-  [
-   "Daddy Issues",
-   "Sofia Franklyn",
-   "current"
-  ],
-  [
-   "Chain Reaction",
-   "Lee Child & Andrew Child",
-   "current"
-  ],
-  [
-   "A Court of Splintered Harmony",
-   "Sarah J. Maas",
-   "current"
-  ],
-  [
-   "The French Illusion",
-   "John Grisham",
    "current"
   ],
   [
@@ -48,13 +33,18 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "The Things We Do for Love",
-   "Kristin Hannah",
+   "The French Illusion",
+   "John Grisham",
    "current"
   ],
   [
-   "Mad Mabel",
-   "Sally Hepworth",
+   "A Court of Splintered Harmony",
+   "Sarah J. Maas",
+   "current"
+  ],
+  [
+   "Atmosphere: A GMA Book Club Pick",
+   "Taylor Jenkins Reid",
    "current"
   ],
   [
@@ -63,23 +53,73 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
+   "Chain Reaction",
+   "Lee Child & Andrew Child",
+   "current"
+  ],
+  [
+   "Split Second: Thirty-Two Switcheroo",
+   "Janet Evanovich",
+   "current"
+  ],
+  [
+   "Stuart Woods' Hostile Intent",
+   "Brett Battles",
+   "current"
+  ],
+  [
+   "The Nightingale",
+   "Kristin Hannah",
+   "current"
+  ],
+  [
+   "Celebration",
+   "Danielle Steel",
+   "current"
+  ],
+  [
    "Theo of Golden",
    "Allen Levi",
    "current"
   ],
   [
-   "Fox",
-   "Joyce Carol Oates",
+   "Mad Mabel",
+   "Sally Hepworth",
    "current"
   ],
   [
-   "Clive Cussler Obsidian Sky",
-   "Dirk Cussler",
+   "Hollow Bones",
+   "Jodi Picoult",
    "current"
   ],
   [
-   "Iberia",
-   "James A. Michener, Steve Berry & Robert Vavra",
+   "Fever Beach",
+   "Carl Hiaasen",
+   "current"
+  ],
+  [
+   "The Secrets We Hide",
+   "Karin Slaughter",
+   "current"
+  ],
+  [
+   "The Wife He Kept Off the Record",
+   "Lena Marsh",
+   "current"
+  ],
+  [
+   "Conspiracy Theory",
+   "Phillip Margolin",
+   "current"
+  ],
+  [
+   "Whistler",
+   "Ann Patchett",
+   "current"
+  ],
+  [
+   "The Lazarus Moment",
+   "J. Robert Kennedy",
    "current"
   ],
   [
@@ -93,88 +133,18 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "Ten Big Ones",
-   "Janet Evanovich",
+   "The Collateral Heart",
+   "Jeffery Deaver",
    "current"
   ],
   [
-   "It's a Long Story",
-   "Willie Nelson & David Ritz",
+   "The Story Keeper",
+   "Kelly Rimmer",
    "current"
   ],
   [
-   "The Wife He Kept Off the Record",
-   "Lena Marsh",
-   "current"
-  ],
-  [
-   "The Family Cross",
-   "James Patterson",
-   "current"
-  ],
-  [
-   "American Hagwon",
-   "Min Jin Lee",
-   "current"
-  ],
-  [
-   "Hollow Bones",
-   "Jodi Picoult",
-   "current"
-  ],
-  [
-   "Shelter in Place",
-   "Nora Roberts",
-   "current"
-  ],
-  [
-   "The Night Island",
-   "Jayne Ann Krentz",
-   "current"
-  ],
-  [
-   "The London Man",
-   "Louise Bay",
-   "current"
-  ],
-  [
-   "The End of Everything",
-   "M. John Harrison",
-   "current"
-  ],
-  [
-   "The Wife He Filed Under Business",
-   "Lena Marsh",
-   "current"
-  ],
-  [
-   "Miss Wolcott's Ghost",
-   "Louise Penny",
-   "current"
-  ],
-  [
-   "The Taken Ones",
-   "J. A. Jance",
-   "current"
-  ],
-  [
-   "The Paris Seamstress",
-   "Catherine Law",
-   "current"
-  ],
-  [
-   "The Borrowed Life of Frederick Fife",
-   "Anna Johnston",
-   "current"
-  ],
-  [
-   "Whistler",
-   "Ann Patchett",
-   "current"
-  ],
-  [
-   "A Court of Thorns and Roses",
-   "Sarah J. Maas",
+   "In the Woods",
+   "Tana French",
    "current"
   ],
   [
@@ -183,28 +153,8 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "Department of Fate",
-   "Rachel Maddow",
-   "current"
-  ],
-  [
-   "Artemis",
-   "Andy Weir",
-   "current"
-  ],
-  [
-   "Peck & Peck",
-   "Bonnie Garmus",
-   "current"
-  ],
-  [
-   "In the Shadow of Eight",
-   "Collin Gosselin",
-   "current"
-  ],
-  [
-   "Before I Disappear",
-   "Cate Quinn",
+   "Mystery",
+   "Jonathan Kellerman",
    "current"
   ],
   [
@@ -213,23 +163,68 @@ window.CURRENT_BOOKS = {
    "current"
   ],
   [
-   "Empire of the Summer Moon",
-   "S. C. Gwynne",
+   "The Best Is Yet to Come",
+   "Diana Palmer",
    "current"
   ],
   [
-   "The Names: A Read with Jenna Pick",
-   "Florence Knapp",
-   "current"
-  ],
-  [
-   "Operation Bounce House",
-   "Matt Dinniman",
-   "current"
-  ],
-  [
-   "A Court of Forgotten Melody",
+   "A Court of Thorns and Roses",
    "Sarah J. Maas",
+   "current"
+  ],
+  [
+   "The Water Dancer",
+   "Ta-Nehisi Coates",
+   "current"
+  ],
+  [
+   "The Last Library of Paris",
+   "Kerry Barrett",
+   "current"
+  ],
+  [
+   "The Wife He Filed Under Business",
+   "Lena Marsh",
+   "current"
+  ],
+  [
+   "Living on the Edge",
+   "Susan Mallery",
+   "current"
+  ],
+  [
+   "American Hagwon",
+   "Min Jin Lee",
+   "current"
+  ],
+  [
+   "Miss Wolcott's Ghost",
+   "Louise Penny",
+   "current"
+  ],
+  [
+   "Sugar and Salt",
+   "Susan Wiggs",
+   "current"
+  ],
+  [
+   "The Family Cross",
+   "James Patterson",
+   "current"
+  ],
+  [
+   "Holiday Bliss",
+   "Kat Mizera",
+   "current"
+  ],
+  [
+   "The Three-Body Problem",
+   "Cixin Liu & Ken Liu",
+   "current"
+  ],
+  [
+   "Daddy Issues",
+   "Sofia Franklyn",
    "current"
   ]
  ]

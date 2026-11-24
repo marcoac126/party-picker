@@ -9,7 +9,7 @@ import { dirname } from 'node:path';
 
 const SITE = 'https://thepartywheel.com';
 // Preset settings the picker pages read from the link. Nothing else (no tracking tags) may ride along.
-const PRESETS = new Set(['moods', 'price', 'vibes', 'style', 'decade', 'occasion', 'players', 'types', 'genres', 'mode']);
+const PRESETS = new Set(['moods', 'mood', 'price', 'vibes', 'style', 'decade', 'occasion', 'players', 'types', 'genres', 'mode']);
 const MAX_ITEMS = 25; // keep feeds small; older items have already been pinned
 const q = JSON.parse(readFileSync('pins/queue.json', 'utf8'));
 // PIN_TODAY=YYYY-MM-DD overrides today's date, for testing only.

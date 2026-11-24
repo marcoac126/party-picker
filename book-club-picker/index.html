@@ -59,6 +59,9 @@ h1 { font-size: clamp(1.75rem, 7vw, 3rem); }
 .why-line { margin: 0.35rem auto 0; max-width: 26rem; }
 .get-btn { display: flex; align-items: center; justify-content: center; width: min(100%, 22rem); min-height: 3rem; margin: 1rem auto 0.25rem; padding: 0.5rem 1rem; border-radius: 999px; background: var(--yellow); color: var(--plum); font: 800 1.1rem var(--font); text-decoration: none; }
 .get-btn:hover { background: var(--cream); color: var(--plum); }
+.alt-link { margin: 0.25rem auto 0; }
+.alt-link a { display: inline-flex; align-items: center; min-height: 2.75rem; padding: 0 0.5rem; font-weight: 750; }
+.result-disclosure { max-width: 22rem; margin: 0.25rem auto 0; }
 .more-ways { margin: 0.25rem auto 0; width: min(100%, 22rem); text-align: left; }
 .more-ways summary { min-height: 2.75rem; display: flex; align-items: center; justify-content: center; cursor: pointer; font-weight: 700; color: var(--yellow); }
 .more-ways ul { list-style: none; margin: 0; padding: 0; }
@@ -206,7 +209,7 @@ h1 { font-size: clamp(1.75rem, 7vw, 3rem); }
   </div>
 </footer>
 
-<script src="../assets/wheel.js?v=20261102a"></script>
+<script src="../assets/wheel.js?v=20261121a"></script>
 <script src="../assets/share.js?v=20261113a"></script>
 <script src="../assets/links.js?v=20261113a"></script>
 <script src="current-books.js?v=20261009e"></script>
@@ -435,6 +438,12 @@ h1 { font-size: clamp(1.75rem, 7vw, 3rem); }
   const wheel = new Wheel($('wheel'), {
     colors: ['#FF4F86', '#FFC93C', '#22B8A7', '#FFF4E2'],
     labelFn: (item) => split(item)[0],
+    // Spin count label: the mode plus active filter ids from our fixed lists. Never book titles or typed names.
+    countLabel: () => {
+      if (isHost()) return 'hosts';
+      if (isClub()) return 'club list';
+      return ['suggested'].concat(FILTERS.map((f) => state.f[f.key]).filter((v, i) => v && LABELS[FILTERS[i].key].has(v))).join(' · ');
+    },
     onResult(item, index) { showResult(item, index); }
   });
 
@@ -472,15 +481,29 @@ h1 { font-size: clamp(1.75rem, 7vw, 3rem); }
         sentence += ` ${parts.join(', ')}.`;
       }
       if (book && book.r) result.append(el('p', 'why-line', book.r));
-      const primary = L.link('library', title, author, 'Borrow free from your library');
-      primary.classList.add('get-btn');
-      result.append(newTab(primary));
+      // Bookshop is the main button while affiliate links are on; otherwise the library is, as before.
+      // (Books without an ISBN in isbns.js get a plain Bookshop search link, which earns no commission.)
+      const shop = L.link('bookshop', title, author, 'Buy at Bookshop.org');
+      const shopFirst = L.isAffiliate();
       const more = el('details', 'more-ways');
       more.append(el('summary', '', 'More ways to get it'));
-      if (L.isAffiliate()) more.append(el('p', 'disclosure', L.disclosure()));
+      const stores = [['goodreads', 'Read reviews on Goodreads'], ['amazon', 'Buy on Amazon'],
+        ['kindle', 'Read on Kindle'], ['audible', 'Listen on Audible'], ['librofm', 'Listen on Libro.fm']];
+      if (shopFirst) {
+        shop.classList.add('get-btn');
+        const lib = L.link('library', title, author, 'Or borrow it free from your library');
+        const alt = el('p', 'alt-link');
+        alt.append(newTab(lib));
+        result.append(newTab(shop), alt, el('p', 'disclosure result-disclosure', L.disclosure()));
+      } else {
+        const primary = L.link('library', title, author, 'Borrow free from your library');
+        primary.classList.add('get-btn');
+        result.append(newTab(primary));
+        if (L.isAffiliate()) more.append(el('p', 'disclosure', L.disclosure()));
+        stores.unshift(['bookshop', 'Buy at Bookshop.org']);
+      }
       const ul = el('ul');
-      [['bookshop', 'Buy at Bookshop.org'], ['goodreads', 'Read reviews on Goodreads'], ['amazon', 'Buy on Amazon'],
-        ['kindle', 'Read on Kindle'], ['audible', 'Listen on Audible'], ['librofm', 'Listen on Libro.fm']]
+      stores
         .forEach(([id, text]) => { const li = el('li'); li.append(newTab(L.link(id, title, author, text))); ul.append(li); });
       more.append(ul);
       result.append(more);
@@ -1001,6 +1024,6 @@ h1 { font-size: clamp(1.75rem, 7vw, 3rem); }
   }
 })();
 </script>
-<script src="../assets/count.js?v=20261031a" defer></script>
+<script src="../assets/count.js?v=20261121a" defer></script>
 </body>
 </html>
