@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Party Game Picker Wheel – Spin, Then See How to Play</title>
-<meta name="description" content="Party games for any group size, with quick rules and how-to videos. No-supply, pen and paper, card, board, and holiday games. Free on any phone.">
+<meta name="description" content="Party games for any group size, with quick rules and how-to videos. No-supply, pen and paper, card, board, Thanksgiving, Friendsgiving, and holiday games. Free on any phone.">
 <link rel="canonical" href="https://thepartywheel.com/party-game-picker/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="The Party Wheel">
 <meta property="og:title" content="Party Game Picker Wheel – Spin, Then See How to Play">
-<meta property="og:description" content="Party games for any group size, with quick rules and how-to videos. No-supply, pen and paper, card, board, and holiday games. Free on any phone.">
+<meta property="og:description" content="Party games for any group size, with quick rules and how-to videos. No-supply, pen and paper, card, board, Thanksgiving, Friendsgiving, and holiday games. Free on any phone.">
 <meta property="og:url" content="https://thepartywheel.com/party-game-picker/">
 <meta property="og:image" content="https://thepartywheel.com/assets/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -72,6 +72,7 @@
           <label for="occasion">Occasion</label>
           <select id="occasion">
             <option value="any">Any occasion</option>
+            <option value="thanksgiving">Thanksgiving</option>
             <option value="holiday">Holiday party</option>
           </select>
         </div>
@@ -109,6 +110,7 @@
       <li><strong>Game night rotation:</strong> switch to “Games we own”, list your shelf, and turn on “Remove each game” so you play something different each round.</li>
       <li><strong>Icebreakers:</strong> at a party where people don’t know each other, include only “No supplies” and spin for the first game.</li>
       <li><strong>Holiday parties:</strong> set the occasion to “Holiday party” for White Elephant, holiday charades, and crowd-pleasers that work for office parties and family gatherings. Card and board games on the wheel also make easy gifts.</li>
+      <li><strong>Thanksgiving and Friendsgiving:</strong> set the occasion to “Thanksgiving” for games that work around the table after dinner, like Fishbowl, Name Five, and Thankful ABCs. Pick “No supplies” or “Pen &amp; paper” if nobody brought games.</li>
       <li><strong>Big groups:</strong> pick “13 or more”. Games like Mafia, Fishbowl, and Herd Mentality work for a crowd.</li>
     </ul>
 
@@ -129,7 +131,7 @@
 <script src="../assets/wheel.js?v=20261121a"></script>
 <script src="../assets/share.js?v=20261113a"></script>
 <script src="../assets/links.js?v=20261113a"></script>
-<script src="games.js?v=20261009e"></script>
+<script src="games.js?v=20261118a"></script>
 <script>
 (function () {
   const WHEEL_SIZE = 12;
@@ -209,7 +211,7 @@
     const on = new Set(state.types);
     let lo = 0, hi = 999;
     if (state.players !== 'any') { [lo, hi] = state.players.split('-').map(Number); if (!hi) hi = lo; }
-    const pool = GAMES.filter((g) => on.has(g[1]) && g[2] <= hi && g[3] >= lo && (state.occasion === 'any' || g[5] === state.occasion));
+    const pool = GAMES.filter((g) => on.has(g[1]) && g[2] <= hi && g[3] >= lo && (state.occasion === 'any' || (g[5] || '').split(' ').includes(state.occasion)));
     state.dealt = sample(pool, WHEEL_SIZE);
     renderList();
     if (!on.size) status.textContent = 'Turn on at least one kind of game.';
@@ -252,15 +254,16 @@
     if (wheel.spin()) { spinBtn.disabled = true; spinBtn.textContent = 'Spinning…'; result.innerHTML = '<p class="result-hint">Spinning…</p>'; }
   });
 
+  // Only accept values that exist as an <option>, so a removed option can't leave a blank select.
+  const okVal = (sel, v) => v && [...sel.options].some((o) => o.value === v);
   const saved = store.get();
   if (saved.source === 'own') state.source = 'own';
-  if (saved.players) state.players = saved.players;
-  if (saved.occasion) state.occasion = saved.occasion;
+  if (okVal(playersSel, saved.players)) state.players = saved.players;
+  if (okVal($('occasion'), saved.occasion)) state.occasion = saved.occasion;
   if (Array.isArray(saved.types)) state.types = saved.types.filter((t) => typeLabel[t]);
   state.own = saved.own || '';
   // Preset links: ?occasion=holiday&players=8-12&types=free,paper. Only known values are accepted.
   const qp = new URLSearchParams(location.search);
-  const okVal = (sel, v) => v && [...sel.options].some((o) => o.value === v);
   let preset = false;
   if (okVal($('occasion'), qp.get('occasion'))) { state.occasion = qp.get('occasion'); preset = true; }
   if (okVal(playersSel, qp.get('players'))) { state.players = qp.get('players'); preset = true; }
