@@ -1,0 +1,42 @@
+{
+ "round": "trend-adds-2026-11",
+ "made": "2026-11-24",
+ "files": [
+  "docs/bookshop/trend-adds-2026-11.csv"
+ ],
+ "picks": [
+  {
+   "title": "The Bodyguard",
+   "author": "Katherine Center",
+   "genre": "romance",
+   "key": "the bodyguard|center",
+   "isbn": "9781250219411",
+   "source": "https://www.publishersweekly.com/9781250219398"
+  },
+  {
+   "title": "A Married Little Christmas",
+   "author": "Abby Jimenez",
+   "genre": "christmas",
+   "key": "a married little christmas|jimenez",
+   "isbn": "9781538780046",
+   "source": "https://www.hachettebookgroup.com/titles/abby-jimenez/a-married-little-christmas/9781538780046/"
+  },
+  {
+   "title": "It's Beginning to Look a Lot Like Murder",
+   "author": "Ally Carter",
+   "genre": "christmas",
+   "key": "it's beginning to look a lot like murder|carter",
+   "isbn": "9780063387041",
+   "source": "https://www.bookreporter.com/reviews/its-beginning-to-look-a-lot-like-murder"
+  },
+  {
+   "title": "Murder on 34th Street",
+   "author": "Mariah Fredericks",
+   "genre": "christmas",
+   "key": "murder on 34th street|fredericks",
+   "isbn": "9781250367549",
+   "source": "https://www.target.com/p/murder-on-34th-street-by-mariah-fredericks-hardcover/-/A-1007933576"
+  }
+ ],
+ "missing": []
+}
