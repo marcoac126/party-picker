@@ -70,6 +70,10 @@ window.PARTY_GAMES = [
   ['Pass the Parcel', 'free', 5, 20, 'Wrap a small prize in many layers. Pass it while music plays; when the music stops, unwrap one layer. The last layer wins.', 'holiday'],
   ['Holiday Who Am I?', 'paper', 4, 15, 'Stick a holiday character on each forehead, like Santa, Rudolph, or the Grinch, and ask yes-or-no questions to guess yours.', 'holiday'],
   ['Holiday Pictionary', 'paper', 4, 16, 'Draw holiday words from a hat, from snowman to fruitcake, while your team races to guess.', 'holiday'],
+  ['Ornament Switcharoo', 'free', 2, 20, 'Fill one bowl with red and one with green shatterproof ornaments. Race the timer to move every ornament into the other bowl, one at a time; fastest swap wins.', 'holiday'],
+  ['Candy Cane Fishing', 'free', 2, 20, 'Tie a candy cane to a string around your waist and stand more canes upright in a bucket of dry rice. No hands: hook as many as you can before time runs out. Keep candy canes out of mouths.', 'holiday'],
+  ['Gift Grab', 'free', 4, 20, 'Put out half as many soft gifts as players. A caller shouts body parts to touch, then “gift!” and everyone grabs one; anyone empty-handed sits out the next round. Clear breakables and give players room.', 'holiday'],
+  ['Bow Scoop', 'free', 2, 20, 'Blindfolded, use a plastic spatula to scoop gift bows into a bowl; clear the floor and have a spotter. Most bows before the timer wins.', 'holiday'],
 
   // Thanksgiving / Friendsgiving (Occasion: Thanksgiving)
   ['Thanksgiving Trivia', 'free', 2, 20, 'Quiz each other on feast foods, parades, football, and family traditions. Play in teams for bigger groups.', 'thanksgiving'],
