@@ -1,0 +1,281 @@
+{
+ "round": "weekly-2026-11-23",
+ "made": "2026-11-23",
+ "files": [
+  "weekly-2026-11-23.csv (9)"
+ ],
+ "picks": [
+  {
+   "title": "The Calamity Club",
+   "author": "Kathryn Stockett",
+   "genre": "weekly",
+   "key": "the calamity club|stockett",
+   "isbn": "9781954118812",
+   "year": 2026
+  },
+  {
+   "title": "Red Rising",
+   "author": "Pierce Brown",
+   "genre": "weekly",
+   "key": "red rising|brown",
+   "isbn": "9780593871522",
+   "year": 2025
+  },
+  {
+   "title": "The French Illusion",
+   "author": "John Grisham",
+   "genre": "weekly",
+   "key": "the french illusion|grisham",
+   "isbn": "9780385550543",
+   "year": 2026
+  },
+  {
+   "title": "A Court of Splintered Harmony",
+   "author": "Sarah J. Maas",
+   "genre": "weekly",
+   "key": "a court of splintered harmony|maas",
+   "isbn": "9781037200083",
+   "year": 2026
+  },
+  {
+   "title": "Atmosphere: A GMA Book Club Pick",
+   "author": "Taylor Jenkins Reid",
+   "genre": "weekly",
+   "key": "atmosphere|reid",
+   "isbn": "9780593158715",
+   "year": 2025
+  },
+  {
+   "title": "Yesteryear: A GMA Book Club Pick",
+   "author": "Caro Claire Burke",
+   "genre": "weekly",
+   "key": "yesteryear|burke",
+   "isbn": "9780593804216",
+   "year": 2026
+  },
+  {
+   "title": "The Pirate Queen",
+   "author": "Ariel Lawhon",
+   "genre": "weekly",
+   "key": "the pirate queen|lawhon",
+   "isbn": "9780385550345",
+   "year": 2026
+  },
+  {
+   "title": "The Best Is Yet to Come",
+   "author": "Diana Palmer",
+   "genre": "weekly",
+   "key": "the best is yet to come|palmer",
+   "isbn": "9780373590759",
+   "year": 1994
+  },
+  {
+   "title": "The Water Dancer",
+   "author": "Ta-Nehisi Coates",
+   "genre": "weekly",
+   "key": "the water dancer|coates",
+   "isbn": "9780399590610",
+   "year": 2020
+  }
+ ],
+ "missing": [
+  {
+   "title": "The Murder Trial",
+   "author": "James Patterson & Nancy Allen",
+   "genre": "weekly",
+   "key": "the murder trial|patterson"
+  },
+  {
+   "title": "All In",
+   "author": "David Baldacci",
+   "genre": "weekly",
+   "key": "all in|baldacci"
+  },
+  {
+   "title": "Birth of the Witch",
+   "author": "Nora Roberts",
+   "genre": "weekly",
+   "key": "birth of the witch|roberts"
+  },
+  {
+   "title": "The Hollow",
+   "author": "Michael Connelly",
+   "genre": "weekly",
+   "key": "the hollow|connelly"
+  },
+  {
+   "title": "Solace in Winter",
+   "author": "Mary Lawson",
+   "genre": "weekly",
+   "key": "solace in winter|lawson"
+  },
+  {
+   "title": "Chain Reaction",
+   "author": "Lee Child & Andrew Child",
+   "genre": "weekly",
+   "key": "chain reaction|child"
+  },
+  {
+   "title": "Split Second: Thirty-Two Switcheroo",
+   "author": "Janet Evanovich",
+   "genre": "weekly",
+   "key": "split second|evanovich"
+  },
+  {
+   "title": "Stuart Woods' Hostile Intent",
+   "author": "Brett Battles",
+   "genre": "weekly",
+   "key": "stuart woods' hostile intent|battles"
+  },
+  {
+   "title": "Celebration",
+   "author": "Danielle Steel",
+   "genre": "weekly",
+   "key": "celebration|steel"
+  },
+  {
+   "title": "Theo of Golden",
+   "author": "Allen Levi",
+   "genre": "weekly",
+   "key": "theo of golden|levi"
+  },
+  {
+   "title": "Mad Mabel",
+   "author": "Sally Hepworth",
+   "genre": "weekly",
+   "key": "mad mabel|hepworth"
+  },
+  {
+   "title": "Hollow Bones",
+   "author": "Jodi Picoult",
+   "genre": "weekly",
+   "key": "hollow bones|picoult"
+  },
+  {
+   "title": "Fever Beach",
+   "author": "Carl Hiaasen",
+   "genre": "weekly",
+   "key": "fever beach|hiaasen"
+  },
+  {
+   "title": "The Secrets We Hide",
+   "author": "Karin Slaughter",
+   "genre": "weekly",
+   "key": "the secrets we hide|slaughter"
+  },
+  {
+   "title": "The Wife He Kept Off the Record",
+   "author": "Lena Marsh",
+   "genre": "weekly",
+   "key": "the wife he kept off the record|marsh"
+  },
+  {
+   "title": "Conspiracy Theory",
+   "author": "Phillip Margolin",
+   "genre": "weekly",
+   "key": "conspiracy theory|margolin"
+  },
+  {
+   "title": "Whistler",
+   "author": "Ann Patchett",
+   "genre": "weekly",
+   "key": "whistler|patchett"
+  },
+  {
+   "title": "The Lazarus Moment",
+   "author": "J. Robert Kennedy",
+   "genre": "weekly",
+   "key": "the lazarus moment|kennedy"
+  },
+  {
+   "title": "Partita",
+   "author": "Barbara Kingsolver",
+   "genre": "weekly",
+   "key": "partita|kingsolver"
+  },
+  {
+   "title": "Whale Harbor",
+   "author": "Mary Beth Keane",
+   "genre": "weekly",
+   "key": "whale harbor|keane"
+  },
+  {
+   "title": "The Collateral Heart",
+   "author": "Jeffery Deaver",
+   "genre": "weekly",
+   "key": "the collateral heart|deaver"
+  },
+  {
+   "title": "The Story Keeper",
+   "author": "Kelly Rimmer",
+   "genre": "weekly",
+   "key": "the story keeper|rimmer"
+  },
+  {
+   "title": "Mystery",
+   "author": "Jonathan Kellerman",
+   "genre": "weekly",
+   "key": "mystery|kellerman"
+  },
+  {
+   "title": "The Last Library of Paris",
+   "author": "Kerry Barrett",
+   "genre": "weekly",
+   "key": "the last library of paris|barrett"
+  },
+  {
+   "title": "The Wife He Filed Under Business",
+   "author": "Lena Marsh",
+   "genre": "weekly",
+   "key": "the wife he filed under business|marsh"
+  },
+  {
+   "title": "Living on the Edge",
+   "author": "Susan Mallery",
+   "genre": "weekly",
+   "key": "living on the edge|mallery"
+  },
+  {
+   "title": "American Hagwon",
+   "author": "Min Jin Lee",
+   "genre": "weekly",
+   "key": "american hagwon|lee"
+  },
+  {
+   "title": "Miss Wolcott's Ghost",
+   "author": "Louise Penny",
+   "genre": "weekly",
+   "key": "miss wolcott's ghost|penny"
+  },
+  {
+   "title": "Sugar and Salt",
+   "author": "Susan Wiggs",
+   "genre": "weekly",
+   "key": "sugar and salt|wiggs"
+  },
+  {
+   "title": "The Family Cross",
+   "author": "James Patterson",
+   "genre": "weekly",
+   "key": "the family cross|patterson"
+  },
+  {
+   "title": "Holiday Bliss",
+   "author": "Kat Mizera",
+   "genre": "weekly",
+   "key": "holiday bliss|mizera"
+  },
+  {
+   "title": "The Three-Body Problem",
+   "author": "Cixin Liu & Ken Liu",
+   "genre": "weekly",
+   "key": "the three-body problem|liu"
+  },
+  {
+   "title": "Daddy Issues",
+   "author": "Sofia Franklyn",
+   "genre": "weekly",
+   "key": "daddy issues|franklyn"
+  }
+ ]
+}

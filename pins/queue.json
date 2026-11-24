@@ -210,6 +210,149 @@
         "Drink smoker",
         "Hot sauce kit"
       ]
+    },
+    {
+      "id": "dare-holiday-games-8-12",
+      "feed": "holiday",
+      "publish": "2026-11-24",
+      "title": "Can't Agree on a Holiday Party Game? Let the Wheel Decide",
+      "description": "Hosting 8 to 12 people this Christmas? Skip the debate. Spin a free wheel of holiday party games, from Charades and Holiday Trivia to Wavelength and Monikers. Whatever it lands on, everyone plays. Quick rules on every spin. Free, no sign-up.",
+      "link": "https://thepartywheel.com/party-game-picker/?occasion=holiday&players=8-12",
+      "image": "/pins/img/dare-holiday-games-8-12.jpg",
+      "alt": "A spinning wheel of holiday party games for 8 to 12 people with the headline Can't agree? Let fate pick.",
+      "headline": "Can't agree? Let fate pick.",
+      "subhead": "Holiday games for 8–12. No take-backs.",
+      "theme": "brand",
+      "accent": "#FFC93C",
+      "wheel": [
+        "Charades",
+        "Holiday Trivia",
+        "Wavelength",
+        "Herd Mentality",
+        "Monikers",
+        "Fishbowl",
+        "Pass the Parcel",
+        "White Elephant"
+      ]
+    },
+    {
+      "id": "christmas-romance-swoon",
+      "feed": "holiday",
+      "publish": "2026-11-27",
+      "title": "Christmas Romance for Book Club: Spin and Let the Swooning Begin",
+      "description": "Mistletoe, snowed-in cabins, and holiday meet-cutes. Spin a free wheel of Christmas romance picks for your book club. Every pick comes with a one-line reason it works for a group, plus links to borrow it from your library or buy it. Free, no sign-up.",
+      "link": "https://thepartywheel.com/book-club-picker/?occasion=christmas&mood=romantic",
+      "image": "/pins/img/christmas-romance-swoon.jpg",
+      "alt": "A spinning wheel of Christmas romance tropes for book clubs with the headline Your book club is about to swoon",
+      "headline": "Your book club is about to swoon",
+      "subhead": "Spin a Christmas romance pick.",
+      "theme": "brand",
+      "accent": "#FF4F86",
+      "wheel": [
+        "Snowed in",
+        "Mistletoe",
+        "Fake dating",
+        "Time loop",
+        "Twin swap",
+        "Grumpy neighbor",
+        "Love letters",
+        "Late-life love"
+      ]
+    },
+    {
+      "id": "book-club-deadlock-christmas",
+      "feed": "holiday",
+      "publish": "2026-11-30",
+      "title": "Book Club Can't Agree on December's Pick? Let the Wheel Choose",
+      "description": "Cozy, romantic, funny, mystery, or a little creepy? Pick a Christmas mood and spin, or spin them all and let fate decide your December book. Each pick has a one-line reason it works for a club and links to borrow or buy. Free, no sign-up.",
+      "link": "https://thepartywheel.com/book-club-picker/?occasion=christmas",
+      "image": "/pins/img/book-club-deadlock-christmas.jpg",
+      "alt": "A spinning wheel of Christmas book moods for book clubs with the headline Book club deadlock? Let fate pick.",
+      "headline": "Book club deadlock? Let fate pick.",
+      "subhead": "Christmas reads, cozy to creepy.",
+      "theme": "brand",
+      "accent": "#22B8A7",
+      "wheel": [
+        "Cozy",
+        "Romantic",
+        "Funny",
+        "Mystery",
+        "Scary",
+        "Uplifting",
+        "Thoughtful",
+        "Classics"
+      ]
+    },
+    {
+      "id": "spooky-cozy-christmas-reads",
+      "feed": "holiday",
+      "publish": "2026-12-03",
+      "title": "Creepy Christmas Reads for Book Club: Spin for a Chilling Pick",
+      "description": "Ghost stories at Christmas are an old tradition. Spin a free wheel of creepy Christmas reads for your book club: ghost stories, haunted houses, Krampus, and dark winter tales. Each pick has a one-line reason it works for a group and links to borrow or buy. Free, no sign-up.",
+      "link": "https://thepartywheel.com/book-club-picker/?occasion=christmas&mood=scary",
+      "image": "/pins/img/spooky-cozy-christmas-reads.jpg",
+      "alt": "A spinning wheel of spooky Christmas book themes for book clubs with the headline Christmas, but make it creepy",
+      "headline": "Christmas, but make it creepy",
+      "subhead": "Spin a creepy Christmas book club pick.",
+      "theme": "brand",
+      "accent": "#FFC93C",
+      "wheel": [
+        "Ghost story",
+        "Haunted house",
+        "Winter tale",
+        "Dark carol",
+        "Old mansion",
+        "Krampus",
+        "Cursed gift",
+        "Fireside tales"
+      ]
+    },
+    {
+      "id": "office-party-wheel-boss",
+      "feed": "holiday",
+      "publish": "2026-12-06",
+      "title": "Office Holiday Party Games: The Wheel Picks, Everyone Plays",
+      "description": "Big office party, no time to plan? Let the wheel run it. Spin a free wheel of holiday games for 13+ people in teams, like Charades, Fishbowl, Holiday Trivia, and Two Truths and a Lie. No board games to buy. Quick rules on every spin. Free, no sign-up.",
+      "link": "https://thepartywheel.com/party-game-picker/?occasion=holiday&players=13-99&types=free,paper",
+      "image": "/pins/img/office-party-wheel-boss.jpg",
+      "alt": "A spinning wheel of office holiday party games for big groups with the headline The wheel is the party boss now",
+      "headline": "The wheel is the party boss now",
+      "subhead": "Big-group games. No board games to buy.",
+      "theme": "brand",
+      "accent": "#22B8A7",
+      "wheel": [
+        "Charades",
+        "Fishbowl",
+        "Holiday Trivia",
+        "Pass the Parcel",
+        "Holiday Pictionary",
+        "Holiday Who Am I?",
+        "Two Truths"
+      ]
+    },
+    {
+      "id": "funny-christmas-books",
+      "feed": "holiday",
+      "publish": "2026-12-09",
+      "title": "Funny Christmas Books for Book Club: Spin for a Holiday Laugh",
+      "description": "Family chaos, holiday disasters, and office-party cringe, in book form. Spin a free wheel of funny Christmas reads for your book club. Each pick has a one-line reason it works for a group and links to borrow or buy. Free, no sign-up.",
+      "link": "https://thepartywheel.com/book-club-picker/?occasion=christmas&mood=funny",
+      "image": "/pins/img/funny-christmas-books.jpg",
+      "alt": "A spinning wheel of funny Christmas book themes for book clubs with the headline Holiday chaos, but make it a book",
+      "headline": "Holiday chaos, but make it a book",
+      "subhead": "Spin a funny Christmas pick.",
+      "theme": "brand",
+      "accent": "#FF4F86",
+      "wheel": [
+        "Family chaos",
+        "Holiday disaster",
+        "Office party",
+        "Rom-com",
+        "Satire",
+        "Essays",
+        "Train trip",
+        "Zany mystery"
+      ]
     }
   ]
 }
