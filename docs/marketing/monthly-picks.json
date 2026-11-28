@@ -8,5 +8,15 @@
   "isbn": "9780593321201",
   "poolSize": 26,
   "pickedOn": "2026-10-28"
+ },
+ {
+  "month": "2026-12",
+  "genre": "mystery",
+  "genreLabel": "Mystery & thriller",
+  "title": "In the Woods",
+  "author": "Tana French",
+  "isbn": "9780143113492",
+  "poolSize": 12,
+  "pickedOn": "2026-11-28"
  }
 ]

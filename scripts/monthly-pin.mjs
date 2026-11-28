@@ -23,7 +23,7 @@ const html = `<!doctype html><html><head><meta charset="utf-8"><style>
 h1{font-size:84px;line-height:1.05;margin:28px 0 14px;font-weight:850;text-wrap:balance}
 .by{font-size:40px;color:#E6D6C4;margin:0}
 .stage{position:relative;width:640px;height:640px;margin:50px 0 40px}
-canvas{width:640px;height:640px} .ptr{position:absolute;left:50%;top:-18px;transform:translateX(-50%);width:0;height:0;border-left:30px solid transparent;border-right:30px solid transparent;border-top:52px solid #FFF4E2;z-index:2}
+canvas{width:640px;height:640px} .ptr{position:absolute;left:50%;top:-46px;transform:translateX(-50%);width:0;height:0;border-left:30px solid transparent;border-right:30px solid transparent;border-top:52px solid #FFF4E2;z-index:2}
 .genre{font-size:36px;color:#E6D6C4;margin:0 0 18px} .genre b{color:#FFF4E2}
 .find{font-size:38px;font-weight:750;color:#FFC93C;margin:0 0 auto;text-wrap:balance}
 .url{font-size:40px;font-weight:800;margin-top:30px}
